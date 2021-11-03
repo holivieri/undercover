@@ -10,6 +10,9 @@ namespace Undercover.API.Entities
         public Guid Id { get; set; }
 
         [Required]
+        public DateTime CreatedDate { get; set; }
+
+        [Required]
         [StringLength(200)]
         public string Name { get; set; }
 
@@ -25,6 +28,10 @@ namespace Undercover.API.Entities
         public List<Concert> Concerts { get; set; }
 
         public List<Album> Albums { get; set; }
+
+        [Required]
+        public long Followers { get; set; }
+
 
         [StringLength(300)]
         public string TwitterAccount { get; set; }

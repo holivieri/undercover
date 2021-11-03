@@ -101,11 +101,29 @@ namespace Undercover.API.Data
                 Id = Guid.NewGuid(),
                 Name = "Hip Hop"
             };
+            var genrePop = new Genre()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Pop"
+            };
+            var genreMetal = new Genre()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Metal"
+            };
+            var genrePunk = new Genre()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Punk"
+            };
 
             modelBuilder.Entity<Genre>().HasData(genreRock);
             modelBuilder.Entity<Genre>().HasData(genreBlues);
             modelBuilder.Entity<Genre>().HasData(genreJazz);
             modelBuilder.Entity<Genre>().HasData(genreHipHop);
+            modelBuilder.Entity<Genre>().HasData(genrePop);
+            modelBuilder.Entity<Genre>().HasData(genrePunk);
+            modelBuilder.Entity<Genre>().HasData(genreMetal);
 
             base.OnModelCreating(modelBuilder);
         }

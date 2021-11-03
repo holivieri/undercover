@@ -49,29 +49,29 @@ namespace Undercover.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "adacd116-fdf8-4f7a-bb67-c87545eb56c0",
-                            ConcurrencyStamp = "4b8d381b-8d07-40b5-90f7-4da78fb42a9d",
+                            Id = "1410b209-0f39-4f82-a1b8-89eff86ce5b8",
+                            ConcurrencyStamp = "e2e44276-0846-40f7-85e3-af980b77a810",
                             Name = "admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
-                            Id = "8df1f7d4-6d38-4f51-adaa-4c88e529b847",
-                            ConcurrencyStamp = "aa66dec1-6828-4c4a-ac5e-1b808304fc74",
+                            Id = "15dc6ccb-c10b-4543-ab6c-c109e08aa19b",
+                            ConcurrencyStamp = "7f7c15c2-e235-440b-bb75-5ee894ffdd5c",
                             Name = "artist",
                             NormalizedName = "artist"
                         },
                         new
                         {
-                            Id = "1a2b8e94-22d0-46a2-8a5f-eac0d46b34fb",
-                            ConcurrencyStamp = "ab861dd9-cade-4d73-8b0f-76ab294509a6",
+                            Id = "b8ac5e65-50a4-4183-942e-1dc32a3f999a",
+                            ConcurrencyStamp = "0a97355a-a80d-4ad8-87c0-4ba944ab08d4",
                             Name = "user",
                             NormalizedName = "user"
                         },
                         new
                         {
-                            Id = "59352007-18c6-4ec4-bb51-7741bd34de5a",
-                            ConcurrencyStamp = "879bb6df-16f0-497a-92bd-fe3215a61380",
+                            Id = "a27f8bd4-9f5b-4649-abf2-fa9578e18cda",
+                            ConcurrencyStamp = "f64a15e5-819f-43f9-a6ce-03b2b7ec2f2c",
                             Name = "placeOwner",
                             NormalizedName = "placeOwner"
                         });
@@ -219,9 +219,15 @@ namespace Undercover.API.Migrations
                         .HasColumnType("nvarchar(1000)")
                         .HasMaxLength(1000);
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FacebookAccount")
                         .HasColumnType("nvarchar(300)")
                         .HasMaxLength(300);
+
+                    b.Property<long>("Followers")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("ManagerContact")
                         .HasColumnType("nvarchar(300)")
@@ -318,7 +324,7 @@ namespace Undercover.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5ddb857c-dfae-411c-a719-3a1a7e158bed"),
+                            Id = new Guid("a4744a61-bc89-4dcb-b502-94e307fb0b30"),
                             Name = "Argentina"
                         });
                 });
@@ -341,23 +347,38 @@ namespace Undercover.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("89cf4f25-8519-4c63-b06d-d16a46aab062"),
+                            Id = new Guid("73f8d09c-10fd-4ded-86af-61b322dde9d5"),
                             Name = "Rock"
                         },
                         new
                         {
-                            Id = new Guid("07f3f3c8-2d6f-4096-ab44-802246b04976"),
+                            Id = new Guid("14348366-7efe-4251-be40-1671fa806ce1"),
                             Name = "Blues"
                         },
                         new
                         {
-                            Id = new Guid("c55ef8cf-7b60-44ab-b381-5c7ff837bda2"),
+                            Id = new Guid("015fb8f3-e344-4b96-af45-a965ae3ddab0"),
                             Name = "Jazz"
                         },
                         new
                         {
-                            Id = new Guid("7051697a-4075-4e1c-819c-2c2dcc519230"),
+                            Id = new Guid("405e78a9-cd47-4817-aabb-e3634aeb1793"),
                             Name = "Hip Hop"
+                        },
+                        new
+                        {
+                            Id = new Guid("1882c5f7-d630-4449-bbad-02c6761e4fd8"),
+                            Name = "Pop"
+                        },
+                        new
+                        {
+                            Id = new Guid("52bfeb17-cebb-457d-a233-250312bdbc35"),
+                            Name = "Punk"
+                        },
+                        new
+                        {
+                            Id = new Guid("8971413e-7c01-43ac-bd88-ffa854dfd790"),
+                            Name = "Metal"
                         });
                 });
 
@@ -569,7 +590,7 @@ namespace Undercover.API.Migrations
             modelBuilder.Entity("Undercover.API.Entities.ArtistGenres", b =>
                 {
                     b.HasOne("Undercover.API.Entities.Artist", "Artist")
-                        .WithMany("Genre")
+                        .WithMany("Genres")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

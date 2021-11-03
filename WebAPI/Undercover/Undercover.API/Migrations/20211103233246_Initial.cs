@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Undercover.API.Migrations
 {
-    public partial class InitMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,9 +12,11 @@ namespace Undercover.API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(maxLength: 200, nullable: false),
                     Bio = table.Column<string>(maxLength: 1000, nullable: true),
                     PictureUrl = table.Column<string>(maxLength: 300, nullable: true),
+                    Followers = table.Column<long>(nullable: false),
                     TwitterAccount = table.Column<string>(maxLength: 300, nullable: true),
                     FacebookAccount = table.Column<string>(maxLength: 300, nullable: true),
                     YouTubeAccount = table.Column<string>(maxLength: 300, nullable: true),
@@ -321,26 +323,29 @@ namespace Undercover.API.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "adacd116-fdf8-4f7a-bb67-c87545eb56c0", "4b8d381b-8d07-40b5-90f7-4da78fb42a9d", "admin", "admin" },
-                    { "8df1f7d4-6d38-4f51-adaa-4c88e529b847", "aa66dec1-6828-4c4a-ac5e-1b808304fc74", "artist", "artist" },
-                    { "1a2b8e94-22d0-46a2-8a5f-eac0d46b34fb", "ab861dd9-cade-4d73-8b0f-76ab294509a6", "user", "user" },
-                    { "59352007-18c6-4ec4-bb51-7741bd34de5a", "879bb6df-16f0-497a-92bd-fe3215a61380", "placeOwner", "placeOwner" }
+                    { "1410b209-0f39-4f82-a1b8-89eff86ce5b8", "e2e44276-0846-40f7-85e3-af980b77a810", "admin", "admin" },
+                    { "15dc6ccb-c10b-4543-ab6c-c109e08aa19b", "7f7c15c2-e235-440b-bb75-5ee894ffdd5c", "artist", "artist" },
+                    { "b8ac5e65-50a4-4183-942e-1dc32a3f999a", "0a97355a-a80d-4ad8-87c0-4ba944ab08d4", "user", "user" },
+                    { "a27f8bd4-9f5b-4649-abf2-fa9578e18cda", "f64a15e5-819f-43f9-a6ce-03b2b7ec2f2c", "placeOwner", "placeOwner" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Countries",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { new Guid("5ddb857c-dfae-411c-a719-3a1a7e158bed"), "Argentina" });
+                values: new object[] { new Guid("a4744a61-bc89-4dcb-b502-94e307fb0b30"), "Argentina" });
 
             migrationBuilder.InsertData(
                 table: "Genres",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("89cf4f25-8519-4c63-b06d-d16a46aab062"), "Rock" },
-                    { new Guid("07f3f3c8-2d6f-4096-ab44-802246b04976"), "Blues" },
-                    { new Guid("c55ef8cf-7b60-44ab-b381-5c7ff837bda2"), "Jazz" },
-                    { new Guid("7051697a-4075-4e1c-819c-2c2dcc519230"), "Hip Hop" }
+                    { new Guid("73f8d09c-10fd-4ded-86af-61b322dde9d5"), "Rock" },
+                    { new Guid("14348366-7efe-4251-be40-1671fa806ce1"), "Blues" },
+                    { new Guid("015fb8f3-e344-4b96-af45-a965ae3ddab0"), "Jazz" },
+                    { new Guid("405e78a9-cd47-4817-aabb-e3634aeb1793"), "Hip Hop" },
+                    { new Guid("1882c5f7-d630-4449-bbad-02c6761e4fd8"), "Pop" },
+                    { new Guid("52bfeb17-cebb-457d-a233-250312bdbc35"), "Punk" },
+                    { new Guid("8971413e-7c01-43ac-bd88-ffa854dfd790"), "Metal" }
                 });
 
             migrationBuilder.CreateIndex(
