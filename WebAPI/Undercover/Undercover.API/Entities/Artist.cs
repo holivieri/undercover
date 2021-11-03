@@ -20,7 +20,7 @@ namespace Undercover.API.Entities
         public string PictureUrl { get; set; }
 
         [Required]
-        public List<ArtistGenres> Genre { get; set; }
+        public List<ArtistGenres> Genres { get; set; }
 
         public List<Concert> Concerts { get; set; }
 

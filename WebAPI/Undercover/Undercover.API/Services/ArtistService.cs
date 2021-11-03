@@ -26,7 +26,7 @@ namespace Undercover.API.Services
         {
             return _dbContext
                 .Artists
-                //.Where(a => a.Genre.Contains())
+                //.Where(a => genre.Artists.Contains(a));
                 .OrderBy(a => a.Name)
                 .ToList();
         }
