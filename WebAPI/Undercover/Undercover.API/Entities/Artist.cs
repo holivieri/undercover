@@ -22,12 +22,15 @@ namespace Undercover.API.Entities
         [StringLength(300)]
         public string PictureUrl { get; set; }
 
-        //[Required]
+        [Required]
         public virtual List<ArtistGenres> Genres { get; set; }
 
         public List<Concert> Concerts { get; set; }
 
         public List<Album> Albums { get; set; }
+
+        public List<ArtistPost> Posts { get; set; }
+
 
         [Required]
         public long Followers { get; set; }

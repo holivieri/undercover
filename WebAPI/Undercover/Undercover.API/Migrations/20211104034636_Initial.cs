@@ -117,6 +117,28 @@ namespace Undercover.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ArtistPosts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    Title = table.Column<string>(maxLength: 200, nullable: false),
+                    Details = table.Column<string>(maxLength: 1000, nullable: true),
+                    PictureUrl = table.Column<string>(maxLength: 300, nullable: true),
+                    ArtistId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArtistPosts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ArtistPosts_Artists_ArtistId",
+                        column: x => x.ArtistId,
+                        principalTable: "Artists",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -228,6 +250,7 @@ namespace Undercover.API.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 200, nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
                     Seats = table.Column<long>(nullable: false),
                     Standing = table.Column<long>(nullable: false),
                     Floor = table.Column<string>(maxLength: 10, nullable: true),
@@ -323,29 +346,29 @@ namespace Undercover.API.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1410b209-0f39-4f82-a1b8-89eff86ce5b8", "e2e44276-0846-40f7-85e3-af980b77a810", "admin", "admin" },
-                    { "15dc6ccb-c10b-4543-ab6c-c109e08aa19b", "7f7c15c2-e235-440b-bb75-5ee894ffdd5c", "artist", "artist" },
-                    { "b8ac5e65-50a4-4183-942e-1dc32a3f999a", "0a97355a-a80d-4ad8-87c0-4ba944ab08d4", "user", "user" },
-                    { "a27f8bd4-9f5b-4649-abf2-fa9578e18cda", "f64a15e5-819f-43f9-a6ce-03b2b7ec2f2c", "placeOwner", "placeOwner" }
+                    { "d4800eb4-fdb3-45f5-b446-a8e24b4ded17", "5b11b2d5-902f-4abc-a3c1-ed2fb038fd20", "admin", "admin" },
+                    { "cf6e47c5-3c6a-41ef-b932-5a3eb9aab893", "6504f2b7-f3eb-40cb-b750-05bd0f3c90b6", "artist", "artist" },
+                    { "c656d525-88b9-424e-9188-810cfcea62d1", "58189032-0c59-455a-a926-ae1fc7eea0b7", "user", "user" },
+                    { "f7488814-644d-4b10-81e5-0c9a8c490daa", "cc89eff9-f013-4717-a09c-6cfe9f3654a7", "placeOwner", "placeOwner" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Countries",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { new Guid("a4744a61-bc89-4dcb-b502-94e307fb0b30"), "Argentina" });
+                values: new object[] { new Guid("217c8a7e-ac0a-4ffa-b50d-9efecec87cfa"), "Argentina" });
 
             migrationBuilder.InsertData(
                 table: "Genres",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("73f8d09c-10fd-4ded-86af-61b322dde9d5"), "Rock" },
-                    { new Guid("14348366-7efe-4251-be40-1671fa806ce1"), "Blues" },
-                    { new Guid("015fb8f3-e344-4b96-af45-a965ae3ddab0"), "Jazz" },
-                    { new Guid("405e78a9-cd47-4817-aabb-e3634aeb1793"), "Hip Hop" },
-                    { new Guid("1882c5f7-d630-4449-bbad-02c6761e4fd8"), "Pop" },
-                    { new Guid("52bfeb17-cebb-457d-a233-250312bdbc35"), "Punk" },
-                    { new Guid("8971413e-7c01-43ac-bd88-ffa854dfd790"), "Metal" }
+                    { new Guid("2a6524df-0ff9-4653-88e3-5e6a3ee81655"), "Rock" },
+                    { new Guid("be03ffac-e5d6-48ad-a924-b0f55851c4c4"), "Blues" },
+                    { new Guid("bbf597d0-8df3-4698-b723-571754c1e698"), "Jazz" },
+                    { new Guid("3dbc1e47-2a3d-499d-9f33-71f93076d67b"), "Hip Hop" },
+                    { new Guid("539c697d-e747-4d4a-9f15-76cef6487355"), "Pop" },
+                    { new Guid("3ef2cf7b-f325-44b8-8aec-ffbfd64a07bf"), "Punk" },
+                    { new Guid("74ec0464-4d9d-4541-a5c9-218158ab0736"), "Metal" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -357,6 +380,11 @@ namespace Undercover.API.Migrations
                 name: "IX_ArtistGenres_GenreId",
                 table: "ArtistGenres",
                 column: "GenreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtistPosts_ArtistId",
+                table: "ArtistPosts",
+                column: "ArtistId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -422,6 +450,9 @@ namespace Undercover.API.Migrations
         {
             migrationBuilder.DropTable(
                 name: "ArtistGenres");
+
+            migrationBuilder.DropTable(
+                name: "ArtistPosts");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");

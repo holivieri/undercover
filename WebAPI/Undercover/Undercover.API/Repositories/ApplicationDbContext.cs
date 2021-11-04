@@ -20,6 +20,7 @@ namespace Undercover.API.Data
         public DbSet<Place> Places { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<ArtistGenres> ArtistGenres { get; set; }
+        public DbSet<ArtistPost> ArtistPosts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

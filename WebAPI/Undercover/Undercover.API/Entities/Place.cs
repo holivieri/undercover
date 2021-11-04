@@ -13,6 +13,9 @@ namespace Undercover.API.Entities
         [StringLength(200)]
         public string Name { get; set; }
 
+        [Required]
+        public DateTime CreatedDate { get; set; }
+
         public long TotalCapacity { get { return Seats + Standing; } }
 
         public long Seats { get; set; }
