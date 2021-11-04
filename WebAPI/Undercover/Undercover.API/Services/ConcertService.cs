@@ -15,6 +15,11 @@ namespace Undercover.API.Services
             _dbContext = dbContext;
         }
 
+        public Concert Get(Guid id)
+        {
+            return _dbContext.Concerts.Find(id);
+        }
+
         public List<Concert> GetNextConcerts()
         {
             return _dbContext.Concerts

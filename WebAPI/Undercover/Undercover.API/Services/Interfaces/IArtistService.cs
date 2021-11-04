@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Undercover.API.Entities;
 
 namespace Undercover.API.Services
@@ -7,5 +8,7 @@ namespace Undercover.API.Services
     {
         List<Artist> GetAllArtist();
         List<Artist> GetAllArtist(Genre genre);
+
+        Artist Get(Guid id);
     }
 }

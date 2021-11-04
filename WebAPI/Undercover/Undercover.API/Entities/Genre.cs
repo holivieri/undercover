@@ -13,7 +13,7 @@ namespace Undercover.API.Entities
         [StringLength(100)]
         public string Name { get; set; }
 
-        public List<ArtistGenres> Artists { get; set; }
+        public virtual List<ArtistGenres> Artists { get; set; }
 
     }
 }

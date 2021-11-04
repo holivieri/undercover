@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Undercover.API.Data;
 using Undercover.API.Entities;
@@ -12,6 +13,11 @@ namespace Undercover.API.Services
         public ArtistService(IApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public Artist Get(Guid id)
+        {
+            return _dbContext.Artists.Find(id);
         }
 
         public List<Artist> GetAllArtist()

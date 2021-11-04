@@ -28,7 +28,7 @@ namespace Undercover.API.Data
 
             modelBuilder.Entity<ArtistGenres>()
                 .HasKey(ag => new { ag.ArtistId, ag.GenreId });
-            
+
             modelBuilder.Entity<ArtistGenres>()
             .HasOne(ag => ag.Artist)
             .WithMany(b => b.Genres)

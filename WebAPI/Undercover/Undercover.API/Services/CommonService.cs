@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Undercover.API.Data;
@@ -28,6 +29,16 @@ namespace Undercover.API.Services
             return _dbContext.Countries
                 .OrderBy(c => c.Name)
                 .ToList();
+        }
+
+        public Country GetCountry(Guid id)
+        {
+            return _dbContext.Countries.Find(id);
+        }
+
+        public Genre GetGenre(Guid id)
+        {
+            return _dbContext.Genres.Find(id);
         }
     }
 }
