@@ -1,4 +1,4 @@
-package com.example.unvercover_mobile
+package com.example.undercover_mobile
 
 import io.flutter.embedding.android.FlutterActivity
 

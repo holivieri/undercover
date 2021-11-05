@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.unvercover_mobile">
+    package="com.example.undercover_mobile">
    <application
-        android:label="unvercover_mobile"
+        android:label="undercover_mobile"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

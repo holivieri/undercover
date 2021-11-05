@@ -1,6 +1,6 @@
 {
-    "name": "unvercover_mobile",
-    "short_name": "unvercover_mobile",
+    "name": "undercover_mobile",
+    "short_name": "undercover_mobile",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
