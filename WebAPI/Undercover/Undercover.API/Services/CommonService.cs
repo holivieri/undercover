@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Undercover.API.Data;
 using Undercover.API.Entities;
 
@@ -19,6 +19,7 @@ namespace Undercover.API.Services
         public List<Genre> GetAllGenres()
         {
             return _dbContext.Genres
+                .Include(a => a.Artists)
                 .OrderBy(c => c.Name)
                 .ToList();
         }

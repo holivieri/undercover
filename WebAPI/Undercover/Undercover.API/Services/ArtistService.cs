@@ -19,11 +19,10 @@ namespace Undercover.API.Services
         public Artist Get(Guid id)
         {
             return _dbContext.Artists
-                .Include("Genres")
-
-                .Include("Concerts")
-                .Include("Posts")
-                .Include("Albums")
+                .Include(a => a.Genres).ThenInclude(x => x.Genre)
+                .Include(a => a.Concerts)
+                .Include(a => a.Posts)
+                .Include(a => a.Albums)
                 .Where(a => a.Id == id).FirstOrDefault();
         }
 
@@ -31,10 +30,10 @@ namespace Undercover.API.Services
         {
             return _dbContext
                 .Artists
-                .Include(a => a.Genres)
-                .Include("Concerts")
-                .Include("Posts")
-                .Include("Albums")
+                .Include(a => a.Genres).ThenInclude(x => x.Genre)
+                .Include(a => a.Concerts)
+                .Include(a => a.Posts)
+                .Include(a => a.Albums)
                 .OrderBy(a => a.Name)
                 .ToList();
         }
@@ -43,10 +42,10 @@ namespace Undercover.API.Services
         {
             return _dbContext
                 .Artists
-                .Include("Genres")
-                .Include("Concerts")
-                .Include("Posts")
-                .Include("Albums")
+                .Include(a => a.Genres).ThenInclude(x => x.Genre)
+                .Include(a => a.Concerts)
+                .Include(a => a.Posts)
+                .Include(a => a.Albums)
                 //.Where(a => genre.Artists.Contains(a));
                 .OrderBy(a => a.Name)
                 .ToList();
