@@ -37,6 +37,11 @@ class _UnderAppbarState extends State<UnderAppbar> {
           color: Colors.white,
           size: 40,
         ),
+        Icon(
+          FontAwesomeIcons.recordVinyl,
+          color: Colors.white,
+          size: 40,
+        ),
       ],
     );
   }

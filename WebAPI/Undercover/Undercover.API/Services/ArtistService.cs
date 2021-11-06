@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Undercover.API.Data;
@@ -17,13 +18,23 @@ namespace Undercover.API.Services
 
         public Artist Get(Guid id)
         {
-            return _dbContext.Artists.Find(id);
+            return _dbContext.Artists
+                .Include("Genres")
+
+                .Include("Concerts")
+                .Include("Posts")
+                .Include("Albums")
+                .Where(a => a.Id == id).FirstOrDefault();
         }
 
         public List<Artist> GetAllArtist()
         {
             return _dbContext
                 .Artists
+                .Include(a => a.Genres)
+                .Include("Concerts")
+                .Include("Posts")
+                .Include("Albums")
                 .OrderBy(a => a.Name)
                 .ToList();
         }
@@ -32,6 +43,10 @@ namespace Undercover.API.Services
         {
             return _dbContext
                 .Artists
+                .Include("Genres")
+                .Include("Concerts")
+                .Include("Posts")
+                .Include("Albums")
                 //.Where(a => genre.Artists.Contains(a));
                 .OrderBy(a => a.Name)
                 .ToList();

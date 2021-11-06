@@ -9,6 +9,5 @@ namespace Undercover.API.Entities
         public Guid GenreId { get; set; }
 
         public Genre Genre { get; set; }
-
     }
 }
