@@ -33,12 +33,12 @@ class _UnderAppbarState extends State<UnderAppbar> {
           size: 40,
         ),
         Icon(
-          Icons.account_circle,
+          FontAwesomeIcons.guitar,
           color: Colors.white,
           size: 40,
         ),
         Icon(
-          FontAwesomeIcons.recordVinyl,
+          Icons.account_circle,
           color: Colors.white,
           size: 40,
         ),

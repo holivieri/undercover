@@ -20,7 +20,7 @@ namespace Undercover.API.Services
         {
             return _dbContext.Artists
                 .Include(a => a.Genres).ThenInclude(x => x.Genre)
-                .Include(a => a.Concerts)
+                .Include(a => a.Concerts).ThenInclude(x => x.Place).ThenInclude(x => x.Country)
                 .Include(a => a.Posts)
                 .Include(a => a.Albums)
                 .Where(a => a.Id == id).FirstOrDefault();
@@ -31,7 +31,7 @@ namespace Undercover.API.Services
             return _dbContext
                 .Artists
                 .Include(a => a.Genres).ThenInclude(x => x.Genre)
-                .Include(a => a.Concerts)
+                .Include(a => a.Concerts).ThenInclude(x => x.Place).ThenInclude(x => x.Country)
                 .Include(a => a.Posts)
                 .Include(a => a.Albums)
                 .OrderBy(a => a.Name)
@@ -43,7 +43,7 @@ namespace Undercover.API.Services
             return _dbContext
                 .Artists
                 .Include(a => a.Genres).ThenInclude(x => x.Genre)
-                .Include(a => a.Concerts)
+                .Include(a => a.Concerts).ThenInclude(x => x.Place).ThenInclude(x => x.Country)
                 .Include(a => a.Posts)
                 .Include(a => a.Albums)
                 //.Where(a => genre.Artists.Contains(a));

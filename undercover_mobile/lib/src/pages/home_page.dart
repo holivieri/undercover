@@ -19,3 +19,17 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+Widget mainBody() {
+  return Column(
+    children: [
+      getMyBands(),
+    ],
+  );
+}
+
+Widget getMyBands() {
+  return Row(
+    children: const [],
+  );
+}
