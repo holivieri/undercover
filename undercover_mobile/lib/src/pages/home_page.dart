@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:undercover_mobile/src/blocs/artists/my_artists_bloc.dart';
-import 'package:undercover_mobile/src/repositories/artists_repository.dart';
-import 'package:undercover_mobile/src/utils/colors.dart';
-import 'package:undercover_mobile/src/widgets/artists_of_the_day.dart';
-import 'package:undercover_mobile/src/widgets/undercover_appbar.dart';
+import 'package:undercover_mobile/src/services/artists_service.dart';
+
+import '../blocs/artists/my_artists_bloc.dart';
+import '../repositories/artists_repository.dart';
+import '../utils/colors.dart';
+import '../widgets/artists_of_the_day.dart';
+import '../widgets/undercover_appbar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -19,18 +21,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late MyArtistsBloc artistsBloc;
+  //late MyArtistsBloc artistsBloc;
 
   @override
   void initState() {
     super.initState();
-    artistsBloc = MyArtistsBloc(widget.artistsRepository);
+    // artistsBloc = MyArtistsBloc(widget.artistsRepository);
   }
 
   @override
   Widget build(BuildContext context) {
+    final ArtistService artistService = ArtistService();
+
+    final ArtistRepository artistRepository = ArtistRepository(artistService);
+
     return BlocProvider(
-      create: (context) => artistsBloc,
+      create: (context) => MyArtistsBloc(artistRepository),
       child: Scaffold(
         appBar: const UnderAppbar(),
         extendBodyBehindAppBar: true,

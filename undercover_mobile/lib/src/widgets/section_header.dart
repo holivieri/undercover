@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:undercover_mobile/src/utils/font.dart';
-import 'package:undercover_mobile/src/utils/text_style.dart';
+import '../utils/font.dart';
+import '../utils/text_style.dart';
 
 Widget sectionHeader(String text, {bool isFirst = false, bool seeAll = true}) {
   return Column(children: [

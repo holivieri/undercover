@@ -9,7 +9,7 @@ using Undercover.API.Services;
 
 namespace Undercover.API.Controllers.V1
 {
-    [Route("api/[controller]")]
+    [Route("api/V1/[controller]")]
     [ApiController]
     public class CountryController : ControllerBase
     {

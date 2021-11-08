@@ -7,12 +7,6 @@ class Post {
     this.pictureUrl,
   });
 
-  final String id;
-  final DateTime createdDate;
-  final String title;
-  final String? details;
-  final String? pictureUrl;
-
   factory Post.fromJson(Map<String, dynamic> json) => Post(
         id: json['id'],
         createdDate: DateTime.parse(json['createdDate']),
@@ -20,6 +14,12 @@ class Post {
         details: json['details'],
         pictureUrl: json['pictureUrl'],
       );
+
+  final String id;
+  final DateTime createdDate;
+  final String title;
+  final String? details;
+  final String? pictureUrl;
 
   Map<String, dynamic> toJson() => {
         'id': id,

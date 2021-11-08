@@ -16,19 +16,6 @@ class Place {
     this.floor,
   });
 
-  final String id;
-  final String name;
-  final DateTime createdDate;
-  final int totalCapacity;
-  final int? seats;
-  final int? standing;
-  final String? floor;
-  final String streetName;
-  final String streetNumber;
-  final String city;
-  final String province;
-  final Country country;
-
   factory Place.fromJson(Map<String, dynamic> json) => Place(
         id: json['id'],
         name: json['name'],
@@ -43,6 +30,19 @@ class Place {
         province: json['province'],
         country: Country.fromJson(json['country']),
       );
+
+  final String id;
+  final String name;
+  final DateTime createdDate;
+  final int totalCapacity;
+  final int? seats;
+  final int? standing;
+  final String? floor;
+  final String streetName;
+  final String streetNumber;
+  final String city;
+  final String province;
+  final Country country;
 
   Map<String, dynamic> toJson() => {
         'id': id,

@@ -1,36 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:undercover_mobile/src/pages/home_page.dart';
-import 'package:undercover_mobile/src/repositories/artists_repository.dart';
-import 'package:undercover_mobile/src/services/artists_service.dart';
 
+import 'pages/home_page.dart';
+import 'repositories/artists_repository.dart';
 import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
+import 'services/artists_service.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({
-    Key? key,
     required this.settingsController,
-    required this.artistService,
+    //required this.artistService,
+    required this.artistRepository,
+    Key? key,
   }) : super(key: key);
 
   final SettingsController settingsController;
-  final ArtistService artistService;
+  // final ArtistService artistService;
+  final ArtistRepository artistRepository;
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  late ArtistRepository _artistRepository;
+  // late ArtistRepository _artistRepository;
 
   @override
   void initState() {
     super.initState();
-    _artistRepository = ArtistRepository(widget.artistService);
+    //final ArtistService service = ArtistService();
+    // _artistRepository = ArtistRepository(service);
   }
 
   @override
@@ -81,7 +84,7 @@ class _MyAppState extends State<MyApp> {
                   case SampleItemListView.routeName:
                   default:
                     return HomePage(
-                      artistsRepository: _artistRepository,
+                      artistsRepository: widget.artistRepository,
                     );
                 }
               },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:undercover_mobile/src/utils/colors.dart';
-import 'package:undercover_mobile/src/widgets/device.dart';
+
+import '../utils/colors.dart';
+import 'device.dart';
 
 class MyArtistsListView extends StatefulWidget {
   const MyArtistsListView(

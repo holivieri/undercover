@@ -1,4 +1,4 @@
-import 'package:undercover_mobile/src/models/place_mode.dart';
+import 'place_mode.dart';
 
 class Concert {
   Concert({
@@ -7,15 +7,15 @@ class Concert {
     required this.place,
   });
 
-  final String id;
-  final DateTime date;
-  final Place place;
-
   factory Concert.fromJson(Map<String, dynamic> json) => Concert(
         id: json['id'],
         date: DateTime.parse(json['date']),
         place: Place.fromJson(json['place']),
       );
+
+  final String id;
+  final DateTime date;
+  final Place place;
 
   Map<String, dynamic> toJson() => {
         'id': id,

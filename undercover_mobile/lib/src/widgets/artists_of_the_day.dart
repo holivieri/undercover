@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:undercover_mobile/src/blocs/artists/my_artists_bloc.dart';
-import 'package:undercover_mobile/src/widgets/section_header.dart';
+
 import '../../main.dart';
+import '../blocs/artists/my_artists_bloc.dart';
 import 'artist_tall_card.dart';
 import 'list_view.dart';
+import 'section_header.dart';
 
 class ArtistsOfTheDay extends StatefulWidget {
   const ArtistsOfTheDay({Key? key}) : super(key: key);

@@ -1,12 +1,12 @@
-import 'package:undercover_mobile/src/models/artist_model.dart';
-import 'package:undercover_mobile/src/services/artists_service.dart';
+import '../models/artist_model.dart';
+import '../services/artists_service.dart';
 
 class ArtistRepository {
-  final ArtistService _artistService;
-
   ArtistRepository(this._artistService);
 
-  List<Artist> getMyArtists() {
+  final ArtistService _artistService;
+
+  Future<List<Artist>> getMyArtists() async {
     //check cache
     return _artistService.getMyArtists();
   }

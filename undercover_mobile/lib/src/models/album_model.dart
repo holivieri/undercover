@@ -7,12 +7,6 @@ class Album {
     this.songs,
   });
 
-  final String id;
-  final String title;
-  final String imageUrl;
-  final int releaseYear;
-  final dynamic songs;
-
   factory Album.fromJson(Map<String, dynamic> json) => Album(
         id: json['id'],
         title: json['title'],
@@ -20,6 +14,12 @@ class Album {
         releaseYear: json['releaseYear'],
         songs: json['songs'],
       );
+
+  final String id;
+  final String title;
+  final String imageUrl;
+  final int releaseYear;
+  final dynamic songs;
 
   Map<String, dynamic> toJson() => {
         'id': id,

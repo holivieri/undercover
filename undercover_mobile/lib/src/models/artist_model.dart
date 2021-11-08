@@ -31,24 +31,6 @@ class Artist {
     this.managerContact,
   });
 
-  final String id;
-  final DateTime createdDate;
-  final String name;
-  final String bio;
-  final String? pictureUrl;
-  final List<GenreElement> genres;
-  final List<Concert> concerts;
-  final List<Album> albums;
-  final List<Post> posts;
-  final int followers;
-  final String? twitterAccount;
-  final String? facebookAccount;
-  final String? youTubeAccount;
-  final String? spotifyAccount;
-  final String? soundCloudAccount;
-  final String? managerName;
-  final String? managerContact;
-
   factory Artist.fromJson(Map<String, dynamic> json) => Artist(
         id: json['id'],
         createdDate: DateTime.parse(json['createdDate']),
@@ -70,6 +52,24 @@ class Artist {
         managerName: json['managerName'],
         managerContact: json['managerContact'],
       );
+
+  final String id;
+  final DateTime createdDate;
+  final String name;
+  final String bio;
+  final String? pictureUrl;
+  final List<GenreElement> genres;
+  final List<Concert> concerts;
+  final List<Album> albums;
+  final List<Post> posts;
+  final int followers;
+  final String? twitterAccount;
+  final String? facebookAccount;
+  final String? youTubeAccount;
+  final String? spotifyAccount;
+  final String? soundCloudAccount;
+  final String? managerName;
+  final String? managerContact;
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -99,15 +99,15 @@ class GenreElement {
     required this.genre,
   });
 
-  final String artistId;
-  final String genreId;
-  final ArtistGenre genre;
-
   factory GenreElement.fromJson(Map<String, dynamic> json) => GenreElement(
         artistId: json['artistId'],
         genreId: json['genreId'],
         genre: ArtistGenre.fromJson(json['genre']),
       );
+
+  final String artistId;
+  final String genreId;
+  final ArtistGenre genre;
 
   Map<String, dynamic> toJson() => {
         'artistId': artistId,
@@ -123,10 +123,6 @@ class ArtistGenre {
     this.artists,
   });
 
-  final String id;
-  final String name;
-  final List<dynamic>? artists;
-
   factory ArtistGenre.fromJson(Map<String, dynamic> json) => ArtistGenre(
         id: json['id'],
         name: json['name'],
@@ -134,6 +130,10 @@ class ArtistGenre {
             ? null
             : List<dynamic>.from(json['artists'].map((x) => x)),
       );
+
+  final String id;
+  final String name;
+  final List<dynamic>? artists;
 
   Map<String, dynamic> toJson() => {
         'id': id,

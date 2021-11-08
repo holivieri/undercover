@@ -3,14 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Undercover.API.Entities;
 using Undercover.API.Services;
 
 namespace Undercover.API.Controllers.V1
 {
-    [Route("api/[controller]")]
+    [Route("api/V1/[controller]")]
     [ApiController]
     public class ConcertController : ControllerBase
     {

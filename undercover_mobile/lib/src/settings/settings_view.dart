@@ -7,7 +7,10 @@ import 'settings_controller.dart';
 /// When a user changes a setting, the SettingsController is updated and
 /// Widgets that listen to the SettingsController are rebuilt.
 class SettingsView extends StatelessWidget {
-  const SettingsView({Key? key, required this.controller}) : super(key: key);
+  const SettingsView({
+    required this.controller,
+    Key? key,
+  }) : super(key: key);
 
   static const routeName = '/settings';
 
