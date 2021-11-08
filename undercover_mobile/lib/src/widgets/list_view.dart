@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:undercover_mobile/src/utils/colors.dart';
 import 'package:undercover_mobile/src/widgets/device.dart';
 
-class TribesListView extends StatefulWidget {
-  const TribesListView(
+class MyArtistsListView extends StatefulWidget {
+  const MyArtistsListView(
       {required this.listOfWidgets,
       required this.numOfWidgetsOnTablet,
       required this.numOfWidgetsOnDesktop,
@@ -24,10 +24,10 @@ class TribesListView extends StatefulWidget {
   final int numOfWidgetsOnWideScreen;
 
   @override
-  _TribesListViewState createState() => _TribesListViewState();
+  _MyArtistsListViewState createState() => _MyArtistsListViewState();
 }
 
-class _TribesListViewState extends State<TribesListView> {
+class _MyArtistsListViewState extends State<MyArtistsListView> {
   final ScrollController _scrollController = ScrollController();
   late Size _screenSize;
   double movedItem = 0;

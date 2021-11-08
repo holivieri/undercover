@@ -2,24 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:undercover_mobile/src/pages/home_page.dart';
+import 'package:undercover_mobile/src/repositories/artists_repository.dart';
+import 'package:undercover_mobile/src/services/artists_service.dart';
 
 import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({
     Key? key,
     required this.settingsController,
+    required this.artistService,
   }) : super(key: key);
 
   final SettingsController settingsController;
+  final ArtistService artistService;
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late ArtistRepository _artistRepository;
+
+  @override
+  void initState() {
+    super.initState();
+    _artistRepository = ArtistRepository(widget.artistService);
+  }
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: settingsController,
+      animation: widget.settingsController,
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
           restorationScopeId: 'app',
@@ -48,7 +65,7 @@ class MyApp extends StatelessWidget {
           // SettingsController to display the correct theme.
           theme: ThemeData(),
           darkTheme: ThemeData.dark(),
-          themeMode: settingsController.themeMode,
+          themeMode: widget.settingsController.themeMode,
 
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
@@ -58,12 +75,14 @@ class MyApp extends StatelessWidget {
               builder: (BuildContext context) {
                 switch (routeSettings.name) {
                   case SettingsView.routeName:
-                    return SettingsView(controller: settingsController);
+                    return SettingsView(controller: widget.settingsController);
                   case SampleItemDetailsView.routeName:
                     return const SampleItemDetailsView();
                   case SampleItemListView.routeName:
                   default:
-                    return const HomePage();
+                    return HomePage(
+                      artistsRepository: _artistRepository,
+                    );
                 }
               },
             );

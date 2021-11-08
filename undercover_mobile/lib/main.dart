@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:undercover_mobile/src/services/artists_service.dart';
 
 import 'src/app.dart';
 import 'src/settings/settings_controller.dart';
@@ -16,7 +17,13 @@ bool platformIsNotWeb() {
 
 void main() async {
   final settingsController = SettingsController(SettingsService());
+  final ArtistService _artistService = ArtistService();
 
   await settingsController.loadSettings();
-  runApp(MyApp(settingsController: settingsController));
+  runApp(
+    MyApp(
+      settingsController: settingsController,
+      artistService: _artistService,
+    ),
+  );
 }

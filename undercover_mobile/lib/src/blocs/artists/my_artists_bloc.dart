@@ -10,6 +10,7 @@ class MyArtistsBloc extends Bloc<MyArtistsBlocEvent, MyArtistsBlocState> {
   MyArtistsBloc(this.artistRepository) : super(MyArtistsBlocInitial()) {
     on<MyArtistsBlocEvent>((event, emit) {
       // TODO: implement event handler
+      if (event is LoadMyArtists) {}
     });
   }
   final ArtistRepository artistRepository;

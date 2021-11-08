@@ -17,20 +17,19 @@ class _ArtistsOfTheDayState extends State<ArtistsOfTheDay> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      key: const Key('artists_of_the_day_column'),
+      key: const Key('my_artists_column'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: platformIsNotWeb() ? 10 : 25),
-          child: sectionHeader('artistOfTheDay'),
+          child: sectionHeader('myArtists'),
         ),
         BlocBuilder<MyArtistsBloc, MyArtistsBlocState>(
             builder: (context, status) {
           if (status is LoadingArtists) {
             return const CircularProgressIndicator();
-          }
-          if (status is ArtistsLoaded) {
+          } else if (status is ArtistsLoaded) {
             final List<Widget> _artistWidgets = List.generate(
               status.artists.length,
               (index) => InkWell(
@@ -46,7 +45,7 @@ class _ArtistsOfTheDayState extends State<ArtistsOfTheDay> {
                 ),
               ),
             );
-            return TribesListView(
+            return MyArtistsListView(
               listOfWidgets: _artistWidgets,
               numOfWidgetsOnTablet: 4,
               numOfWidgetsOnDesktop: 6,
@@ -56,6 +55,8 @@ class _ArtistsOfTheDayState extends State<ArtistsOfTheDay> {
               padding: 10,
               leftPaddingOnPhone: 25,
             );
+          } else {
+            return Container();
           }
         }),
       ],
