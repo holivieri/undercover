@@ -46,7 +46,7 @@ namespace Undercover.API.Services
                 .Include(a => a.Concerts).ThenInclude(x => x.Place).ThenInclude(x => x.Country)
                 .Include(a => a.Posts)
                 .Include(a => a.Albums)
-                //.Where(a => genre.Artists.Contains(a));
+                //.Where(a => a.Genres.Select( x => x.Genre.Name).Contains(genre)));
                 .OrderBy(a => a.Name)
                 .ToList();
         }

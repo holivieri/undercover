@@ -24,7 +24,7 @@ class _ArtistsOfTheDayState extends State<ArtistsOfTheDay> {
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: platformIsNotWeb() ? 10 : 25),
-          child: sectionHeader('myArtists'),
+          child: sectionHeader('Vamos las bandas'),
         ),
         BlocBuilder<MyArtistsBloc, MyArtistsBlocState>(
             builder: (context, status) {

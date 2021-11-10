@@ -63,16 +63,12 @@ namespace Undercover.API
                 options.AddPolicy("isAdmin", policy => policy.RequireClaim("isAdmin"));
             });
 
-            services.AddCors(opt =>
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
-                opt.AddPolicy("CorsPolicy", policy =>
-                {
-                    policy.AllowAnyMethod()
-                            .AllowAnyHeader()
-                            .WithExposedHeaders(new string[] { "totalRecordsCount" })
-                            .WithOrigins("https://localhost:3000");
-                });
-            });
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
             services.AddSwaggerGen(c =>
             {
@@ -155,6 +151,8 @@ namespace Undercover.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 

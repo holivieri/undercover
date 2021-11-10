@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:undercover_mobile/src/repositories/artists_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'src/app.dart';
+import 'src/blocs/artists/my_artists_bloc.dart';
+import 'src/repositories/artists_repository.dart';
 import 'src/services/artists_service.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
@@ -23,10 +25,18 @@ Future<void> main() async {
 
   await settingsController.loadSettings();
   runApp(
-    MyApp(
-      settingsController: settingsController,
-      //  artistService: _artistService,
-      artistRepository: _artistRepository,
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<MyArtistsBloc>(
+          create: (BuildContext context) =>
+              MyArtistsBloc(_artistRepository)..add(LoadMyArtists()),
+        ),
+      ],
+      child: MyApp(
+        settingsController: settingsController,
+        //  artistService: _artistService,
+        artistRepository: _artistRepository,
+      ),
     ),
   );
 }

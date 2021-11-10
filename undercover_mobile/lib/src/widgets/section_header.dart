@@ -22,7 +22,7 @@ Widget sectionHeader(String text, {bool isFirst = false, bool seeAll = true}) {
               ? Row(
                   children: const [
                     Text(
-                      'seeAll',
+                      'ver todos',
                       style: seeAllTextStyle,
                     ),
                     SizedBox(

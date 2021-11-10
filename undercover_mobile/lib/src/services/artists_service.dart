@@ -8,7 +8,8 @@ import '../utils/http.dart';
 class ArtistService {
   Future<List<Artist>> getMyArtists() async {
     final _apiResponse = await Client().get(
-      Uri.parse('$apiUrl/Artists'),
+      Uri.parse('$apiUrl/Artist'),
+      headers: returnUndercoverHeaders(),
     );
 
     if (_apiResponse.statusCode != 200) {

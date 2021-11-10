@@ -31,21 +31,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final ArtistService artistService = ArtistService();
+    //final ArtistService artistService = ArtistService();
 
-    final ArtistRepository artistRepository = ArtistRepository(artistService);
+    //final ArtistRepository artistRepository = ArtistRepository(artistService);
 
-    return BlocProvider(
-      create: (context) => MyArtistsBloc(artistRepository),
-      child: Scaffold(
-        appBar: const UnderAppbar(),
-        extendBodyBehindAppBar: true,
-        body: Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: const BoxDecoration(gradient: themeBackgroundGradient),
-          child: mainBody(),
-        ),
+    return Scaffold(
+      appBar: const UnderAppbar(),
+      extendBodyBehindAppBar: true,
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: const BoxDecoration(gradient: themeBackgroundGradient),
+        child: mainBody(),
       ),
     );
   }

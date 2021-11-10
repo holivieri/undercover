@@ -14,19 +14,8 @@ class MyArtistsBloc extends Bloc<MyArtistsBlocEvent, MyArtistsBlocState> {
     } */
     on<LoadMyArtists>((event, emit) async {
       final artists = await artistRepository.getMyArtists();
-      return emit(ArtistsLoaded(artists));
+      emit(ArtistsLoaded(artists));
     });
   }
   final ArtistRepository artistRepository;
-
-  @override
-  Stream<MyArtistsBlocState> mapEventToState(MyArtistsBlocEvent event) async* {
-    if (event is LoadMyArtists) {
-      yield LoadingArtists();
-      final artists = await artistRepository.getMyArtists();
-      yield ArtistsLoaded(artists);
-    } else {
-      yield ArtistsError('unknown event $event');
-    }
-  }
 }
