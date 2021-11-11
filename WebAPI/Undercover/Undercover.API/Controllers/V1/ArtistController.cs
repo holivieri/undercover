@@ -36,7 +36,7 @@ namespace Undercover.API.Controllers.V1
             }
             catch (Exception ex)
             {
-                _logger.LogError("Error on GetAllArtist");
+                _logger.LogError("Error on GetAllArtist", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error getting all artist");
             }
             
