@@ -5,8 +5,11 @@ import '../utils/default_images.dart';
 import '../utils/text_style.dart';
 
 class GenreCellWidget extends StatelessWidget {
-  const GenreCellWidget({Key? key, this.backgroundImageUrl, this.title})
-      : super(key: key);
+  const GenreCellWidget({
+    Key? key,
+    this.backgroundImageUrl,
+    this.title,
+  }) : super(key: key);
 
   final String? backgroundImageUrl;
   final String? title;
@@ -14,7 +17,7 @@ class GenreCellWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){},
+      onTap: () {},
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Container(
@@ -23,9 +26,10 @@ class GenreCellWidget extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,
-                image: backgroundImageUrl == null
-                    ? AssetImage(defaultSquareCardBackgroundUrl) as ImageProvider
-                    : NetworkImage(backgroundImageUrl!)),
+              image: backgroundImageUrl == null
+                  ? AssetImage(defaultSquareCardBackgroundUrl) as ImageProvider
+                  : NetworkImage(backgroundImageUrl!),
+            ),
           ),
           child: Center(
             child: Text(

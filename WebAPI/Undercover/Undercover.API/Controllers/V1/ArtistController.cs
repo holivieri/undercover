@@ -18,9 +18,10 @@ namespace Undercover.API.Controllers.V1
         private readonly IArtistService _artistService;
         private readonly ILogger<ArtistController> _logger;
 
-        public ArtistController(IArtistService artistService)
+        public ArtistController(IArtistService artistService, ILogger<ArtistController> logger)
         {
             _artistService = artistService;
+            _logger = logger;
         }
 
         /// <summary>

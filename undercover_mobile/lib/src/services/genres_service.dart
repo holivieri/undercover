@@ -2,20 +2,20 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 
-import '../models/artist_model.dart';
+import '../models/genre_model.dart';
 import '../utils/http.dart';
 
-class ArtistService {
-  Future<List<Artist>> getMyArtists() async {
+class GenresService {
+  Future<List<Genre>> getAllGenres() async {
     final _apiResponse = await Client().get(
-      Uri.parse('$apiUrl/Artist'),
+      Uri.parse('$apiUrl/Genre'),
       headers: returnUndercoverHeaders(),
     );
 
     if (_apiResponse.statusCode != 200) {
       assert(
         _apiResponse.statusCode == 200,
-        'Artists endpoint is NOT working',
+        'Genres endpoint is NOT working',
       );
       return [];
     }
@@ -26,7 +26,7 @@ class ArtistService {
 
     return [
       for (final Map<String, dynamic> _record in _decodedResponse)
-        Artist.fromJson(_record)
+        Genre.fromJson(_record)
     ];
   }
 }

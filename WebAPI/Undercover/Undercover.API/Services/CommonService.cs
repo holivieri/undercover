@@ -19,11 +19,14 @@ namespace Undercover.API.Services
         public List<Genre> GetAllGenres()
         {
             return _dbContext.Genres
-                .Include(a => a.Artists)
+                //.Include(a => a.Artists).ThenInclude(b => b.Artist)
                 .OrderBy(c => c.Name)
                 .ToList();
         }
-
+        public Genre GetGenre(Guid id)
+        {
+            return _dbContext.Genres.Find(id);
+        }
 
         public List<Country> GetAllCountries()
         {
@@ -35,11 +38,6 @@ namespace Undercover.API.Services
         public Country GetCountry(Guid id)
         {
             return _dbContext.Countries.Find(id);
-        }
-
-        public Genre GetGenre(Guid id)
-        {
-            return _dbContext.Genres.Find(id);
         }
     }
 }

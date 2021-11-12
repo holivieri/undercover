@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:undercover_mobile/src/services/artists_service.dart';
+import 'package:undercover_mobile/src/widgets/genres_list.dart';
 
 import '../blocs/artists/my_artists_bloc.dart';
 import '../repositories/artists_repository.dart';
@@ -21,20 +22,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  //late MyArtistsBloc artistsBloc;
-
   @override
   void initState() {
     super.initState();
-    // artistsBloc = MyArtistsBloc(widget.artistsRepository);
   }
 
   @override
   Widget build(BuildContext context) {
-    //final ArtistService artistService = ArtistService();
-
-    //final ArtistRepository artistRepository = ArtistRepository(artistService);
-
     return Scaffold(
       appBar: const UnderAppbar(),
       extendBodyBehindAppBar: true,
@@ -52,8 +46,14 @@ Widget mainBody() {
   return Column(
     children: [
       getMyBands(),
+      const SizedBox(height: 20),
+      getGenres(),
     ],
   );
+}
+
+Widget getGenres() {
+  return const GenresList();
 }
 
 Widget getMyBands() {

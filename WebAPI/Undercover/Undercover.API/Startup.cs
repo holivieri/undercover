@@ -69,6 +69,7 @@ namespace Undercover.API
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
+         
 
             services.AddSwaggerGen(c =>
             {
