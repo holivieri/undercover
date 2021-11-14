@@ -21,7 +21,7 @@ namespace Undercover.API.Entities
 
         [StringLength(300)]
         public string PictureUrl { get; set; }
-
+        public List<ArtistPicture> Pictures { get; set; }
         [Required]
         public virtual List<ArtistGenres> Genres { get; set; }
 

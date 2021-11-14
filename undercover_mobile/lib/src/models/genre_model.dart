@@ -13,21 +13,25 @@ class Genre {
     required this.id,
     required this.name,
     this.artists,
+    this.coverPicture,
   });
 
   factory Genre.fromJson(Map<String, dynamic> json) => Genre(
         id: json['id'],
         name: json['name'],
         artists: json['artists'],
+        coverPicture: json['coverPicture'],
       );
 
   final String id;
   final String name;
   final Artist? artists;
+  final String? coverPicture;
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
         'artists': artists,
+        'coverPicture': coverPicture,
       };
 }

@@ -42,5 +42,11 @@ namespace Undercover.API.Entities
 
         [Required]
         public Country Country { get; set; }
+
+        [StringLength(300)]
+        public string CoverPicture { get; set; }
+
+        public List<PlacePicture> Pictures { get; set; }
+
     }
 }

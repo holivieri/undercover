@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import '../blocs/places/places_bloc.dart';
 import '../../main.dart';
-import '../blocs/genres/genres_bloc.dart';
-import 'genre_card.dart';
+import 'rounded_rectangle_card.dart';
 
-class GenresList extends StatelessWidget {
-  const GenresList({Key? key}) : super(key: key);
+class PlacesList extends StatelessWidget {
+  const PlacesList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BlocBuilder<GenresBloc, GenresState>(
+        BlocBuilder<PlacesBloc, PlacesState>(
           builder: (context, status) {
-            if (status is LoadingGenres) {
+            if (status is LoadingPlaces) {
               return const CircularProgressIndicator();
-            } else if (status is GenresLoaded) {
+            } else if (status is PlacesLoaded) {
               return Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: platformIsNotWeb() ? 10 : 25),
@@ -24,10 +23,10 @@ class GenresList extends StatelessWidget {
                   spacing: 20,
                   runSpacing: 20,
                   children: List.generate(
-                    status.genres.length,
-                    (index) => GenreCellWidget(
-                      backgroundImageUrl: status.genres[index].coverPicture,
-                      title: status.genres[index].name,
+                    status.places.length,
+                    (index) => RoundedRectangleCard(
+                      backgroundImageUrl: status.places[index].coverPicture,
+                      title: status.places[index].name,
                     ),
                   ),
                 ),

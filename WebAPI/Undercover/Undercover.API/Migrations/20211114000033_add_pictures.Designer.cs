@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Undercover.API.Data;
 
 namespace Undercover.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211114000033_add_pictures")]
+    partial class add_pictures
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,29 +51,29 @@ namespace Undercover.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "514ab5c9-99f6-4775-807a-17457c68d3d1",
-                            ConcurrencyStamp = "51b8bf2c-1dd3-4d66-a272-c4185a6abfb2",
+                            Id = "d221b4c8-6352-48fe-834b-46276d5c996b",
+                            ConcurrencyStamp = "bc11d170-bab3-4ce8-bd9c-f84a56292860",
                             Name = "admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
-                            Id = "14c0e088-1c88-40ab-bb96-886ab3fe4bf1",
-                            ConcurrencyStamp = "c360dc54-f2a6-45a4-a1fa-552bdbda0c05",
+                            Id = "cc6d6f67-13cb-4b2c-a8f1-ffe1a9c1107a",
+                            ConcurrencyStamp = "32e784d7-72e5-4bf5-8ef1-1c3434217ce7",
                             Name = "artist",
                             NormalizedName = "artist"
                         },
                         new
                         {
-                            Id = "79a61732-4e4f-41f1-ba26-aa56463b581d",
-                            ConcurrencyStamp = "b2b4bebf-892f-4cf3-a106-8d255dd4bfb4",
+                            Id = "555494eb-97da-492b-a371-7be3c27c9f6b",
+                            ConcurrencyStamp = "e1bf35d7-adc4-4d49-accd-aa6d2e83cb76",
                             Name = "user",
                             NormalizedName = "user"
                         },
                         new
                         {
-                            Id = "3f17eea7-1261-4ef8-b660-43af23db90db",
-                            ConcurrencyStamp = "3dfef266-73b2-4cdc-a32b-b25562293a13",
+                            Id = "137dd9cb-861b-401c-9ae4-bf2fa511972b",
+                            ConcurrencyStamp = "4fd1bb35-b8f1-4730-8df8-580439809f05",
                             Name = "placeOwner",
                             NormalizedName = "placeOwner"
                         });
@@ -303,7 +305,7 @@ namespace Undercover.API.Migrations
 
                     b.HasIndex("ArtistId");
 
-                    b.ToTable("ArtistPictures");
+                    b.ToTable("ArtistPicture");
                 });
 
             modelBuilder.Entity("Undercover.API.Entities.ArtistPost", b =>
@@ -380,7 +382,7 @@ namespace Undercover.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0540d814-0335-4471-9228-022008407a95"),
+                            Id = new Guid("7dddb130-dd1e-4dd8-9294-cd23d9402f51"),
                             Name = "Argentina"
                         });
                 });
@@ -407,37 +409,37 @@ namespace Undercover.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("02260fd4-eaf2-41dd-b117-e9f00029f425"),
+                            Id = new Guid("ad3d6882-8662-40be-8c52-d1cf6fd9a57e"),
                             Name = "Rock"
                         },
                         new
                         {
-                            Id = new Guid("187d4ddf-35f6-491f-b7a1-2cc68c700b1c"),
+                            Id = new Guid("67fdcd35-64ef-4478-9d85-030f5992fad0"),
                             Name = "Blues"
                         },
                         new
                         {
-                            Id = new Guid("6d7a840a-7346-40a5-b789-b375f2e3c987"),
+                            Id = new Guid("7785d19a-6ba8-4717-a46e-61054065a597"),
                             Name = "Jazz"
                         },
                         new
                         {
-                            Id = new Guid("3381d3bc-a27d-4d47-bb27-73fab460ea4d"),
+                            Id = new Guid("65d8ab52-a879-47ac-a2a9-647518822a18"),
                             Name = "Hip Hop"
                         },
                         new
                         {
-                            Id = new Guid("8eae36e3-590b-44af-97c7-8d41166343da"),
+                            Id = new Guid("c549983f-fbea-485a-9ff7-d90d7b137308"),
                             Name = "Pop"
                         },
                         new
                         {
-                            Id = new Guid("a102fe9c-09f8-4ae0-9e7e-2ca782a310c5"),
+                            Id = new Guid("7b9631a3-d0ba-4530-8122-e3ee088205d4"),
                             Name = "Punk"
                         },
                         new
                         {
-                            Id = new Guid("3506e841-1439-407e-a8d3-34a3250ea6ee"),
+                            Id = new Guid("e1577957-e777-41fb-9af9-4a938129cbf1"),
                             Name = "Metal"
                         });
                 });
@@ -521,7 +523,7 @@ namespace Undercover.API.Migrations
 
                     b.HasIndex("PlaceId");
 
-                    b.ToTable("PlacePictures");
+                    b.ToTable("PlacePicture");
                 });
 
             modelBuilder.Entity("Undercover.API.Entities.Song", b =>

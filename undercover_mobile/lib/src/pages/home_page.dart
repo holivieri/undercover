@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:undercover_mobile/src/services/artists_service.dart';
-import 'package:undercover_mobile/src/widgets/genres_list.dart';
+import 'package:undercover_mobile/src/widgets/section_header.dart';
 
-import '../blocs/artists/my_artists_bloc.dart';
+import '../../main.dart';
 import '../repositories/artists_repository.dart';
 import '../utils/colors.dart';
 import '../widgets/artists_of_the_day.dart';
+import '../widgets/genres_list.dart';
+import '../widgets/places_list.dart';
 import '../widgets/undercover_appbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -48,12 +48,34 @@ Widget mainBody() {
       getMyBands(),
       const SizedBox(height: 20),
       getGenres(),
+      const SizedBox(height: 20),
+      getPlaces()
     ],
   );
 }
 
 Widget getGenres() {
-  return const GenresList();
+  return Column(
+    children: [
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: platformIsNotWeb() ? 10 : 25),
+        child: sectionHeader('Generos'),
+      ),
+      const GenresList(),
+    ],
+  );
+}
+
+Widget getPlaces() {
+  return Column(
+    children: [
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: platformIsNotWeb() ? 10 : 25),
+        child: sectionHeader('Bares y Fondas', seeAll: false),
+      ),
+      const PlacesList(),
+    ],
+  );
 }
 
 Widget getMyBands() {

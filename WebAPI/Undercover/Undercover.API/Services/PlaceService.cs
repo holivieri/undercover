@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Undercover.API.Data;
@@ -17,12 +18,16 @@ namespace Undercover.API.Services
 
         public Place Get(Guid id)
         {
-            return _dbContext.Places.Find(id);
+            return _dbContext.Places
+                .Include(p => p.Country)
+                .Where(p => p.Id == id)
+                .SingleOrDefault();
         }
 
         public List<Place> GetAllPlaces()
         {
             return _dbContext.Places
+                .Include(p => p.Country)
                 .OrderBy(c => c.Name)
                 .ToList();
         }
@@ -30,6 +35,7 @@ namespace Undercover.API.Services
         public List<Place> GetAllPlaces(string city)
         {
             return _dbContext.Places
+                .Include(p => p.Country)
                 .Where(c => c.City == city)
                 .OrderBy(c => c.Name)
                 .ToList();

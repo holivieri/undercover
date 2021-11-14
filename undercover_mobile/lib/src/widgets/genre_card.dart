@@ -26,9 +26,28 @@ class GenreCellWidget extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: backgroundImageUrl == null
+              image: title == 'Rock'
+                  ? const AssetImage('images/rock-n-roll.jpg')
+                  : title == 'Reggae'
+                      ? const AssetImage('images/Reggae.jpg')
+                      : title == 'Hip Hop'
+                          ? const AssetImage('images/hiphop.jpg')
+                          : title == 'Punk'
+                              ? const AssetImage('images/punk.jpg')
+                              : title == 'Blues'
+                                  ? const AssetImage('images/blues.jpg')
+                                  : title == 'Pop'
+                                      ? const AssetImage('images/pop.jpg')
+                                      : title == 'Jazz'
+                                          ? const AssetImage('images/jazz.jpg')
+                                          : title == 'Metal'
+                                              ? const AssetImage(
+                                                  'images/metal.jpg')
+                                              : const AssetImage(
+                                                  'images/jazz.png'),
+              /* backgroundImageUrl == null
                   ? AssetImage(defaultSquareCardBackgroundUrl) as ImageProvider
-                  : NetworkImage(backgroundImageUrl!),
+                  : NetworkImage(backgroundImageUrl!), */
             ),
           ),
           child: Center(

@@ -22,6 +22,10 @@ namespace Undercover.API.Data
         public DbSet<ArtistGenres> ArtistGenres { get; set; }
         public DbSet<ArtistPost> ArtistPosts { get; set; }
 
+        public DbSet<ArtistPicture> ArtistPictures { get; set; }
+
+        public DbSet<PlacePicture> PlacePictures { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");

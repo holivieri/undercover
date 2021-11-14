@@ -6,7 +6,6 @@ import 'pages/home_page.dart';
 import 'repositories/artists_repository.dart';
 import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
-import 'services/artists_service.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
