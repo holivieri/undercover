@@ -11,11 +11,8 @@ import '../widgets/undercover_appbar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
-    //  required this.artistsRepository,
     Key? key,
   }) : super(key: key);
-
-  //final ArtistRepository artistsRepository;
 
   @override
   State<HomePage> createState() => _HomePageState();
