@@ -33,7 +33,8 @@ namespace Undercover.API.Controllers.V1
         {
             try
             {
-                return Ok(_artistService.GetAllArtist());
+                var result = _artistService.GetAllArtist();
+                return Ok(result);
             }
             catch (Exception ex)
             {

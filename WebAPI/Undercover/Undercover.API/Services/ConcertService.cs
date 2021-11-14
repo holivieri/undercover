@@ -24,6 +24,7 @@ namespace Undercover.API.Services
         public List<Concert> GetNextConcerts()
         {
             return _dbContext.Concerts
+                .Include(c => c.Artist)
                 .Include(c => c.Artist).ThenInclude(z => z.Genres)
                 .Include(z => z.Artist).ThenInclude(z => z.Albums)
                 .Include(z => z.Artist).ThenInclude(z => z.Posts)
@@ -36,6 +37,7 @@ namespace Undercover.API.Services
         public List<Concert> GetNextConcerts(string city)
         {
             return _dbContext.Concerts
+                .Include(c => c.Artist)
                 .Include(c => c.Artist).ThenInclude(z => z.Genres)
                 .Include(z => z.Artist).ThenInclude(z => z.Albums)
                 .Include(z => z.Artist).ThenInclude(z => z.Posts)

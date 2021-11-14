@@ -55,7 +55,7 @@ Widget mainBody() {
         const SizedBox(height: 20),
         getPlaces(),
         const SizedBox(height: 20),
-        getNextConcerts(),
+        //getNextConcerts(),
       ],
     ),
   );
