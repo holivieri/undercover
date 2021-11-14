@@ -22,9 +22,9 @@ class ArtistTallCard extends StatelessWidget {
 
   String checkPlurals(int followers) {
     if (followers > 1) {
-      return '$followers followers';
+      return '$followers Seguidores';
     }
-    return '$followers follower';
+    return '$followers Seguidor';
   }
 
   Widget _returnArtistCard(BuildContext context) {
