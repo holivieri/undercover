@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../main.dart';
 import '../blocs/places/places_bloc.dart';
-import 'rounded_rectangle_card.dart';
+import 'place_card.dart';
 
 class PlacesList extends StatelessWidget {
   const PlacesList({Key? key}) : super(key: key);
@@ -25,7 +25,7 @@ class PlacesList extends StatelessWidget {
                   runSpacing: 20,
                   children: List.generate(
                     status.places.length,
-                    (index) => RoundedRectangleCard(
+                    (index) => PlaceCard(
                       backgroundImageUrl: status.places[index].coverPicture,
                       title: status.places[index].name,
                     ),

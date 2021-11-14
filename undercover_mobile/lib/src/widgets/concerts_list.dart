@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../main.dart';
 import '../blocs/concerts/concerts_bloc.dart';
-import 'rounded_rectangle_card.dart';
+import 'place_card.dart';
 
 class ConcertsList extends StatelessWidget {
   const ConcertsList({Key? key}) : super(key: key);
@@ -25,7 +25,7 @@ class ConcertsList extends StatelessWidget {
                   runSpacing: 20,
                   children: List.generate(
                     status.concerts.length,
-                    (index) => RoundedRectangleCard(
+                    (index) => PlaceCard(
                       backgroundImageUrl:
                           status.concerts[index].artist!.pictureUrl,
                       title:

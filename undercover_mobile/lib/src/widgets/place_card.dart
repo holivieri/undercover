@@ -8,8 +8,8 @@ enum RoundedRectangleCardType {
   wide,
 }
 
-class RoundedRectangleCard extends StatelessWidget {
-  const RoundedRectangleCard({
+class PlaceCard extends StatelessWidget {
+  const PlaceCard({
     this.title,
     this.subtitle,
     this.rightSubtitle = '',
