@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../utils/default_images.dart';
 import '../utils/text_style.dart';
 
 class GenreCellWidget extends StatelessWidget {

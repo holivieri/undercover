@@ -6,7 +6,7 @@ import '../models/concert_model.dart';
 import '../utils/http.dart';
 
 class ConcertsService {
-  Future<List<Concert>> getConcerts() async {
+  Future<List<Concert>> getNextConcerts() async {
     final _apiResponse = await Client().get(
       Uri.parse('$apiUrl/Concert'),
       headers: returnUndercoverHeaders(),

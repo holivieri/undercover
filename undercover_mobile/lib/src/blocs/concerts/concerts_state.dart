@@ -5,10 +5,10 @@ abstract class ConcertsState {}
 
 class ConcertsInitial extends ConcertsState {}
 
-class LoadingConcerts extends ConcertsState {}
+class LoadingNextConcerts extends ConcertsState {}
 
-class ConcertsLoaded extends ConcertsState {
-  ConcertsLoaded(this.concerts);
+class NextConcertsLoaded extends ConcertsState {
+  NextConcertsLoaded(this.concerts);
 
   final List<Concert> concerts;
 }

@@ -6,12 +6,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'src/app.dart';
 import 'src/blocs/artists/my_artists_bloc.dart';
+import 'src/blocs/concerts/concerts_bloc.dart';
 import 'src/blocs/genres/genres_bloc.dart';
 import 'src/blocs/places/places_bloc.dart';
 import 'src/repositories/artists_repository.dart';
+import 'src/repositories/concerts_repository.dart';
 import 'src/repositories/genres_repository.dart';
 import 'src/repositories/places_repository.dart';
 import 'src/services/artists_service.dart';
+import 'src/services/concerts_service.dart';
 import 'src/services/genres_service.dart';
 import 'src/services/places_service.dart';
 import 'src/settings/settings_controller.dart';
@@ -29,10 +32,13 @@ Future<void> main() async {
   final ArtistService _artistService = ArtistService();
   final GenresService _genresService = GenresService();
   final PlacesService _placesService = PlacesService();
+  final ConcertsService _concertsService = ConcertsService();
 
   final ArtistRepository _artistRepository = ArtistRepository(_artistService);
   final GenresRespository _genresRepository = GenresRespository(_genresService);
   final PlacesRepository _placesRepository = PlacesRepository(_placesService);
+  final ConcertsRepository _concertsRepository =
+      ConcertsRepository(_concertsService);
 
   await settingsController.loadSettings();
   runApp(
@@ -49,6 +55,10 @@ Future<void> main() async {
         BlocProvider<PlacesBloc>(
           create: (BuildContext context) =>
               PlacesBloc(_placesRepository)..add(LoadPlaces()),
+        ),
+        BlocProvider<ConcertsBloc>(
+          create: (BuildContext context) =>
+              ConcertsBloc(_concertsRepository)..add(LoadNextConcerts()),
         )
       ],
       child: MyApp(

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:undercover_mobile/src/widgets/section_header.dart';
 
 import '../../main.dart';
 import '../repositories/artists_repository.dart';
 import '../utils/colors.dart';
 import '../widgets/artists_of_the_day.dart';
+import '../widgets/concerts_list.dart';
 import '../widgets/genres_list.dart';
 import '../widgets/places_list.dart';
+import '../widgets/section_header.dart';
 import '../widgets/undercover_appbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -29,28 +30,34 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const UnderAppbar(),
-      extendBodyBehindAppBar: true,
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(gradient: themeBackgroundGradient),
-        child: mainBody(),
+    return SafeArea(
+      child: Scaffold(
+        appBar: const UnderAppbar(),
+        extendBodyBehindAppBar: true,
+        body: Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(gradient: themeBackgroundGradient),
+          child: mainBody(),
+        ),
       ),
     );
   }
 }
 
 Widget mainBody() {
-  return Column(
-    children: [
-      getMyBands(),
-      const SizedBox(height: 20),
-      getGenres(),
-      const SizedBox(height: 20),
-      getPlaces()
-    ],
+  return SingleChildScrollView(
+    child: Column(
+      children: [
+        getMyBands(),
+        const SizedBox(height: 20),
+        getGenres(),
+        const SizedBox(height: 20),
+        getPlaces(),
+        const SizedBox(height: 20),
+        getNextConcerts(),
+      ],
+    ),
   );
 }
 
@@ -74,6 +81,18 @@ Widget getPlaces() {
         child: sectionHeader('Bares y Fondas', seeAll: false),
       ),
       const PlacesList(),
+    ],
+  );
+}
+
+Widget getNextConcerts() {
+  return Column(
+    children: [
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: platformIsNotWeb() ? 10 : 25),
+        child: sectionHeader('Proximos Shows', seeAll: false),
+      ),
+      const ConcertsList(),
     ],
   );
 }

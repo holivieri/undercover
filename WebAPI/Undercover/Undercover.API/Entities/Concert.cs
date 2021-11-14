@@ -17,6 +17,8 @@ namespace Undercover.API.Entities
         [Required]
         public Place Place { get; set; }
 
+        public Artist Artist { get; set; }
+
 
     }
 }
