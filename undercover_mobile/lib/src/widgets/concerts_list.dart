@@ -28,7 +28,8 @@ class ConcertsList extends StatelessWidget {
                     (index) => RoundedRectangleCard(
                       backgroundImageUrl:
                           status.concerts[index].artist!.pictureUrl,
-                      title: status.concerts[index].date.toLocal().toString(),
+                      title:
+                          '${status.concerts[index].date.toLocal().day}-${status.concerts[index].date.toLocal().month}-${status.concerts[index].date.toLocal().year} (${status.concerts[index].date.toLocal().hour}:${status.concerts[index].date.toLocal().minute} hs) / ${status.concerts[index].artist!.name}',
                     ),
                   ),
                 ),

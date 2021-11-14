@@ -51,7 +51,7 @@ Widget mainBody() {
         const SizedBox(height: 20),
         getPlaces(),
         const SizedBox(height: 20),
-        //getNextConcerts(),
+        getNextConcerts(),
       ],
     ),
   );
@@ -86,7 +86,7 @@ Widget getNextConcerts() {
     children: [
       Padding(
         padding: EdgeInsets.symmetric(horizontal: platformIsNotWeb() ? 10 : 25),
-        child: sectionHeader('Proximos Shows', seeAll: false),
+        child: sectionHeader('Próximos Shows', seeAll: false),
       ),
       const ConcertsList(),
     ],
