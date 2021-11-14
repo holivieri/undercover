@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../main.dart';
-import '../repositories/artists_repository.dart';
 import '../utils/colors.dart';
 import '../widgets/artists_of_the_day.dart';
 import '../widgets/concerts_list.dart';
@@ -12,11 +11,11 @@ import '../widgets/undercover_appbar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
-    required this.artistsRepository,
+    //  required this.artistsRepository,
     Key? key,
   }) : super(key: key);
 
-  final ArtistRepository artistsRepository;
+  //final ArtistRepository artistsRepository;
 
   @override
   State<HomePage> createState() => _HomePageState();

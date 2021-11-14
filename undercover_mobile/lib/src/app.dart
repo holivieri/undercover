@@ -82,9 +82,7 @@ class _MyAppState extends State<MyApp> {
                     return const SampleItemDetailsView();
                   case SampleItemListView.routeName:
                   default:
-                    return HomePage(
-                      artistsRepository: widget.artistRepository,
-                    );
+                    return const HomePage();
                 }
               },
             );
