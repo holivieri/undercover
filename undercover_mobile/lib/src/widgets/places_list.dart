@@ -26,6 +26,7 @@ class PlacesList extends StatelessWidget {
                   children: List.generate(
                     status.places.length,
                     (index) => PlaceCard(
+                      placeId: status.places[index].id,
                       backgroundImageUrl: status.places[index].coverPicture,
                       title: status.places[index].name,
                     ),

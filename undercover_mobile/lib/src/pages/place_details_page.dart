@@ -1,20 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 import '../blocs/places/places_bloc.dart';
 import '../models/place_model.dart';
+import '../repositories/places_repository.dart';
+import '../services/places_service.dart';
 import '../utils/colors.dart';
 import '../utils/font.dart';
 
-class PlaceDetailsPage extends StatelessWidget {
+class PlaceDetailsPage extends StatefulWidget {
   const PlaceDetailsPage({
-    required this.placeId,
-    required this.placesBloc,
     Key? key,
   }) : super(key: key);
 
-  final String placeId;
-  final PlacesBloc placesBloc;
+  @override
+  State<PlaceDetailsPage> createState() => _PlaceDetailsPageState();
+}
+
+class _PlaceDetailsPageState extends State<PlaceDetailsPage> {
+  final String? _placeId = Get.arguments;
+  late final PlacesBloc placesBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    final PlacesService service = PlacesService();
+    final PlacesRepository repository = PlacesRepository(service);
+
+    placesBloc = PlacesBloc(repository)
+      ..add(
+        FetchPlace(_placeId!),
+      );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +41,17 @@ class PlaceDetailsPage extends StatelessWidget {
       builder: (context, state) {
         if (state is FetchingPlace) {
           return const CircularProgressIndicator();
-        } else if (state is PlaceReady) {
+        } else if (state is PlaceLoaded) {
+          if (state.place == null) {
+            return const Text('No existe un lugar asi');
+          }
           return Scaffold(
             body: Container(
               height: double.infinity,
               width: double.infinity,
               decoration:
                   const BoxDecoration(gradient: themeBackgroundGradient),
-              child: mainBody(state.place),
+              child: mainBody(state.place!),
             ),
           );
         } else if (state is PlacesError) {

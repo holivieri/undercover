@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../routes/routes.dart';
 import '../utils/default_images.dart';
@@ -11,6 +12,7 @@ enum RoundedRectangleCardType {
 
 class PlaceCard extends StatelessWidget {
   const PlaceCard({
+    required this.placeId,
     this.title,
     this.subtitle,
     this.rightSubtitle = '',
@@ -28,6 +30,7 @@ class PlaceCard extends StatelessWidget {
   final String? rightSubtitle;
   final RoundedRectangleCardType cardType;
   final bool widthInfinit;
+  final String placeId;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +56,7 @@ class PlaceCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, placeRoute);
+        Get.toNamed(placeRoute, arguments: placeId);
       },
       child: Container(
         height: _cardHeight,

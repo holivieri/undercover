@@ -13,6 +13,10 @@ class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
       final list = await placesRepository.getAllPlaces();
       emit(PlacesLoaded(list));
     });
+    on<FetchPlace>((event, emit) async {
+      final place = await placesRepository.getPlace(event.placeId);
+      emit(PlaceLoaded(place));
+    });
   }
 
   final PlacesRepository placesRepository;

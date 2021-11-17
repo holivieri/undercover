@@ -15,10 +15,10 @@ class PlacesLoaded extends PlacesState {
 
 class FetchingPlace extends PlacesState {}
 
-class PlaceReady extends PlacesState {
-  PlaceReady({required this.place});
+class PlaceLoaded extends PlacesState {
+  PlaceLoaded(this.place);
 
-  final Place place;
+  final Place? place;
 }
 
 class PlacesError extends PlacesState {

@@ -9,4 +9,8 @@ class PlacesRepository {
   Future<List<Place>> getAllPlaces() async {
     return placesService.getAllPlaces();
   }
+
+  Future<Place?> getPlace(String id) {
+    return placesService.getPlace(id);
+  }
 }

@@ -26,6 +26,7 @@ class ConcertsList extends StatelessWidget {
                   children: List.generate(
                     status.concerts.length,
                     (index) => PlaceCard(
+                      placeId: status.concerts[index].place.id,
                       backgroundImageUrl:
                           status.concerts[index].artist!.pictureUrl,
                       title:
