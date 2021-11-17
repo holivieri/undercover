@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import '../models/place_mode.dart';
+import '../models/place_model.dart';
 
 import '../utils/http.dart';
 

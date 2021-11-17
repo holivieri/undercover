@@ -13,6 +13,14 @@ class PlacesLoaded extends PlacesState {
   final List<Place> places;
 }
 
+class FetchingPlace extends PlacesState {}
+
+class PlaceReady extends PlacesState {
+  PlaceReady({required this.place});
+
+  final Place place;
+}
+
 class PlacesError extends PlacesState {
   PlacesError(this.errorMessage);
 

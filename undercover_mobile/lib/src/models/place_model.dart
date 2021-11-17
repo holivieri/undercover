@@ -15,6 +15,7 @@ class Place {
     this.standing,
     this.floor,
     this.coverPicture,
+    this.description,
   });
 
   factory Place.fromJson(Map<String, dynamic> json) => Place(
@@ -31,6 +32,7 @@ class Place {
         province: json['province'],
         country: Country.fromJson(json['country']),
         coverPicture: json['coverPicture'],
+        description: json['description'],
       );
 
   final String id;
@@ -46,6 +48,7 @@ class Place {
   final String province;
   final Country country;
   final String? coverPicture;
+  final String? description;
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -61,5 +64,6 @@ class Place {
         'province': province,
         'country': country.toJson(),
         'coverPicture': coverPicture,
+        'description': description,
       };
 }

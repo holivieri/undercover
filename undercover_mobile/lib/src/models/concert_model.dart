@@ -1,5 +1,5 @@
 import 'artist_model.dart';
-import 'place_mode.dart';
+import 'place_model.dart';
 
 class Concert {
   Concert({

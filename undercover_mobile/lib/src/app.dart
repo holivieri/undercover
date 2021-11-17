@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:undercover_mobile/src/routes/routes.dart';
 
 import 'pages/home_page.dart';
 import 'repositories/artists_repository.dart';
@@ -71,6 +72,7 @@ class _MyAppState extends State<MyApp> {
 
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
+          routes: getApplicationRoutes(),
           onGenerateRoute: (RouteSettings routeSettings) {
             return MaterialPageRoute<void>(
               settings: routeSettings,

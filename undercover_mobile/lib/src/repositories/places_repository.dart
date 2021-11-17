@@ -1,4 +1,4 @@
-import '../models/place_mode.dart';
+import '../models/place_model.dart';
 import '../services/places_service.dart';
 
 class PlacesRepository {

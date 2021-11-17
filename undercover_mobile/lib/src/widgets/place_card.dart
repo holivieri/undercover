@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../routes/routes.dart';
 import '../utils/default_images.dart';
 import '../utils/text_style.dart';
 
@@ -51,7 +52,9 @@ class PlaceCard extends StatelessWidget {
     }
 
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, placeRoute);
+      },
       child: Container(
         height: _cardHeight,
         width: widthInfinit ? 350 : _cardWidth,

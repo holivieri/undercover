@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../models/place_mode.dart';
+import '../../models/place_model.dart';
 import '../../repositories/places_repository.dart';
 
 part 'places_event.dart';
