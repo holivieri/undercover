@@ -20,6 +20,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Undercover.API.Config;
 using Undercover.API.Data;
+using Undercover.API.Entities;
 using Undercover.API.Services;
 
 namespace Undercover.API
@@ -124,7 +125,7 @@ namespace Undercover.API
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 

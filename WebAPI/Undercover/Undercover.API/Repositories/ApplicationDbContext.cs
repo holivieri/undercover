@@ -28,6 +28,8 @@ namespace Undercover.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
 
 
@@ -130,7 +132,7 @@ namespace Undercover.API.Data
             modelBuilder.Entity<Genre>().HasData(genrePunk);
             modelBuilder.Entity<Genre>().HasData(genreMetal);
 
-            base.OnModelCreating(modelBuilder);
+          
         }
 
     }
