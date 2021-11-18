@@ -11,6 +11,8 @@ class Place {
     required this.city,
     required this.province,
     required this.country,
+    required this.likes,
+    required this.dislikes,
     this.seats,
     this.standing,
     this.floor,
@@ -33,6 +35,8 @@ class Place {
         country: Country.fromJson(json['country']),
         coverPicture: json['coverPicture'],
         description: json['description'],
+        likes: json['likes'],
+        dislikes: json['dislikes'],
       );
 
   final String id;
@@ -49,6 +53,8 @@ class Place {
   final Country country;
   final String? coverPicture;
   final String? description;
+  final int likes;
+  final int dislikes;
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -65,5 +71,7 @@ class Place {
         'country': country.toJson(),
         'coverPicture': coverPicture,
         'description': description,
+        'likes': likes,
+        'dislikes': dislikes,
       };
 }

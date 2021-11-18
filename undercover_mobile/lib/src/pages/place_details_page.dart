@@ -68,6 +68,7 @@ class _PlaceDetailsPageState extends State<PlaceDetailsPage> {
       child: Column(
         children: [
           getPlaceCoverPicture(place),
+          const SizedBox(height: 20),
           getPlaceInfo(place),
         ],
       ),
@@ -83,17 +84,41 @@ class _PlaceDetailsPageState extends State<PlaceDetailsPage> {
   }
 
   Widget getPlaceInfo(Place place) {
-    return Column(
-      children: [
-        Text(
-          place.name,
-          style: titleStyle,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Colors.lightBlue[50]!.withOpacity(0.5),
+      ),
+      width: 250,
+      height: 300,
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            const SizedBox(height: 15),
+            Text(
+              place.name,
+              style: subtitleStyle,
+            ),
+            const SizedBox(height: 15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Icon(Icons.location_city),
+                Text(place.city),
+              ],
+            ),
+            const SizedBox(height: 15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Icon(Icons.chair),
+                Text(place.seats.toString()),
+              ],
+            ),
+          ],
         ),
-        const SizedBox(height: 15),
-        Text(place.city),
-        const SizedBox(height: 15),
-        Text(place.seats.toString()),
-      ],
+      ),
     );
   }
 }
