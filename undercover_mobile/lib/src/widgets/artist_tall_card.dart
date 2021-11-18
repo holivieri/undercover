@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../routes/routes.dart';
 import '../utils/colors.dart';
 import '../utils/default_images.dart';
 import '../utils/text_style.dart';
 
 class ArtistTallCard extends StatelessWidget {
   const ArtistTallCard({
-    this.artistName,
+    required this.artistId,
+    required this.artistName,
     this.backgroundImageUrl,
-    this.followersCount,
+    this.followersCount = 0,
     Key? key,
   }) : super(key: key);
 
   final String? backgroundImageUrl;
   final int? followersCount;
   final String? artistName;
+  final String artistId;
 
   @override
   Widget build(BuildContext context) {
@@ -28,46 +33,51 @@ class ArtistTallCard extends StatelessWidget {
   }
 
   Widget _returnArtistCard(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(15),
-      child: Container(
-        height: 220,
-        width: 150,
-        decoration: const BoxDecoration(
-          color: themeBoxBlue,
-        ),
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                      backgroundImageUrl ?? defaultSquareCardBackgroundUrl),
-                  fit: BoxFit.cover,
+    return InkWell(
+      onTap: () {
+        Get.toNamed(artistRoute, arguments: artistId);
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15),
+        child: Container(
+          height: 220,
+          width: 150,
+          decoration: const BoxDecoration(
+            color: themeBoxBlue,
+          ),
+          child: Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        backgroundImageUrl ?? defaultSquareCardBackgroundUrl),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 0, 30),
-                child: Text(
-                  artistName ?? '',
-                  style: cardTitleTextBoldStyle,
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 30),
+                  child: Text(
+                    artistName ?? '',
+                    style: cardTitleTextBoldStyle,
+                  ),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Text(
-                  checkPlurals(followersCount!),
-                  style: cardTitleSmallTextStyle,
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    checkPlurals(followersCount!),
+                    style: cardTitleSmallTextStyle,
+                  ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

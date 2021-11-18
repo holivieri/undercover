@@ -42,16 +42,13 @@ class _PlaceDetailsPageState extends State<PlaceDetailsPage> {
         if (state is FetchingPlace) {
           return const CircularProgressIndicator();
         } else if (state is PlaceLoaded) {
-          if (state.place == null) {
-            return const Text('No existe un lugar asi');
-          }
           return Scaffold(
             body: Container(
               height: double.infinity,
               width: double.infinity,
               decoration:
                   const BoxDecoration(gradient: themeBackgroundGradient),
-              child: mainBody(state.place!),
+              child: mainBody(state.place),
             ),
           );
         } else if (state is PlacesError) {

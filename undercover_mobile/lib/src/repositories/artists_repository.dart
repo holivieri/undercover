@@ -10,4 +10,9 @@ class ArtistRepository {
     //check cache
     return _artistService.getMyArtists();
   }
+
+  Future<Artist?> getArtist(String id) {
+    //check cache
+    return _artistService.getArtist(id);
+  }
 }

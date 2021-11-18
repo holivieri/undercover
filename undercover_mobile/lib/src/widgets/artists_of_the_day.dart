@@ -40,6 +40,7 @@ class _ArtistsOfTheDayState extends State<ArtistsOfTheDay> {
                   arguments: status.artists[index].id,
                 ),
                 child: ArtistTallCard(
+                  artistId: status.artists[index].id,
                   artistName: status.artists[index].name,
                   followersCount: status.artists[index].followers,
                   backgroundImageUrl: status.artists[index].pictureUrl,

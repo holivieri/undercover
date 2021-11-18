@@ -4,3 +4,9 @@ part of 'my_artists_bloc.dart';
 abstract class MyArtistsBlocEvent {}
 
 class LoadMyArtists extends MyArtistsBlocEvent {}
+
+class LoadArtist extends MyArtistsBlocEvent {
+  LoadArtist(this.artistId);
+
+  final String artistId;
+}

@@ -18,7 +18,7 @@ class FetchingPlace extends PlacesState {}
 class PlaceLoaded extends PlacesState {
   PlaceLoaded(this.place);
 
-  final Place? place;
+  final Place place;
 }
 
 class PlacesError extends PlacesState {

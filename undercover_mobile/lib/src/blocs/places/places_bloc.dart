@@ -15,7 +15,11 @@ class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
     });
     on<FetchPlace>((event, emit) async {
       final place = await placesRepository.getPlace(event.placeId);
-      emit(PlaceLoaded(place));
+      if (place == null) {
+        emit(PlacesError('No existe ese lugar'));
+      } else {
+        emit(PlaceLoaded(place));
+      }
     });
   }
 

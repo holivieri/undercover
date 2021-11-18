@@ -13,6 +13,14 @@ class ArtistsLoaded extends MyArtistsBlocState {
   final List<Artist> artists;
 }
 
+class LoadingArtist extends MyArtistsBlocState {}
+
+class ArtistLoaded extends MyArtistsBlocState {
+  ArtistLoaded(this.artist);
+
+  final Artist artist;
+}
+
 class ArtistsError extends MyArtistsBlocState {
   ArtistsError(this.errorMessage);
 

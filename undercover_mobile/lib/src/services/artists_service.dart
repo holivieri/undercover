@@ -6,6 +6,29 @@ import '../models/artist_model.dart';
 import '../utils/http.dart';
 
 class ArtistService {
+  Future<Artist?> getArtist(String id) async {
+    final _apiResponse = await Client().get(
+      Uri.parse('$apiUrl/Artist/$id'),
+      headers: returnUndercoverHeaders(),
+    );
+
+    if (_apiResponse.statusCode != 200) {
+      assert(
+        _apiResponse.statusCode == 200,
+        'Artist endpoint is NOT working',
+      );
+      return null;
+    }
+
+    final Artist artist = Artist.fromJson(
+      json.decode(
+        _apiResponse.body,
+      ),
+    );
+
+    return artist;
+  }
+
   Future<List<Artist>> getMyArtists() async {
     final _apiResponse = await Client().get(
       Uri.parse('$apiUrl/Artist'),
