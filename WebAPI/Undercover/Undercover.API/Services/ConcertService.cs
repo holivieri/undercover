@@ -18,7 +18,16 @@ namespace Undercover.API.Services
 
         public Concert Get(Guid id)
         {
-            return _dbContext.Concerts.Find(id);
+            return _dbContext.Concerts
+                .Include(c => c.Artist)
+                .Include(c => c.Artist).ThenInclude(z => z.Genres)
+                .Include(z => z.Artist).ThenInclude(z => z.Albums)
+                .Include(z => z.Artist).ThenInclude(z => z.Posts)
+                .Include(c => c.Artist).ThenInclude(x => x.Genres).ThenInclude(y => y.Genre)
+                .Include(c => c.Place).ThenInclude(x => x.Country)
+                .Where(c => c.Id == id)
+                .OrderBy(c => c.Date)
+                .FirstOrDefault();
         }
 
         public List<Concert> GetNextConcerts()

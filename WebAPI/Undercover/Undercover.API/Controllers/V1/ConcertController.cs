@@ -13,15 +13,12 @@ namespace Undercover.API.Controllers.V1
     [ApiController]
     public class ConcertController : ControllerBase
     {
-        private readonly IPlaceService _placeService;
         private readonly IConcertService _concertService;
         private readonly ILogger<ConcertController> _logger;
 
-        public ConcertController(IPlaceService placeService, 
-            IConcertService concertService, 
+        public ConcertController(IConcertService concertService, 
             ILogger<ConcertController> logger)
         {
-            _placeService = placeService;
             _concertService = concertService;
             _logger = logger;
         }
@@ -48,8 +45,8 @@ namespace Undercover.API.Controllers.V1
         }
 
 
-
-        [HttpGet(Name = "GetNextConcerts")]
+        
+        [HttpGet("GetNextConcerts")]
         public async Task<ActionResult<List<Concert>>> GetNextConcerts()
         {
             try
@@ -63,7 +60,7 @@ namespace Undercover.API.Controllers.V1
             }
         }
 
-        [HttpGet( "{city}", Name = "GetNextConcertsByCity")]
+        [HttpGet("GetNextConcertsByCity/{city}")]
         public async Task<ActionResult<List<Concert>>> GetNextConcertsByCity(string city)
         {
             try
