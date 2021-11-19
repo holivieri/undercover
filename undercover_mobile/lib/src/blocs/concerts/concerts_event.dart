@@ -4,3 +4,9 @@ part of 'concerts_bloc.dart';
 abstract class ConcertsEvent {}
 
 class LoadNextConcerts extends ConcertsEvent {}
+
+class LoadConcert extends ConcertsEvent {
+  LoadConcert(this.concertId);
+
+  final String concertId;
+}

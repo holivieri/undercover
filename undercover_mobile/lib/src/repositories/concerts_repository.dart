@@ -9,4 +9,8 @@ class ConcertsRepository {
   Future<List<Concert>> getNextConcerts() async {
     return concertsService.getNextConcerts();
   }
+
+  Future<Concert?> getConcert(String concertId) async {
+    return concertsService.getConcert(concertId);
+  }
 }

@@ -12,3 +12,17 @@ class NextConcertsLoaded extends ConcertsState {
 
   final List<Concert> concerts;
 }
+
+class LoadingConcert extends ConcertsState {}
+
+class ConcertLoaded extends ConcertsState {
+  ConcertLoaded(this.concert);
+
+  final Concert concert;
+}
+
+class ConcertError extends ConcertsState {
+  ConcertError(this.errorMessage);
+
+  final String errorMessage;
+}
