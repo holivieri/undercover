@@ -27,7 +27,7 @@ class ConcertsService {
 
   Future<List<Concert>> getNextConcerts() async {
     final _apiResponse = await Client().get(
-      Uri.parse('$apiUrl/Concert'),
+      Uri.parse('$apiUrl/Concert/GetNextConcerts'),
       headers: returnUndercoverHeaders(),
     );
 

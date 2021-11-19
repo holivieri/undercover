@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../main.dart';
 import '../blocs/concerts/concerts_bloc.dart';
-import 'place_card.dart';
+import 'concert_card.dart';
 
 class ConcertsList extends StatelessWidget {
   const ConcertsList({Key? key}) : super(key: key);
@@ -25,8 +25,8 @@ class ConcertsList extends StatelessWidget {
                   runSpacing: 20,
                   children: List.generate(
                     status.concerts.length,
-                    (index) => PlaceCard(
-                      placeId: status.concerts[index].place.id,
+                    (index) => ConcertCard(
+                      concertId: status.concerts[index].id,
                       backgroundImageUrl:
                           status.concerts[index].artist!.pictureUrl,
                       title:
