@@ -79,7 +79,7 @@ namespace Undercover.API
                     Title = "Undercover",
                     Version = "v1",
                     Description = "Web Api for Undercover App",
-                    Contact = new OpenApiContact() { Name = "Hernan Olivier", Email = "hernan.olivieri@gmail.com"}
+                    Contact = new OpenApiContact() { Name = "Hernan Olivieri", Email = "hernan.olivieri@gmail.com"}
                 });
                 c.SwaggerDoc("v2", new OpenApiInfo
                 {

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -39,43 +40,68 @@ namespace Undercover.API.Controllers.V1
         }
 
         [HttpPost("SignUp")]
-        public async Task<ActionResult<UserToken>> SignUp([FromBody] UserModel model)
+        public async Task<ActionResult<AuthenticateResponse>> SignUp([FromBody] UserModel model)
         {
-            // TODO we have to define the process
-            var user = new User { UserName = model.Email, Email = model.Email };
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Some parameters are missing for signing up");
+            }
+            
+
+
+            var user = new User { 
+                UserName = model.Email, 
+                Email = model.Email, 
+            };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                return BuildToken(model, new List<string>(), user.Id);
+                //asign user to role
+                var newUser = await _userManager.FindByEmailAsync(model.Email);
+                try
+                {
+                    await _userManager.AddToRoleAsync(newUser, model.UserRole);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError("Error assigning user to role.", ex);
+                    return BadRequest("Role is not valid");
+                }
+
+                return BuildToken(model, user.Id).Result;
             }
             else
             {
-                return BadRequest("This username already exists in our database");
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError("Errors:", error.Description);
+                }
+                return BadRequest(result.Errors);
             }
         }
 
         [HttpPost("Login")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<UserToken>> Login([FromBody] UserModel UserModel)
+        public async Task<ActionResult<AuthenticateResponse>> Login([FromBody] UserModel UserModel)
         {
             var result = await _signInManager.PasswordSignInAsync(UserModel.Email, UserModel.Password, isPersistent: false, lockoutOnFailure: false);
             if (result.Succeeded)
             {
                 var user = await _userManager.FindByEmailAsync(UserModel.Email);
                 var roles = await _userManager.GetRolesAsync(user);
-                return BuildToken(UserModel, roles, user.Id);
+
+                return BuildToken(UserModel, user.Id).Result;
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return BadRequest(ModelState);
+                return BadRequest("Invalid login attempt.");
             }
         }
 
         [HttpGet("RefreshToken")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<ActionResult<UserToken>> RefreshToken()
+        public async Task<ActionResult<AuthenticateResponse>> RefreshToken()
         {
             var emailClaim = HttpContext.User.Claims.Where(Claim => Claim.Type == "Email").FirstOrDefault();
             var id = HttpContext.User.Claims.Where(claim => claim.Type == "UserId").FirstOrDefault();
@@ -86,7 +112,7 @@ namespace Undercover.API.Controllers.V1
             var userWithRoles = await _userManager.FindByEmailAsync(email);
             var roles = await _userManager.GetRolesAsync(userWithRoles);
 
-            return BuildToken(user, roles, id.Value);
+            return BuildToken(user, id.Value).Result;
 
         }
 
@@ -122,38 +148,38 @@ namespace Undercover.API.Controllers.V1
             return Ok(roles);
         }
 
-        private UserToken BuildToken(UserModel UserModel, IList<string> roles, string Id)
+        private async Task<AuthenticateResponse> BuildToken(UserModel UserModel, string userId)
         {
-            var claims = new List<Claim>
-            {
-                new Claim("UserId", Id),
-                new Claim("Email", UserModel.Email),
-                new Claim(JwtRegisteredClaimNames.UniqueName, UserModel.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
-
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            }
-
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
             var expiration = DateTime.UtcNow.AddYears(1);
 
+            var user = await _userManager.FindByIdAsync(userId);
+            var roles = await _userManager.GetRolesAsync(user);
+
+
+            var claims = new List<Claim>()
+            {
+                new Claim("UserId", userId.ToString()),
+                new Claim("Email", UserModel.Email),
+                new Claim("Role", roles[0]),
+            };
+
             JwtSecurityToken token = new JwtSecurityToken(
-               issuer: null,
+               issuer: "undercover-api",
                audience: null,
                claims: claims,
                expires: expiration,
-               signingCredentials: creds);
+               signingCredentials: creds
+               );
 
-            return new UserToken()
+            return new AuthenticateResponse()
             {
+                UserId = Guid.Parse(userId),
+                UserName = UserModel.Email,
+                UserRole = UserModel.UserRole,
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 Expiration = expiration,
-                userName = UserModel.Email,
             };
         }
     }
