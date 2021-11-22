@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../routes/routes.dart';
+
 class UnderAppbar extends StatefulWidget implements PreferredSizeWidget {
   const UnderAppbar({Key? key})
+      // ignore: avoid_field_initializers_in_const_classes
       : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
 
@@ -26,21 +29,26 @@ class _UnderAppbarState extends State<UnderAppbar> {
   Widget getIcons() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: const [
-        Icon(
+      children: [
+        const Icon(
           Icons.circle_notifications,
           color: Colors.white,
           size: 40,
         ),
-        Icon(
+        const Icon(
           FontAwesomeIcons.guitar,
           color: Colors.white,
           size: 40,
         ),
-        Icon(
-          Icons.account_circle,
-          color: Colors.white,
-          size: 40,
+        InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, loginRoute);
+          },
+          child: const Icon(
+            Icons.account_circle,
+            color: Colors.white,
+            size: 40,
+          ),
         ),
       ],
     );

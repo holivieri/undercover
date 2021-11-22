@@ -4,15 +4,18 @@ import 'package:get/get.dart';
 import '../pages/artist_details_page.dart';
 import '../pages/concert_details_page.dart';
 import '../pages/home_page.dart';
+import '../pages/login_page.dart';
 import '../pages/place_details_page.dart';
 
 const String homeRoute = '/';
 const String artistRoute = '/artistDetails';
 const String placeRoute = '/placeDetails';
 const String concertRoute = '/concertDetails';
+const String loginRoute = '/login';
 
 Map<String, WidgetBuilder> getApplicationRoutes() {
   return <String, WidgetBuilder>{
+    loginRoute: (BuildContext context) => LoginPage(),
     homeRoute: (BuildContext context) => const HomePage(),
     artistRoute: (BuildContext context) => ArtistDetailsPage(),
     concertRoute: (BuildContext context) => ConcertDetailsPage(),
