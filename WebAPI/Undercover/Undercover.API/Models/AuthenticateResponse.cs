@@ -8,6 +8,11 @@ namespace Undercover.API.Models
         public string UserName { get; set; }
         public string Token { get; set; }
         public DateTime Expiration { get; set; }
-        public string UserRole { get; set; }
+        
+        /// <summary>
+        /// Roles. Comma separated
+        /// </summary>
+        public string UserRoles { get; set; }
+
     }
 }

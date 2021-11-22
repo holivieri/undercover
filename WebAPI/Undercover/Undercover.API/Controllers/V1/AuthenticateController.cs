@@ -89,8 +89,6 @@ namespace Undercover.API.Controllers.V1
             if (result.Succeeded)
             {
                 var user = await _userManager.FindByEmailAsync(UserModel.Email);
-                var roles = await _userManager.GetRolesAsync(user);
-
                 return BuildToken(UserModel, user.Id).Result;
             }
             else
@@ -156,13 +154,14 @@ namespace Undercover.API.Controllers.V1
 
             var user = await _userManager.FindByIdAsync(userId);
             var roles = await _userManager.GetRolesAsync(user);
+            string myRoles = string.Join(",", roles);
 
 
             var claims = new List<Claim>()
             {
                 new Claim("UserId", userId.ToString()),
                 new Claim("Email", UserModel.Email),
-                new Claim("Role", roles[0]),
+                new Claim("Roles", myRoles),
             };
 
             JwtSecurityToken token = new JwtSecurityToken(
@@ -177,7 +176,7 @@ namespace Undercover.API.Controllers.V1
             {
                 UserId = Guid.Parse(userId),
                 UserName = UserModel.Email,
-                UserRole = UserModel.UserRole,
+                UserRoles = myRoles,
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 Expiration = expiration,
             };
