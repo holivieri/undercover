@@ -28,6 +28,7 @@ class LoginPage extends StatelessWidget {
 
   Widget getUserForm() {
     return Container(
+      padding: const EdgeInsets.all(10),
       child: Column(
         children: [
           InputText(
