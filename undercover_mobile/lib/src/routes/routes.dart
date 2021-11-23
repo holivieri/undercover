@@ -15,7 +15,7 @@ const String loginRoute = '/login';
 
 Map<String, WidgetBuilder> getApplicationRoutes() {
   return <String, WidgetBuilder>{
-    loginRoute: (BuildContext context) => LoginPage(),
+    loginRoute: (BuildContext context) => const LoginPage(),
     homeRoute: (BuildContext context) => const HomePage(),
     artistRoute: (BuildContext context) => ArtistDetailsPage(),
     concertRoute: (BuildContext context) => ConcertDetailsPage(),

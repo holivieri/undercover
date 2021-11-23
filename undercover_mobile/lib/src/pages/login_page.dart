@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../widgets/input_text.dart';
 
 class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,18 +14,41 @@ class LoginPage extends StatelessWidget {
 
   Widget getBody() {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          getLogo(),
-          getUserForm(),
-          getButtons(),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            getLogo(),
+            getUserForm(),
+            getButtons(),
+          ],
+        ),
       ),
     );
   }
 
   Widget getLogo() {
-    return Image.asset('images/logo.jpg', width: 300, height: 300,);
+    return Image.asset(
+      'images/logo.jpg',
+      width: 300,
+      height: 300,
+    );
+  }
+
+  Widget getButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        ElevatedButton(
+          onPressed: () {},
+          child: const Text('Login'),
+        ),
+        ElevatedButton(
+          onPressed: () {},
+          child: const Text('Cancel'),
+        )
+      ],
+    );
   }
 
   Widget getUserForm() {
@@ -47,7 +72,7 @@ class LoginPage extends StatelessWidget {
               }
             },
           ),
-            InputText(
+          InputText(
             label: 'Password',
             onChanged: (String value) {},
             validator: (String? password) {
@@ -59,21 +84,6 @@ class LoginPage extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Widget getButtons() {
-    return Row(
-      children: [
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Login'),
-        ),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Cancel'),
-        )
-      ],
     );
   }
 }

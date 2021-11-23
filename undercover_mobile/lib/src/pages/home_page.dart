@@ -44,6 +44,7 @@ class _HomePageState extends State<HomePage> {
 Widget mainBody() {
   return SingleChildScrollView(
     child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         getMyBands(),
         const SizedBox(height: 20),
