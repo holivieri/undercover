@@ -272,7 +272,7 @@ namespace Undercover.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ArtistGenres",
+                name: "ArtistGenre",
                 columns: table => new
                 {
                     ArtistId = table.Column<Guid>(nullable: false),
@@ -280,15 +280,15 @@ namespace Undercover.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ArtistGenres", x => new { x.ArtistId, x.GenreId });
+                    table.PrimaryKey("PK_ArtistGenre", x => new { x.ArtistId, x.GenreId });
                     table.ForeignKey(
-                        name: "FK_ArtistGenres_Artists_ArtistId",
+                        name: "FK_ArtistGenre_Artists_ArtistId",
                         column: x => x.ArtistId,
                         principalTable: "Artists",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ArtistGenres_Genres_GenreId",
+                        name: "FK_ArtistGenre_Genres_GenreId",
                         column: x => x.GenreId,
                         principalTable: "Genres",
                         principalColumn: "Id",
@@ -377,8 +377,8 @@ namespace Undercover.API.Migrations
                 column: "ArtistId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArtistGenres_GenreId",
-                table: "ArtistGenres",
+                name: "IX_ArtistGenre_GenreId",
+                table: "ArtistGenre",
                 column: "GenreId");
 
             migrationBuilder.CreateIndex(
@@ -449,7 +449,7 @@ namespace Undercover.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ArtistGenres");
+                name: "ArtistGenre");
 
             migrationBuilder.DropTable(
                 name: "ArtistPosts");

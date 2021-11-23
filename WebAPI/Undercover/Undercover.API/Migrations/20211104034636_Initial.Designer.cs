@@ -269,7 +269,7 @@ namespace Undercover.API.Migrations
                     b.ToTable("Artists");
                 });
 
-            modelBuilder.Entity("Undercover.API.Entities.ArtistGenres", b =>
+            modelBuilder.Entity("Undercover.API.Entities.ArtistGenre", b =>
                 {
                     b.Property<Guid>("ArtistId")
                         .HasColumnType("uniqueidentifier");
@@ -281,7 +281,7 @@ namespace Undercover.API.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("ArtistGenres");
+                    b.ToTable("ArtistGenre");
                 });
 
             modelBuilder.Entity("Undercover.API.Entities.ArtistPost", b =>
@@ -624,7 +624,7 @@ namespace Undercover.API.Migrations
                         .HasForeignKey("ArtistId");
                 });
 
-            modelBuilder.Entity("Undercover.API.Entities.ArtistGenres", b =>
+            modelBuilder.Entity("Undercover.API.Entities.ArtistGenre", b =>
                 {
                     b.HasOne("Undercover.API.Entities.Artist", "Artist")
                         .WithMany("Genres")

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../utils/colors.dart';
 import '../widgets/input_text.dart';
 
 class LoginPage extends StatelessWidget {
@@ -8,7 +9,12 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: getBody(),
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: const BoxDecoration(gradient: themeBackgroundGradient),
+        child: getBody(),
+      ),
     );
   }
 

@@ -19,7 +19,7 @@ namespace Undercover.API.Data
 
         public DbSet<Place> Places { get; set; }
         public DbSet<Country> Countries { get; set; }
-        public DbSet<ArtistGenres> ArtistGenres { get; set; }
+       
         public DbSet<ArtistPost> ArtistPosts { get; set; }
 
         public DbSet<ArtistPicture> ArtistPictures { get; set; }
@@ -33,18 +33,18 @@ namespace Undercover.API.Data
             modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
 
 
-            modelBuilder.Entity<ArtistGenres>()
-                .HasKey(ag => new { ag.ArtistId, ag.GenreId });
+            //modelBuilder.Entity<ArtistGenre>()
+            //    .HasKey(ag => new { ag.ArtistId, ag.GenreId });
 
-            modelBuilder.Entity<ArtistGenres>()
-            .HasOne(ag => ag.Artist)
-            .WithMany(b => b.Genres)
-            .HasForeignKey(bc => bc.ArtistId);
+            //modelBuilder.Entity<ArtistGenre>()
+            //.HasOne(ag => ag.Artist)
+            //.WithMany(b => b.Genres)
+            //.HasForeignKey(bc => bc.ArtistId);
 
-            modelBuilder.Entity<ArtistGenres>()
-            .HasOne(bc => bc.Genre)
-            .WithMany(c => c.Artists)
-            .HasForeignKey(bc => bc.GenreId);
+            //modelBuilder.Entity<ArtistGenre>()
+            //.HasOne(bc => bc.Genre)
+            //.WithMany(c => c.Artists)
+            //.HasForeignKey(bc => bc.GenreId);
 
 
             var adminRole = new IdentityRole()
