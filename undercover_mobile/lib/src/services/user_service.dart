@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:undercover_mobile/src/errors/login_error.dart';
 
+import '../errors/login_error.dart';
 import '../models/user_model.dart';
 import '../utils/http.dart';
 
