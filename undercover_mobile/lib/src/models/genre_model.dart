@@ -19,13 +19,15 @@ class Genre {
   factory Genre.fromJson(Map<String, dynamic> json) => Genre(
         id: json['id'],
         name: json['name'],
-        artists: json['artists'],
+        artists: json['artists'] != null
+            ? List<Artist>.from(json['artists'].map((x) => Artist.fromJson(x)))
+            : null,
         coverPicture: json['coverPicture'],
       );
 
   final String id;
   final String name;
-  final Artist? artists;
+  final List<Artist>? artists;
   final String? coverPicture;
 
   Map<String, dynamic> toJson() => {

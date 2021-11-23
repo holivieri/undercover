@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'album_model.dart';
 import 'concert_model.dart';
+import 'genre_model.dart';
 import 'post_model.dart';
 
 List<Artist> artistFromJson(String str) =>
@@ -37,8 +38,7 @@ class Artist {
         name: json['name'],
         bio: json['bio'],
         pictureUrl: json['pictureUrl'],
-        genres: List<GenreElement>.from(
-            json['genres'].map((x) => GenreElement.fromJson(x))),
+        genres: List<Genre>.from(json['genres'].map((x) => Genre.fromJson(x))),
         concerts: List<Concert>.from(
             json['concerts'].map((x) => Concert.fromJson(x))),
         albums: List<Album>.from(json['albums'].map((x) => Album.fromJson(x))),
@@ -58,7 +58,7 @@ class Artist {
   final String name;
   final String bio;
   final String? pictureUrl;
-  final List<GenreElement> genres;
+  final List<Genre> genres;
   final List<Concert> concerts;
   final List<Album> albums;
   final List<Post> posts;
@@ -77,10 +77,10 @@ class Artist {
         'name': name,
         'bio': bio,
         'pictureUrl': pictureUrl,
-        'genres': List<dynamic>.from(genres.map((x) => x.toJson())),
-        'concerts': List<dynamic>.from(concerts.map((x) => x.toJson())),
-        'albums': List<dynamic>.from(albums.map((x) => x.toJson())),
-        'posts': List<dynamic>.from(posts.map((x) => x.toJson())),
+        'genres': List<Genre>.from(genres.map((x) => x.toJson())),
+        'concerts': List<Concert>.from(concerts.map((x) => x.toJson())),
+        'albums': List<Album>.from(albums.map((x) => x.toJson())),
+        'posts': List<Post>.from(posts.map((x) => x.toJson())),
         'followers': followers,
         'twitterAccount': twitterAccount,
         'facebookAccount': facebookAccount,
@@ -89,56 +89,5 @@ class Artist {
         'soundCloudAccount': soundCloudAccount,
         'managerName': managerName,
         'managerContact': managerContact,
-      };
-}
-
-class GenreElement {
-  GenreElement({
-    required this.artistId,
-    required this.genreId,
-    required this.genre,
-  });
-
-  factory GenreElement.fromJson(Map<String, dynamic> json) => GenreElement(
-        artistId: json['artistId'],
-        genreId: json['genreId'],
-        genre: ArtistGenre.fromJson(json['genre']),
-      );
-
-  final String artistId;
-  final String genreId;
-  final ArtistGenre genre;
-
-  Map<String, dynamic> toJson() => {
-        'artistId': artistId,
-        'genreId': genreId,
-        'genre': genre.toJson(),
-      };
-}
-
-class ArtistGenre {
-  ArtistGenre({
-    required this.id,
-    required this.name,
-    this.artists,
-  });
-
-  factory ArtistGenre.fromJson(Map<String, dynamic> json) => ArtistGenre(
-        id: json['id'],
-        name: json['name'],
-        artists: json['artists'] == null
-            ? null
-            : List<dynamic>.from(json['artists'].map((x) => x)),
-      );
-
-  final String id;
-  final String name;
-  final List<dynamic>? artists;
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'artists':
-            artists == null ? null : List<dynamic>.from(artists!.map((x) => x)),
       };
 }
