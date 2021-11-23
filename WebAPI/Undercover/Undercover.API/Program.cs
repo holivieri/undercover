@@ -16,7 +16,7 @@ namespace Undercover.API
         public static void Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
-                                .WriteTo.RollingFile("Log_{Date}.txt")
+                              //  .WriteTo.Sink()  //.RollingFile("Log_{Date}.txt")
                                 .MinimumLevel.Debug()
                                 .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
                                 .Enrich.FromLogContext()
