@@ -16,7 +16,7 @@ namespace Undercover.API.Entities
         [StringLength(300)]
         public string CoverPicture { get; set; }
 
-        public virtual List<ArtistGenres> Artists { get; set; }
+        public virtual List<Artist> Artists { get; set; }
 
     }
 }

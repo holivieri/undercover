@@ -9,9 +9,6 @@ namespace Undercover.API.Data
         DbSet<Concert> Concerts { get; set; }
         DbSet<Place> Places { get; set; }
         DbSet<Genre> Genres { get; set; }
-
-        DbSet<ArtistGenres> ArtistGenres { get; set; }
-
         DbSet<Country> Countries { get; set; }
 
     }
