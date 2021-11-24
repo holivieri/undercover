@@ -67,6 +67,19 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               );
             }
+            if (state is ValidateError) {
+              return Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    getLogo(),
+                    getErrorMessage(state.message),
+                    getUserForm(),
+                    getButtons(),
+                  ],
+                ),
+              );
+            }
             return Container();
           },
         ),
@@ -79,6 +92,18 @@ class _LoginPageState extends State<LoginPage> {
       'images/logo.jpg',
       width: 300,
       height: 300,
+    );
+  }
+
+  Widget getErrorMessage(String error) {
+    return Container(
+      height: 200,
+      width: double.infinity,
+      color: themeDanger,
+      child: Text(
+        error,
+        style: const TextStyle(color: Colors.white),
+      ),
     );
   }
 
