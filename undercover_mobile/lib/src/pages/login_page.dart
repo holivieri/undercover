@@ -1,10 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../blocs/users/users_bloc.dart';
+import '../repositories/user_repository.dart';
+import '../routes/routes.dart';
+import '../services/user_service.dart';
 import '../utils/colors.dart';
 import '../widgets/input_text.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  late UsersBloc bloc;
+  @override
+  void initState() {
+    super.initState();
+    UserService _userService = UserService();
+    UserRepository _userRepository = UserRepository(_userService);
+
+    bloc = UsersBloc(_userRepository);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +41,32 @@ class LoginPage extends StatelessWidget {
 
   Widget getBody() {
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            getLogo(),
-            getUserForm(),
-            getButtons(),
-          ],
+      child: BlocListener<UsersBloc, UsersState>(
+        bloc: bloc,
+        listener: (context, state) {
+          if (state is UserIsValidated) {
+            Navigator.pushNamed(context, homeRoute);
+          }
+        },
+        child: BlocBuilder<UsersBloc, UsersState>(
+          builder: (context, state) {
+            if (state is ValidatingUser) {
+              return const CircularProgressIndicator();
+            }
+            if (state is UsersInitial) {
+              return Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    getLogo(),
+                    getUserForm(),
+                    getButtons(),
+                  ],
+                ),
+              );
+            }
+            return Container();
+          },
         ),
       ),
     );
@@ -46,7 +85,12 @@ class LoginPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            bloc.add(
+              ValidateUser(
+                  userName: 'hernan@gmail.com', password: 'Tener1fe*79'),
+            );
+          },
           child: const Text('Login'),
         ),
         ElevatedButton(
