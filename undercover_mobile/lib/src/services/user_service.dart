@@ -19,9 +19,10 @@ class UserService {
 
   Future<dynamic> login(String userName, String password) async {
     final _apiResponse = await Client().post(
-        Uri.parse('$apiUrl/Authenticate/Login'),
-        headers: returnUndercoverHeaders(),
-        body: jsonEncode({'userName': userName, 'password': password}));
+      Uri.parse('$apiUrl/Authenticate/Login'),
+      headers: returnUndercoverHeaders(),
+      body: json.encode({'email': userName, 'password': password}),
+    );
 
     if (_apiResponse.statusCode == 500) {
       return LoginError(

@@ -7,7 +7,6 @@ import '../repositories/user_repository.dart';
 import '../routes/routes.dart';
 import '../services/user_service.dart';
 import '../utils/colors.dart';
-import '../widgets/input_text.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -109,29 +108,40 @@ class _LoginPageState extends State<LoginPage> {
       child: Column(
         children: [
           TextFormField(
+            decoration: const InputDecoration(
+              fillColor: Colors.white,
+              filled: true,
+              labelText: 'User',
+              prefixIcon: Icon(
+                Icons.person,
+                color: Colors.teal,
+              ),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black12),
+              ),
+            ),
             scrollPhysics: const ClampingScrollPhysics(),
             textInputAction: TextInputAction.done,
-            //key: widget.keyInput,
             controller: txtUser,
             autocorrect: false,
           ),
+          const SizedBox(height: 20),
           TextFormField(
             decoration: const InputDecoration(
               fillColor: Colors.white,
+              filled: true,
               labelText: 'Password',
               prefixIcon: Icon(
-                Icons.person,
-                color: Colors.white,
+                Icons.password,
+                color: Colors.teal,
               ),
               border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.teal),
+                borderSide: BorderSide(color: Colors.black12),
               ),
             ),
-
             scrollPhysics: const ClampingScrollPhysics(),
             textInputAction: TextInputAction.done,
             obscureText: true,
-            //key: widget.keyInput,
             controller: txtPassword,
             autocorrect: false,
           ),
