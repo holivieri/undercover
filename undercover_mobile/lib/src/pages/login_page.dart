@@ -21,8 +21,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    UserService _userService = UserService();
-    UserRepository _userRepository = UserRepository(_userService);
+    final UserService _userService = UserService();
+    final UserRepository _userRepository = UserRepository(_userService);
 
     bloc = UsersBloc(_userRepository);
   }
