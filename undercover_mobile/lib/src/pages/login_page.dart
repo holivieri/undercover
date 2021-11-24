@@ -18,6 +18,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   late UsersBloc bloc;
+  final TextEditingController txtUser = TextEditingController();
+  final TextEditingController txtPassword = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -87,8 +90,7 @@ class _LoginPageState extends State<LoginPage> {
         ElevatedButton(
           onPressed: () {
             bloc.add(
-              ValidateUser(
-                  userName: 'hernan@gmail.com', password: 'Tener1fe*79'),
+              ValidateUser(userName: txtUser.text, password: txtPassword.text),
             );
           },
           child: const Text('Login'),
@@ -106,31 +108,32 @@ class _LoginPageState extends State<LoginPage> {
       padding: const EdgeInsets.all(10),
       child: Column(
         children: [
-          InputText(
-            label: 'E-mail',
-            onChanged: (String value) {},
-            validator: (String? email) {
-              if (email == null) {
-                return 'Enter a valid e-mail';
-              }
-              if (RegExp(
-                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                  .hasMatch(email)) {
-                return null;
-              } else {
-                return 'Enter a valid e-mail';
-              }
-            },
+          TextFormField(
+            scrollPhysics: const ClampingScrollPhysics(),
+            textInputAction: TextInputAction.done,
+            //key: widget.keyInput,
+            controller: txtUser,
+            autocorrect: false,
           ),
-          InputText(
-            label: 'Password',
-            onChanged: (String value) {},
-            validator: (String? password) {
-              if (password == null) {
-                return 'Enter a password';
-              }
-              return null;
-            },
+          TextFormField(
+            decoration: const InputDecoration(
+              fillColor: Colors.white,
+              labelText: 'Password',
+              prefixIcon: Icon(
+                Icons.person,
+                color: Colors.white,
+              ),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.teal),
+              ),
+            ),
+
+            scrollPhysics: const ClampingScrollPhysics(),
+            textInputAction: TextInputAction.done,
+            obscureText: true,
+            //key: widget.keyInput,
+            controller: txtPassword,
+            autocorrect: false,
           ),
         ],
       ),
