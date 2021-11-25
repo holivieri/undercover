@@ -67,22 +67,22 @@ namespace Undercover.API.Controllers.V1
             {
                 _logger.LogError("Error on Get Artist", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error getting an artist");
-
             }
         }
 
 
         [HttpGet("GetTweets")]
-        public IActionResult GetTweets(String userId)
+        public async Task<IActionResult> GetTweets(String userId)
         {
             try
             {
-               return Ok(_twitterService.getTweets(567037176));
+                var result = _twitterService.getTweets(567037176);
+               return Ok(await result);
             }
             catch (Exception ex)
             {
-
-                throw;
+                _logger.LogError("Error on Get Tweets", ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error getting tweets");
             }
         }
     }

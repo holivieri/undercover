@@ -32,7 +32,7 @@ namespace Undercover.API.Models
         public string next_token { get; set; }
     }
 
-    public class Root
+    public class Tweets
     {
         public List<Tweet> data { get; set; }
         public Meta meta { get; set; }

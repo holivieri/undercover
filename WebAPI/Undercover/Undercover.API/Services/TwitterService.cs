@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Undercover.API.Models;
 
@@ -22,7 +20,7 @@ namespace Undercover.API.Services
             _settings = settings;
         }
 
-        public async Task<List<Tweet>> getTweets(long twitterUserId)
+        public async Task<Tweets> getTweets(long twitterUserId)
         {
             string url = _settings["Twitter:url"];
             url += "/" + twitterUserId.ToString() + "/tweets?tweet.fields=public_metrics,created_at";
@@ -31,25 +29,14 @@ namespace Undercover.API.Services
 
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync(url))
+                using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, url))
                 {
-                    response.EnsureSuccessStatusCode();
-
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var jsonString = await response.Content.ReadAsStringAsync();
-                        return JsonConvert.DeserializeObject<List<Tweet>>(jsonString);
-                    }
-                    else
-                    {
-                        _logger.LogError("Status Code: " + response.StatusCode);
-                        _logger.LogError("Response: " + response.ToString());
-                        _logger.LogError("Twitter Error");
-                        return new List<Tweet>();
-                    }
+                    requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _settings["Twitter:BearerToken"]);
+                    var response = await httpClient.SendAsync(requestMessage);
+                    var jsonString = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<Tweets>(jsonString);
                 }
             }
-
         }
 
     }
