@@ -15,11 +15,13 @@ namespace Undercover.API.Controllers.V1
     {
         private readonly IArtistService _artistService;
         private readonly ILogger<ArtistController> _logger;
+        private readonly ITwitterService _twitterService;
 
-        public ArtistController(IArtistService artistService, ILogger<ArtistController> logger)
+        public ArtistController(IArtistService artistService, ILogger<ArtistController> logger, ITwitterService twitterService)
         {
             _artistService = artistService;
             _logger = logger;
+            _twitterService = twitterService;
         }
 
         /// <summary>
@@ -39,7 +41,6 @@ namespace Undercover.API.Controllers.V1
                 _logger.LogError("Error on GetAllArtist", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error getting all artist");
             }
-            
         }
 
 
@@ -68,7 +69,21 @@ namespace Undercover.API.Controllers.V1
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error getting an artist");
 
             }
-            
+        }
+
+
+        [HttpGet("GetTweets")]
+        public IActionResult GetTweets(String userId)
+        {
+            try
+            {
+               return Ok(_twitterService.getTweets(567037176));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }
