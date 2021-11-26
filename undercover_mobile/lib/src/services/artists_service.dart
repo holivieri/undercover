@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 import '../models/artist_model.dart';
+import '../models/twitter_response_model.dart';
 import '../utils/http.dart';
 
 class ArtistService {
@@ -27,6 +28,27 @@ class ArtistService {
     );
 
     return artist;
+  }
+
+  Future<TweeterResponse?> getTweets() async {
+    final _apiResponse = await Client().get(
+      Uri.parse('$apiUrl/Artist/GetTweets'),
+      headers: returnUndercoverHeaders(),
+    );
+
+    if (_apiResponse.statusCode != 200) {
+      assert(
+        _apiResponse.statusCode == 200,
+        'Tweets endpoint is NOT working',
+      );
+      return null;
+    }
+
+    final _decodedResponse = json.decode(
+      _apiResponse.body,
+    );
+
+    return TweeterResponse.fromJson(_decodedResponse);
   }
 
   Future<List<Artist>> getMyArtists() async {

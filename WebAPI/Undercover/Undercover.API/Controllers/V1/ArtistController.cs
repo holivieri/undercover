@@ -72,7 +72,7 @@ namespace Undercover.API.Controllers.V1
 
 
         [HttpGet("GetTweets")]
-        public async Task<IActionResult> GetTweets(String userId)
+        public async Task<IActionResult> GetTweets()
         {
             try
             {

@@ -21,8 +21,22 @@ class ArtistLoaded extends MyArtistsBlocState {
   final Artist artist;
 }
 
+class LoadingTweets extends MyArtistsBlocState {}
+
+class TweetsLoaded extends MyArtistsBlocState {
+  TweetsLoaded(this.tweets);
+
+  final TweeterResponse tweets;
+}
+
 class ArtistsError extends MyArtistsBlocState {
   ArtistsError(this.errorMessage);
+
+  final String errorMessage;
+}
+
+class TweetsError extends MyArtistsBlocState {
+  TweetsError(this.errorMessage);
 
   final String errorMessage;
 }

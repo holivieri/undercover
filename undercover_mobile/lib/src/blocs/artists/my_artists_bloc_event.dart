@@ -10,3 +10,9 @@ class LoadArtist extends MyArtistsBlocEvent {
 
   final String artistId;
 }
+
+class LoadArtistTweets extends MyArtistsBlocEvent {
+  /*  LoadArtistTweets(this.twitterAccount);
+
+  final String twitterAccount; */
+}

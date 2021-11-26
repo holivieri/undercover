@@ -1,4 +1,5 @@
 import '../models/artist_model.dart';
+import '../models/twitter_response_model.dart';
 import '../services/artists_service.dart';
 
 class ArtistRepository {
@@ -30,5 +31,9 @@ class ArtistRepository {
     } else {
       return _artistService.getArtist(id);
     }
+  }
+
+  Future<TweeterResponse?> getArtistTweets() async {
+    return _artistService.getTweets();
   }
 }

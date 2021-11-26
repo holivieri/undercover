@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../models/artist_model.dart';
+import '../../models/twitter_response_model.dart';
 import '../../repositories/artists_repository.dart';
 
 part 'my_artists_bloc_event.dart';
@@ -19,6 +20,14 @@ class MyArtistsBloc extends Bloc<MyArtistsBlocEvent, MyArtistsBlocState> {
         ArtistsError('No existe ese artista');
       } else {
         emit(ArtistLoaded(artist));
+      }
+    });
+    on<LoadArtistTweets>((event, emit) async {
+      final TweeterResponse? tweets = await artistRepository.getArtistTweets();
+      if (tweets == null) {
+        emit(TweetsError('No se pueden cargar los Tweets'));
+      } else {
+        emit(TweetsLoaded(tweets));
       }
     });
   }
