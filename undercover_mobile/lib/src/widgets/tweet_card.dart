@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:undercover_mobile/src/utils/colors.dart';
+
+import '../utils/colors.dart';
 
 class TweetCard extends StatelessWidget {
   const TweetCard({

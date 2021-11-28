@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:undercover_mobile/src/widgets/tweets_list.dart';
 
 import '../blocs/artists/my_artists_bloc.dart';
 import '../models/artist_model.dart';
@@ -10,6 +9,7 @@ import '../repositories/artists_repository.dart';
 import '../services/artists_service.dart';
 import '../utils/colors.dart';
 import '../utils/font.dart';
+import '../widgets/tweets_list.dart';
 
 class ArtistDetailsPage extends StatefulWidget {
   @override

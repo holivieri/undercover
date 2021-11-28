@@ -135,6 +135,7 @@ namespace Undercover.API
             services.AddTransient<IPlaceService, PlaceService>();
             services.AddTransient<IConcertService, ConcertService>();
             services.AddTransient<ITwitterService, TwitterService>();
+            services.AddTransient<IYoutubeService, YoutubeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
