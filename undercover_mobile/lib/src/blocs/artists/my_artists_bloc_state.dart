@@ -29,6 +29,14 @@ class TweetsLoaded extends MyArtistsBlocState {
   final TweeterResponse tweets;
 }
 
+class LoadingYoutubeVideos extends MyArtistsBlocState {}
+
+class YoutubeVideosLoaded extends MyArtistsBlocState {
+  YoutubeVideosLoaded(this.videos);
+
+  final YoutubeResponse videos;
+}
+
 class ArtistsError extends MyArtistsBlocState {
   ArtistsError(this.errorMessage);
 

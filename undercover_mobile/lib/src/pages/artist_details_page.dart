@@ -10,6 +10,7 @@ import '../services/artists_service.dart';
 import '../utils/colors.dart';
 import '../utils/font.dart';
 import '../widgets/tweets_list.dart';
+import '../widgets/youtube_videos_list.dart';
 
 class ArtistDetailsPage extends StatefulWidget {
   @override
@@ -65,6 +66,8 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
           getArtistBio(artist),
           const SizedBox(height: 20),
           const TweetsList(),
+          const SizedBox(height: 20),
+          const YoutubeVideosList(),
         ],
       ),
     );

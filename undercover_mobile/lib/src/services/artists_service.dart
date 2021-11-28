@@ -4,6 +4,7 @@ import 'package:http/http.dart';
 
 import '../models/artist_model.dart';
 import '../models/twitter_response_model.dart';
+import '../models/youtube_response_model.dart';
 import '../utils/http.dart';
 
 class ArtistService {
@@ -49,6 +50,27 @@ class ArtistService {
     );
 
     return TweeterResponse.fromJson(_decodedResponse);
+  }
+
+  Future<YoutubeResponse?> getYoutubeVideos() async {
+    final _apiResponse = await Client().get(
+      Uri.parse('$apiUrl/Artist/GetYoutubeVideos'),
+      headers: returnUndercoverHeaders(),
+    );
+
+    if (_apiResponse.statusCode != 200) {
+      assert(
+        _apiResponse.statusCode == 200,
+        'GetYoutubeVideos endpoint is NOT working',
+      );
+      return null;
+    }
+
+    final _decodedResponse = json.decode(
+      _apiResponse.body,
+    );
+
+    return YoutubeResponse.fromJson(_decodedResponse);
   }
 
   Future<List<Artist>> getMyArtists() async {
