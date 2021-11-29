@@ -1,5 +1,6 @@
 import '../models/artist_model.dart';
 import '../models/twitter_response_model.dart';
+import '../models/youtube_response_model.dart';
 import '../services/artists_service.dart';
 
 class ArtistRepository {
@@ -35,5 +36,9 @@ class ArtistRepository {
 
   Future<TweeterResponse?> getArtistTweets() async {
     return _artistService.getTweets();
+  }
+
+  Future<YoutubeResponse?> getYoutbeVideos() async {
+    return _artistService.getYoutubeVideos();
   }
 }

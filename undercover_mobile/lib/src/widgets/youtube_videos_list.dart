@@ -5,16 +5,16 @@ import '../../main.dart';
 import '../blocs/artists/my_artists_bloc.dart';
 import '../repositories/artists_repository.dart';
 import '../services/artists_service.dart';
-import 'tweet_card.dart';
+import 'video_card.dart';
 
-class TweetsList extends StatefulWidget {
-  const TweetsList({Key? key}) : super(key: key);
+class YoutubeVideosList extends StatefulWidget {
+  const YoutubeVideosList({Key? key}) : super(key: key);
 
   @override
-  State<TweetsList> createState() => _TweetsListState();
+  State<YoutubeVideosList> createState() => _YoutubeVideosListState();
 }
 
-class _TweetsListState extends State<TweetsList> {
+class _YoutubeVideosListState extends State<YoutubeVideosList> {
   late final MyArtistsBloc bloc;
 
   @override
@@ -23,7 +23,7 @@ class _TweetsListState extends State<TweetsList> {
     final ArtistService _artistService = ArtistService();
     final ArtistRepository _artistRepository = ArtistRepository(_artistService);
 
-    bloc = MyArtistsBloc(_artistRepository)..add(LoadArtistTweets());
+    bloc = MyArtistsBloc(_artistRepository)..add(LoadArtistYoutubeVideos());
   }
 
   @override
@@ -35,7 +35,7 @@ class _TweetsListState extends State<TweetsList> {
           builder: (context, status) {
             if (status is LoadingTweets) {
               return const CircularProgressIndicator();
-            } else if (status is TweetsLoaded) {
+            } else if (status is YoutubeVideosLoaded) {
               return Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: platformIsNotWeb() ? 10 : 25),
@@ -43,16 +43,9 @@ class _TweetsListState extends State<TweetsList> {
                   spacing: 20,
                   runSpacing: 20,
                   children: List.generate(
-                    status.tweets.data.length,
-                    (index) => TweetCard(
-                      createdDate: status.tweets.data[index].createdAt,
-                      likeCount:
-                          status.tweets.data[index].publicMetrics.likeCount,
-                      message: status.tweets.data[index].text,
-                      replyCount:
-                          status.tweets.data[index].publicMetrics.replyCount,
-                      retweetCount:
-                          status.tweets.data[index].publicMetrics.retweetCount,
+                    status.videos.items.length,
+                    (index) => VideoCard(
+                      videoInfo: status.videos.items[index],
                     ),
                   ),
                 ),

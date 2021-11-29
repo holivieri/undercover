@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 
 import '../../models/artist_model.dart';
 import '../../models/twitter_response_model.dart';
+import '../../models/youtube_response_model.dart';
 import '../../repositories/artists_repository.dart';
 
 part 'my_artists_bloc_event.dart';
@@ -28,6 +29,14 @@ class MyArtistsBloc extends Bloc<MyArtistsBlocEvent, MyArtistsBlocState> {
         emit(TweetsError('No se pueden cargar los Tweets'));
       } else {
         emit(TweetsLoaded(tweets));
+      }
+    });
+    on<LoadArtistYoutubeVideos>((event, emit) async {
+      final YoutubeResponse? videos = await artistRepository.getYoutbeVideos();
+      if (videos == null) {
+        emit(ArtistsError('No se puede cargar los videos'));
+      } else {
+        emit(YoutubeVideosLoaded(videos));
       }
     });
   }

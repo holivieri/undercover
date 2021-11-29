@@ -16,12 +16,15 @@ namespace Undercover.API.Controllers.V1
         private readonly IArtistService _artistService;
         private readonly ILogger<ArtistController> _logger;
         private readonly ITwitterService _twitterService;
+        private readonly IYoutubeService _youtubeService;
 
-        public ArtistController(IArtistService artistService, ILogger<ArtistController> logger, ITwitterService twitterService)
+
+        public ArtistController(IArtistService artistService, ILogger<ArtistController> logger, ITwitterService twitterService, IYoutubeService youtubeService)
         {
             _artistService = artistService;
             _logger = logger;
             _twitterService = twitterService;
+            _youtubeService = youtubeService;
         }
 
         /// <summary>
@@ -84,6 +87,23 @@ namespace Undercover.API.Controllers.V1
                 _logger.LogError("Error on Get Tweets", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error getting tweets");
             }
+        }
+
+        [HttpGet("GetYoutubeVideos")]
+        public async Task<IActionResult> GetYoutubeVideos()
+        {
+            //
+            try
+            {
+                var result = _youtubeService.GetVideos("UC-NxzTwCAdyO_HRMahoxHfQ");
+                return Ok(await result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error on Get Youtube Videos", ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error on Get Youtube Videos");
+            }
+
         }
     }
 }

@@ -16,3 +16,5 @@ class LoadArtistTweets extends MyArtistsBlocEvent {
 
   final String twitterAccount; */
 }
+
+class LoadArtistYoutubeVideos extends MyArtistsBlocEvent {}
