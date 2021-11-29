@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:undercover_mobile/src/models/user_preferences.dart';
 
 import '../blocs/users/users_bloc.dart';
 import '../repositories/user_repository.dart';
@@ -47,6 +48,10 @@ class _LoginPageState extends State<LoginPage> {
         bloc: bloc,
         listener: (context, state) {
           if (state is UserIsValidated) {
+            print(state.user.token);
+
+            UserPreferences().token = state.user.token;
+            UserPreferences().userName = state.user.userName;
             Navigator.pushNamed(context, homeRoute);
           }
         },

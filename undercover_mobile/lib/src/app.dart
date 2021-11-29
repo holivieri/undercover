@@ -12,13 +12,11 @@ import 'settings/settings_view.dart';
 class MyApp extends StatefulWidget {
   const MyApp({
     required this.settingsController,
-    //required this.artistService,
     required this.artistRepository,
     Key? key,
   }) : super(key: key);
 
   final SettingsController settingsController;
-  // final ArtistService artistService;
   final ArtistRepository artistRepository;
 
   @override
@@ -26,13 +24,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // late ArtistRepository _artistRepository;
-
   @override
   void initState() {
     super.initState();
-    //final ArtistService service = ArtistService();
-    // _artistRepository = ArtistRepository(service);
   }
 
   @override

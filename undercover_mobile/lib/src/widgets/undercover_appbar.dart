@@ -1,5 +1,8 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:undercover_mobile/src/models/user_preferences.dart';
 
 import '../routes/routes.dart';
 
@@ -27,6 +30,8 @@ class _UnderAppbarState extends State<UnderAppbar> {
   }
 
   Widget getIcons() {
+    final String userName = UserPreferences().userName;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -40,16 +45,19 @@ class _UnderAppbarState extends State<UnderAppbar> {
           color: Colors.white,
           size: 40,
         ),
-        InkWell(
-          onTap: () {
-            Navigator.pushNamed(context, loginRoute);
-          },
-          child: const Icon(
-            Icons.account_circle,
-            color: Colors.white,
-            size: 40,
-          ),
-        ),
+        if (userName.isEmpty)
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, loginRoute);
+            },
+            child: const Icon(
+              Icons.account_circle,
+              color: Colors.white,
+              size: 40,
+            ),
+          )
+        else
+          Text(userName),
       ],
     );
   }

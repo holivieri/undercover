@@ -10,6 +10,7 @@ import 'src/blocs/concerts/concerts_bloc.dart';
 import 'src/blocs/genres/genres_bloc.dart';
 import 'src/blocs/places/places_bloc.dart';
 import 'src/blocs/users/users_bloc.dart';
+import 'src/models/user_preferences.dart';
 import 'src/repositories/artists_repository.dart';
 import 'src/repositories/concerts_repository.dart';
 import 'src/repositories/genres_repository.dart';
@@ -44,6 +45,9 @@ Future<void> main() async {
   final UserRepository _userRepository = UserRepository(_userService);
   final ConcertsRepository _concertsRepository =
       ConcertsRepository(_concertsService);
+
+  final userPreferences = UserPreferences();
+  await userPreferences.init();
 
   await settingsController.loadSettings();
   runApp(
