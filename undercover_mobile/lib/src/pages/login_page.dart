@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:undercover_mobile/src/models/user_preferences.dart';
 
 import '../blocs/users/users_bloc.dart';
+import '../models/user_preferences.dart';
 import '../repositories/user_repository.dart';
 import '../routes/routes.dart';
 import '../services/user_service.dart';
 import '../utils/colors.dart';
+import '../utils/app_colors.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: const BoxDecoration(gradient: themeBackgroundGradient),
+        color: blackBackground,
         child: getBody(),
       ),
     );
@@ -49,7 +50,6 @@ class _LoginPageState extends State<LoginPage> {
         listener: (context, state) {
           if (state is UserIsValidated) {
             print(state.user.token);
-
             UserPreferences().token = state.user.token;
             UserPreferences().userName = state.user.userName;
             Navigator.pushNamed(context, homeRoute);
@@ -94,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget getLogo() {
     return Image.asset(
-      'images/logo.jpg',
+      'images/Logo_small.png',
       width: 300,
       height: 300,
     );
@@ -113,22 +113,17 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget getButtons() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        ElevatedButton(
-          onPressed: () {
-            bloc.add(
-              ValidateUser(userName: txtUser.text, password: txtPassword.text),
-            );
-          },
-          child: const Text('Login'),
-        ),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Cancel'),
-        )
-      ],
+    return Container(
+      color: greenButtonColor,
+      width: 600,
+      child: ElevatedButton(
+        onPressed: () {
+          bloc.add(
+            ValidateUser(userName: txtUser.text, password: txtPassword.text),
+          );
+        },
+        child: const Text('Log In'),
+      ),
     );
   }
 
@@ -139,15 +134,13 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           TextFormField(
             decoration: const InputDecoration(
-              fillColor: Colors.white,
+              fillColor: controlColor,
               filled: true,
+              hintText: 'Your Email Address',
               labelText: 'User',
               prefixIcon: Icon(
                 Icons.person,
-                color: Colors.teal,
-              ),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.black12),
+                color: greenButtonColor,
               ),
             ),
             scrollPhysics: const ClampingScrollPhysics(),
@@ -158,15 +151,13 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(height: 20),
           TextFormField(
             decoration: const InputDecoration(
-              fillColor: Colors.white,
+              fillColor: controlColor,
               filled: true,
+              hintText: 'Your Password',
               labelText: 'Password',
               prefixIcon: Icon(
                 Icons.password,
-                color: Colors.teal,
-              ),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.black12),
+                color: greenButtonColor,
               ),
             ),
             scrollPhysics: const ClampingScrollPhysics(),

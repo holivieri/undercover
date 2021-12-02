@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:undercover_mobile/src/themes/theme_provider.dart';
 
 import '../../main.dart';
 import '../utils/colors.dart';
@@ -8,6 +10,7 @@ import '../widgets/genres_list.dart';
 import '../widgets/places_list.dart';
 import '../widgets/section_header.dart';
 import '../widgets/undercover_appbar.dart';
+import '../widgets/undercover_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -26,6 +29,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeProvider theme = Provider.of<ThemeProvider>(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: const UnderAppbar(),
@@ -36,6 +41,8 @@ class _HomePageState extends State<HomePage> {
           decoration: const BoxDecoration(gradient: themeBackgroundGradient),
           child: mainBody(),
         ),
+        extendBody: true,
+        bottomNavigationBar: UndercoverNavBar(),
       ),
     );
   }
