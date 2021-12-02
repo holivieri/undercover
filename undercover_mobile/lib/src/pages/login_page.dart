@@ -7,8 +7,8 @@ import '../models/user_preferences.dart';
 import '../repositories/user_repository.dart';
 import '../routes/routes.dart';
 import '../services/user_service.dart';
-import '../utils/colors.dart';
 import '../utils/app_colors.dart';
+import '../utils/colors.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        color: blackBackground,
+        color: darkBackground,
         child: getBody(),
       ),
     );
@@ -134,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           TextFormField(
             decoration: const InputDecoration(
-              fillColor: controlColor,
+              fillColor: darkControlColor,
               filled: true,
               hintText: 'Your Email Address',
               labelText: 'User',
@@ -151,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(height: 20),
           TextFormField(
             decoration: const InputDecoration(
-              fillColor: controlColor,
+              fillColor: darkControlColor,
               filled: true,
               hintText: 'Your Password',
               labelText: 'Password',

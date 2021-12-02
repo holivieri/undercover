@@ -18,20 +18,36 @@ class ThemeProvider extends ChangeNotifier {
     themeMode = isOn ? ThemeMode.dark : ThemeMode.light;
     notifyListeners();
   }
+
+  Color getSelectedIconColor() {
+    if (isDarkMode) {
+      return iconSelectedColor;
+    } else {
+      return Colors.green;
+    }
+  }
+
+  Color getControlColor() {
+    if (isDarkMode) {
+      return darkControlColor;
+    } else {
+      return brightControlColor;
+    }
+  }
 }
 
 // ignore: avoid_classes_with_only_static_members
 class MyThemes {
   static final darkTheme = ThemeData(
     scaffoldBackgroundColor: Colors.grey.shade900,
-    backgroundColor: blackBackground,
+    backgroundColor: darkBackground,
     primaryColor: Colors.black,
     colorScheme: const ColorScheme.dark(),
     iconTheme: const IconThemeData(color: greenButtonColor),
   );
 
   static final lightTheme = ThemeData(
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: brightBackgroundWhite,
     backgroundColor: Colors.pink.shade200,
     primaryColor: Colors.white,
     colorScheme: const ColorScheme.light(),

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 import '../blocs/places/places_bloc.dart';
 import '../models/place_model.dart';
 import '../repositories/places_repository.dart';
 import '../services/places_service.dart';
-import '../themes/theme_provider.dart';
 import '../utils/colors.dart';
 import '../utils/font.dart';
 
@@ -38,8 +36,6 @@ class _PlaceDetailsPageState extends State<PlaceDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeProvider theme = Provider.of<ThemeProvider>(context);
-
     return BlocBuilder<PlacesBloc, PlacesState>(
       bloc: placesBloc,
       builder: (context, state) {
