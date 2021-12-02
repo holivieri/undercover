@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:undercover_mobile/src/utils/app_colors.dart';
+import '../utils/app_colors.dart';
 
 class ThemeProvider extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.system;
@@ -27,13 +27,14 @@ class MyThemes {
     backgroundColor: blackBackground,
     primaryColor: Colors.black,
     colorScheme: const ColorScheme.dark(),
-    iconTheme: IconThemeData(color: Colors.purple.shade200, opacity: 0.8),
+    iconTheme: const IconThemeData(color: greenButtonColor),
   );
 
   static final lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
+    backgroundColor: Colors.pink.shade200,
     primaryColor: Colors.white,
     colorScheme: const ColorScheme.light(),
-    iconTheme: const IconThemeData(color: Colors.red, opacity: 0.8),
+    iconTheme: const IconThemeData(color: Colors.red),
   );
 }

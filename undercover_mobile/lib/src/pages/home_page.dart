@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:undercover_mobile/src/themes/theme_provider.dart';
 
 import '../../main.dart';
-import '../utils/colors.dart';
+import '../themes/theme_provider.dart';
 import '../widgets/artists_of_the_day.dart';
 import '../widgets/concerts_list.dart';
 import '../widgets/genres_list.dart';
@@ -38,7 +37,6 @@ class _HomePageState extends State<HomePage> {
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: const BoxDecoration(gradient: themeBackgroundGradient),
           child: mainBody(),
         ),
         extendBody: true,
