@@ -47,7 +47,7 @@ class _ArtistsOfTheDayState extends State<ArtistsOfTheDay> {
                 ),
               ),
             );
-            return MyArtistsListView(
+            return UndercoverListView(
               listOfWidgets: _artistWidgets,
               numOfWidgetsOnTablet: 4,
               numOfWidgetsOnDesktop: 6,

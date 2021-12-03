@@ -46,8 +46,6 @@ class _PlaceDetailsPageState extends State<PlaceDetailsPage> {
             body: Container(
               height: double.infinity,
               width: double.infinity,
-              decoration:
-                  const BoxDecoration(gradient: themeBackgroundGradient),
               child: mainBody(state.place),
             ),
           );
@@ -73,10 +71,18 @@ class _PlaceDetailsPageState extends State<PlaceDetailsPage> {
   }
 
   Widget getPlaceCoverPicture(Place place) {
-    return Container(
-      width: double.infinity,
-      height: 400,
-      child: Image.network(place.coverPicture!),
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        bottomLeft: Radius.circular(25),
+        bottomRight: Radius.circular(25),
+      ),
+      child: Container(
+        width: double.infinity,
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: Image.network(place.coverPicture!),
+        ),
+      ),
     );
   }
 

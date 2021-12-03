@@ -26,7 +26,7 @@ class TweetCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(25),
       ),
       child: Card(
-        color: const Color.fromRGBO(0, 172, 238, 0.5), //themeBoxBlue,
+        color: const Color.fromRGBO(0, 172, 238, 0.5),
         elevation: 20,
         child: Padding(
           padding: const EdgeInsets.all(8),

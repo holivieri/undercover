@@ -7,7 +7,6 @@ import '../blocs/artists/my_artists_bloc.dart';
 import '../models/artist_model.dart';
 import '../repositories/artists_repository.dart';
 import '../services/artists_service.dart';
-import '../utils/colors.dart';
 import '../utils/font.dart';
 import '../widgets/tweets_list.dart';
 import '../widgets/youtube_videos_list.dart';
@@ -45,8 +44,6 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
             body: Container(
               height: double.infinity,
               width: double.infinity,
-              decoration:
-                  const BoxDecoration(gradient: themeBackgroundGradient),
               child: mainBody(state.artist),
             ),
           );
@@ -74,10 +71,18 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
   }
 
   Widget getArtistCoverPicture(Artist artist) {
-    return Container(
-      width: double.infinity,
-      height: 400,
-      child: Image.network(artist.pictureUrl!),
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        bottomLeft: Radius.circular(25),
+        bottomRight: Radius.circular(25),
+      ),
+      child: Container(
+        width: double.infinity,
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: Image.network(artist.pictureUrl!),
+        ),
+      ),
     );
   }
 

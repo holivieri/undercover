@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:undercover_mobile/src/widgets/list_view.dart';
 
 import '../../main.dart';
 import '../blocs/artists/my_artists_bloc.dart';
@@ -36,25 +37,31 @@ class _TweetsListState extends State<TweetsList> {
             if (status is LoadingTweets) {
               return const CircularProgressIndicator();
             } else if (status is TweetsLoaded) {
+              final tweetsWidgets = List.generate(
+                status.tweets.data.length,
+                (index) => TweetCard(
+                  createdDate: status.tweets.data[index].createdAt,
+                  likeCount: status.tweets.data[index].publicMetrics.likeCount,
+                  message: status.tweets.data[index].text,
+                  replyCount:
+                      status.tweets.data[index].publicMetrics.replyCount,
+                  retweetCount:
+                      status.tweets.data[index].publicMetrics.retweetCount,
+                ),
+              );
+
               return Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: platformIsNotWeb() ? 10 : 25),
-                child: Wrap(
-                  spacing: 20,
-                  runSpacing: 20,
-                  children: List.generate(
-                    status.tweets.data.length,
-                    (index) => TweetCard(
-                      createdDate: status.tweets.data[index].createdAt,
-                      likeCount:
-                          status.tweets.data[index].publicMetrics.likeCount,
-                      message: status.tweets.data[index].text,
-                      replyCount:
-                          status.tweets.data[index].publicMetrics.replyCount,
-                      retweetCount:
-                          status.tweets.data[index].publicMetrics.retweetCount,
-                    ),
-                  ),
+                child: UndercoverListView(
+                  listOfWidgets: tweetsWidgets,
+                  numOfWidgetsOnTablet: 4,
+                  numOfWidgetsOnDesktop: 6,
+                  numOfWidgetsOnWideScreen: 8,
+                  itemHeight: 140,
+                  itemWidth: 150,
+                  padding: 10,
+                  leftPaddingOnPhone: 25,
                 ),
               );
             } else {
