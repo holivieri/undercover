@@ -30,11 +30,11 @@ class _UserPreferencesPageState extends State<UserPreferencesPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            const Text('Modo Oscuro'),
             Switch.adaptive(
               value: themeProvider.isDarkMode,
               onChanged: themeProvider.toggleTheme,
             ),
-            const Text('Modo Oscuro'),
           ],
         ),
       ],

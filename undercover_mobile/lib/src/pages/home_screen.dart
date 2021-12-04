@@ -20,6 +20,7 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          getLogo(),
           getMyBands(),
           const SizedBox(height: 20),
           getGenres(),
@@ -32,13 +33,26 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  Widget getLogo() {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      width: double.infinity,
+      alignment: Alignment.topRight,
+      child: Image.asset(
+        'images/Logo_small.png',
+        height: 50,
+      ),
+    );
+  }
+
   Widget getGenres() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: platformIsNotWeb() ? 10 : 25),
-          child: sectionHeader('Generos'),
+          child: sectionHeader('Generos', seeAll: false),
         ),
         const GenresList(),
       ],
@@ -47,6 +61,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget getPlaces() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding:
@@ -72,15 +87,6 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget getMyBands() {
-    return Column(
-      children: [
-        const SizedBox(height: 50),
-        Row(
-          children: const [
-            ArtistsOfTheDay(),
-          ],
-        ),
-      ],
-    );
+    return const ArtistsOfTheDay();
   }
 }

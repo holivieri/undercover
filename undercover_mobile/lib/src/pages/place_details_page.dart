@@ -78,7 +78,7 @@ class _PlaceDetailsPageState extends State<PlaceDetailsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '${place.name} - ${place.city} - Phone: ${place.phoneNumber}',
+                  '${place.name} - ${place.city}',
                   style: titleStyle,
                 ),
                 getSocialNetworkIcons(),
@@ -141,48 +141,78 @@ class _PlaceDetailsPageState extends State<PlaceDetailsPage> {
   }
 
   Widget getPlaceInfo(Place place) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: Colors.black.withOpacity(0.5),
-      ),
-      width: 250,
-      height: 300,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            const SizedBox(height: 15),
-            Text(
-              place.name,
-              style: subtitleStyle,
-            ),
-            const SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Icon(Icons.location_city),
-                Text(place.city),
-              ],
-            ),
-            const SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Icon(Icons.chair),
-                Text(place.seats.toString()),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Icon(FontAwesomeIcons.peopleArrows),
-                Text(place.seats.toString()),
-              ],
-            ),
-          ],
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Container(
+              padding: const EdgeInsets.all(8),
+              height: 600,
+              width: 300,
+              child: Text(place.description ?? '')),
         ),
-      ),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: Colors.black.withOpacity(0.5),
+          ),
+          width: 250,
+          height: 300,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              children: [
+                const SizedBox(height: 15),
+                Text(
+                  place.name,
+                  style: subtitleStyle,
+                ),
+                const SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Icon(Icons.location_city),
+                    Text(place.city),
+                  ],
+                ),
+                const SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Icon(FontAwesomeIcons.phone),
+                    Text(place.phoneNumber ?? ''),
+                  ],
+                ),
+                const SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Icon(FontAwesomeIcons.archway),
+                    Text(place.totalCapacity.toString()),
+                  ],
+                ),
+                const SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Icon(Icons.chair),
+                    Text(place.seats.toString()),
+                  ],
+                ),
+                const SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Icon(FontAwesomeIcons.male),
+                    Text(place.totalCapacity.toString()),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(width: 10),
+      ],
     );
   }
 }
