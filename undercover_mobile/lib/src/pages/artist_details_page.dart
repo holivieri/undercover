@@ -8,6 +8,7 @@ import '../models/artist_model.dart';
 import '../repositories/artists_repository.dart';
 import '../services/artists_service.dart';
 import '../utils/font.dart';
+import '../widgets/back_button.dart';
 import '../widgets/tweets_list.dart';
 import '../widgets/youtube_videos_list.dart';
 
@@ -41,6 +42,12 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
           return const CircularProgressIndicator();
         } else if (state is ArtistLoaded) {
           return Scaffold(
+            appBar: AppBar(
+              leading: const BackArrowButton(),
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+            ),
+            extendBodyBehindAppBar: true,
             body: Container(
               height: double.infinity,
               width: double.infinity,

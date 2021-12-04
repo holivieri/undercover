@@ -16,6 +16,8 @@ namespace Undercover.API.Entities
         [StringLength(500)]
         public string Description { get; set; }
 
+        [StringLength(50)]
+        public string PhoneNumber { get; set; }
 
         [Required]
         public DateTime CreatedDate { get; set; }

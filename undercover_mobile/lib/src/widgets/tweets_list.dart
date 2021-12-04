@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:undercover_mobile/src/widgets/list_view.dart';
 
 import '../../main.dart';
 import '../blocs/artists/my_artists_bloc.dart';
 import '../repositories/artists_repository.dart';
 import '../services/artists_service.dart';
+import 'list_view.dart';
 import 'tweet_card.dart';
 
 class TweetsList extends StatefulWidget {
