@@ -33,7 +33,7 @@ class _YoutubeVideosListState extends State<YoutubeVideosList> {
         BlocBuilder<MyArtistsBloc, MyArtistsBlocState>(
           bloc: bloc,
           builder: (context, status) {
-            if (status is LoadingTweets) {
+            if (status is LoadingYoutubeVideos) {
               return const CircularProgressIndicator();
             } else if (status is YoutubeVideosLoaded) {
               return Padding(
