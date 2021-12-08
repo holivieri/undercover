@@ -41,4 +41,8 @@ class ArtistRepository {
   Future<YoutubeResponse?> getYoutbeVideos() async {
     return _artistService.getYoutubeVideos();
   }
+
+  Future<List<Artist>> searchArtists(String artistName) async {
+    return _artistService.searchArtist(artistName);
+  }
 }

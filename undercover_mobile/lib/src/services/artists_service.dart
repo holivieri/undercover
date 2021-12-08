@@ -96,4 +96,28 @@ class ArtistService {
         Artist.fromJson(_record)
     ];
   }
+
+  Future<List<Artist>> searchArtist(String artistName) async {
+    final _apiResponse = await Client().get(
+      Uri.parse('$apiUrl/Artist/Search?name=$artistName'),
+      headers: returnUndercoverHeaders(),
+    );
+
+    if (_apiResponse.statusCode != 200) {
+      assert(
+        _apiResponse.statusCode == 200,
+        'Artists Search endpoint is NOT working',
+      );
+      return [];
+    }
+
+    final List _decodedResponse = json.decode(
+      _apiResponse.body,
+    );
+
+    return [
+      for (final Map<String, dynamic> _record in _decodedResponse)
+        Artist.fromJson(_record)
+    ];
+  }
 }

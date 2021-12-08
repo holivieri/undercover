@@ -48,3 +48,11 @@ class TweetsError extends MyArtistsBlocState {
 
   final String errorMessage;
 }
+
+class SearchingArtists extends MyArtistsBlocState {}
+
+class ArtistsFound extends MyArtistsBlocState {
+  ArtistsFound(this.artists);
+
+  final List<Artist> artists;
+}
