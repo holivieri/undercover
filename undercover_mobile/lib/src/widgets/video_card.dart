@@ -21,7 +21,7 @@ class VideoCard extends StatelessWidget {
         Container(
             width: 400,
             height: 180,
-            child: Image.asset('images/youtube_logo.png')
+            child: Image.asset('assets/images/youtube_logo.png')
             //Image.network(videoInfo.snippet.thumbnails.high.url),
             ),
       ],

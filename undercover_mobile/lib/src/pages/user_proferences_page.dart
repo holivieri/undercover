@@ -22,7 +22,7 @@ class _UserPreferencesPageState extends State<UserPreferencesPage> {
     return Column(
       children: [
         Image.asset(
-          'images/Logo_small.png',
+          'assets/images/Logo_small.png',
           width: 300,
           height: 300,
         ),

@@ -1,3 +1,3 @@
 String defaultWideCardBackgroundUrl = '';
 String defaultTallCardBackgroundUrl = '';
-String defaultSquareCardBackgroundUrl = 'images/blues.jpg';
+String defaultSquareCardBackgroundUrl = 'assets/images/blues.jpg';

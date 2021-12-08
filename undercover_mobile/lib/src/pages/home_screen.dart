@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // getLogo(),
+          getLogo(),
           getMyBands(),
           const SizedBox(height: 20),
           getGenres(),
@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
       width: double.infinity,
       alignment: Alignment.topRight,
       child: Image.asset(
-        'images/Logo_small.png',
+        'assets/images/Logo_small.png',
         height: 50,
       ),
     );
