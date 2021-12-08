@@ -79,7 +79,7 @@ class _PlaceDetailsPageState extends State<PlaceDetailsPage> {
               children: [
                 Text(
                   '${place.name} - ${place.city}',
-                  style: titleStyle,
+                  style: titleStyleGreen,
                 ),
                 getSocialNetworkIcons(),
               ],

@@ -27,7 +27,7 @@ namespace Undercover.API.Entities
         public long Seats { get; set; }
         public long Standing { get; set; }
 
-        [StringLength(10)]
+        [StringLength(20)]
         public string Floor { get; set; }
 
         [Required]

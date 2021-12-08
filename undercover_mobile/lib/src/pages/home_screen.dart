@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          getLogo(),
+          // getLogo(),
           getMyBands(),
           const SizedBox(height: 20),
           getGenres(),

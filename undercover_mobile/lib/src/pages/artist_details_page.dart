@@ -65,10 +65,21 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
     return SingleChildScrollView(
       child: Column(
         children: [
+          const SizedBox(height: 25),
           getArtistCoverPicture(artist),
           const SizedBox(height: 20),
-          getArtistBio(artist),
-          const SizedBox(height: 20),
+          Text(
+            artist.name,
+            style: titleStyle,
+          ),
+          Text(
+            artist.followers.toString(),
+            style: titleStyleGreen,
+          ),
+          const Text('followers', style: subtitleStyle),
+          /* getArtistBio(artist),
+          const SizedBox(height: 20), */
+          getKeyPad(),
           const TweetsList(),
           const SizedBox(height: 20),
           const YoutubeVideosList(),
@@ -78,18 +89,27 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
   }
 
   Widget getArtistCoverPicture(Artist artist) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        bottomLeft: Radius.circular(25),
-        bottomRight: Radius.circular(25),
-      ),
-      child: Container(
-        width: double.infinity,
-        child: FittedBox(
+    return Container(
+      width: 300,
+      height: 300,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        image: DecorationImage(
+          image: NetworkImage(artist.pictureUrl!),
           fit: BoxFit.fill,
-          child: Image.network(artist.pictureUrl!),
         ),
       ),
+    );
+  }
+
+  Widget getKeyPad() {
+    return Row(
+      children: [
+        ElevatedButton(
+          onPressed: () {},
+          child: const Text('Follow'),
+        ),
+      ],
     );
   }
 

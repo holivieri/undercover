@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'app_colors.dart';
 import 'colors.dart';
 
 const double hugeTextSize = 24;
@@ -26,11 +27,15 @@ const fontColorBlue = themeBlue;
 
 const bool allowFontScaling = true;
 
-const String fontFamily = 'ubuntu';
+const String fontFamily = 'Nunito';
 
 const TextStyle titleStyle = TextStyle(
-  fontSize: largeTextSize,
-  color: Colors.white,
+  fontSize: hugeTextSize,
+);
+
+const TextStyle titleStyleGreen = TextStyle(
+  fontSize: hugeTextSize,
+  color: greenButtonColor,
 );
 
 const TextStyle seeAllStyle = TextStyle(
