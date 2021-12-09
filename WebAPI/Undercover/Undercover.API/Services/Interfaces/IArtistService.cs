@@ -9,6 +9,7 @@ namespace Undercover.API.Services
         List<Artist> GetAllArtist();
         List<Artist> GetAllArtist(Genre genre);
 
+        List<Artist> SearchArtist(string artistName);
         Artist Get(Guid id);
     }
 }

@@ -89,14 +89,17 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
   }
 
   Widget getArtistCoverPicture(Artist artist) {
-    return Container(
-      width: 300,
-      height: 300,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        image: DecorationImage(
-          image: NetworkImage(artist.pictureUrl!),
-          fit: BoxFit.fill,
+    return Hero(
+      tag: 'image-${artist.id}',
+      child: Container(
+        width: 300,
+        height: 300,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            image: NetworkImage(artist.pictureUrl!),
+            fit: BoxFit.fill,
+          ),
         ),
       ),
     );
