@@ -39,7 +39,7 @@ class _ArtistSearchResultListState extends State<ArtistSearchResultList> {
           trailing: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Text('Select to add to your list'),
+              const Text('Select'),
               Checkbox(
                 value: _selected.containsKey(artist.id),
                 onChanged: (bool? value) {
