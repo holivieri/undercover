@@ -30,30 +30,34 @@ class _ArtistSearchResultListState extends State<ArtistSearchResultList> {
       child: Card(
         elevation: 10,
         child: ListTile(
-          leading: FittedBox(
-            fit: BoxFit.cover,
-            child: Image.network(artist.pictureUrl!),
+          leading: Container(
+            width: 80,
+            child: FittedBox(
+              child: Image.network(artist.pictureUrl!),
+            ),
           ),
           title: Text(artist.name),
           subtitle: Text(artist.genres[0].name),
-          trailing: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const Text('Select'),
-              Checkbox(
-                value: _selected.containsKey(artist.id),
-                onChanged: (bool? value) {
-                  setState(() {
-                    if (value!) {
-                      _selected[artist.id] = value;
-                    } else {
-                      _selected.remove(artist.id);
-                    }
-                  });
-                  //call Add/remove method
-                },
-              ),
-            ],
+          trailing: FittedBox(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const Text('Select'),
+                Checkbox(
+                  value: _selected.containsKey(artist.id),
+                  onChanged: (bool? value) {
+                    setState(() {
+                      if (value!) {
+                        _selected[artist.id] = value;
+                      } else {
+                        _selected.remove(artist.id);
+                      }
+                    });
+                    //call Add/remove method
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
