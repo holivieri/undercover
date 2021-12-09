@@ -21,10 +21,13 @@ class _UserPreferencesPageState extends State<UserPreferencesPage> {
 
     return Column(
       children: [
-        Image.asset(
-          'assets/images/Logo_small.png',
-          width: 300,
-          height: 300,
+        Hero(
+          tag: 'logoTag',
+          child: Image.asset(
+            'assets/images/Logo_small.png',
+            width: 300,
+            height: 300,
+          ),
         ),
         const SizedBox(height: 40),
         Row(

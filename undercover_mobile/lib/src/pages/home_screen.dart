@@ -38,9 +38,12 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       width: double.infinity,
       alignment: Alignment.topRight,
-      child: Image.asset(
-        'assets/images/Logo_small.png',
-        height: 50,
+      child: Hero(
+        tag: 'logoTag',
+        child: Image.asset(
+          'assets/images/Logo_small.png',
+          height: 50,
+        ),
       ),
     );
   }
