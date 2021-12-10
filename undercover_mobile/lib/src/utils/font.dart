@@ -30,7 +30,7 @@ const bool allowFontScaling = true;
 const String fontFamily = 'Nunito';
 
 const TextStyle titleStyle = TextStyle(
-  fontSize: hugeTextSize,
+  fontSize: 33,
 );
 
 const TextStyle titleStyleGreen = TextStyle(
@@ -59,9 +59,8 @@ const TextStyle h3WhiteStyle = TextStyle(
 );
 
 const TextStyle subtitleStyle = TextStyle(
-  fontSize: 18,
+  fontSize: 20,
   color: Colors.white,
-  fontFamily: 'Ubuntu',
 );
 
 final TextStyle paragraphStyle = TextStyle(

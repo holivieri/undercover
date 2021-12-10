@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:undercover_mobile/src/utils/app_colors.dart';
+import 'package:undercover_mobile/src/widgets/green_button.dart';
 
 import '../blocs/artists/my_artists_bloc.dart';
 import '../models/artist_model.dart';
@@ -35,29 +37,31 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MyArtistsBloc, MyArtistsBlocState>(
-      bloc: artistBloc,
-      builder: (context, state) {
-        if (state is LoadingArtist) {
-          return const CircularProgressIndicator();
-        } else if (state is ArtistLoaded) {
-          return Scaffold(
-            appBar: AppBar(
-              leading: const BackArrowButton(),
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-            ),
-            extendBodyBehindAppBar: true,
-            body: Container(
-              height: double.infinity,
-              width: double.infinity,
-              child: mainBody(state.artist),
-            ),
-          );
-        } else {
-          return const Text('Error - Artista no encontrado');
-        }
-      },
+    return SafeArea(
+      child: BlocBuilder<MyArtistsBloc, MyArtistsBlocState>(
+        bloc: artistBloc,
+        builder: (context, state) {
+          if (state is LoadingArtist) {
+            return const CircularProgressIndicator();
+          } else if (state is ArtistLoaded) {
+            return Scaffold(
+              appBar: AppBar(
+                leading: const BackArrowButton(),
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+              ),
+              extendBodyBehindAppBar: true,
+              body: Container(
+                height: double.infinity,
+                width: double.infinity,
+                child: mainBody(state.artist),
+              ),
+            );
+          } else {
+            return const Text('Error - Artista no encontrado');
+          }
+        },
+      ),
     );
   }
 
@@ -77,9 +81,10 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
             style: titleStyleGreen,
           ),
           const Text('followers', style: subtitleStyle),
-          /* getArtistBio(artist),
-          const SizedBox(height: 20), */
-          getKeyPad(),
+          const SizedBox(height: 20),
+          getKeyPad(artist),
+          const SizedBox(height: 30),
+          getArtistBio(artist),
           const TweetsList(),
           const SizedBox(height: 20),
           const YoutubeVideosList(),
@@ -92,8 +97,8 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
     return Hero(
       tag: 'image-${artist.id}',
       child: Container(
-        width: 300,
-        height: 300,
+        width: 160,
+        height: 160,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(
@@ -105,52 +110,83 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
     );
   }
 
-  Widget getKeyPad() {
-    return Row(
-      children: [
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Follow'),
+  Widget getKeyPad(Artist artist) {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          const GreenButton(label: 'Follow'),
+          /*  if (artist.facebookAccount != null &&
+              artist.facebookAccount!.isNotEmpty) */
+          getFacebookButton(artist),
+          getYoutubeButton(artist),
+
+          /*  ElevatedButton(
+            onPressed: () {},
+            child: const Text('Follow'),
+          ), */
+        ],
+      ),
+    );
+  }
+
+  Widget getFacebookButton(Artist artist) {
+    return Container(
+      height: 50,
+      child: ElevatedButton.icon(
+        onPressed: () {},
+        icon: const Icon(
+          FontAwesomeIcons.facebook,
+          color: facebookColor,
+          size: 30,
         ),
-      ],
+        style: ElevatedButton.styleFrom(
+          primary: darkControlColor,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          textStyle: const TextStyle(
+            fontSize: 20,
+            color: Colors.white, //Theme.of(context).primaryColor,
+          ),
+        ),
+        label: Container(),
+      ),
+    );
+  }
+
+  Widget getYoutubeButton(Artist artist) {
+    return Container(
+      height: 50,
+      child: ElevatedButton.icon(
+        onPressed: () {},
+        icon: const Icon(
+          FontAwesomeIcons.youtube,
+          color: youtubeColor,
+          size: 30,
+        ),
+        style: ElevatedButton.styleFrom(
+          primary: darkControlColor,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          textStyle: const TextStyle(
+            fontSize: 20,
+            color: Colors.white, //Theme.of(context).primaryColor,
+          ),
+        ),
+        label: Container(),
+      ),
     );
   }
 
   Widget getArtistBio(Artist artist) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: Colors.lightBlue[50]!.withOpacity(0.5),
-      ),
-      width: 250,
-      height: 300,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            const SizedBox(height: 15),
-            Text(
-              artist.name,
-              style: subtitleStyle,
-            ),
-            const SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Icon(Icons.follow_the_signs),
-                Text(artist.followers.toString()),
-              ],
-            ),
-            const SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Icon(FontAwesomeIcons.twitter),
-                Text(artist.twitterAccount!),
-              ],
-            ),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Bio', style: titleStyle, textAlign: TextAlign.start),
+          const SizedBox(height: 20),
+          Text(artist.bio),
+        ],
       ),
     );
   }

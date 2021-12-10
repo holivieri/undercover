@@ -15,6 +15,6 @@ const Color youtubeColor = Color.fromRGBO(255, 0, 0, 1);
 
 //White design
 const Color brightBackgroundWhite = Color.fromRGBO(229, 229, 229, 1);
-const Color buttonColor = Color.fromRGBO(0, 183, 172, 1);
+const Color buttonColor = Color.fromARGB(0, 183, 172, 1);
 
 const Color themeGrey = Color.fromRGBO(196, 196, 196, 1);

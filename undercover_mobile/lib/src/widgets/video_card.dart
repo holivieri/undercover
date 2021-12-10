@@ -19,11 +19,11 @@ class VideoCard extends StatelessWidget {
           height: 10,
         ),
         Container(
-            width: 400,
-            height: 180,
-            child: Image.asset('assets/images/youtube_logo.png')
-            //Image.network(videoInfo.snippet.thumbnails.high.url),
-            ),
+          width: 400,
+          height: 180,
+          child: Image.network(videoInfo.snippet.thumbnails.high
+              .url), //Image.asset('assets/images/youtube_logo.png')
+        ),
       ],
     );
   }
