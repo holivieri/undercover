@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../generated/l10n.dart';
 import '../blocs/users/users_bloc.dart';
 import '../models/user_preferences.dart';
 import '../repositories/user_repository.dart';
@@ -122,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
             ValidateUser(userName: txtUser.text, password: txtPassword.text),
           );
         },
-        child: const Text('Log In'),
+        child: Text(S.of(context).logIn),
       ),
     );
   }

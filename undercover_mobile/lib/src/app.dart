@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+import '../generated/l10n.dart';
 import 'pages/home_page.dart';
 import 'repositories/artists_repository.dart';
 import 'routes/routes.dart';
@@ -41,9 +43,16 @@ class _MyAppState extends State<MyApp> {
         return GetMaterialApp(
           // restorationScopeId: 'app',
           debugShowCheckedModeBanner: false,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
 
           supportedLocales: const [
             Locale('en', ''), // English, no country code
+            Locale('es', ''), // Spanish, no country code
           ],
           locale: const Locale('en', 'US'),
           fallbackLocale: const Locale('en', 'US'),

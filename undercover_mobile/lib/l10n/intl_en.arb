@@ -1,0 +1,16 @@
+{
+    "bio": "Bio",
+    "darkMode": "Dark Mode",
+    "errorArtistNotFound": "Error - Artist not found",
+    "errorConcertNotFound": "Error - Concert not found",
+    "followers": "Followers",
+    "genres": "Genres",
+    "logIn": "Log In",
+    "myBands": "My Artists",
+    "myPlaces": "My Rocking places",
+    "nextConcerts": "Next Concerts",
+    "placesError": "Error - There is an error getting places",
+    "select": "Select",
+    "tweets": "Tweets",
+    "videos": "Videos"
+}

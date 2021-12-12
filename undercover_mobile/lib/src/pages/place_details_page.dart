@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
+import '../../generated/l10n.dart';
 import '../blocs/places/places_bloc.dart';
 import '../models/place_model.dart';
 import '../repositories/places_repository.dart';
@@ -58,7 +59,7 @@ class _PlaceDetailsPageState extends State<PlaceDetailsPage> {
             ),
           );
         } else if (state is PlacesError) {
-          return const Text('Error');
+          return Text(S.of(context).placesError);
         } else {
           return Container();
         }

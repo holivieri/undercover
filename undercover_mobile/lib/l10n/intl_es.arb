@@ -1,0 +1,16 @@
+{
+    "bio": "Bio",
+    "darkMode": "Modo Oscuro",
+    "errorArtistNotFound": "Error - Artista no encontradp",
+    "errorConcertNotFound": "Error - Concierto no encontrado",
+    "followers": "Seguidores",
+    "genres": "Estilos",
+    "logIn": "Log In",
+    "myBands": "Vamos las Bandas",
+    "myPlaces": "Bares y Fondas",
+    "nextConcerts": "Próximos Conciertos",
+    "placesError": "Error - Hubo un error al obtener los bares",
+    "select": "Seleccionar",
+    "tweets": "Tweets",
+    "videos": "Videos"
+}
