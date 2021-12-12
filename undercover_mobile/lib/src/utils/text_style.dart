@@ -15,7 +15,7 @@ const TextStyle cardTitleTextBoldStyle = TextStyle(
 
 const TextStyle cardTitleTextStyle = TextStyle(
   color: fontColorWhite,
-  fontSize: 14,
+  fontSize: 16,
   fontFamily: 'Ubuntu',
   fontWeight: FontWeight.w500,
   shadows: <Shadow>[normalTextShadow],

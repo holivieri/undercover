@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../main.dart';
 import '../blocs/places/places_bloc.dart';
+import 'list_view.dart';
 import 'place_card.dart';
 
 class PlacesList extends StatelessWidget {
@@ -17,20 +18,27 @@ class PlacesList extends StatelessWidget {
             if (status is LoadingPlaces) {
               return const CircularProgressIndicator();
             } else if (status is PlacesLoaded) {
+              final genreWidgets = List.generate(
+                status.places.length,
+                (index) => PlaceCard(
+                  title: status.places[index].name,
+                  backgroundImageUrl: status.places[index].coverPicture,
+                  placeId: status.places[index].id,
+                ),
+              );
+
               return Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: platformIsNotWeb() ? 10 : 25),
-                child: Wrap(
-                  spacing: 20,
-                  runSpacing: 20,
-                  children: List.generate(
-                    status.places.length,
-                    (index) => PlaceCard(
-                      placeId: status.places[index].id,
-                      backgroundImageUrl: status.places[index].coverPicture,
-                      title: status.places[index].name,
-                    ),
-                  ),
+                child: UndercoverListView(
+                  listOfWidgets: genreWidgets,
+                  numOfWidgetsOnTablet: 4,
+                  numOfWidgetsOnDesktop: 6,
+                  numOfWidgetsOnWideScreen: 8,
+                  itemHeight: 140,
+                  itemWidth: 150,
+                  padding: 10,
+                  leftPaddingOnPhone: 25,
                 ),
               );
             } else {

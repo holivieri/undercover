@@ -28,6 +28,7 @@ class HomeScreen extends StatelessWidget {
           getPlaces(),
           const SizedBox(height: 20),
           getNextConcerts(),
+          const SizedBox(height: 40),
         ],
       ),
     );
@@ -85,6 +86,7 @@ class HomeScreen extends StatelessWidget {
           child: sectionHeader('Próximos Shows', seeAll: false),
         ),
         const ConcertsList(),
+        const SizedBox(height: 20),
       ],
     );
   }

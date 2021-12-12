@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:undercover_mobile/src/utils/app_colors.dart';
 
 import '../models/youtube_response_model.dart';
+import '../utils/app_colors.dart';
 
 class VideoCard extends StatelessWidget {
   const VideoCard({
