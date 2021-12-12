@@ -18,3 +18,4 @@ const Color brightBackgroundWhite = Color.fromRGBO(229, 229, 229, 1);
 const Color buttonColor = Color.fromARGB(0, 183, 172, 1);
 
 const Color themeGrey = Color.fromRGBO(196, 196, 196, 1);
+const Color iconLightThemeColor = Colors.black;

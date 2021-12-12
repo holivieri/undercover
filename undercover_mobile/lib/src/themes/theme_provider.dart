@@ -23,7 +23,7 @@ class ThemeProvider extends ChangeNotifier {
     if (isDarkMode) {
       return iconSelectedColor;
     } else {
-      return Colors.green;
+      return iconLightThemeColor;
     }
   }
 
@@ -43,7 +43,7 @@ class MyThemes {
     backgroundColor: darkBackground,
     primaryColor: Colors.black,
     colorScheme: const ColorScheme.dark(),
-    iconTheme: const IconThemeData(color: greenButtonColor),
+    iconTheme: const IconThemeData(color: Colors.black), //greenButtonColor),
   );
 
   static final lightTheme = ThemeData(
