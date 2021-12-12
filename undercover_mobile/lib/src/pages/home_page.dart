@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../../main.dart';
-import '../utils/colors.dart';
-import '../widgets/artists_of_the_day.dart';
-import '../widgets/concerts_list.dart';
-import '../widgets/genres_list.dart';
-import '../widgets/places_list.dart';
-import '../widgets/section_header.dart';
-import '../widgets/undercover_appbar.dart';
+import '../themes/theme_provider.dart';
+import 'home_screen.dart';
+import 'search_page.dart';
+import 'user_proferences_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -19,6 +16,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+  final tabs = [
+    const HomeScreen(),
+    const SearchPage(),
+    Container(),
+    const UserPreferencesPage(),
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -26,83 +32,59 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeProvider theme = Provider.of<ThemeProvider>(context);
+
     return SafeArea(
       child: Scaffold(
-        appBar: const UnderAppbar(),
-        extendBodyBehindAppBar: true,
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: const BoxDecoration(gradient: themeBackgroundGradient),
-          child: mainBody(),
+          child: tabs[_selectedIndex],
+        ),
+        extendBody: true,
+        bottomNavigationBar: Container(
+          margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Container(
+                height: 60,
+                decoration: BoxDecoration(
+                  boxShadow: const [
+                    BoxShadow(color: Colors.grey),
+                  ],
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: BottomNavigationBar(
+                  backgroundColor: theme.getControlColor(),
+                  currentIndex: _selectedIndex,
+                  type: BottomNavigationBarType.fixed,
+                  items: const [
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.home_rounded),
+                      label: 'Home',
+                    ),
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.search), label: 'Search'),
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.notifications),
+                        label: 'Notifications'),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.person),
+                      label: 'Profile',
+                    ),
+                  ],
+                  onTap: (index) {
+                    setState(() {
+                      _selectedIndex = index;
+                    });
+                  },
+                  selectedItemColor: theme.getSelectedIconColor(),
+                  unselectedItemColor: Colors.grey,
+                )),
+          ),
         ),
       ),
     );
   }
-}
-
-Widget mainBody() {
-  return SingleChildScrollView(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        getMyBands(),
-        const SizedBox(height: 20),
-        getGenres(),
-        const SizedBox(height: 20),
-        getPlaces(),
-        const SizedBox(height: 20),
-        getNextConcerts(),
-      ],
-    ),
-  );
-}
-
-Widget getGenres() {
-  return Column(
-    children: [
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: platformIsNotWeb() ? 10 : 25),
-        child: sectionHeader('Generos'),
-      ),
-      const GenresList(),
-    ],
-  );
-}
-
-Widget getPlaces() {
-  return Column(
-    children: [
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: platformIsNotWeb() ? 10 : 25),
-        child: sectionHeader('Bares y Fondas', seeAll: false),
-      ),
-      const PlacesList(),
-    ],
-  );
-}
-
-Widget getNextConcerts() {
-  return Column(
-    children: [
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: platformIsNotWeb() ? 10 : 25),
-        child: sectionHeader('Próximos Shows', seeAll: false),
-      ),
-      const ConcertsList(),
-    ],
-  );
-}
-
-Widget getMyBands() {
-  return Column(
-    children: [
-      const SizedBox(height: 50),
-      Row(
-        children: const [
-          ArtistsOfTheDay(),
-        ],
-      ),
-    ],
-  );
 }

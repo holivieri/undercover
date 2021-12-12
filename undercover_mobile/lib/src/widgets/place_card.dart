@@ -102,7 +102,7 @@ class PlaceCard extends StatelessWidget {
             Align(
               alignment: Alignment.bottomLeft,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 18),
+                padding: const EdgeInsets.fromLTRB(10, 0, 0, 18),
                 child: Text(
                   title ?? '',
                   style: cardTitleTextStyle,

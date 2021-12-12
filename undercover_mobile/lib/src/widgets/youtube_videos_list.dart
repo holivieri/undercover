@@ -5,6 +5,7 @@ import '../../main.dart';
 import '../blocs/artists/my_artists_bloc.dart';
 import '../repositories/artists_repository.dart';
 import '../services/artists_service.dart';
+import 'list_view.dart';
 import 'video_card.dart';
 
 class YoutubeVideosList extends StatefulWidget {
@@ -33,21 +34,28 @@ class _YoutubeVideosListState extends State<YoutubeVideosList> {
         BlocBuilder<MyArtistsBloc, MyArtistsBlocState>(
           bloc: bloc,
           builder: (context, status) {
-            if (status is LoadingTweets) {
+            if (status is LoadingYoutubeVideos) {
               return const CircularProgressIndicator();
             } else if (status is YoutubeVideosLoaded) {
+              final videosWidgets = List.generate(
+                status.videos.items.length,
+                (index) => VideoCard(
+                  videoInfo: status.videos.items[index],
+                ),
+              );
+
               return Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: platformIsNotWeb() ? 10 : 25),
-                child: Wrap(
-                  spacing: 20,
-                  runSpacing: 20,
-                  children: List.generate(
-                    status.videos.items.length,
-                    (index) => VideoCard(
-                      videoInfo: status.videos.items[index],
-                    ),
-                  ),
+                child: UndercoverListView(
+                  listOfWidgets: videosWidgets,
+                  numOfWidgetsOnTablet: 4,
+                  numOfWidgetsOnDesktop: 6,
+                  numOfWidgetsOnWideScreen: 8,
+                  itemHeight: 140,
+                  itemWidth: 150,
+                  padding: 10,
+                  leftPaddingOnPhone: 25,
                 ),
               );
             } else {

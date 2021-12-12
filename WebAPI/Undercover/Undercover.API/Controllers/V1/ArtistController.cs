@@ -36,7 +36,7 @@ namespace Undercover.API.Controllers.V1
         {
             try
             {
-                var result = _artistService.GetAllArtist();
+                var result =  _artistService.GetAllArtist();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -92,7 +92,6 @@ namespace Undercover.API.Controllers.V1
         [HttpGet("GetYoutubeVideos")]
         public async Task<IActionResult> GetYoutubeVideos()
         {
-            //
             try
             {
                 var result = _youtubeService.GetVideos("UC-NxzTwCAdyO_HRMahoxHfQ");
@@ -103,7 +102,21 @@ namespace Undercover.API.Controllers.V1
                 _logger.LogError("Error on Get Youtube Videos", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error on Get Youtube Videos");
             }
+        }
 
+        [HttpGet("Search")]
+        public ActionResult<List<Artist>> Search(string name)
+        {
+            try
+            {
+                var result = _artistService.SearchArtist(name);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error on Search Artists", ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error on Search Artists");
+            }
         }
     }
 }

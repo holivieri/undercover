@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 import 'src/app.dart';
 import 'src/blocs/artists/my_artists_bloc.dart';
@@ -23,6 +24,7 @@ import 'src/services/places_service.dart';
 import 'src/services/user_service.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
+import 'src/themes/theme_provider.dart';
 
 bool platformIsNotWeb() {
   if (kIsWeb) {
@@ -74,9 +76,12 @@ Future<void> main() async {
               UsersBloc(_userRepository)..add(InitializeUser()),
         ),
       ],
-      child: MyApp(
-        settingsController: settingsController,
-        artistRepository: _artistRepository,
+      child: ChangeNotifierProvider(
+        create: (context) => ThemeProvider(),
+        child: MyApp(
+          settingsController: settingsController,
+          artistRepository: _artistRepository,
+        ),
       ),
     ),
   );

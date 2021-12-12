@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../models/youtube_response_model.dart';
+import '../utils/app_colors.dart';
 
 class VideoCard extends StatelessWidget {
   const VideoCard({
@@ -12,18 +14,21 @@ class VideoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(videoInfo.snippet.title),
-        const SizedBox(
-          height: 10,
-        ),
-        Container(
-          width: 400,
-          height: 180,
-          child: Image.network(videoInfo.snippet.thumbnails.high.url),
-        ),
-      ],
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(25),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Image.network(videoInfo.snippet.thumbnails.high.url),
+          const Center(
+            child: Icon(
+              FontAwesomeIcons.youtube,
+              color: youtubeColor,
+              size: 40,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

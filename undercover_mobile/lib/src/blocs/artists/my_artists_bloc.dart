@@ -39,6 +39,12 @@ class MyArtistsBloc extends Bloc<MyArtistsBlocEvent, MyArtistsBlocState> {
         emit(YoutubeVideosLoaded(videos));
       }
     });
+    on<SearchArtists>((event, emit) async {
+      emit(SearchingArtists());
+      final List<Artist> artists =
+          await artistRepository.searchArtists(event.artistName);
+      emit(ArtistsFound(artists));
+    });
   }
   final ArtistRepository artistRepository;
 }

@@ -47,12 +47,15 @@ class ArtistTallCard extends StatelessWidget {
           ),
           child: Stack(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        backgroundImageUrl ?? defaultSquareCardBackgroundUrl),
-                    fit: BoxFit.cover,
+              Hero(
+                tag: 'image-$artistId',
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(
+                          backgroundImageUrl ?? defaultSquareCardBackgroundUrl),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),

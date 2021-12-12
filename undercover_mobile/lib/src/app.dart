@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import 'pages/home_page.dart';
 import 'repositories/artists_repository.dart';
@@ -8,6 +9,7 @@ import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
+import 'themes/theme_provider.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({
@@ -34,6 +36,8 @@ class _MyAppState extends State<MyApp> {
     return AnimatedBuilder(
       animation: widget.settingsController,
       builder: (BuildContext context, Widget? child) {
+        final themeProvider = Provider.of<ThemeProvider>(context);
+
         return GetMaterialApp(
           // restorationScopeId: 'app',
           debugShowCheckedModeBanner: false,
@@ -52,13 +56,9 @@ class _MyAppState extends State<MyApp> {
           // directory.
 
           // onGenerateTitle: 'appTitle'.tr,
-
-          // Define a light and dark color theme. Then, read the user's
-          // preferred ThemeMode (light, dark, or system default) from the
-          // SettingsController to display the correct theme.
-          theme: ThemeData(),
-          darkTheme: ThemeData.dark(),
-          themeMode: widget.settingsController.themeMode,
+          themeMode: themeProvider.themeMode,
+          theme: MyThemes.lightTheme,
+          darkTheme: MyThemes.darkTheme,
 
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.

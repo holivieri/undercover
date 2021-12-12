@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Undercover.API.Data;
 
+#nullable disable
+
 namespace Undercover.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
@@ -15,10 +17,26 @@ namespace Undercover.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.20")
-                .HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .UseCollation("Modern_Spanish_CI_AS")
+                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("ArtistGenre", b =>
+                {
+                    b.Property<Guid>("ArtistsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("GenresId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ArtistsId", "GenresId");
+
+                    b.HasIndex("GenresId");
+
+                    b.ToTable("ArtistGenre");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -30,48 +48,48 @@ namespace Undercover.API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
+                        .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("AspNetRoles", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = "514ab5c9-99f6-4775-807a-17457c68d3d1",
-                            ConcurrencyStamp = "51b8bf2c-1dd3-4d66-a272-c4185a6abfb2",
+                            Id = "5c98c352-4aeb-474a-90fb-8f08fae0096b",
+                            ConcurrencyStamp = "b507af8a-f95c-4260-af8f-2cbab0e4be15",
                             Name = "admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
-                            Id = "14c0e088-1c88-40ab-bb96-886ab3fe4bf1",
-                            ConcurrencyStamp = "c360dc54-f2a6-45a4-a1fa-552bdbda0c05",
+                            Id = "0bd72234-b6f3-48f6-aea0-cc6e8dec0fb1",
+                            ConcurrencyStamp = "ac4c288c-447c-4e22-8f7a-f903af3e2962",
                             Name = "artist",
                             NormalizedName = "artist"
                         },
                         new
                         {
-                            Id = "79a61732-4e4f-41f1-ba26-aa56463b581d",
-                            ConcurrencyStamp = "b2b4bebf-892f-4cf3-a106-8d255dd4bfb4",
+                            Id = "9e22de93-4d37-4403-91a2-4daa194e73fa",
+                            ConcurrencyStamp = "8601a94f-f896-41a6-8f67-5e84eff782c3",
                             Name = "user",
                             NormalizedName = "user"
                         },
                         new
                         {
-                            Id = "3f17eea7-1261-4ef8-b660-43af23db90db",
-                            ConcurrencyStamp = "3dfef266-73b2-4cdc-a32b-b25562293a13",
+                            Id = "0533b194-daf2-40f0-bbca-981c48229e55",
+                            ConcurrencyStamp = "d89e4dc9-1c27-4c67-8ca8-614c3f2b8160",
                             Name = "placeOwner",
                             NormalizedName = "placeOwner"
                         });
@@ -81,8 +99,9 @@ namespace Undercover.API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -98,15 +117,16 @@ namespace Undercover.API.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -122,7 +142,7 @@ namespace Undercover.API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -144,7 +164,7 @@ namespace Undercover.API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("AspNetUserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -159,7 +179,7 @@ namespace Undercover.API.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("AspNetUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -178,7 +198,7 @@ namespace Undercover.API.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("Undercover.API.Entities.Album", b =>
@@ -191,16 +211,16 @@ namespace Undercover.API.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<int>("ReleaseYear")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
@@ -216,70 +236,55 @@ namespace Undercover.API.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Bio")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FacebookAccount")
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<long>("Followers")
                         .HasColumnType("bigint");
 
                     b.Property<string>("ManagerContact")
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("ManagerName")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("PictureUrl")
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("SoundCloudAccount")
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("SpotifyAccount")
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("TwitterAccount")
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("YouTubeAccount")
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Artists");
-                });
-
-            modelBuilder.Entity("Undercover.API.Entities.ArtistGenre", b =>
-                {
-                    b.Property<Guid>("ArtistId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("GenreId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ArtistId", "GenreId");
-
-                    b.HasIndex("GenreId");
-
-                    b.ToTable("ArtistGenre");
                 });
 
             modelBuilder.Entity("Undercover.API.Entities.ArtistPicture", b =>
@@ -296,8 +301,8 @@ namespace Undercover.API.Migrations
 
                     b.Property<string>("PictureUrl")
                         .IsRequired()
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.HasKey("Id");
 
@@ -319,17 +324,17 @@ namespace Undercover.API.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Details")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("PictureUrl")
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
@@ -344,7 +349,7 @@ namespace Undercover.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ArtistId")
+                    b.Property<Guid>("ArtistId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Date")
@@ -370,8 +375,8 @@ namespace Undercover.API.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -380,7 +385,7 @@ namespace Undercover.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0540d814-0335-4471-9228-022008407a95"),
+                            Id = new Guid("1267bacd-a997-44df-9a25-2e405b0ea0d5"),
                             Name = "Argentina"
                         });
                 });
@@ -392,13 +397,13 @@ namespace Undercover.API.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CoverPicture")
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -407,37 +412,37 @@ namespace Undercover.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("02260fd4-eaf2-41dd-b117-e9f00029f425"),
+                            Id = new Guid("2d787fa8-21b8-4a71-a8c2-cf0cca7bdd1a"),
                             Name = "Rock"
                         },
                         new
                         {
-                            Id = new Guid("187d4ddf-35f6-491f-b7a1-2cc68c700b1c"),
+                            Id = new Guid("8a963800-2bca-46a9-9068-e51bfb479051"),
                             Name = "Blues"
                         },
                         new
                         {
-                            Id = new Guid("6d7a840a-7346-40a5-b789-b375f2e3c987"),
+                            Id = new Guid("64e74203-3dea-41e5-9275-7d4e00801872"),
                             Name = "Jazz"
                         },
                         new
                         {
-                            Id = new Guid("3381d3bc-a27d-4d47-bb27-73fab460ea4d"),
+                            Id = new Guid("99c29565-11b5-4ca9-8969-e3af9c4ffd8a"),
                             Name = "Hip Hop"
                         },
                         new
                         {
-                            Id = new Guid("8eae36e3-590b-44af-97c7-8d41166343da"),
+                            Id = new Guid("aa96a0e4-c523-47d1-abb7-d6592a9ecad0"),
                             Name = "Pop"
                         },
                         new
                         {
-                            Id = new Guid("a102fe9c-09f8-4ae0-9e7e-2ca782a310c5"),
+                            Id = new Guid("801f7413-182a-4c42-bea9-3909e390fd36"),
                             Name = "Punk"
                         },
                         new
                         {
-                            Id = new Guid("3506e841-1439-407e-a8d3-34a3250ea6ee"),
+                            Id = new Guid("b9ae2573-0167-4a01-a615-da46262150e4"),
                             Name = "Metal"
                         });
                 });
@@ -450,32 +455,46 @@ namespace Undercover.API.Migrations
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<Guid>("CountryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CoverPicture")
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<long>("Dislikes")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Floor")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<long>("Likes")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Province")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<long>("Seats")
                         .HasColumnType("bigint");
@@ -485,13 +504,13 @@ namespace Undercover.API.Migrations
 
                     b.Property<string>("StreetName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("StreetNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -511,8 +530,8 @@ namespace Undercover.API.Migrations
 
                     b.Property<string>("PictureUrl")
                         .IsRequired()
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<Guid?>("PlaceId")
                         .HasColumnType("uniqueidentifier");
@@ -534,13 +553,13 @@ namespace Undercover.API.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Songwriter")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
@@ -562,8 +581,8 @@ namespace Undercover.API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
@@ -575,12 +594,12 @@ namespace Undercover.API.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -601,8 +620,8 @@ namespace Undercover.API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("UserPassword")
                         .HasColumnType("nvarchar(max)");
@@ -610,14 +629,29 @@ namespace Undercover.API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
+                        .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("ArtistGenre", b =>
+                {
+                    b.HasOne("Undercover.API.Entities.Artist", null)
+                        .WithMany()
+                        .HasForeignKey("ArtistsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Undercover.API.Entities.Genre", null)
+                        .WithMany()
+                        .HasForeignKey("GenresId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -678,21 +712,6 @@ namespace Undercover.API.Migrations
                         .HasForeignKey("ArtistId");
                 });
 
-            modelBuilder.Entity("Undercover.API.Entities.ArtistGenre", b =>
-                {
-                    b.HasOne("Undercover.API.Entities.Artist", "Artist")
-                        .WithMany("Genres")
-                        .HasForeignKey("ArtistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undercover.API.Entities.Genre", "Genre")
-                        .WithMany("Artists")
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Undercover.API.Entities.ArtistPicture", b =>
                 {
                     b.HasOne("Undercover.API.Entities.Artist", null)
@@ -709,15 +728,21 @@ namespace Undercover.API.Migrations
 
             modelBuilder.Entity("Undercover.API.Entities.Concert", b =>
                 {
-                    b.HasOne("Undercover.API.Entities.Artist", null)
+                    b.HasOne("Undercover.API.Entities.Artist", "Artist")
                         .WithMany("Concerts")
-                        .HasForeignKey("ArtistId");
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Undercover.API.Entities.Place", "Place")
                         .WithMany()
                         .HasForeignKey("PlaceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Artist");
+
+                    b.Navigation("Place");
                 });
 
             modelBuilder.Entity("Undercover.API.Entities.Place", b =>
@@ -727,6 +752,8 @@ namespace Undercover.API.Migrations
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Country");
                 });
 
             modelBuilder.Entity("Undercover.API.Entities.PlacePicture", b =>
@@ -741,6 +768,27 @@ namespace Undercover.API.Migrations
                     b.HasOne("Undercover.API.Entities.Album", null)
                         .WithMany("Songs")
                         .HasForeignKey("AlbumId");
+                });
+
+            modelBuilder.Entity("Undercover.API.Entities.Album", b =>
+                {
+                    b.Navigation("Songs");
+                });
+
+            modelBuilder.Entity("Undercover.API.Entities.Artist", b =>
+                {
+                    b.Navigation("Albums");
+
+                    b.Navigation("Concerts");
+
+                    b.Navigation("Pictures");
+
+                    b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("Undercover.API.Entities.Place", b =>
+                {
+                    b.Navigation("Pictures");
                 });
 #pragma warning restore 612, 618
         }
