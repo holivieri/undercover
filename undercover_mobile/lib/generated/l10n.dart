@@ -70,6 +70,16 @@ class S {
     );
   }
 
+  /// `Enter Artist Name`
+  String get enterArtistName {
+    return Intl.message(
+      'Enter Artist Name',
+      name: 'enterArtistName',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Error - Artist not found`
   String get errorArtistNotFound {
     return Intl.message(
@@ -95,6 +105,16 @@ class S {
     return Intl.message(
       'Followers',
       name: 'followers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get home {
+    return Intl.message(
+      'Home',
+      name: 'home',
       desc: '',
       args: [],
     );
@@ -150,11 +170,41 @@ class S {
     );
   }
 
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Error - There is an error getting places`
   String get placesError {
     return Intl.message(
       'Error - There is an error getting places',
       name: 'placesError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message(
+      'Profile',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
       desc: '',
       args: [],
     );

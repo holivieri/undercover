@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../generated/l10n.dart';
 import '../themes/theme_provider.dart';
 import 'home_screen.dart';
 import 'search_page.dart';
@@ -59,19 +60,22 @@ class _HomePageState extends State<HomePage> {
                   backgroundColor: theme.getControlColor(),
                   currentIndex: _selectedIndex,
                   type: BottomNavigationBarType.fixed,
-                  items: const [
+                  items: [
                     BottomNavigationBarItem(
-                      icon: Icon(Icons.home_rounded),
-                      label: 'Home',
+                      icon: const Icon(Icons.home_rounded),
+                      label: S.of(context).home,
                     ),
                     BottomNavigationBarItem(
-                        icon: Icon(Icons.search), label: 'Search'),
+                      icon: const Icon(Icons.search),
+                      label: S.of(context).search,
+                    ),
                     BottomNavigationBarItem(
-                        icon: Icon(Icons.notifications),
-                        label: 'Notifications'),
+                      icon: const Icon(Icons.notifications),
+                      label: S.of(context).notifications,
+                    ),
                     BottomNavigationBarItem(
-                      icon: Icon(Icons.person),
-                      label: 'Profile',
+                      icon: const Icon(Icons.person),
+                      label: S.of(context).profile,
                     ),
                   ],
                   onTap: (index) {

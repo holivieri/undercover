@@ -24,19 +24,25 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "bio": MessageLookupByLibrary.simpleMessage("Bio"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Modo Oscuro"),
+        "enterArtistName":
+            MessageLookupByLibrary.simpleMessage("Nombre del artista"),
         "errorArtistNotFound": MessageLookupByLibrary.simpleMessage(
             "Error - Artista no encontradp"),
         "errorConcertNotFound": MessageLookupByLibrary.simpleMessage(
             "Error - Concierto no encontrado"),
         "followers": MessageLookupByLibrary.simpleMessage("Seguidores"),
         "genres": MessageLookupByLibrary.simpleMessage("Estilos"),
+        "home": MessageLookupByLibrary.simpleMessage("Inicio"),
         "logIn": MessageLookupByLibrary.simpleMessage("Log In"),
         "myBands": MessageLookupByLibrary.simpleMessage("Vamos las Bandas"),
         "myPlaces": MessageLookupByLibrary.simpleMessage("Bares y Fondas"),
         "nextConcerts":
             MessageLookupByLibrary.simpleMessage("Próximos Conciertos"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Avisos"),
         "placesError": MessageLookupByLibrary.simpleMessage(
             "Error - Hubo un error al obtener los bares"),
+        "profile": MessageLookupByLibrary.simpleMessage("Perfil"),
+        "search": MessageLookupByLibrary.simpleMessage("Buscar"),
         "select": MessageLookupByLibrary.simpleMessage("Seleccionar"),
         "tweets": MessageLookupByLibrary.simpleMessage("Tweets"),
         "videos": MessageLookupByLibrary.simpleMessage("Videos")

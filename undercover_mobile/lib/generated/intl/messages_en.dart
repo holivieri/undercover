@@ -24,18 +24,24 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "bio": MessageLookupByLibrary.simpleMessage("Bio"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+        "enterArtistName":
+            MessageLookupByLibrary.simpleMessage("Enter Artist Name"),
         "errorArtistNotFound":
             MessageLookupByLibrary.simpleMessage("Error - Artist not found"),
         "errorConcertNotFound":
             MessageLookupByLibrary.simpleMessage("Error - Concert not found"),
         "followers": MessageLookupByLibrary.simpleMessage("Followers"),
         "genres": MessageLookupByLibrary.simpleMessage("Genres"),
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
         "logIn": MessageLookupByLibrary.simpleMessage("Log In"),
         "myBands": MessageLookupByLibrary.simpleMessage("My Artists"),
         "myPlaces": MessageLookupByLibrary.simpleMessage("My Rocking places"),
         "nextConcerts": MessageLookupByLibrary.simpleMessage("Next Concerts"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "placesError": MessageLookupByLibrary.simpleMessage(
             "Error - There is an error getting places"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "search": MessageLookupByLibrary.simpleMessage("Search"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
         "tweets": MessageLookupByLibrary.simpleMessage("Tweets"),
         "videos": MessageLookupByLibrary.simpleMessage("Videos")

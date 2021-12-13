@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../generated/l10n.dart';
 import '../blocs/artists/my_artists_bloc.dart';
 import '../repositories/artists_repository.dart';
 import '../services/artists_service.dart';
@@ -36,9 +37,9 @@ class _SearchPageState extends State<SearchPage> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: _txtController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Enter Artist Name',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).enterArtistName,
             ),
             onEditingComplete: () {
               print(_txtController.text);

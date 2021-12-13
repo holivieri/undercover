@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../generated/l10n.dart';
 import '../routes/routes.dart';
 import '../utils/colors.dart';
 import '../utils/default_images.dart';
@@ -25,9 +26,9 @@ class ArtistTallCard extends StatelessWidget {
     return _returnArtistCard(context);
   }
 
-  String checkPlurals(int followers) {
+  String checkPlurals(BuildContext context, int followers) {
     if (followers > 1) {
-      return '$followers Seguidores';
+      return '$followers ${S.of(context).followers}';
     }
     return '$followers Seguidor';
   }
@@ -74,7 +75,7 @@ class ArtistTallCard extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Text(
-                    checkPlurals(followersCount!),
+                    checkPlurals(context, followersCount!),
                     style: cardTitleSmallTextStyle,
                   ),
                 ),
