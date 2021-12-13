@@ -1,5 +1,6 @@
 {
     "bio": "Bio",
+    "cancel": "Cancelar",
     "darkMode": "Modo Oscuro",
     "enterArtistName": "Nombre del artista",
     "errorArtistNotFound": "Error - Artista no encontradp",
@@ -7,6 +8,8 @@
     "followers": "Seguidores",
     "genres": "Estilos",
     "home": "Inicio",
+    "langEnglish": "Ingles",
+    "langSpanish": "Español",
     "logIn": "Log In",
     "myBands": "Vamos las Bandas",
     "myPlaces": "Bares y Fondas",

@@ -60,6 +60,16 @@ class S {
     );
   }
 
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Dark Mode`
   String get darkMode {
     return Intl.message(
@@ -125,6 +135,26 @@ class S {
     return Intl.message(
       'Genres',
       name: 'genres',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get langEnglish {
+    return Intl.message(
+      'English',
+      name: 'langEnglish',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Spanish`
+  String get langSpanish {
+    return Intl.message(
+      'Spanish',
+      name: 'langSpanish',
       desc: '',
       args: [],
     );

@@ -1,5 +1,6 @@
 {
     "bio": "Bio",
+    "cancel": "Cancel",
     "darkMode": "Dark Mode",
     "enterArtistName": "Enter Artist Name",
     "errorArtistNotFound": "Error - Artist not found",
@@ -7,6 +8,8 @@
     "followers": "Followers",
     "home": "Home",
     "genres": "Genres",
+    "langEnglish": "English",
+    "langSpanish": "Spanish",
     "logIn": "Log In",
     "myBands": "My Artists",
     "myPlaces": "My Rocking places",
