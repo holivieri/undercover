@@ -71,7 +71,6 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 25),
             getArtistCoverPicture(artist),

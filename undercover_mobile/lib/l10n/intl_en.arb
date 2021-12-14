@@ -5,6 +5,7 @@
     "enterArtistName": "Enter Artist Name",
     "errorArtistNotFound": "Error - Artist not found",
     "errorConcertNotFound": "Error - Concert not found",
+    "errorLoadingVideos": "Error - Cannot find any video",
     "followers": "Followers",
     "home": "Home",
     "genres": "Genres",

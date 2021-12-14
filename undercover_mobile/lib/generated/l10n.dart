@@ -110,6 +110,16 @@ class S {
     );
   }
 
+  /// `Error - Cannot find any video`
+  String get errorLoadingVideos {
+    return Intl.message(
+      'Error - Cannot find any video',
+      name: 'errorLoadingVideos',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Followers`
   String get followers {
     return Intl.message(

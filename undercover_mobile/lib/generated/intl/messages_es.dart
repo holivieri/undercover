@@ -31,6 +31,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Error - Artista no encontradp"),
         "errorConcertNotFound": MessageLookupByLibrary.simpleMessage(
             "Error - Concierto no encontrado"),
+        "errorLoadingVideos": MessageLookupByLibrary.simpleMessage(
+            "Error - No encontramos videos"),
         "followers": MessageLookupByLibrary.simpleMessage("Seguidores"),
         "genres": MessageLookupByLibrary.simpleMessage("Estilos"),
         "home": MessageLookupByLibrary.simpleMessage("Inicio"),
