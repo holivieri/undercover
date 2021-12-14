@@ -12,6 +12,7 @@ import 'src/blocs/genres/genres_bloc.dart';
 import 'src/blocs/places/places_bloc.dart';
 import 'src/blocs/users/users_bloc.dart';
 import 'src/models/user_preferences.dart';
+import 'src/providers/language_provider.dart';
 import 'src/repositories/artists_repository.dart';
 import 'src/repositories/concerts_repository.dart';
 import 'src/repositories/genres_repository.dart';
@@ -76,8 +77,12 @@ Future<void> main() async {
               UsersBloc(_userRepository)..add(InitializeUser()),
         ),
       ],
-      child: ChangeNotifierProvider(
-        create: (context) => ThemeProvider(),
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
+          ChangeNotifierProvider<LanguageProvider>(
+              create: (_) => LanguageProvider()),
+        ],
         child: MyApp(
           settingsController: settingsController,
           artistRepository: _artistRepository,
