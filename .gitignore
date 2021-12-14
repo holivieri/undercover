@@ -1,2 +1,3 @@
 .DS_Store
 undercover_mobile/pubspec.lock
+undercover_mobile/lib/l10n/intl_en.arb
