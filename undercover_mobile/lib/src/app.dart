@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:undercover_mobile/src/providers/language_provider.dart';
 
 import '../generated/l10n.dart';
 import 'pages/home_page.dart';
+import 'providers/language_provider.dart';
 import 'repositories/artists_repository.dart';
 import 'routes/routes.dart';
 import 'sample_feature/sample_item_details_view.dart';
