@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../generated/l10n.dart';
 import '../models/artist_model.dart';
 
 class ArtistSearchResultList extends StatefulWidget {
@@ -42,7 +43,7 @@ class _ArtistSearchResultListState extends State<ArtistSearchResultList> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Text('Select'),
+                Text(S.of(context).select),
                 Checkbox(
                   value: _selected.containsKey(artist.id),
                   onChanged: (bool? value) {

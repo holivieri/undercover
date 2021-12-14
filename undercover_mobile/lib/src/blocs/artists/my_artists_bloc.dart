@@ -34,7 +34,7 @@ class MyArtistsBloc extends Bloc<MyArtistsBlocEvent, MyArtistsBlocState> {
     on<LoadArtistYoutubeVideos>((event, emit) async {
       final YoutubeResponse? videos = await artistRepository.getYoutbeVideos();
       if (videos == null) {
-        emit(ArtistsError('No se puede cargar los videos'));
+        emit(ArtistsError('errorLoadingVideos'));
       } else {
         emit(YoutubeVideosLoaded(videos));
       }

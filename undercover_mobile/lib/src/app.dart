@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:undercover_mobile/src/providers/language_provider.dart';
 
+import '../generated/l10n.dart';
 import 'pages/home_page.dart';
 import 'repositories/artists_repository.dart';
 import 'routes/routes.dart';
@@ -38,47 +41,59 @@ class _MyAppState extends State<MyApp> {
       builder: (BuildContext context, Widget? child) {
         final themeProvider = Provider.of<ThemeProvider>(context);
 
-        return GetMaterialApp(
-          // restorationScopeId: 'app',
-          debugShowCheckedModeBanner: false,
+        return ChangeNotifierProvider<LanguageProvider>(
+          create: (_) => LanguageProvider(),
+          child: GetMaterialApp(
+            // restorationScopeId: 'app',
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
 
-          supportedLocales: const [
-            Locale('en', ''), // English, no country code
-          ],
-          locale: const Locale('en', 'US'),
-          fallbackLocale: const Locale('en', 'US'),
-          getPages: routes,
+            supportedLocales: const [
+              Locale('en', ''),
+              Locale('es', ''),
+            ],
+            locale: Provider.of<LanguageProvider>(context, listen: true)
+                .currentLocale,
+            fallbackLocale: const Locale('en', 'US'),
+            getPages: routes,
 
-          // Use AppLocalizations to configure the correct application title
-          // depending on the user's locale.
-          //
-          // The appTitle is defined in .arb files found in the localization
-          // directory.
+            // Use AppLocalizations to configure the correct application title
+            // depending on the user's locale.
+            //
+            // The appTitle is defined in .arb files found in the localization
+            // directory.
 
-          // onGenerateTitle: 'appTitle'.tr,
-          themeMode: themeProvider.themeMode,
-          theme: MyThemes.lightTheme,
-          darkTheme: MyThemes.darkTheme,
+            // onGenerateTitle: 'appTitle'.tr,
+            themeMode: themeProvider.themeMode,
+            theme: MyThemes.lightTheme,
+            darkTheme: MyThemes.darkTheme,
 
-          // Define a function to handle named routes in order to support
-          // Flutter web url navigation and deep linking.
-          routes: getApplicationRoutes(),
-          onGenerateRoute: (RouteSettings routeSettings) {
-            return MaterialPageRoute<void>(
-              settings: routeSettings,
-              builder: (BuildContext context) {
-                switch (routeSettings.name) {
-                  case SettingsView.routeName:
-                    return SettingsView(controller: widget.settingsController);
-                  case SampleItemDetailsView.routeName:
-                    return const SampleItemDetailsView();
-                  case SampleItemListView.routeName:
-                  default:
-                    return const HomePage();
-                }
-              },
-            );
-          },
+            // Define a function to handle named routes in order to support
+            // Flutter web url navigation and deep linking.
+            routes: getApplicationRoutes(),
+            onGenerateRoute: (RouteSettings routeSettings) {
+              return MaterialPageRoute<void>(
+                settings: routeSettings,
+                builder: (BuildContext context) {
+                  switch (routeSettings.name) {
+                    case SettingsView.routeName:
+                      return SettingsView(
+                          controller: widget.settingsController);
+                    case SampleItemDetailsView.routeName:
+                      return const SampleItemDetailsView();
+                    case SampleItemListView.routeName:
+                    default:
+                      return const HomePage();
+                  }
+                },
+              );
+            },
+          ),
         );
       },
     );

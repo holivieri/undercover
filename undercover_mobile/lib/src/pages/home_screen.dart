@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../generated/l10n.dart';
 import '../../main.dart';
-import '../widgets/artists_of_the_day.dart';
 import '../widgets/concerts_list.dart';
 import '../widgets/genres_list.dart';
+import '../widgets/my_artists_list.dart';
 import '../widgets/places_list.dart';
 import '../widgets/section_header.dart';
 
@@ -12,10 +13,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return mainBody();
+    return mainBody(context);
   }
 
-  Widget mainBody() {
+  Widget mainBody(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -23,11 +24,11 @@ class HomeScreen extends StatelessWidget {
           getLogo(),
           getMyBands(),
           const SizedBox(height: 20),
-          getGenres(),
+          getGenres(context),
           const SizedBox(height: 20),
-          getPlaces(),
+          getPlaces(context),
           const SizedBox(height: 20),
-          getNextConcerts(),
+          getNextConcerts(context),
           const SizedBox(height: 40),
         ],
       ),
@@ -49,41 +50,41 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget getGenres() {
+  Widget getGenres(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: platformIsNotWeb() ? 10 : 25),
-          child: sectionHeader('Generos', seeAll: false),
+          child: sectionHeader(S.of(context).genres, seeAll: false),
         ),
         const GenresList(),
       ],
     );
   }
 
-  Widget getPlaces() {
+  Widget getPlaces(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: platformIsNotWeb() ? 10 : 25),
-          child: sectionHeader('Bares y Fondas', seeAll: false),
+          child: sectionHeader(S.of(context).myPlaces, seeAll: false),
         ),
         const PlacesList(),
       ],
     );
   }
 
-  Widget getNextConcerts() {
+  Widget getNextConcerts(BuildContext context) {
     return Column(
       children: [
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: platformIsNotWeb() ? 10 : 25),
-          child: sectionHeader('Próximos Shows', seeAll: false),
+          child: sectionHeader(S.of(context).nextConcerts, seeAll: false),
         ),
         const ConcertsList(),
         const SizedBox(height: 20),
@@ -92,6 +93,6 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget getMyBands() {
-    return const ArtistsOfTheDay();
+    return const MyArtistsList();
   }
 }

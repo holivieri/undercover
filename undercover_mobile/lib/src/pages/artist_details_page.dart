@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
+import '../../generated/l10n.dart';
 import '../blocs/artists/my_artists_bloc.dart';
 import '../models/artist_model.dart';
 import '../repositories/artists_repository.dart';
@@ -58,7 +59,7 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
               ),
             );
           } else {
-            return const Text('Error - Artista no encontrado');
+            return Text(S.of(context).errorArtistNotFound);
           }
         },
       ),
@@ -70,7 +71,6 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 25),
             getArtistCoverPicture(artist),
@@ -83,7 +83,7 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
               artist.followers.toString(),
               style: titleStyleGreen,
             ),
-            const Text('followers', style: subtitleStyle),
+            Text(S.of(context).followers, style: subtitleStyle),
             const SizedBox(height: 20),
             getKeyPad(artist),
             const SizedBox(height: 30),
@@ -167,7 +167,8 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Bio', style: titleStyle, textAlign: TextAlign.start),
+          Text(S.of(context).bio,
+              style: titleStyle, textAlign: TextAlign.start),
           const SizedBox(height: 20),
           Text(artist.bio),
         ],
@@ -180,10 +181,14 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
       padding: const EdgeInsets.all(15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Tweets', style: titleStyle, textAlign: TextAlign.start),
-          SizedBox(height: 20),
-          TweetsList(),
+        children: [
+          Text(
+            S.of(context).tweets,
+            style: titleStyle,
+            textAlign: TextAlign.start,
+          ),
+          const SizedBox(height: 20),
+          const TweetsList(),
         ],
       ),
     );
@@ -194,10 +199,14 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
       padding: const EdgeInsets.all(15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Videos', style: titleStyle, textAlign: TextAlign.start),
-          SizedBox(height: 20),
-          YoutubeVideosList(),
+        children: [
+          Text(
+            S.of(context).videos,
+            style: titleStyle,
+            textAlign: TextAlign.start,
+          ),
+          const SizedBox(height: 20),
+          const YoutubeVideosList(),
         ],
       ),
     );
