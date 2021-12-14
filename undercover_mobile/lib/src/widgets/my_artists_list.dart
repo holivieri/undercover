@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../generated/l10n.dart';
 import '../../main.dart';
 import '../blocs/artists/my_artists_bloc.dart';
 import 'artist_tall_card.dart';
 import 'list_view.dart';
 import 'section_header.dart';
 
-class ArtistsOfTheDay extends StatefulWidget {
-  const ArtistsOfTheDay({Key? key}) : super(key: key);
+class MyArtistsList extends StatefulWidget {
+  const MyArtistsList({Key? key}) : super(key: key);
 
   @override
-  _ArtistsOfTheDayState createState() => _ArtistsOfTheDayState();
+  _MyArtistsListState createState() => _MyArtistsListState();
 }
 
-class _ArtistsOfTheDayState extends State<ArtistsOfTheDay> {
+class _MyArtistsListState extends State<MyArtistsList> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,7 +25,7 @@ class _ArtistsOfTheDayState extends State<ArtistsOfTheDay> {
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: platformIsNotWeb() ? 10 : 25),
-          child: sectionHeader('Vamos las bandas', seeAll: false),
+          child: sectionHeader(S.of(context).myBands, seeAll: false),
         ),
         BlocBuilder<MyArtistsBloc, MyArtistsBlocState>(
             builder: (context, status) {

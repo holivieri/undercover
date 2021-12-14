@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../generated/l10n.dart';
 import '../themes/theme_provider.dart';
 
 class UserPreferencesPage extends StatefulWidget {
@@ -33,7 +34,7 @@ class _UserPreferencesPageState extends State<UserPreferencesPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const Text('Modo Oscuro'),
+            Text(S.of(context).darkMode),
             Switch.adaptive(
               value: themeProvider.isDarkMode,
               onChanged: themeProvider.toggleTheme,

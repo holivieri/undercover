@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
+import '../../generated/l10n.dart';
 import '../blocs/concerts/concerts_bloc.dart';
 import '../models/concert_model.dart';
 import '../repositories/concerts_repository.dart';
@@ -49,7 +50,7 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
             ),
           );
         } else {
-          return const Text('Error - Concierto no encontrado');
+          return Text(S.of(context).errorConcertNotFound);
         }
       },
     );

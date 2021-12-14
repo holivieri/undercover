@@ -49,3 +49,7 @@ app.*.map.json
 messages_all.dart
 messages_en.dart
 l10n.dart
+/messages_all.dart
+/message_en.dart
+generated/
+
