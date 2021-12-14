@@ -47,3 +47,5 @@ app.*.map.json
 
 /messages_all.dart
 /message_en.dart
+generated/
+
