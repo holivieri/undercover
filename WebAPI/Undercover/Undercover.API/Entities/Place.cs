@@ -60,6 +60,7 @@ namespace Undercover.API.Entities
         [Required]
         public long Dislikes { get; set; }
 
+        public virtual List<User> Users { get; set; }
 
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Undercover.API.Data;
 
@@ -11,9 +12,10 @@ using Undercover.API.Data;
 namespace Undercover.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211214064244_users")]
+    partial class users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,51 +38,6 @@ namespace Undercover.API.Migrations
                     b.HasIndex("GenresId");
 
                     b.ToTable("ArtistGenre");
-                });
-
-            modelBuilder.Entity("ArtistUser", b =>
-                {
-                    b.Property<Guid>("MyArtistsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("MyArtistsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("ArtistUser");
-                });
-
-            modelBuilder.Entity("ConcertUser", b =>
-                {
-                    b.Property<Guid>("MyConcertsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("MyConcertsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("ConcertUser");
-                });
-
-            modelBuilder.Entity("GenreUser", b =>
-                {
-                    b.Property<Guid>("MyGenresId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("MyGenresId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("GenreUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -112,29 +69,29 @@ namespace Undercover.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5cd73a48-af41-4725-a755-571aecba8756",
-                            ConcurrencyStamp = "e6828a1c-86c0-4355-8ca8-5fb57f51c0c1",
+                            Id = "80efdd00-d13b-4323-b8c6-d714669742d3",
+                            ConcurrencyStamp = "950fe483-2079-4705-859c-99c5887635d2",
                             Name = "admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
-                            Id = "76fd1e27-a710-464e-9d6d-c4d0967a332c",
-                            ConcurrencyStamp = "db3da450-29eb-49e8-a28e-fa1e901fbc7c",
+                            Id = "127745c4-415f-41ec-8f38-bd9e01e0a2ce",
+                            ConcurrencyStamp = "96f8c4a2-b2f0-4367-9bc6-7d9b043f92cc",
                             Name = "artist",
                             NormalizedName = "artist"
                         },
                         new
                         {
-                            Id = "1e6a28f2-eabe-4160-b639-040bed16298a",
-                            ConcurrencyStamp = "9c11fc5c-a974-4d8d-a15d-cf390048a508",
+                            Id = "0da6e4bf-8f95-46b8-83c3-adcab2bc0662",
+                            ConcurrencyStamp = "d82dfb63-c629-4da4-a9e6-969dfeda52df",
                             Name = "user",
                             NormalizedName = "user"
                         },
                         new
                         {
-                            Id = "142f05a8-5691-401b-9d89-f6d672190c55",
-                            ConcurrencyStamp = "c6b1b9c8-035a-4748-97ad-39deb1e04cd7",
+                            Id = "6bea85d0-7449-449c-890d-50bdcb268fb4",
+                            ConcurrencyStamp = "17b1527c-978c-4a7a-a321-7469d09b19e5",
                             Name = "placeOwner",
                             NormalizedName = "placeOwner"
                         });
@@ -246,21 +203,6 @@ namespace Undercover.API.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("PlaceUser", b =>
-                {
-                    b.Property<Guid>("MyPlacesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("MyPlacesId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("PlaceUser");
-                });
-
             modelBuilder.Entity("Undercover.API.Entities.Album", b =>
                 {
                     b.Property<Guid>("Id")
@@ -338,20 +280,25 @@ namespace Undercover.API.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("YouTubeAccount")
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Artists");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("74668b76-c118-4205-b6c4-6b4f4adc1151"),
+                            Id = new Guid("31005ac7-ec90-4a5b-bba0-0bb3d1621b15"),
                             Bio = "Banda que surge en los sotanos del bajo Flores, cuando un grupo de amigos se junta a celebrar la prision domiciliaria de un entrañable del rock barrial.",
-                            CreatedDate = new DateTime(2021, 12, 14, 6, 48, 49, 181, DateTimeKind.Utc).AddTicks(2724),
+                            CreatedDate = new DateTime(2021, 12, 14, 6, 42, 44, 14, DateTimeKind.Utc).AddTicks(9239),
                             FacebookAccount = "cadenaperpetua",
                             Followers = 121L,
                             ManagerContact = "15-4444-5555",
@@ -363,9 +310,9 @@ namespace Undercover.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3cc05136-142e-4d08-982f-46a2c28d182e"),
+                            Id = new Guid("0f911145-7b2b-4cea-8dc1-acde7843dff2"),
                             Bio = "Luego de una noche de sexo y alcohol los muchachos se pusieron a cantar la marcha peronista y descubrieron que tenian futuro en la música",
-                            CreatedDate = new DateTime(2021, 12, 14, 6, 48, 49, 181, DateTimeKind.Utc).AddTicks(2760),
+                            CreatedDate = new DateTime(2021, 12, 14, 6, 42, 44, 14, DateTimeKind.Utc).AddTicks(9280),
                             FacebookAccount = "A_tu_Vieja",
                             Followers = 150L,
                             ManagerContact = "15-4444-5555",
@@ -448,11 +395,16 @@ namespace Undercover.API.Migrations
                     b.Property<Guid>("PlaceId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ArtistId");
 
                     b.HasIndex("PlaceId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Concerts");
                 });
@@ -475,7 +427,7 @@ namespace Undercover.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0e0d7e2e-6624-4315-89b0-cedf9ae190b3"),
+                            Id = new Guid("c4f4fc39-ff2c-476b-b7d5-dd752f08a437"),
                             Name = "Argentina"
                         });
                 });
@@ -495,44 +447,49 @@ namespace Undercover.API.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Genres");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("16c12875-d18e-4fa2-a772-ce0e69cd5ccc"),
+                            Id = new Guid("cc3d0d7c-d3e5-4eb3-97d9-7a41c98aed3b"),
                             Name = "Rock"
                         },
                         new
                         {
-                            Id = new Guid("6e2dc6a2-b5d3-49d1-a6c3-d6852159f40b"),
+                            Id = new Guid("69995c6a-513f-4352-8340-9da5005ef316"),
                             Name = "Blues"
                         },
                         new
                         {
-                            Id = new Guid("235857f9-4f2c-4214-a10d-a6a47f7efec9"),
+                            Id = new Guid("9f5c233e-54dd-4ccd-a160-29ad01fb6118"),
                             Name = "Jazz"
                         },
                         new
                         {
-                            Id = new Guid("75505d0b-bade-44f3-9423-4147948bf464"),
+                            Id = new Guid("4ece17a5-c394-41cb-b922-339bd65dbcb1"),
                             Name = "Hip Hop"
                         },
                         new
                         {
-                            Id = new Guid("b16c3fce-449a-4652-8a14-fd1aaccbadbf"),
+                            Id = new Guid("d912dc79-d47e-4642-af61-8e72d935192d"),
                             Name = "Pop"
                         },
                         new
                         {
-                            Id = new Guid("48ba8f78-48d7-4c32-b22c-b73ecfd2e132"),
+                            Id = new Guid("4ace03b5-104d-4bfd-9388-db4805288c83"),
                             Name = "Punk"
                         },
                         new
                         {
-                            Id = new Guid("2cd04ce9-965a-48d2-a0b3-0da4408bce9a"),
+                            Id = new Guid("72162ed7-329b-4824-b5d4-6e9cc87c50bd"),
                             Name = "Metal"
                         });
                 });
@@ -602,9 +559,14 @@ namespace Undercover.API.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CountryId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Places");
                 });
@@ -767,51 +729,6 @@ namespace Undercover.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ArtistUser", b =>
-                {
-                    b.HasOne("Undercover.API.Entities.Artist", null)
-                        .WithMany()
-                        .HasForeignKey("MyArtistsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undercover.API.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ConcertUser", b =>
-                {
-                    b.HasOne("Undercover.API.Entities.Concert", null)
-                        .WithMany()
-                        .HasForeignKey("MyConcertsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undercover.API.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("GenreUser", b =>
-                {
-                    b.HasOne("Undercover.API.Entities.Genre", null)
-                        .WithMany()
-                        .HasForeignKey("MyGenresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undercover.API.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -863,26 +780,18 @@ namespace Undercover.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PlaceUser", b =>
-                {
-                    b.HasOne("Undercover.API.Entities.Place", null)
-                        .WithMany()
-                        .HasForeignKey("MyPlacesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undercover.API.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Undercover.API.Entities.Album", b =>
                 {
                     b.HasOne("Undercover.API.Entities.Artist", null)
                         .WithMany("Albums")
                         .HasForeignKey("ArtistId");
+                });
+
+            modelBuilder.Entity("Undercover.API.Entities.Artist", b =>
+                {
+                    b.HasOne("Undercover.API.Entities.User", null)
+                        .WithMany("MyArtists")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Undercover.API.Entities.ArtistPicture", b =>
@@ -913,9 +822,20 @@ namespace Undercover.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Undercover.API.Entities.User", null)
+                        .WithMany("MyConcerts")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Artist");
 
                     b.Navigation("Place");
+                });
+
+            modelBuilder.Entity("Undercover.API.Entities.Genre", b =>
+                {
+                    b.HasOne("Undercover.API.Entities.User", null)
+                        .WithMany("MyGenres")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Undercover.API.Entities.Place", b =>
@@ -925,6 +845,10 @@ namespace Undercover.API.Migrations
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Undercover.API.Entities.User", null)
+                        .WithMany("MyPlaces")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Country");
                 });
@@ -982,7 +906,15 @@ namespace Undercover.API.Migrations
 
             modelBuilder.Entity("Undercover.API.Entities.User", b =>
                 {
+                    b.Navigation("MyArtists");
+
+                    b.Navigation("MyConcerts");
+
+                    b.Navigation("MyGenres");
+
                     b.Navigation("MyPictures");
+
+                    b.Navigation("MyPlaces");
                 });
 #pragma warning restore 612, 618
         }

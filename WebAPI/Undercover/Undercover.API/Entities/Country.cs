@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Undercover.API.Entities
@@ -11,5 +12,6 @@ namespace Undercover.API.Entities
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
+
     }
 }

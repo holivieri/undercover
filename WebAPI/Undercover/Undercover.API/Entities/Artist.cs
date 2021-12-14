@@ -31,6 +31,8 @@ namespace Undercover.API.Entities
 
         public List<ArtistPost> Posts { get; set; }
 
+        public virtual List<User> Users { get; set; }
+
 
         [Required]
         public long Followers { get; set; }

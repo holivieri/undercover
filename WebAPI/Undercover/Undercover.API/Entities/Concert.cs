@@ -20,6 +20,7 @@ namespace Undercover.API.Entities
         [Required]
         public virtual Artist Artist { get; set; }
 
+        public virtual List<User> Users { get; set; }
 
     }
 }
