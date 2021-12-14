@@ -1,2 +1,5 @@
 .DS_Store
 undercover_mobile/pubspec.lock
+messages_all.dart
+messages_en.dart
+message_es.dart
