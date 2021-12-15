@@ -44,6 +44,7 @@ class MyThemes {
     primaryColor: Colors.black,
     colorScheme: const ColorScheme.dark(),
     iconTheme: const IconThemeData(color: Colors.black), //greenButtonColor),
+    buttonTheme: const ButtonThemeData(buttonColor: greenButtonColor),
   );
 
   static final lightTheme = ThemeData(
@@ -52,5 +53,6 @@ class MyThemes {
     primaryColor: Colors.white,
     colorScheme: const ColorScheme.light(),
     iconTheme: const IconThemeData(color: Colors.red),
+    buttonTheme: const ButtonThemeData(buttonColor: greenButtonColor),
   );
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:undercover_mobile/src/providers/language_provider.dart';
-import 'package:undercover_mobile/src/utils/font.dart';
 
 import '../../generated/l10n.dart';
+import '../providers/language_provider.dart';
+import '../utils/font.dart';
 
 class LanguageSelector extends StatelessWidget {
   const LanguageSelector({Key? key}) : super(key: key);
