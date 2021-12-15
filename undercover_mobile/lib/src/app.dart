@@ -40,9 +40,10 @@ class _MyAppState extends State<MyApp> {
       animation: widget.settingsController,
       builder: (BuildContext context, Widget? child) {
         final themeProvider = Provider.of<ThemeProvider>(context);
+        final languageProvider = Provider.of<LanguageProvider>(context);
 
         return ChangeNotifierProvider<LanguageProvider>(
-          create: (_) => LanguageProvider(),
+          create: (_) => languageProvider,
           child: GetMaterialApp(
             // restorationScopeId: 'app',
             debugShowCheckedModeBanner: false,
@@ -57,8 +58,7 @@ class _MyAppState extends State<MyApp> {
               Locale('en', ''),
               Locale('es', ''),
             ],
-            locale: Provider.of<LanguageProvider>(context, listen: true)
-                .currentLocale,
+            locale: languageProvider.currentLocale,
             fallbackLocale: const Locale('en', 'US'),
             getPages: routes,
 

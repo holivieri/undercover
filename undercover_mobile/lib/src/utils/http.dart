@@ -1,7 +1,7 @@
 import 'dart:io';
 
-const String apiUrl =
-    'https://undercoverrg.azurewebsites.net/api/V1'; //'https://localhost:44320/api/V1';
+const String apiUrl = 'https://undercoverrg.azurewebsites.net/api/V1';
+//'https://undercoverrg.azurewebsites.net/api/V1'; //'https://localhost:44320/api/V1';
 
 const formUrlEncoded = 'application/x-www-form-urlencoded';
 const applicationJson = 'application/json';
