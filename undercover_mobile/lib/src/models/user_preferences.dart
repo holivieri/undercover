@@ -34,4 +34,11 @@ class UserPreferences {
   set userName(String value) {
     _userPreferences!.setString('userName', value);
   }
+
+  String get selectedLanguage =>
+      _userPreferences!.getString('language') ?? 'en';
+
+  set selectedLanguage(String value) {
+    _userPreferences!.setString('language', value);
+  }
 }

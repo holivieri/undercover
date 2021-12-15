@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../generated/l10n.dart';
 import '../themes/theme_provider.dart';
+import '../widgets/language_selector.dart';
 
 class UserPreferencesPage extends StatefulWidget {
   const UserPreferencesPage({Key? key}) : super(key: key);
@@ -40,6 +42,15 @@ class _UserPreferencesPageState extends State<UserPreferencesPage> {
               onChanged: themeProvider.toggleTheme,
             ),
           ],
+        ),
+        ElevatedButton(
+          onPressed: () {
+            showCupertinoModalPopup(
+              context: context,
+              builder: (_) => const LanguageSelector(),
+            );
+          },
+          child: Text(S.of(context).changeLanguage),
         ),
       ],
     );
