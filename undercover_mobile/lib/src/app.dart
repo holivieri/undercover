@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
+import '../generated/l10n.dart';
 import 'pages/home_page.dart';
+import 'providers/language_provider.dart';
 import 'repositories/artists_repository.dart';
 import 'routes/routes.dart';
 import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
+import 'themes/theme_provider.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({
@@ -34,51 +39,61 @@ class _MyAppState extends State<MyApp> {
     return AnimatedBuilder(
       animation: widget.settingsController,
       builder: (BuildContext context, Widget? child) {
-        return GetMaterialApp(
-          // restorationScopeId: 'app',
-          debugShowCheckedModeBanner: false,
+        final themeProvider = Provider.of<ThemeProvider>(context);
 
-          supportedLocales: const [
-            Locale('en', ''), // English, no country code
-          ],
-          locale: const Locale('en', 'US'),
-          fallbackLocale: const Locale('en', 'US'),
-          getPages: routes,
+        return ChangeNotifierProvider<LanguageProvider>(
+          create: (_) => LanguageProvider(),
+          child: GetMaterialApp(
+            // restorationScopeId: 'app',
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
 
-          // Use AppLocalizations to configure the correct application title
-          // depending on the user's locale.
-          //
-          // The appTitle is defined in .arb files found in the localization
-          // directory.
+            supportedLocales: const [
+              Locale('en', ''),
+              Locale('es', ''),
+            ],
+            locale: Provider.of<LanguageProvider>(context, listen: true)
+                .currentLocale,
+            fallbackLocale: const Locale('en', 'US'),
+            getPages: routes,
 
-          // onGenerateTitle: 'appTitle'.tr,
+            // Use AppLocalizations to configure the correct application title
+            // depending on the user's locale.
+            //
+            // The appTitle is defined in .arb files found in the localization
+            // directory.
 
-          // Define a light and dark color theme. Then, read the user's
-          // preferred ThemeMode (light, dark, or system default) from the
-          // SettingsController to display the correct theme.
-          theme: ThemeData(),
-          darkTheme: ThemeData.dark(),
-          themeMode: widget.settingsController.themeMode,
+            // onGenerateTitle: 'appTitle'.tr,
+            themeMode: themeProvider.themeMode,
+            theme: MyThemes.lightTheme,
+            darkTheme: MyThemes.darkTheme,
 
-          // Define a function to handle named routes in order to support
-          // Flutter web url navigation and deep linking.
-          routes: getApplicationRoutes(),
-          onGenerateRoute: (RouteSettings routeSettings) {
-            return MaterialPageRoute<void>(
-              settings: routeSettings,
-              builder: (BuildContext context) {
-                switch (routeSettings.name) {
-                  case SettingsView.routeName:
-                    return SettingsView(controller: widget.settingsController);
-                  case SampleItemDetailsView.routeName:
-                    return const SampleItemDetailsView();
-                  case SampleItemListView.routeName:
-                  default:
-                    return const HomePage();
-                }
-              },
-            );
-          },
+            // Define a function to handle named routes in order to support
+            // Flutter web url navigation and deep linking.
+            routes: getApplicationRoutes(),
+            onGenerateRoute: (RouteSettings routeSettings) {
+              return MaterialPageRoute<void>(
+                settings: routeSettings,
+                builder: (BuildContext context) {
+                  switch (routeSettings.name) {
+                    case SettingsView.routeName:
+                      return SettingsView(
+                          controller: widget.settingsController);
+                    case SampleItemDetailsView.routeName:
+                      return const SampleItemDetailsView();
+                    case SampleItemListView.routeName:
+                    default:
+                      return const HomePage();
+                  }
+                },
+              );
+            },
+          ),
         );
       },
     );

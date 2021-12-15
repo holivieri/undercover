@@ -18,26 +18,27 @@ class Place {
     this.floor,
     this.coverPicture,
     this.description,
+    this.phoneNumber,
   });
 
   factory Place.fromJson(Map<String, dynamic> json) => Place(
-        id: json['id'],
-        name: json['name'],
-        createdDate: DateTime.parse(json['createdDate']),
-        totalCapacity: json['totalCapacity'],
-        seats: json['seats'],
-        standing: json['standing'],
-        floor: json['floor'],
-        streetName: json['streetName'],
-        streetNumber: json['streetNumber'],
-        city: json['city'],
-        province: json['province'],
-        country: Country.fromJson(json['country']),
-        coverPicture: json['coverPicture'],
-        description: json['description'],
-        likes: json['likes'],
-        dislikes: json['dislikes'],
-      );
+      id: json['id'],
+      name: json['name'],
+      createdDate: DateTime.parse(json['createdDate']),
+      totalCapacity: json['totalCapacity'],
+      seats: json['seats'],
+      standing: json['standing'],
+      floor: json['floor'],
+      streetName: json['streetName'],
+      streetNumber: json['streetNumber'],
+      city: json['city'],
+      province: json['province'],
+      country: Country.fromJson(json['country']),
+      coverPicture: json['coverPicture'],
+      description: json['description'],
+      likes: json['likes'],
+      dislikes: json['dislikes'],
+      phoneNumber: json['phoneNumber']);
 
   final String id;
   final String name;
@@ -55,6 +56,7 @@ class Place {
   final String? description;
   final int likes;
   final int dislikes;
+  final String? phoneNumber;
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -73,5 +75,6 @@ class Place {
         'description': description,
         'likes': likes,
         'dislikes': dislikes,
+        'phoneNumber': phoneNumber,
       };
 }

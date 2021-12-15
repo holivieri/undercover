@@ -18,3 +18,9 @@ class LoadArtistTweets extends MyArtistsBlocEvent {
 }
 
 class LoadArtistYoutubeVideos extends MyArtistsBlocEvent {}
+
+class SearchArtists extends MyArtistsBlocEvent {
+  SearchArtists(this.artistName);
+
+  final String artistName;
+}

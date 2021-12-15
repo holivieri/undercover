@@ -45,12 +45,24 @@ namespace Undercover.API.Services
                 .Artists
                 .Include(a => a.Genres)
                 .Include(a => a.Concerts).ThenInclude(x => x.Place).ThenInclude(x => x.Country)
-                .Include(a => a.Concerts).ThenInclude(a => a.Artist)
                 .Include(a => a.Posts)
                 .Include(a => a.Albums)
                 //.Where(a => a.Genres.Select( x => x.Genre.Name).Contains(genre)));
                 .OrderBy(a => a.Name)
                 .ToList();
+        }
+
+        public List<Artist> SearchArtist(string artistName)
+        {
+            return _dbContext
+              .Artists
+              .Include(a => a.Genres)
+              .Include(a => a.Concerts).ThenInclude(x => x.Place).ThenInclude(x => x.Country)
+              .Include(a => a.Posts)
+              .Include(a => a.Albums)
+              .Where(a => a.Name.StartsWith(artistName))
+              .OrderBy(a => a.Name)
+              .ToList();
         }
     }
 }

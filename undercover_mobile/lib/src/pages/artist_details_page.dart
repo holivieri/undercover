@@ -3,12 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
+import '../../generated/l10n.dart';
 import '../blocs/artists/my_artists_bloc.dart';
 import '../models/artist_model.dart';
 import '../repositories/artists_repository.dart';
 import '../services/artists_service.dart';
-import '../utils/colors.dart';
+import '../utils/app_colors.dart';
 import '../utils/font.dart';
+import '../widgets/back_button.dart';
+import '../widgets/green_button.dart';
 import '../widgets/tweets_list.dart';
 import '../widgets/youtube_videos_list.dart';
 
@@ -35,87 +38,176 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MyArtistsBloc, MyArtistsBlocState>(
-      bloc: artistBloc,
-      builder: (context, state) {
-        if (state is LoadingArtist) {
-          return const CircularProgressIndicator();
-        } else if (state is ArtistLoaded) {
-          return Scaffold(
-            body: Container(
-              height: double.infinity,
-              width: double.infinity,
-              decoration:
-                  const BoxDecoration(gradient: themeBackgroundGradient),
-              child: mainBody(state.artist),
-            ),
-          );
-        } else {
-          return const Text('Error - Artista no encontrado');
-        }
-      },
+    return SafeArea(
+      child: BlocBuilder<MyArtistsBloc, MyArtistsBlocState>(
+        bloc: artistBloc,
+        builder: (context, state) {
+          if (state is LoadingArtist) {
+            return const CircularProgressIndicator();
+          } else if (state is ArtistLoaded) {
+            return Scaffold(
+              appBar: AppBar(
+                leading: const BackArrowButton(),
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+              ),
+              extendBodyBehindAppBar: true,
+              body: Container(
+                height: double.infinity,
+                width: double.infinity,
+                child: mainBody(state.artist),
+              ),
+            );
+          } else {
+            return Text(S.of(context).errorArtistNotFound);
+          }
+        },
+      ),
     );
   }
 
   Widget mainBody(Artist artist) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          getArtistCoverPicture(artist),
-          const SizedBox(height: 20),
-          getArtistBio(artist),
-          const SizedBox(height: 20),
-          const TweetsList(),
-          const SizedBox(height: 20),
-          const YoutubeVideosList(),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          children: [
+            const SizedBox(height: 25),
+            getArtistCoverPicture(artist),
+            const SizedBox(height: 20),
+            Text(
+              artist.name,
+              style: titleStyle,
+            ),
+            Text(
+              artist.followers.toString(),
+              style: titleStyleGreen,
+            ),
+            Text(S.of(context).followers, style: subtitleStyle),
+            const SizedBox(height: 20),
+            getKeyPad(artist),
+            const SizedBox(height: 30),
+            getArtistBio(artist),
+            getArtistTweets(),
+            getArtistVideos(),
+            const SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }
 
   Widget getArtistCoverPicture(Artist artist) {
-    return Container(
-      width: double.infinity,
-      height: 400,
-      child: Image.network(artist.pictureUrl!),
+    return Hero(
+      tag: 'image-${artist.id}',
+      child: Container(
+        width: 160,
+        height: 160,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            image: NetworkImage(artist.pictureUrl!),
+            fit: BoxFit.fill,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget getKeyPad(Artist artist) {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          const Expanded(child: GreenButton(label: 'Follow')),
+          /*  if (artist.facebookAccount != null &&
+              artist.facebookAccount!.isNotEmpty) */
+          getSocialNetworkIcons(),
+        ],
+      ),
+    );
+  }
+
+  Widget getSocialNetworkIcons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: const [
+        Padding(
+          padding: EdgeInsets.all(8),
+          child: Icon(
+            FontAwesomeIcons.facebook,
+            size: 35,
+            color: facebookColor,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(8),
+          child: Icon(
+            FontAwesomeIcons.youtube,
+            size: 35,
+            color: youtubeColor,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(8),
+          child: Icon(
+            FontAwesomeIcons.twitter,
+            size: 35,
+            color: twitterColor,
+          ),
+        ),
+      ],
     );
   }
 
   Widget getArtistBio(Artist artist) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: Colors.lightBlue[50]!.withOpacity(0.5),
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(S.of(context).bio,
+              style: titleStyle, textAlign: TextAlign.start),
+          const SizedBox(height: 20),
+          Text(artist.bio),
+        ],
       ),
-      width: 250,
-      height: 300,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            const SizedBox(height: 15),
-            Text(
-              artist.name,
-              style: subtitleStyle,
-            ),
-            const SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Icon(Icons.follow_the_signs),
-                Text(artist.followers.toString()),
-              ],
-            ),
-            const SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Icon(FontAwesomeIcons.twitter),
-                Text(artist.twitterAccount!),
-              ],
-            ),
-          ],
-        ),
+    );
+  }
+
+  Widget getArtistTweets() {
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            S.of(context).tweets,
+            style: titleStyle,
+            textAlign: TextAlign.start,
+          ),
+          const SizedBox(height: 20),
+          const TweetsList(),
+        ],
+      ),
+    );
+  }
+
+  Widget getArtistVideos() {
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            S.of(context).videos,
+            style: titleStyle,
+            textAlign: TextAlign.start,
+          ),
+          const SizedBox(height: 20),
+          const YoutubeVideosList(),
+        ],
       ),
     );
   }

@@ -16,6 +16,8 @@ namespace Undercover.API.Entities
         [StringLength(500)]
         public string Description { get; set; }
 
+        [StringLength(50)]
+        public string PhoneNumber { get; set; }
 
         [Required]
         public DateTime CreatedDate { get; set; }
@@ -25,7 +27,7 @@ namespace Undercover.API.Entities
         public long Seats { get; set; }
         public long Standing { get; set; }
 
-        [StringLength(10)]
+        [StringLength(20)]
         public string Floor { get; set; }
 
         [Required]

@@ -26,24 +26,26 @@ class GenreCellWidget extends StatelessWidget {
             image: DecorationImage(
               fit: BoxFit.cover,
               image: title == 'Rock'
-                  ? const AssetImage('images/rock-n-roll.jpg')
+                  ? const AssetImage('assets/images/rock-n-roll.jpg')
                   : title == 'Reggae'
-                      ? const AssetImage('images/Reggae.jpg')
+                      ? const AssetImage('assets/images/Reggae.jpg')
                       : title == 'Hip Hop'
-                          ? const AssetImage('images/hiphop.jpg')
+                          ? const AssetImage('assets/images/hiphop.jpg')
                           : title == 'Punk'
-                              ? const AssetImage('images/punk.jpg')
+                              ? const AssetImage('assets/images/punk.jpg')
                               : title == 'Blues'
-                                  ? const AssetImage('images/blues.jpg')
+                                  ? const AssetImage('assets/images/blues.jpg')
                                   : title == 'Pop'
-                                      ? const AssetImage('images/pop.jpg')
+                                      ? const AssetImage(
+                                          'assets/images/pop.jpg')
                                       : title == 'Jazz'
-                                          ? const AssetImage('images/jazz.jpg')
+                                          ? const AssetImage(
+                                              'assets/images/jazz.jpg')
                                           : title == 'Metal'
                                               ? const AssetImage(
-                                                  'images/metal.jpg')
+                                                  'assets/images/metal.jpg')
                                               : const AssetImage(
-                                                  'images/jazz.png'),
+                                                  'assets/images/jazz.png'),
               /* backgroundImageUrl == null
                   ? AssetImage(defaultSquareCardBackgroundUrl) as ImageProvider
                   : NetworkImage(backgroundImageUrl!), */

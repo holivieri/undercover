@@ -1,9 +1,7 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:undercover_mobile/src/models/user_preferences.dart';
 
+import '../models/user_preferences.dart';
 import '../routes/routes.dart';
 
 class UnderAppbar extends StatefulWidget implements PreferredSizeWidget {
@@ -23,6 +21,7 @@ class _UnderAppbarState extends State<UnderAppbar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      iconTheme: Theme.of(context).iconTheme,
       backgroundColor: Colors.transparent,
       elevation: 0,
       title: getIcons(),

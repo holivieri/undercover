@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 import 'src/app.dart';
 import 'src/blocs/artists/my_artists_bloc.dart';
@@ -11,6 +12,7 @@ import 'src/blocs/genres/genres_bloc.dart';
 import 'src/blocs/places/places_bloc.dart';
 import 'src/blocs/users/users_bloc.dart';
 import 'src/models/user_preferences.dart';
+import 'src/providers/language_provider.dart';
 import 'src/repositories/artists_repository.dart';
 import 'src/repositories/concerts_repository.dart';
 import 'src/repositories/genres_repository.dart';
@@ -23,6 +25,7 @@ import 'src/services/places_service.dart';
 import 'src/services/user_service.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
+import 'src/themes/theme_provider.dart';
 
 bool platformIsNotWeb() {
   if (kIsWeb) {
@@ -74,9 +77,16 @@ Future<void> main() async {
               UsersBloc(_userRepository)..add(InitializeUser()),
         ),
       ],
-      child: MyApp(
-        settingsController: settingsController,
-        artistRepository: _artistRepository,
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
+          ChangeNotifierProvider<LanguageProvider>(
+              create: (_) => LanguageProvider()),
+        ],
+        child: MyApp(
+          settingsController: settingsController,
+          artistRepository: _artistRepository,
+        ),
       ),
     ),
   );
