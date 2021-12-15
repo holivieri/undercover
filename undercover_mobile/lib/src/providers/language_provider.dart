@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:undercover_mobile/src/models/user_preferences.dart';
+
+import '../models/user_preferences.dart';
 
 class LanguageProvider extends ChangeNotifier {
   Locale _currentLocale = const Locale('en');

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:undercover_mobile/src/models/user_preferences.dart';
 
 import '../generated/l10n.dart';
+import 'models/user_preferences.dart';
 import 'pages/home_page.dart';
 import 'providers/language_provider.dart';
 import 'repositories/artists_repository.dart';
