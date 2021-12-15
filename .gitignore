@@ -1,2 +1,6 @@
 .DS_Store
 undercover_mobile/pubspec.lock
+
+undercover_mobile/ios/Podfile
+undercover_mobile/ios/Flutter/Debug.xcconfig
+undercover_mobile/ios/Flutter/Release.xcconfig
