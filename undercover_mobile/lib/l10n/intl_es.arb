@@ -1,6 +1,8 @@
 {
+    "availableLanguages": "Idiomas disponibles",
     "bio": "Bio",
     "cancel": "Cancelar",
+    "changeLanguage": "Cambiar Idioma",
     "darkMode": "Modo Oscuro",
     "enterArtistName": "Nombre del artista",
     "errorArtistNotFound": "Error - Artista no encontradp",
@@ -20,6 +22,7 @@
     "profile": "Perfil",
     "search": "Buscar",
     "select": "Seleccionar",
+    "selectLanguage": "Select Language",
     "tweets": "Tweets",
     "videos": "Videos"
 }
