@@ -78,6 +78,7 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
             Text(
               artist.name,
               style: titleStyle,
+              textAlign: TextAlign.center,
             ),
             Text(
               artist.followers.toString(),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:undercover_mobile/src/utils/app_colors.dart';
 
 import '../../generated/l10n.dart';
 import '../themes/theme_provider.dart';
@@ -44,6 +45,7 @@ class _UserPreferencesPageState extends State<UserPreferencesPage> {
           ],
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(primary: greenButtonColor),
           onPressed: () {
             showCupertinoModalPopup(
               context: context,
