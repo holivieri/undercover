@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 const themeBlue = Color.fromRGBO(0, 76, 186, 1); // Hex 004cba
 const themeMediumDarkGrey = Color.fromRGBO(136, 136, 136, 1);

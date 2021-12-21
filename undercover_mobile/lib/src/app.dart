@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../generated/l10n.dart';
@@ -45,7 +44,7 @@ class _MyAppState extends State<MyApp> {
 
         return ChangeNotifierProvider<LanguageProvider>(
           create: (_) => languageProvider,
-          child: GetMaterialApp(
+          child: MaterialApp(
             // restorationScopeId: 'app',
             debugShowCheckedModeBanner: false,
             localizationsDelegates: const [

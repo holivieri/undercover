@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../routes/routes.dart';
+import '../pages/concert_details_page.dart';
 import '../utils/default_images.dart';
 import '../utils/text_style.dart';
 
@@ -56,7 +55,14 @@ class ConcertCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        Get.toNamed(concertRoute, arguments: concertId);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ConcertDetailsPage(
+              concertId: concertId,
+            ),
+          ),
+        );
       },
       child: Container(
         height: _cardHeight,
