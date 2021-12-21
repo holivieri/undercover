@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../generated/l10n.dart';
-import '../routes/routes.dart';
+import '../pages/artist_details_page.dart';
 import '../utils/colors.dart';
 import '../utils/default_images.dart';
 import '../utils/text_style.dart';
@@ -36,7 +35,14 @@ class ArtistTallCard extends StatelessWidget {
   Widget _returnArtistCard(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(artistRoute, arguments: artistId);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ArtistDetailsPage(
+              artistId: artistId,
+            ),
+          ),
+        );
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(15),

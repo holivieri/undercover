@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 
 import '../../generated/l10n.dart';
 import '../blocs/concerts/concerts_bloc.dart';
@@ -13,12 +12,18 @@ import '../utils/font.dart';
 import '../widgets/back_button.dart';
 
 class ConcertDetailsPage extends StatefulWidget {
+  const ConcertDetailsPage({
+    required this.concertId,
+    Key? key,
+  }) : super(key: key);
+
+  final String concertId;
+
   @override
   State<ConcertDetailsPage> createState() => _ConcertDetailsPageState();
 }
 
 class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
-  final String? _concertId = Get.arguments;
   late final ConcertsBloc concertBloc;
 
   @override
@@ -29,7 +34,7 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
 
     concertBloc = ConcertsBloc(repository)
       ..add(
-        LoadConcert(_concertId!),
+        LoadConcert(widget.concertId),
       );
   }
 

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-
 import '../../generated/l10n.dart';
 import '../blocs/artists/my_artists_bloc.dart';
 import '../models/artist_model.dart';
@@ -16,12 +14,18 @@ import '../widgets/tweets_list.dart';
 import '../widgets/youtube_videos_list.dart';
 
 class ArtistDetailsPage extends StatefulWidget {
+  const ArtistDetailsPage({
+    required this.artistId,
+    Key? key,
+  }) : super(key: key);
+
+  final String artistId;
+
   @override
   State<ArtistDetailsPage> createState() => _ArtistDetailsPageState();
 }
 
 class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
-  final String? _artistId = Get.arguments;
   late final MyArtistsBloc artistBloc;
 
   @override
@@ -32,7 +36,7 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
 
     artistBloc = MyArtistsBloc(repository)
       ..add(
-        LoadArtist(_artistId!),
+        LoadArtist(widget.artistId),
       );
   }
 

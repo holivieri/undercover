@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:undercover_mobile/src/utils/app_colors.dart';
 
 import '../../generated/l10n.dart';
 import '../themes/theme_provider.dart';
+import '../utils/app_colors.dart';
 import '../widgets/language_selector.dart';
 
 class UserPreferencesPage extends StatefulWidget {

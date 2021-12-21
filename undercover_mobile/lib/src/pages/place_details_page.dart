@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 
 import '../../generated/l10n.dart';
 import '../blocs/places/places_bloc.dart';
@@ -14,15 +13,17 @@ import '../widgets/back_button.dart';
 
 class PlaceDetailsPage extends StatefulWidget {
   const PlaceDetailsPage({
+    required this.placeId,
     Key? key,
   }) : super(key: key);
+
+  final String placeId;
 
   @override
   State<PlaceDetailsPage> createState() => _PlaceDetailsPageState();
 }
 
 class _PlaceDetailsPageState extends State<PlaceDetailsPage> {
-  final String? _placeId = Get.arguments;
   late final PlacesBloc placesBloc;
 
   @override
@@ -33,7 +34,7 @@ class _PlaceDetailsPageState extends State<PlaceDetailsPage> {
 
     placesBloc = PlacesBloc(repository)
       ..add(
-        FetchPlace(_placeId!),
+        FetchPlace(widget.placeId),
       );
   }
 
