@@ -9,3 +9,6 @@ messages_all.dart
 messages_en.dart
 message_es.dart
 undercover_mobile/ios/Podfile.lock
+undercover_mobile/ios/Flutter/Debug.xcconfig
+undercover_mobile/ios/Flutter/Release.xcconfig
+undercover_mobile/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme
