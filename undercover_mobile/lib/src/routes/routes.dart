@@ -22,7 +22,7 @@ Map<String, WidgetBuilder> getApplicationRoutes() {
     artistRoute: (BuildContext context) => ArtistDetailsPage(),
     concertRoute: (BuildContext context) => ConcertDetailsPage(),
     userPreferencesRoute: (BuildContext context) => const UserPreferencesPage(),
-    //placeRoute: (BuildContext context) => const PlaceDetailsPage(),
+    placeRoute: (BuildContext context) => const PlaceDetailsPage(),
   };
 }
 

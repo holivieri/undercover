@@ -79,7 +79,7 @@ class _PlaceDetailsPageState extends State<PlaceDetailsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '${place.name} - ${place.city}',
+                  place.name,
                   style: titleStyleGreen,
                 ),
                 getSocialNetworkIcons(),
