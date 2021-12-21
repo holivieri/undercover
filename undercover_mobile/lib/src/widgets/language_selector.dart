@@ -23,8 +23,7 @@ class LanguageSelector extends StatelessWidget {
         CupertinoActionSheetAction(
           onPressed: () {
             context.read<LanguageProvider>().changeLocale('en');
-            /* Provider.of<LanguageProvider>(context, listen: false)
-                .changeLocale('en'); */
+
             Navigator.pop(context);
           },
           child: Text(S.of(context).langEnglish),
@@ -32,8 +31,7 @@ class LanguageSelector extends StatelessWidget {
         CupertinoActionSheetAction(
           onPressed: () {
             context.read<LanguageProvider>().changeLocale('es');
-            /*   Provider.of<LanguageProvider>(context, listen: false)
-                .changeLocale('es'); */
+
             Navigator.pop(context);
           },
           isDefaultAction: true,

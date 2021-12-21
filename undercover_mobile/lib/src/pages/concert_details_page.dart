@@ -10,6 +10,7 @@ import '../repositories/concerts_repository.dart';
 import '../services/concerts_service.dart';
 import '../utils/colors.dart';
 import '../utils/font.dart';
+import '../widgets/back_button.dart';
 
 class ConcertDetailsPage extends StatefulWidget {
   @override
@@ -41,6 +42,12 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
           return const CircularProgressIndicator();
         } else if (state is ConcertLoaded) {
           return Scaffold(
+            appBar: AppBar(
+              leading: const BackArrowButton(),
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+            ),
+            extendBodyBehindAppBar: true,
             body: Container(
               height: double.infinity,
               width: double.infinity,
@@ -98,14 +105,23 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Icon(Icons.follow_the_signs),
-                Text(concert.date.toIso8601String()),
+                Text(
+                    '${concert.date.day}/${concert.date.month}/${concert.date.year}'),
               ],
             ),
             const SizedBox(height: 15),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(FontAwesomeIcons.city),
+                const Icon(FontAwesomeIcons.houseUser),
+                Text(concert.place.name),
+              ],
+            ),
+            const SizedBox(height: 15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Icon(FontAwesomeIcons.locationArrow),
                 Text(concert.place.city),
               ],
             ),
