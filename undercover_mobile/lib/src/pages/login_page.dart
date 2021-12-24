@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:undercover_mobile/src/utils/font.dart';
 import '../../generated/l10n.dart';
 import '../blocs/users/users_bloc.dart';
 import '../models/user_preferences.dart';
@@ -66,7 +68,9 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     getLogo(),
                     getUserForm(),
-                    getButtons(),
+                    const SizedBox(height: 20),
+                    getLoginButton(),
+                    getSocialLoginButtons(),
                   ],
                 ),
               );
@@ -79,7 +83,8 @@ class _LoginPageState extends State<LoginPage> {
                     getLogo(),
                     getErrorMessage(state.message),
                     getUserForm(),
-                    getButtons(),
+                    getLoginButton(),
+                    const SizedBox(height: 20),
                   ],
                 ),
               );
@@ -111,17 +116,112 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget getButtons() {
+  Widget getLoginButton() {
     return Container(
-      color: greenButtonColor,
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       width: 600,
-      child: ElevatedButton(
-        onPressed: () {
-          bloc.add(
-            ValidateUser(userName: txtUser.text, password: txtPassword.text),
-          );
-        },
-        child: Text(S.of(context).logIn),
+      height: 50,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: greenButtonColor,
+          ),
+          onPressed: () {
+            bloc.add(
+              ValidateUser(userName: txtUser.text, password: txtPassword.text),
+            );
+          },
+          child: Text(S.of(context).logIn),
+        ),
+      ),
+    );
+  }
+
+  Widget getSocialLoginButtons() {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: Text(
+            S.of(context).or,
+            style: subtitleStyle,
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            googleButton(),
+            facebookButton(),
+            appleButton(),
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget googleButton() {
+    return Container(
+      height: 50,
+      width: 100,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: darkControlColor,
+          ),
+          onPressed: () {
+            print('Google');
+          },
+          child: const Icon(
+            FontAwesomeIcons.google,
+            color: Colors.red,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget appleButton() {
+    return Container(
+      height: 50,
+      width: 100,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: darkControlColor,
+          ),
+          onPressed: () {
+            print('Apple');
+          },
+          child: const Icon(
+            FontAwesomeIcons.apple,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget facebookButton() {
+    return Container(
+      height: 50,
+      width: 100,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: darkControlColor,
+          ),
+          onPressed: () {
+            print('Facebook');
+          },
+          child: const Icon(
+            FontAwesomeIcons.facebook,
+            color: facebookColor,
+          ),
+        ),
       ),
     );
   }
@@ -131,39 +231,45 @@ class _LoginPageState extends State<LoginPage> {
       padding: const EdgeInsets.all(10),
       child: Column(
         children: [
-          TextFormField(
-            decoration: const InputDecoration(
-              fillColor: darkControlColor,
-              filled: true,
-              hintText: 'Your Email Address',
-              labelText: 'User',
-              prefixIcon: Icon(
-                Icons.person,
-                color: greenButtonColor,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                fillColor: darkControlColor,
+                filled: true,
+                hintText: 'Your Email Address',
+                labelText: 'User',
+                prefixIcon: Icon(
+                  Icons.person,
+                  color: greenButtonColor,
+                ),
               ),
+              scrollPhysics: const ClampingScrollPhysics(),
+              textInputAction: TextInputAction.done,
+              controller: txtUser,
+              autocorrect: false,
             ),
-            scrollPhysics: const ClampingScrollPhysics(),
-            textInputAction: TextInputAction.done,
-            controller: txtUser,
-            autocorrect: false,
           ),
           const SizedBox(height: 20),
-          TextFormField(
-            decoration: const InputDecoration(
-              fillColor: darkControlColor,
-              filled: true,
-              hintText: 'Your Password',
-              labelText: 'Password',
-              prefixIcon: Icon(
-                Icons.password,
-                color: greenButtonColor,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                fillColor: darkControlColor,
+                filled: true,
+                hintText: 'Your Password',
+                labelText: 'Password',
+                prefixIcon: Icon(
+                  Icons.password,
+                  color: greenButtonColor,
+                ),
               ),
+              scrollPhysics: const ClampingScrollPhysics(),
+              textInputAction: TextInputAction.done,
+              obscureText: true,
+              controller: txtPassword,
+              autocorrect: false,
             ),
-            scrollPhysics: const ClampingScrollPhysics(),
-            textInputAction: TextInputAction.done,
-            obscureText: true,
-            controller: txtPassword,
-            autocorrect: false,
           ),
         ],
       ),
