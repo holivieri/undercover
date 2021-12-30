@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../generated/l10n.dart';
 import '../themes/theme_provider.dart';
 import 'home_screen.dart';
+import 'notifications_page.dart';
 import 'search_page.dart';
 import 'user_proferences_page.dart';
 
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   final tabs = [
     const HomeScreen(),
     const SearchPage(),
-    Container(),
+    const NotificationsPage(),
     const UserPreferencesPage(),
   ];
 

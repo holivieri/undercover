@@ -7,7 +7,6 @@ import '../repositories/artists_repository.dart';
 import '../services/artists_service.dart';
 import '../widgets/artists_search_result.dart';
 
-//Search for Artists
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
 

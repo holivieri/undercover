@@ -8,7 +8,7 @@ import '../utils/http.dart';
 class NotificationsService {
   Future<List<Notification>> getMyNotifications() async {
     final _apiResponse = await Client().get(
-      Uri.parse('$apiUrl/Users/GetNotifications'),
+      Uri.parse('$apiUrl/User/GetNotifications'),
       headers: returnUndercoverHeaders(),
     );
 
