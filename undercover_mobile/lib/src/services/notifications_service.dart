@@ -32,7 +32,7 @@ class NotificationsService {
 
   Future<bool> deleteNotification(String notificationId) async {
     final _apiResponse = await Client().post(
-      Uri.parse('$apiUrl/Users/DeleteNotifications'),
+      Uri.parse('$apiUrl/User/DeleteNotification'),
       headers: returnUndercoverHeaders(),
     );
 

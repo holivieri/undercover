@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:undercover_mobile/src/repositories/notifications_repository.dart';
+import 'package:undercover_mobile/src/services/notifications_service.dart';
 import 'package:undercover_mobile/src/utils/colors.dart';
 
 import '../../generated/l10n.dart';
 import '../../main.dart';
 import '../blocs/notifications/notifications_bloc.dart';
-import '../utils/font.dart';
 import '../widgets/section_header.dart';
 
 class NotificationsPage extends StatefulWidget {
@@ -17,6 +18,18 @@ class NotificationsPage extends StatefulWidget {
 }
 
 class _NotificationsPageState extends State<NotificationsPage> {
+  late final NotificationsBloc bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    final NotificationsService _notificationService = NotificationsService();
+    final NotificationsRespository _notificationsRespository =
+        NotificationsRespository(_notificationService);
+
+    bloc = NotificationsBloc(_notificationsRespository);
+  }
+
   @override
   Widget build(BuildContext context) {
     return getMyNotifications();
@@ -45,7 +58,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                     itemCount: status.notifications.length,
                     itemBuilder: (_, index) {
                       return Dismissible(
-                        key: ValueKey(status.notifications[index].id),
+                        key: UniqueKey(),
                         background: Container(
                           color: themeDanger,
                           child: const Icon(
@@ -55,6 +68,10 @@ class _NotificationsPageState extends State<NotificationsPage> {
                         ),
                         onDismissed: (DismissDirection direction) {
                           print(status.notifications[index].id);
+                          bloc.add(
+                            DeletingNotification(
+                                status.notifications[index].id),
+                          );
                         },
                         child: Card(
                           shape: RoundedRectangleBorder(
