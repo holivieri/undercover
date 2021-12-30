@@ -18,17 +18,11 @@ class NotificationsPage extends StatefulWidget {
 class _NotificationsPageState extends State<NotificationsPage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: getMyNotifications(),
-      ),
-    );
+    return getMyNotifications();
   }
 
   Widget getMyNotifications() {
-    return Container(
-      height: 1000,
-      width: 800,
+    return SingleChildScrollView(
       child: Column(
         children: [
           Padding(
@@ -41,24 +35,22 @@ class _NotificationsPageState extends State<NotificationsPage> {
             if (status is LoadingNotifications) {
               return const CircularProgressIndicator();
             } else if (status is NotificationsLoaded) {
-              return ListView.builder(itemBuilder: (_, index) {
-                return Container(
-                  height: 400,
-                  width: 800,
-                  padding: const EdgeInsets.all(10),
-                  child: ListTile(
-                    leading: const Icon(FontAwesomeIcons.envelope),
-                    title: Text(
-                      status.notifications[index].title,
-                      style: titleStyle,
-                    ),
-                    subtitle: Text(
-                      status.notifications[index].message,
-                      style: subtitleStyle,
-                    ),
-                  ),
-                );
-              });
+              return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: status.notifications.length,
+                  itemBuilder: (_, index) {
+                    return ListTile(
+                      leading: const Icon(FontAwesomeIcons.envelope),
+                      title: Text(
+                        status.notifications[index].title,
+                        style: titleStyle,
+                      ),
+                      subtitle: Text(
+                        status.notifications[index].message,
+                        style: subtitleStyle,
+                      ),
+                    );
+                  });
             } else {
               return Container(
                 height: 200,
