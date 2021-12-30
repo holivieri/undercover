@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using Undercover.API.Entities;
@@ -27,6 +28,11 @@ namespace Undercover.API.Data
         public override int SaveChanges()
         {
             return base.SaveChanges();
+        }
+
+        public override EntityEntry Entry(object entity)
+        {
+            return base.Entry(entity);
         }
 
         public DbSet<PlacePicture> PlacePictures { get; set; }

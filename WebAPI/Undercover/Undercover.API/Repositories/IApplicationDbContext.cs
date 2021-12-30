@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Undercover.API.Entities;
 
 namespace Undercover.API.Data
@@ -6,6 +7,7 @@ namespace Undercover.API.Data
     public interface IApplicationDbContext
     {
         int SaveChanges();
+        EntityEntry Entry(object entity);
 
         DbSet<Artist> Artists { get; set; }
         DbSet<Concert> Concerts { get; set; }

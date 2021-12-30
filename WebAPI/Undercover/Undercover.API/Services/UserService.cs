@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Undercover.API.Data;
@@ -27,28 +28,40 @@ namespace Undercover.API.Services
 
         public void DeleteNotification(Guid notificationId)
         {
-           var notification = _dbContext.Notifications.FirstOrDefault(x => x.Id == notificationId);
-            if(notification != null)
+            //var notificationDB = _dbContext
+            //                        .Notifications
+            //                        .Include(n => n.User)
+            //                        .Where(n => n.Id == notificationId).FirstOrDefault();
+
+            //Notification newNotification = new Notification
+            //{
+            //    Category = notificationDB.Category,
+            //    CreatedDate = notificationDB.CreatedDate,
+            //    Deleted = true,
+            //    Id = notificationId,
+            //    Message = notificationDB.Message,
+            //    Title = notificationDB.Title,
+            //    User = notificationDB.User,
+            //};
+
+            //_dbContext.Entry(notificationDB).CurrentValues.SetValues(newNotification);
+            //_dbContext.SaveChanges();
+
+
+            var notification = _dbContext.Notifications.Find(notificationId);  //FirstOrDefault(x => x.Id == notificationId);
+            if (notification != null)
             {
                 notification.Deleted = true;
+                _dbContext.Notifications.Attach(notification).Property(p => p.Deleted).IsModified = true;
                 _dbContext.Notifications.Update(notification);
+                _dbContext.SaveChanges();
             }
         }
 
         public List<Notification> GetNotifications(string userId)
         {
-            //var user = _dbContext.Users.Include(x => x.Notifications)
-            //    .Where(u => u.Id == userId.ToString())
-            //    .SingleOrDefault();
-
-            //if(user == null)
-            //{
-            //    return new List<Notification>();
-            //}
-
-            //return user.Notifications;
             return _dbContext.Notifications
-                .Where(n => n.User.Id == userId)
+                .Where(n => n.User.Id == userId && n.Deleted == false)
                 .ToList();
                 
         }
