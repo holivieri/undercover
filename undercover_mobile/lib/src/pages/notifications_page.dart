@@ -44,16 +44,19 @@ class _NotificationsPageState extends State<NotificationsPage> {
                     itemCount: status.notifications.length,
                     itemBuilder: (_, index) {
                       return Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         elevation: 10,
                         child: ListTile(
                           leading: const Icon(FontAwesomeIcons.envelope),
                           title: Text(
                             status.notifications[index].title,
-                            style: titleStyle,
+                            style: const TextStyle(fontSize: 18),
                           ),
                           subtitle: Text(
                             status.notifications[index].message,
-                            style: subtitleStyle,
+                            style: const TextStyle(fontSize: 14),
                           ),
                         ),
                       );
