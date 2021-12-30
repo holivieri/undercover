@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:undercover_mobile/src/utils/colors.dart';
 
 import '../../generated/l10n.dart';
 import '../../main.dart';
@@ -43,20 +44,33 @@ class _NotificationsPageState extends State<NotificationsPage> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: status.notifications.length,
                     itemBuilder: (_, index) {
-                      return Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        elevation: 10,
-                        child: ListTile(
-                          leading: const Icon(FontAwesomeIcons.envelope),
-                          title: Text(
-                            status.notifications[index].title,
-                            style: const TextStyle(fontSize: 18),
+                      return Dismissible(
+                        key: ValueKey(status.notifications[index].id),
+                        background: Container(
+                          color: themeDanger,
+                          child: const Icon(
+                            Icons.delete_forever,
+                            color: Colors.white,
                           ),
-                          subtitle: Text(
-                            status.notifications[index].message,
-                            style: const TextStyle(fontSize: 14),
+                        ),
+                        onDismissed: (DismissDirection direction) {
+                          print(status.notifications[index].id);
+                        },
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          elevation: 10,
+                          child: ListTile(
+                            leading: const Icon(FontAwesomeIcons.envelope),
+                            title: Text(
+                              status.notifications[index].title,
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                            subtitle: Text(
+                              status.notifications[index].message,
+                              style: const TextStyle(fontSize: 14),
+                            ),
                           ),
                         ),
                       );
