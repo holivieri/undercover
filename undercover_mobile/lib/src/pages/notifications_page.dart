@@ -33,24 +33,32 @@ class _NotificationsPageState extends State<NotificationsPage> {
           BlocBuilder<NotificationsBloc, NotificationsState>(
               builder: (context, status) {
             if (status is LoadingNotifications) {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             } else if (status is NotificationsLoaded) {
-              return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: status.notifications.length,
-                  itemBuilder: (_, index) {
-                    return ListTile(
-                      leading: const Icon(FontAwesomeIcons.envelope),
-                      title: Text(
-                        status.notifications[index].title,
-                        style: titleStyle,
-                      ),
-                      subtitle: Text(
-                        status.notifications[index].message,
-                        style: subtitleStyle,
-                      ),
-                    );
-                  });
+              return Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: platformIsNotWeb() ? 10 : 25),
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: status.notifications.length,
+                    itemBuilder: (_, index) {
+                      return Card(
+                        elevation: 10,
+                        child: ListTile(
+                          leading: const Icon(FontAwesomeIcons.envelope),
+                          title: Text(
+                            status.notifications[index].title,
+                            style: titleStyle,
+                          ),
+                          subtitle: Text(
+                            status.notifications[index].message,
+                            style: subtitleStyle,
+                          ),
+                        ),
+                      );
+                    }),
+              );
             } else {
               return Container(
                 height: 200,
