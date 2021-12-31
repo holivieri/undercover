@@ -41,6 +41,13 @@ namespace Undercover.API
                 options.Conventions.Add(new SwaggerConvention());
                 }
             );
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
+
+            });
+
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(
                             Configuration.GetConnectionString("defaultConnectionString")
