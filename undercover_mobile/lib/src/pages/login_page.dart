@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:undercover_mobile/src/services/auth_google_signin_service.dart';
 import 'package:undercover_mobile/src/utils/font.dart';
 import '../../generated/l10n.dart';
 import '../blocs/users/users_bloc.dart';
@@ -172,6 +173,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           onPressed: () {
             print('Google');
+            AuthGoogleSignInService.signInWithGoogle();
           },
           child: const Icon(
             FontAwesomeIcons.google,
