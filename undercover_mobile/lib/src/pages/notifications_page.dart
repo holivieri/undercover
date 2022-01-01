@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:undercover_mobile/src/repositories/notifications_repository.dart';
-import 'package:undercover_mobile/src/services/notifications_service.dart';
-import 'package:undercover_mobile/src/utils/colors.dart';
 
 import '../../generated/l10n.dart';
 import '../../main.dart';
 import '../blocs/notifications/notifications_bloc.dart';
+import '../repositories/notifications_repository.dart';
+import '../services/notifications_service.dart';
+import '../utils/colors.dart';
 import '../widgets/section_header.dart';
 
 class NotificationsPage extends StatefulWidget {
@@ -28,6 +28,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
         NotificationsRespository(_notificationService);
 
     bloc = NotificationsBloc(_notificationsRespository);
+    // ..add(GettingUserNotifications());
   }
 
   @override
