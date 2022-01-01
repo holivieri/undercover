@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Undercover.API.Data;
@@ -28,31 +27,10 @@ namespace Undercover.API.Services
 
         public void DeleteNotification(Guid notificationId)
         {
-            //var notificationDB = _dbContext
-            //                        .Notifications
-            //                        .Include(n => n.User)
-            //                        .Where(n => n.Id == notificationId).FirstOrDefault();
-
-            //Notification newNotification = new Notification
-            //{
-            //    Category = notificationDB.Category,
-            //    CreatedDate = notificationDB.CreatedDate,
-            //    Deleted = true,
-            //    Id = notificationId,
-            //    Message = notificationDB.Message,
-            //    Title = notificationDB.Title,
-            //    User = notificationDB.User,
-            //};
-
-            //_dbContext.Entry(notificationDB).CurrentValues.SetValues(newNotification);
-            //_dbContext.SaveChanges();
-
-
-            var notification = _dbContext.Notifications.Find(notificationId);  //FirstOrDefault(x => x.Id == notificationId);
+            var notification = _dbContext.Notifications.Find(notificationId);  
             if (notification != null)
             {
                 notification.Deleted = true;
-                _dbContext.Notifications.Attach(notification).Property(p => p.Deleted).IsModified = true;
                 _dbContext.Notifications.Update(notification);
                 _dbContext.SaveChanges();
             }

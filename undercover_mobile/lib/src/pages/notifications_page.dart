@@ -27,8 +27,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
     final NotificationsRespository _notificationsRespository =
         NotificationsRespository(_notificationService);
 
-    bloc = NotificationsBloc(_notificationsRespository);
-    // ..add(GettingUserNotifications());
+    bloc = NotificationsBloc(_notificationsRespository)
+      ..add(GettingUserNotifications());
   }
 
   @override
@@ -50,50 +50,58 @@ class _NotificationsPageState extends State<NotificationsPage> {
             if (status is LoadingNotifications) {
               return const Center(child: CircularProgressIndicator());
             } else if (status is NotificationsLoaded) {
-              return Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: platformIsNotWeb() ? 10 : 25),
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: status.notifications.length,
-                    itemBuilder: (_, index) {
-                      return Dismissible(
-                        key: UniqueKey(),
-                        background: Container(
-                          color: themeDanger,
-                          child: const Icon(
-                            Icons.delete_forever,
-                            color: Colors.white,
-                          ),
-                        ),
-                        onDismissed: (DismissDirection direction) {
-                          print(status.notifications[index].id);
-                          bloc.add(
-                            DeletingNotification(
-                                status.notifications[index].id),
-                          );
-                        },
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          elevation: 10,
-                          child: ListTile(
-                            leading: const Icon(FontAwesomeIcons.envelope),
-                            title: Text(
-                              status.notifications[index].title,
-                              style: const TextStyle(fontSize: 18),
-                            ),
-                            subtitle: Text(
-                              status.notifications[index].message,
-                              style: const TextStyle(fontSize: 14),
+              if (status.notifications.isNotEmpty) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: platformIsNotWeb() ? 10 : 25),
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: status.notifications.length,
+                      itemBuilder: (_, index) {
+                        return Dismissible(
+                          key: UniqueKey(),
+                          background: Container(
+                            color: themeDanger,
+                            child: const Icon(
+                              Icons.delete_forever,
+                              color: Colors.white,
                             ),
                           ),
-                        ),
-                      );
-                    }),
-              );
+                          onDismissed: (DismissDirection direction) {
+                            print(status.notifications[index].id);
+                            bloc.add(
+                              DeletingNotification(
+                                  status.notifications[index].id),
+                            );
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            elevation: 10,
+                            child: ListTile(
+                              leading: const Icon(FontAwesomeIcons.envelope),
+                              title: Text(
+                                status.notifications[index].title,
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                              subtitle: Text(
+                                status.notifications[index].message,
+                                style: const TextStyle(fontSize: 14),
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                );
+              } else {
+                return Center(
+                  child: Text(
+                    S.of(context).noNotifications,
+                  ),
+                );
+              }
             } else {
               return Container(
                 height: 200,
