@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:undercover_mobile/src/pages/login_page.dart';
 
 import '../generated/l10n.dart';
 import 'models/user_preferences.dart';
