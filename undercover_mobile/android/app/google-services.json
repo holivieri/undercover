@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "961458927415",
+    "project_id": "undercover-333401",
+    "storage_bucket": "undercover-333401.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961458927415:android:df3456b770041afaf44cb2",
+        "android_client_info": {
+          "package_name": "com.arielsanchez.undercover"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961458927415-k7o6m5du055ln0i5tup8tn8ijp1che5s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.arielsanchez.undercover",
+            "certificate_hash": "f12660fd21dd1cbfeed3d5048fa932432c1670c3"
+          }
+        },
+        {
+          "client_id": "961458927415-5sd88kr66f9p27cjste48nck3koa6b1m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7YP_kqrPVRzluxAohbAcPj350_BsLwcc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "961458927415-5sd88kr66f9p27cjste48nck3koa6b1m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
