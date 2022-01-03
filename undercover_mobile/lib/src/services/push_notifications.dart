@@ -33,16 +33,16 @@ class PushNotificationsService {
 
   static Future _onBackgroundHandler(RemoteMessage message) async {
     print('background handler: ${message.messageId}');
-    _messageStream.add(message.notification?.title ?? 'Sin Titulo');
+    _messageStream.add(message.notification?.body ?? 'Sin Titulo');
   }
 
   static Future _onMessageHandler(RemoteMessage message) async {
     print('_onMessageHandler handler: ${message.messageId}');
-    _messageStream.add(message.notification?.title ?? 'Sin Titulo');
+    _messageStream.add(message.notification?.body ?? 'Sin Titulo');
   }
 
   static Future _onMessageOpenApp(RemoteMessage message) async {
     print('_onMessageOpenApp handler: ${message.messageId}');
-    _messageStream.add(message.notification?.title ?? 'Sin Titulo');
+    _messageStream.add(message.notification?.body ?? 'Sin Titulo');
   }
 }
