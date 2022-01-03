@@ -25,6 +25,7 @@ import 'src/services/concerts_service.dart';
 import 'src/services/genres_service.dart';
 import 'src/services/notifications_service.dart';
 import 'src/services/places_service.dart';
+import 'src/services/push_notifications.dart';
 import 'src/services/user_service.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
@@ -59,6 +60,10 @@ Future<void> main() async {
   await userPreferences.init();
 
   await settingsController.loadSettings();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await PushNotificationsService.initializeApp();
+
   runApp(
     MultiBlocProvider(
       providers: [
