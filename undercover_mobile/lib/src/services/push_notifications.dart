@@ -13,6 +13,23 @@ class PushNotificationsService {
     print('================ Device TOKEN ================');
     print(token);
 
+    //Handlers
+    FirebaseMessaging.onBackgroundMessage(_onBackgroundHandler);
+    FirebaseMessaging.onMessage.listen(_onMessageHandler);
+    FirebaseMessaging.onMessageOpenedApp.listen(_onMessageOpenApp);
+
     //Local Notifications
+  }
+
+  static Future<void> _onBackgroundHandler(RemoteMessage message) async {
+    print('background handler: ${message.messageId}');
+  }
+
+  static Future<void> _onMessageHandler(RemoteMessage message) async {
+    print('_onMessageHandler handler: ${message.messageId}');
+  }
+
+  static Future<void> _onMessageOpenApp(RemoteMessage message) async {
+    print('_onMessageOpenApp handler: ${message.messageId}');
   }
 }
