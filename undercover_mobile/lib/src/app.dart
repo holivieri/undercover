@@ -10,6 +10,7 @@ import 'repositories/artists_repository.dart';
 import 'routes/routes.dart';
 import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
+import 'services/push_notifications.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 import 'themes/theme_provider.dart';
@@ -29,9 +30,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  final GlobalKey<ScaffoldMessengerState> messengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+
   @override
   void initState() {
     super.initState();
+    PushNotificationsService.messageStream.listen((message) {
+      const snackbar = SnackBar(
+        content: Text('Tenes una nueva notificación'),
+        backgroundColor: Colors.red,
+      );
+      messengerKey.currentState?.showSnackBar(snackbar);
+    });
   }
 
   @override
@@ -46,6 +58,8 @@ class _MyAppState extends State<MyApp> {
           create: (_) => languageProvider,
           child: MaterialApp(
             // restorationScopeId: 'app',
+            navigatorKey: navigatorKey,
+            scaffoldMessengerKey: messengerKey,
             debugShowCheckedModeBanner: false,
             localizationsDelegates: const [
               S.delegate,
