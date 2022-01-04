@@ -14,5 +14,8 @@ namespace Undercover.API.Models
 
         public string UserRole { get; set; }
 
+        public string DeviceToken { get; set; }
+        public string Platform { get; set; }
+
     }
 }

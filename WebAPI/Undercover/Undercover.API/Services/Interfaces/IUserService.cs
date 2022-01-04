@@ -9,5 +9,6 @@ namespace Undercover.API.Services
         List<Notification> GetNotifications(string userId);
         void DeleteNotification(Guid notificationId);
         void CreateNotification(Notification notification, Guid userId);
+        void SaveDevice(Device device);
     }
 }

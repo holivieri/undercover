@@ -18,5 +18,7 @@ namespace Undercover.API.Data
 
         DbSet<User> Users { get; set; }
 
+        DbSet<Device> Devices { get; set; }
+
     }
 }

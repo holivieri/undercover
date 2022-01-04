@@ -41,7 +41,20 @@ namespace Undercover.API.Services
             return _dbContext.Notifications
                 .Where(n => n.User.Id == userId && n.Deleted == false)
                 .ToList();
-                
+        }
+
+        public void SaveDevice(Device device)
+        {
+            var deviceDB = _dbContext.Devices.Find(device.Token);
+            if (deviceDB != null)
+            {
+                deviceDB.LastAccess = DateTime.UtcNow;
+            }
+            else
+            {
+                _dbContext.Devices.Add(device);
+            }
+            _dbContext.SaveChanges();
         }
     }
 }

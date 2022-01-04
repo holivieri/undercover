@@ -39,6 +39,9 @@ namespace Undercover.API.Data
         public DbSet<Notification> Notifications { get; set; }
 
         public DbSet<User> Users { get; set; }
+       
+        public DbSet<Device> Devices { get; set; }
+       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
