@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -17,6 +16,7 @@ using System.Threading.Tasks;
 using Undercover.API.DTOs;
 using Undercover.API.Entities;
 using Undercover.API.Models;
+using Undercover.API.Services;
 
 namespace Undercover.API.Controllers.V1
 {
@@ -28,15 +28,18 @@ namespace Undercover.API.Controllers.V1
         private readonly SignInManager<User> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
+        private readonly IUserService _userService;
 
         public AuthenticateController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IUserService userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _userService = userService;
         }
 
         [HttpPost("SignUp")]
@@ -89,6 +92,16 @@ namespace Undercover.API.Controllers.V1
             if (result.Succeeded)
             {
                 var user = await _userManager.FindByEmailAsync(UserModel.Email);
+                Device device = new Device
+                {
+                    LastAccess = DateTime.UtcNow,
+                    Platform = UserModel.Platform,
+                    Token = UserModel.DeviceToken,
+                    UserEmail  = UserModel.Email,
+                    UserId = user.Id,
+                };
+                SaveDeviceInfo(device);
+
                 return BuildToken(UserModel, user.Id).Result;
             }
             else
@@ -146,6 +159,17 @@ namespace Undercover.API.Controllers.V1
             return Ok(roles);
         }
 
+        private void SaveDeviceInfo(Device device)
+        {
+            try
+            {
+                _userService.SaveDevice(device);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error saving Device data.", ex);
+            }
+        }
         private async Task<AuthenticateResponse> BuildToken(UserModel UserModel, string userId)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:key"]));

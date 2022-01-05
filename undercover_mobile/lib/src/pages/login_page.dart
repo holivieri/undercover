@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:undercover_mobile/src/services/auth_google_signin_service.dart';
-import 'package:undercover_mobile/src/utils/font.dart';
+
 import '../../generated/l10n.dart';
 import '../blocs/users/users_bloc.dart';
 import '../models/user_preferences.dart';
 import '../repositories/user_repository.dart';
 import '../routes/routes.dart';
+import '../services/auth_google_signin_service.dart';
 import '../services/user_service.dart';
 import '../utils/app_colors.dart';
 import '../utils/colors.dart';
+import '../utils/font.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -142,10 +143,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget getSocialLoginButtons() {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(10),
+        const Padding(
+          padding: EdgeInsets.all(10),
           child: Text(
-            S.of(context).or,
+            'Or', //S.of(context).or,
             style: subtitleStyle,
           ),
         ),

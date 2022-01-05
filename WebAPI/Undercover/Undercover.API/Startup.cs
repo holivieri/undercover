@@ -41,6 +41,13 @@ namespace Undercover.API
                 options.Conventions.Add(new SwaggerConvention());
                 }
             );
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
+
+            });
+
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(
                             Configuration.GetConnectionString("defaultConnectionString")
@@ -136,6 +143,7 @@ namespace Undercover.API
             services.AddTransient<IConcertService, ConcertService>();
             services.AddTransient<ITwitterService, TwitterService>();
             services.AddTransient<IYoutubeService, YoutubeService>();
+            services.AddTransient<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

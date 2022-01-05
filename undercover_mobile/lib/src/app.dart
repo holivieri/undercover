@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:undercover_mobile/src/pages/login_page.dart';
 
 import '../generated/l10n.dart';
 import 'models/user_preferences.dart';
@@ -11,6 +11,7 @@ import 'repositories/artists_repository.dart';
 import 'routes/routes.dart';
 import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
+import 'services/push_notifications.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 import 'themes/theme_provider.dart';
@@ -30,9 +31,61 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  final GlobalKey<ScaffoldMessengerState> messengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+
+  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+
   @override
   void initState() {
     super.initState();
+    //local notifications
+
+    const initilizationSettingsAndroid =
+        AndroidInitializationSettings('app_icon');
+
+    const initizlizationSettingsIOS = IOSInitializationSettings();
+
+    const initializationSettings = InitializationSettings(
+      android: initilizationSettingsAndroid,
+      iOS: initizlizationSettingsIOS,
+    );
+
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+    );
+
+    // push notifications
+    PushNotificationsService.messageStream.listen((message) {
+      /* const snackbar = SnackBar(
+        content: Text('Tenes una nueva notificación'),
+        backgroundColor: Colors.red,
+      );
+      messengerKey.currentState?.showSnackBar(snackbar); */
+      showNotificationAlert(message);
+    });
+  }
+
+  Future showNotificationAlert(String? payload) async {
+    const androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'your channel id', 'your channel name',
+        importance: Importance.max, priority: Priority.high);
+
+    const iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    const platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+      iOS: iOSPlatformChannelSpecifics,
+    );
+
+    await flutterLocalNotificationsPlugin.show(
+      DateTime.now().millisecond,
+      'Nuevo Mensaje',
+      payload,
+      platformChannelSpecifics,
+      payload: payload ?? '',
+    );
   }
 
   @override
@@ -47,6 +100,8 @@ class _MyAppState extends State<MyApp> {
           create: (_) => languageProvider,
           child: MaterialApp(
             // restorationScopeId: 'app',
+            navigatorKey: navigatorKey,
+            scaffoldMessengerKey: messengerKey,
             debugShowCheckedModeBanner: false,
             localizationsDelegates: const [
               S.delegate,
