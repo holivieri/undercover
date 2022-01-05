@@ -65,6 +65,21 @@ namespace Undercover.API.Controllers.V1
             }
         }
 
+        [HttpPost("SendPushNotification")]
+        public ActionResult SendPushNotification([FromBody] string[] emails)
+        {
+            try
+            {
+                //TODO Terminar
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
 
     }
 }
