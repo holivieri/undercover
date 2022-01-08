@@ -58,25 +58,37 @@ namespace Undercover.API.Services
                 .ToList();
         }
 
-        public bool SetAssistance(Guid concertId, Guid userId)
+        public bool SetAssistance(Guid concertId, string userId, bool assistance)
         {
             var concert = _dbContext.Concerts.Find(concertId);
             var user = _dbContext.Users.Find(userId.ToString());
 
             if (concert != null && user != null)
             {
-                Attendant attendant = new Attendant {
+                Attendant attendant = new Attendant
+                {
                     ConcertId = concertId,
                     UserId = userId.ToString(),
                     User = user,
                 };
-                concert.Attendants = new List<Attendant>();
-                concert.Attendants.Add(attendant);
 
+                if (assistance)
+                {
+                    var foundRecord = _dbContext.Attendants.Where(a => a.UserId == userId && a.ConcertId == concertId).FirstOrDefault();
+                    if (foundRecord == null)
+                    {
+                        concert.Attendants = new List<Attendant>();
+                        concert.Attendants.Add(attendant);
+                        _dbContext.SaveChanges();
+                    }
+                }
+                else
+                {
+                    _dbContext.Attendants.Remove(attendant);
+                    _dbContext.SaveChanges();
+                }
             }
-            _dbContext.SaveChanges();
-            return true;
-
+            return assistance;
         }
 
 

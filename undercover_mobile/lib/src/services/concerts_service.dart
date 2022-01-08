@@ -48,4 +48,22 @@ class ConcertsService {
         Concert.fromJson(_record)
     ];
   }
+
+  Future<bool> updateAssistance(
+      {required String concertId, required bool attendance}) async {
+    final _apiResponse = await Client().post(
+      Uri.parse(
+          '$apiUrl/Concert/SetAssistance?concertId=$concertId&attendance=$attendance'),
+      headers: returnUndercoverHeaders(),
+    );
+
+    if (_apiResponse.statusCode != 200) {
+      assert(
+        _apiResponse.statusCode == 200,
+        'Concert endpoint is NOT working',
+      );
+      return false;
+    }
+    return _apiResponse.body.toLowerCase() == 'true';
+  }
 }

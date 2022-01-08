@@ -16,9 +16,10 @@ class NextConcertsLoaded extends ConcertsState {
 class LoadingConcert extends ConcertsState {}
 
 class ConcertLoaded extends ConcertsState {
-  ConcertLoaded(this.concert);
+  ConcertLoaded({required this.concert, required this.attendance});
 
   final Concert concert;
+  final bool attendance;
 }
 
 class ConcertError extends ConcertsState {
