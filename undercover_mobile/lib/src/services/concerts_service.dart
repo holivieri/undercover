@@ -66,4 +66,20 @@ class ConcertsService {
     }
     return _apiResponse.body.toLowerCase() == 'true';
   }
+
+  Future<bool> checkUserAttendance({required String concertId}) async {
+    final _apiResponse = await Client().get(
+      Uri.parse('$apiUrl/Concert/checkUserAttendance?concertId=$concertId'),
+      headers: returnUndercoverHeaders(),
+    );
+
+    if (_apiResponse.statusCode != 200) {
+      assert(
+        _apiResponse.statusCode == 200,
+        'Concert endpoint is NOT working',
+      );
+      return false;
+    }
+    return _apiResponse.body.toLowerCase() == 'true';
+  }
 }

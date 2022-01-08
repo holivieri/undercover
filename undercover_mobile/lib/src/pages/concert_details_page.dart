@@ -26,7 +26,6 @@ class ConcertDetailsPage extends StatefulWidget {
 
 class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
   late final ConcertsBloc concertBloc;
-  late final ConcertsBloc concertAssistanceBloc;
   Color _buttonColor = themeDanger;
   bool _assistance = false;
 
@@ -39,10 +38,6 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
     concertBloc = ConcertsBloc(repository)
       ..add(
         LoadConcert(widget.concertId),
-      );
-    concertAssistanceBloc = ConcertsBloc(repository)
-      ..add(
-        ConcertInitial(),
       );
   }
 
@@ -169,6 +164,7 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
                     if (state is ConcertLoaded) {
                       if (state.attendance) {
                         _assistance = true;
+                        _buttonColor = greenButtonColor;
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: const [

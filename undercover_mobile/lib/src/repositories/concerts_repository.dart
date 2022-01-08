@@ -39,4 +39,8 @@ class ConcertsRepository {
       attendance: attendance,
     );
   }
+
+  Future<bool> checkUserAttendance({required String concertId}) async {
+    return _concertsService.checkUserAttendance(concertId: concertId);
+  }
 }

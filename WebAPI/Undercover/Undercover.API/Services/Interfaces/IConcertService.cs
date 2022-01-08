@@ -12,5 +12,7 @@ namespace Undercover.API.Services
         Concert Get(Guid id);
 
         bool SetAssistance(Guid concertId, string userId, bool assistance);
+
+        bool CheckUserAttendance(string userId, Guid concertId);
     }
 }

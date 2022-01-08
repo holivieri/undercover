@@ -91,6 +91,11 @@ namespace Undercover.API.Services
             return assistance;
         }
 
+        public bool CheckUserAttendance(string userId, Guid concertId)
+        {
+            if (concertId == Guid.Empty) return false;
+            return _dbContext.Attendants.Where(a => a.UserId == userId && a.ConcertId == concertId).FirstOrDefault() != null;
+        }
 
     }
 }
