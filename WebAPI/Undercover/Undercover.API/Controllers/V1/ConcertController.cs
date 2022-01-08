@@ -74,5 +74,20 @@ namespace Undercover.API.Controllers.V1
             }
         }
 
+        [HttpPost("SetAssistance")]
+        public ActionResult SetAssistance(Guid userId, Guid concertId)
+        {
+            try
+            {
+                var result = _concertService.SetAssistance(concertId, userId);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error setting assistance", ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error setting assistance");
+            }
+        }
     }
 }

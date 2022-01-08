@@ -39,6 +39,7 @@ namespace Undercover.API.Services
                 .Include(z => z.Artist).ThenInclude(z => z.Posts)
                 .Include(c => c.Artist).ThenInclude(x => x.Genres)
                 .Include(c => c.Place).ThenInclude(x => x.Country)
+                .Include(c => c.Attendants).ThenInclude(x => x.User)
                 .Where(c => c.Date >= DateTime.UtcNow)
                 .OrderBy(c => c.Date)
                 .ToList();
@@ -55,6 +56,27 @@ namespace Undercover.API.Services
                 .Where(c => c.Date >= DateTime.UtcNow && c.Place.City == city)
                 .OrderBy(c => c.Date)
                 .ToList();
+        }
+
+        public bool SetAssistance(Guid concertId, Guid userId)
+        {
+            var concert = _dbContext.Concerts.Find(concertId);
+            var user = _dbContext.Users.Find(userId.ToString());
+
+            if (concert != null && user != null)
+            {
+                Attendant attendant = new Attendant {
+                    ConcertId = concertId,
+                    UserId = userId.ToString(),
+                    User = user,
+                };
+                concert.Attendants = new List<Attendant>();
+                concert.Attendants.Add(attendant);
+
+            }
+            _dbContext.SaveChanges();
+            return true;
+
         }
 
 

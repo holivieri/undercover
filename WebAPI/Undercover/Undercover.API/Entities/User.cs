@@ -9,5 +9,7 @@ namespace Undercover.API.Entities
 
         public virtual List<Device> Devices { get; set; }
 
+        public List<Attendant> Attendants { get; set; }
+
     }
 }

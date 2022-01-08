@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Undercover.API.Entities
 {
@@ -20,6 +18,7 @@ namespace Undercover.API.Entities
         [Required]
         public virtual Artist Artist { get; set; }
 
+        public List<Attendant> Attendants { get; set; }
 
     }
 }
