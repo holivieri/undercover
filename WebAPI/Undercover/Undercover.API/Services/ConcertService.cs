@@ -39,6 +39,7 @@ namespace Undercover.API.Services
                 .Include(z => z.Artist).ThenInclude(z => z.Posts)
                 .Include(c => c.Artist).ThenInclude(x => x.Genres)
                 .Include(c => c.Place).ThenInclude(x => x.Country)
+                .Include(c => c.Attendants).ThenInclude(x => x.User)
                 .Where(c => c.Date >= DateTime.UtcNow)
                 .OrderBy(c => c.Date)
                 .ToList();
@@ -57,6 +58,44 @@ namespace Undercover.API.Services
                 .ToList();
         }
 
+        public bool SetAssistance(Guid concertId, string userId, bool assistance)
+        {
+            var concert = _dbContext.Concerts.Find(concertId);
+            var user = _dbContext.Users.Find(userId.ToString());
+
+            if (concert != null && user != null)
+            {
+                Attendant attendant = new Attendant
+                {
+                    ConcertId = concertId,
+                    UserId = userId.ToString(),
+                    User = user,
+                };
+
+                if (assistance)
+                {
+                    var foundRecord = _dbContext.Attendants.Where(a => a.UserId == userId && a.ConcertId == concertId).FirstOrDefault();
+                    if (foundRecord == null)
+                    {
+                        concert.Attendants = new List<Attendant>();
+                        concert.Attendants.Add(attendant);
+                        _dbContext.SaveChanges();
+                    }
+                }
+                else
+                {
+                    _dbContext.Attendants.Remove(attendant);
+                    _dbContext.SaveChanges();
+                }
+            }
+            return assistance;
+        }
+
+        public bool CheckUserAttendance(string userId, Guid concertId)
+        {
+            if (concertId == Guid.Empty) return false;
+            return _dbContext.Attendants.Where(a => a.UserId == userId && a.ConcertId == concertId).FirstOrDefault() != null;
+        }
 
     }
 }

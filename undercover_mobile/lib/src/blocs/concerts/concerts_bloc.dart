@@ -18,9 +18,29 @@ class ConcertsBloc extends Bloc<ConcertsEvent, ConcertsState> {
       if (concert == null) {
         emit(ConcertError('We could not find the concert'));
       } else {
-        emit(ConcertLoaded(concert));
+        final result = await concertsRepository.checkUserAttendance(
+          concertId: event.concertId,
+        );
+
+        emit(ConcertLoaded(concert: concert, attendance: result));
       }
     });
+    on<UpdateAssistance>((event, emit) async {
+      final result = await concertsRepository.updateAssistance(
+        concertId: event.concertId,
+        attendance: event.attendance,
+      );
+      final concert = await concertsRepository.getConcert(event.concertId);
+      if (concert == null) {
+        emit(ConcertError('We could not find the concert'));
+      } else {
+        emit(ConcertLoaded(
+          concert: concert,
+          attendance: result,
+        ));
+      }
+    });
+    on<ConcertInitial>((event, emit) {});
   }
 
   final ConcertsRepository concertsRepository;

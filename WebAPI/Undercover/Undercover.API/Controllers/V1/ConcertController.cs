@@ -74,5 +74,35 @@ namespace Undercover.API.Controllers.V1
             }
         }
 
+        [HttpPost("SetAssistance")]
+        public ActionResult SetAssistance(Guid concertId, bool attendance)
+        {
+            try
+            {
+                string userId = "9a9c3f4b-240d-4dde-8d93-c95c52a27f51"; //Server //TODO take this one from Token
+                
+               // string userId = "9a9c3f4b-240d-4dde-8d93-c95c52a27f51"; //Local //TODO take this one from Token
+                
+                var result = _concertService.SetAssistance(concertId, userId, attendance);
+
+                return Ok(attendance);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error setting assistance", ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error setting assistance");
+            }
+        }
+
+        [HttpGet("CheckUserAttendance")]
+        public ActionResult<bool> CheckUserAttendance(Guid concertId)
+        {
+            string userId = "9a9c3f4b-240d-4dde-8d93-c95c52a27f51"; //Server //TODO take this one from Token
+
+            // string userId = "9a9c3f4b-240d-4dde-8d93-c95c52a27f51"; //Local //TODO take this one from Token
+
+           return Ok(_concertService.CheckUserAttendance(userId, concertId));
+        }
+
     }
 }
