@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../generated/l10n.dart';
 import '../blocs/concerts/concerts_bloc.dart';
 import '../models/concert_model.dart';
 import '../repositories/concerts_repository.dart';
@@ -46,9 +45,7 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
     return BlocBuilder<ConcertsBloc, ConcertsState>(
       bloc: concertBloc,
       builder: (context, state) {
-        if (state is LoadingConcert) {
-          return const CircularProgressIndicator();
-        } else if (state is ConcertLoaded) {
+        if (state is ConcertLoaded) {
           return Scaffold(
             appBar: AppBar(
               leading: const BackArrowButton(),
@@ -72,8 +69,8 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
               backgroundColor: Colors.transparent,
             ),
             extendBodyBehindAppBar: true,
-            body: Center(
-              child: Text(S.of(context).errorConcertNotFound),
+            body: const Center(
+              child: CircularProgressIndicator(),
             ),
           );
         }
@@ -165,6 +162,7 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
                       if (state.attendance) {
                         _assistance = true;
                         _buttonColor = greenButtonColor;
+
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: const [
@@ -175,6 +173,7 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
                       } else {
                         _assistance = false;
                         _buttonColor = Colors.red;
+
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: const [
