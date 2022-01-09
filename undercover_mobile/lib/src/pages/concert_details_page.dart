@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../generated/l10n.dart';
 import '../blocs/concerts/concerts_bloc.dart';
 import '../models/concert_model.dart';
 import '../repositories/concerts_repository.dart';
@@ -26,7 +25,6 @@ class ConcertDetailsPage extends StatefulWidget {
 
 class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
   late final ConcertsBloc concertBloc;
-  Color _buttonColor = themeDanger;
   bool _assistance = false;
 
   @override
@@ -46,9 +44,7 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
     return BlocBuilder<ConcertsBloc, ConcertsState>(
       bloc: concertBloc,
       builder: (context, state) {
-        if (state is LoadingConcert) {
-          return const CircularProgressIndicator();
-        } else if (state is ConcertLoaded) {
+        if (state is ConcertLoaded) {
           return Scaffold(
             appBar: AppBar(
               leading: const BackArrowButton(),
@@ -72,8 +68,8 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
               backgroundColor: Colors.transparent,
             ),
             extendBodyBehindAppBar: true,
-            body: Center(
-              child: Text(S.of(context).errorConcertNotFound),
+            body: const Center(
+              child: CircularProgressIndicator(),
             ),
           );
         }
@@ -144,52 +140,54 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
               ],
             ),
             const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () {
-                concertBloc.add(UpdateAssistance(
-                  attendance: !_assistance,
-                  concertId: widget.concertId,
-                ));
-                _assistance = !_assistance;
-                if (_assistance) {
-                  _buttonColor = greenButtonColor;
-                } else {
-                  _buttonColor = themeDanger;
-                }
-              },
-              style: ElevatedButton.styleFrom(primary: _buttonColor),
-              child: BlocBuilder<ConcertsBloc, ConcertsState>(
-                  bloc: concertBloc,
-                  builder: (context, state) {
-                    if (state is ConcertLoaded) {
-                      if (state.attendance) {
-                        _assistance = true;
-                        _buttonColor = greenButtonColor;
-                        return Row(
+            BlocBuilder<ConcertsBloc, ConcertsState>(
+                bloc: concertBloc,
+                builder: (context, state) {
+                  if (state is ConcertLoaded) {
+                    if (state.attendance) {
+                      _assistance = true;
+                      return ElevatedButton(
+                        onPressed: () {
+                          concertBloc.add(UpdateAssistance(
+                            attendance: !_assistance,
+                            concertId: widget.concertId,
+                          ));
+                          _assistance = !_assistance;
+                        },
+                        style:
+                            ElevatedButton.styleFrom(primary: greenButtonColor),
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: const [
                             Text('Asistire'),
                             Icon(Icons.thumb_up),
                           ],
-                        );
-                      } else {
-                        _assistance = false;
-                        _buttonColor = Colors.red;
-                        return Row(
+                        ),
+                      );
+                    } else {
+                      _assistance = false;
+                      return ElevatedButton(
+                        onPressed: () {
+                          concertBloc.add(UpdateAssistance(
+                            attendance: !_assistance,
+                            concertId: widget.concertId,
+                          ));
+                          _assistance = !_assistance;
+                        },
+                        style: ElevatedButton.styleFrom(primary: themeDanger),
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: const [
                             Text('NO Asistire'),
                             Icon(Icons.thumb_down),
                           ],
-                        );
-                      }
-                    } else if (state is LoadingConcert) {
-                      return const CircularProgressIndicator();
-                    } else {
-                      return const Text('¿Asistire?');
+                        ),
+                      );
                     }
-                  }),
-            ),
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                }),
           ],
         ),
       ),
