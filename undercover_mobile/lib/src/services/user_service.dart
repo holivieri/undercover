@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 import '../errors/login_error.dart';
-import '../models/user_model.dart';
+import '../models/login_response_model.dart';
 import '../utils/http.dart';
 
 class UserService {
@@ -33,7 +33,7 @@ class UserService {
           code: '400', description: 'Invalid username or password');
     }
 
-    final User user = User.fromJson(
+    final LoginResponse user = LoginResponse.fromJson(
       json.decode(
         _apiResponse.body,
       ),

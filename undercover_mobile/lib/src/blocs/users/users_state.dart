@@ -10,7 +10,7 @@ class ValidatingUser extends UsersState {}
 class UserIsValidated extends UsersState {
   UserIsValidated(this.user);
 
-  final User user;
+  final LoginResponse user;
 }
 
 class ValidateError extends UsersState {

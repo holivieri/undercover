@@ -79,6 +79,26 @@ namespace Undercover.API.Controllers.V1
                 throw;
             }
         }
+        [HttpGet("GetUser")]
+        public ActionResult GetUser()
+        {
+            try
+            {
+                string userId = "9a9c3f4b-240d-4dde-8d93-c95c52a27f51"; //Server //TODO take this one from Token
+
+                // string userId = "9a9c3f4b-240d-4dde-8d93-c95c52a27f51"; //Local //TODO take this one from Token
+
+                var user = _userService.GetUser(userId);
+
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error on Get User", ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error on Get User");
+            }
+            
+        }
 
 
     }

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../models/user_model.dart';
+import '../../models/login_response_model.dart';
 import '../../repositories/user_repository.dart';
 
 part 'users_event.dart';
@@ -12,7 +12,7 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
     on<ValidateUser>(
       (event, emit) async {
         final user = await userRepository.login(event.userName, event.password);
-        if (user is User) {
+        if (user is LoginResponse) {
           emit(UserIsValidated(user));
         } else {
           emit(ValidateError(user.toString()));
