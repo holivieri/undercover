@@ -40,7 +40,9 @@ class _UserPreferencesPageState extends State<UserPreferencesPage> {
             Text(S.of(context).darkMode),
             Switch.adaptive(
               value: themeProvider.isDarkMode,
-              onChanged: themeProvider.toggleTheme,
+              onChanged: (value) {
+                themeProvider.toggleTheme(isOn: value);
+              },
             ),
           ],
         ),

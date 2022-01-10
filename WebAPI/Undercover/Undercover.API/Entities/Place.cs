@@ -54,6 +54,8 @@ namespace Undercover.API.Entities
 
         public List<PlacePicture> Pictures { get; set; }
 
+        public List<User> Users { get; set; }
+
         [Required]
         public long Likes { get; set; }
 

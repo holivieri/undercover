@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Undercover.API.Data;
@@ -55,6 +56,14 @@ namespace Undercover.API.Services
                 _dbContext.Devices.Add(device);
             }
             _dbContext.SaveChanges();
+        }
+
+        public User GetUser(string userId)
+        {
+           return _dbContext.Users
+                .Include(u => u.MyArtists)
+                .Include(u => u.MyPlaces)
+                .Where(u => u.Id == userId).FirstOrDefault();
         }
     }
 }

@@ -31,6 +31,9 @@ namespace Undercover.API.Entities
 
         public List<ArtistPost> Posts { get; set; }
 
+        public List<User> Users { get; set; }
+
+
 
         [Required]
         public long Followers { get; set; }
@@ -56,8 +59,5 @@ namespace Undercover.API.Entities
         
         [StringLength(300)]
         public string ManagerContact { get; set; }
-
-
-
     }
 }

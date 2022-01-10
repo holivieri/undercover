@@ -60,7 +60,7 @@ namespace Undercover.API.Data
                 .HasOne(a => a.Concert)
                 .WithMany(c => c.Attendants)
                 .HasForeignKey(a => a.ConcertId);
-
+            ////////////////////
 
             //modelBuilder.Entity<ArtistGenre>()
             //    .HasKey(ag => new { ag.ArtistId, ag.GenreId });
