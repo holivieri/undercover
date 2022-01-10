@@ -55,8 +55,6 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
             body: Container(
               height: double.infinity,
               width: double.infinity,
-              decoration:
-                  const BoxDecoration(gradient: themeBackgroundGradient),
               child: mainBody(state.concert),
             ),
           );
@@ -90,10 +88,17 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
   }
 
   Widget getConcertCoverPicture(Concert concert) {
-    return Container(
-      width: double.infinity,
-      height: 400,
-      child: Image.network(concert.artist!.pictureUrl!),
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
+      child: Container(
+        width: double.infinity,
+        height: 300,
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: Image.network(concert.artist!.pictureUrl!),
+        ),
+      ),
     );
   }
 

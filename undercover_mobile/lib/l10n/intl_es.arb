@@ -15,6 +15,7 @@
     "langEnglish": "Ingles",
     "langSpanish": "Español",
     "logIn": "Log In",
+    "message": "Mensaje",
     "myBands": "Vamos las Bandas",
     "myNotifications": "Mis Notificaciones",
     "myPlaces": "Bares y Fondas",
@@ -28,6 +29,7 @@
     "search": "Buscar",
     "select": "Seleccionar",
     "selectLanguage": "Seleccione Idioma",
+    "title": "Titulo",
     "tweets": "Tweets",
     "videos": "Videos"
 }

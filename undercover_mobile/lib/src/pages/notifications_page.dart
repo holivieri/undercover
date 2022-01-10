@@ -9,6 +9,7 @@ import '../repositories/notifications_repository.dart';
 import '../services/notifications_service.dart';
 import '../utils/colors.dart';
 import '../widgets/section_header.dart';
+import 'notification_detail_page.dart';
 
 class NotificationsPage extends StatefulWidget {
   const NotificationsPage({Key? key}) : super(key: key);
@@ -75,20 +76,35 @@ class _NotificationsPageState extends State<NotificationsPage> {
                                   status.notifications[index].id),
                             );
                           },
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            elevation: 10,
-                            child: ListTile(
-                              leading: const Icon(FontAwesomeIcons.envelope),
-                              title: Text(
-                                status.notifications[index].title,
-                                style: const TextStyle(fontSize: 18),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => NotificationDetailPage(
+                                    messageTitle:
+                                        status.notifications[index].title,
+                                    messageDescription:
+                                        status.notifications[index].message,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                              subtitle: Text(
-                                status.notifications[index].message,
-                                style: const TextStyle(fontSize: 14),
+                              elevation: 10,
+                              child: ListTile(
+                                leading: const Icon(FontAwesomeIcons.envelope),
+                                title: Text(
+                                  status.notifications[index].title,
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                                subtitle: Text(
+                                  status.notifications[index].message,
+                                  style: const TextStyle(fontSize: 14),
+                                ),
                               ),
                             ),
                           ),

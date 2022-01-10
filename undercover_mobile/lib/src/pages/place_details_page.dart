@@ -148,15 +148,16 @@ class _PlaceDetailsPageState extends State<PlaceDetailsPage> {
       children: [
         Expanded(
           child: Container(
-              padding: const EdgeInsets.all(8),
-              height: 600,
-              width: 300,
-              child: Text(place.description ?? '')),
+            padding: const EdgeInsets.all(8),
+            height: 600,
+            width: 300,
+            child: Text(place.description ?? ''),
+          ),
         ),
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: Colors.black.withOpacity(0.5),
+            color: Colors.lightBlue[50]!.withOpacity(0.5),
           ),
           width: 250,
           height: 300,

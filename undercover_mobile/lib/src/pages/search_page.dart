@@ -33,7 +33,7 @@ class _SearchPageState extends State<SearchPage> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
           child: TextField(
             controller: _txtController,
             decoration: InputDecoration(
