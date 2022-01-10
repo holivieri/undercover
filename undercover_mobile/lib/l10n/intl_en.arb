@@ -15,6 +15,7 @@
     "langEnglish": "English",
     "langSpanish": "Spanish",
     "logIn": "Log In",
+    "message": "Message",
     "myBands": "My Artists",
     "myNotifications": "My Notifications",
     "myPlaces": "My Rocking places",
@@ -29,6 +30,7 @@
     "select": "Select",
     "selectLanguage": "Select Language",
     "test": "Test",
+    "title": "Title",
     "tweets": "Tweets",
     "videos": "Videos"
 }
