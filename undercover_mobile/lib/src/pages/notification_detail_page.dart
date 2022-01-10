@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:undercover_mobile/src/utils/font.dart';
 
 import '../../generated/l10n.dart';
-import '../utils/colors.dart';
+import '../utils/font.dart';
 import '../widgets/back_button.dart';
 
 class NotificationDetailPage extends StatefulWidget {
