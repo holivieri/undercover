@@ -17,6 +17,7 @@ using Undercover.API.DTOs;
 using Undercover.API.Entities;
 using Undercover.API.Models;
 using Undercover.API.Services;
+using static Google.Apis.Auth.GoogleJsonWebSignature;
 
 namespace Undercover.API.Controllers.V1
 {
@@ -49,8 +50,6 @@ namespace Undercover.API.Controllers.V1
             {
                 return BadRequest("Some parameters are missing for signing up");
             }
-            
-
 
             var user = new User { 
                 UserName = model.Email, 
@@ -205,5 +204,70 @@ namespace Undercover.API.Controllers.V1
                 Expiration = expiration,
             };
         }
+
+
+        #region Social Login
+
+
+        [HttpPost("auth/google")]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<AuthenticateResponse>> GoogleLogin(string googleTokenId)
+        {
+            Payload payload = new Payload();
+            try
+            {
+                payload = await ValidateAsync(googleTokenId, new ValidationSettings
+                {
+                    Audience = new[] { _configuration["Google:AndroidApiKey"] }
+                });
+            }
+            catch
+            {
+                // Invalid token
+            }
+
+            var user = await GetOrCreateExternalLoginUser("google", payload.Subject, payload.Email, payload.GivenName, payload.FamilyName);
+            UserModel userModel = new UserModel
+            {
+                Email = user.Email,
+            };
+            return Ok(BuildToken(userModel, user.Id));
+        }
+
+        private async Task<User> GetOrCreateExternalLoginUser(string provider, string key, string email, string firstName, string lastName)
+        {
+            // Login already linked to a user
+            var user = await _userManager.FindByLoginAsync(provider, key);
+            if (user != null)
+                return user;
+
+            user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                // No user exists with this email address, we create a new one
+                user = new User
+                {
+                    Email = email,
+                    UserName = email,
+                    FirstName = firstName,
+                    LastName = lastName
+                };
+
+                await _userManager.CreateAsync(user);
+            }
+
+            // Link the user to this login
+            var info = new UserLoginInfo(provider, key, provider.ToUpperInvariant());
+            var result = await _userManager.AddLoginAsync(user, info);
+            if (result.Succeeded)
+                return user;
+
+            _logger.LogError("Failed add a user linked to a login.");
+            _logger.LogError(string.Join(Environment.NewLine, result.Errors.Select(e => e.Description)));
+            return null;
+        }
+
+        #endregion
+
     }
 }
