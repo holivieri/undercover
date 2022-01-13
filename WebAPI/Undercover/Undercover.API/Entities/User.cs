@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Undercover.API.Entities
 {
@@ -17,5 +18,11 @@ namespace Undercover.API.Entities
         public virtual List<Place> MyPlaces { get; set; }
 
         public virtual List<Genre> MyGenres { get; set; }
+
+        [StringLength(50)]
+        public string FirstName { get; set; }
+        
+        [StringLength(50)]
+        public string LastName { get; set; }
     }
 }
