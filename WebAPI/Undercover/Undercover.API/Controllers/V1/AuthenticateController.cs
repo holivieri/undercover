@@ -28,19 +28,22 @@ namespace Undercover.API.Controllers.V1
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IConfiguration _configuration;
-        private readonly ILogger _logger;
+        private readonly ILogger<AuthenticateController> _logger;
         private readonly IUserService _userService;
 
         public AuthenticateController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             IConfiguration configuration,
-            IUserService userService)
+            IUserService userService,
+            ILogger<AuthenticateController> logger
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
             _userService = userService;
+            _logger = logger;
         }
 
         [HttpPost("SignUp")]
@@ -218,12 +221,13 @@ namespace Undercover.API.Controllers.V1
             {
                 payload = await ValidateAsync(googleTokenId, new ValidationSettings
                 {
-                    Audience = new[] { _configuration["Google:AndroidApiKey"] }
+                    Audience = new[] { _configuration["Google:WebClient"], _configuration["Google:AndroidApiKey"], _configuration["Google:IOSApiKey"]}
                 });
             }
-            catch
+            catch(Exception ex)
             {
-                // Invalid token
+                _logger.LogError("Failed add a user linked to a login.", ex);
+                return BadRequest();
             }
 
             var user = await GetOrCreateExternalLoginUser("google", payload.Subject, payload.Email, payload.GivenName, payload.FamilyName);
@@ -231,7 +235,7 @@ namespace Undercover.API.Controllers.V1
             {
                 Email = user.Email,
             };
-            return Ok(BuildToken(userModel, user.Id));
+            return BuildToken(userModel, user.Id).Result;
         }
 
         private async Task<User> GetOrCreateExternalLoginUser(string provider, string key, string email, string firstName, string lastName)
