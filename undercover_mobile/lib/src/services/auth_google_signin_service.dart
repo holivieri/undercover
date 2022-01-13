@@ -11,6 +11,7 @@ class AuthGoogleSignInService {
   static Future<GoogleSignInAccount?> signInWithGoogle() async {
     try {
       final account = await _googleSignIn.signIn();
+      print('======== Google Token ========');
       print(account);
       return account;
     } on Exception catch (error) {

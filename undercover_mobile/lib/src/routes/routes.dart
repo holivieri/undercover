@@ -14,7 +14,7 @@ const String userPreferencesRoute = '/userPreferences';
 Map<String, WidgetBuilder> getApplicationRoutes() {
   return <String, WidgetBuilder>{
     loginRoute: (BuildContext context) => const LoginPage(),
-    homeRoute: (BuildContext context) => const HomePage(), //LoginPage(),
+    homeRoute: (BuildContext context) => const LoginPage(),
     // artistRoute: (BuildContext context) => ArtistDetailsPage(),
     //concertRoute: (BuildContext context) => ConcertDetailsPage(),
     userPreferencesRoute: (BuildContext context) => const UserPreferencesPage(),
