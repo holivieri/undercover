@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:undercover_mobile/src/models/user_preferences.dart';
+
+import '../models/user_preferences.dart';
 
 class PushNotificationsService {
   static FirebaseMessaging messaging = FirebaseMessaging.instance;

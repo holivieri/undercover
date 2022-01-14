@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:undercover_mobile/src/errors/login_error.dart';
+import 'package:undercover_mobile/src/models/login_response_model.dart';
+import 'package:undercover_mobile/src/models/user_model.dart';
 
 import '../../generated/l10n.dart';
 import '../blocs/users/users_bloc.dart';
@@ -175,9 +178,21 @@ class _LoginPageState extends State<LoginPage> {
           style: ElevatedButton.styleFrom(
             primary: darkControlColor,
           ),
-          onPressed: () {
+          onPressed: () async {
             print('Google');
-            AuthGoogleSignInService.signInWithGoogle();
+            final result = await AuthGoogleSignInService.signInWithGoogle();
+
+            if (result is LoginError) {}
+            if (result is LoginResponse) {
+              final user = result as LoginResponse;
+
+              UserPreferences().token = user.token;
+              UserPreferences().userName = user.userName;
+              UserPreferences().tokenExpirationDate =
+                  user.expiration.toString();
+
+              Navigator.pushNamed(context, homeRoute);
+            }
           },
           child: const Icon(
             FontAwesomeIcons.google,
