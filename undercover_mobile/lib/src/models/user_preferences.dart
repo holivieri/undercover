@@ -41,4 +41,25 @@ class UserPreferences {
   set selectedLanguage(String value) {
     _userPreferences!.setString('language', value);
   }
+
+  String get deviceToken =>
+      _userPreferences!.getString('deviceToken') ?? 'device-not-set';
+
+  set deviceToken(String value) {
+    _userPreferences!.setString('deviceToken', value);
+  }
+
+  String get platform =>
+      _userPreferences!.getString('platform') ?? 'platform-not-set';
+
+  set platform(String value) {
+    _userPreferences!.setString('platform', value);
+  }
+
+  String get tokenExpirationDate =>
+      _userPreferences!.getString('tokenExpirationDate') ?? '';
+
+  set tokenExpirationDate(String value) {
+    _userPreferences!.setString('tokenExpirationDate', value);
+  }
 }

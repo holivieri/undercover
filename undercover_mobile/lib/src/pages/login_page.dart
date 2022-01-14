@@ -55,6 +55,9 @@ class _LoginPageState extends State<LoginPage> {
             print(state.user.token);
             UserPreferences().token = state.user.token;
             UserPreferences().userName = state.user.userName;
+            UserPreferences().tokenExpirationDate =
+                state.user.expiration.toString();
+
             Navigator.pushNamed(context, homeRoute);
           }
         },

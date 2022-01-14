@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../generated/l10n.dart';
 import 'models/user_preferences.dart';
 import 'pages/home_page.dart';
+import 'pages/login_page.dart';
 import 'providers/language_provider.dart';
 import 'repositories/artists_repository.dart';
 import 'routes/routes.dart';
@@ -88,6 +89,25 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
+  String getInitialRoute() {
+    final token = UserPreferences().deviceToken;
+    final tokenExpirationDate = UserPreferences().tokenExpirationDate;
+
+    print(tokenExpirationDate);
+
+    if (token.isEmpty || tokenExpirationDate.isEmpty) {
+      return loginRoute;
+    }
+    if (DateTime.parse(UserPreferences().tokenExpirationDate)
+        .toUtc()
+        .isAfter(DateTime.now().toUtc())) {
+      //token expired
+      return loginRoute;
+    } else {
+      return homeRoute;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -132,6 +152,7 @@ class _MyAppState extends State<MyApp> {
             // Define a function to handle named routes in order to support
             // Flutter web url navigation and deep linking.
             routes: getApplicationRoutes(),
+            initialRoute: getInitialRoute(),
             onGenerateRoute: (RouteSettings routeSettings) {
               return MaterialPageRoute<void>(
                 settings: routeSettings,

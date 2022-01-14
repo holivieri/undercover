@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:undercover_mobile/src/models/user_preferences.dart';
 
 import '../errors/login_error.dart';
 import '../models/login_response_model.dart';
@@ -18,10 +19,19 @@ class UserService {
   }
 
   Future<dynamic> login(String userName, String password) async {
+    final deviceToken = UserPreferences().deviceToken;
+    final platform = UserPreferences().platform;
+
     final _apiResponse = await Client().post(
       Uri.parse('$apiUrl/Authenticate/Login'),
       headers: returnUndercoverHeaders(),
-      body: json.encode({'email': userName, 'password': password}),
+      body: json.encode({
+        'email': userName,
+        'password': password,
+        'userRole': '',
+        'deviceToken': deviceToken,
+        'platform': platform,
+      }),
     );
 
     if (_apiResponse.statusCode == 500) {
