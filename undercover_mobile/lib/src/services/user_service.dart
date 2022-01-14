@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:undercover_mobile/src/models/user_preferences.dart';
 
 import '../errors/login_error.dart';
 import '../models/login_response_model.dart';
+import '../models/user_preferences.dart';
 import '../utils/http.dart';
 
 class UserService {

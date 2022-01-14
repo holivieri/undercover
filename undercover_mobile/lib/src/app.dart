@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import '../generated/l10n.dart';
 import 'models/user_preferences.dart';
 import 'pages/home_page.dart';
-import 'pages/login_page.dart';
 import 'providers/language_provider.dart';
 import 'repositories/artists_repository.dart';
 import 'routes/routes.dart';
