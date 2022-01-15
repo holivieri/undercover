@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../generated/l10n.dart';
 import '../blocs/users/users_bloc.dart';
+import '../errors/login_error.dart';
+import '../models/login_response_model.dart';
 import '../models/user_preferences.dart';
 import '../repositories/user_repository.dart';
 import '../routes/routes.dart';
@@ -55,6 +57,9 @@ class _LoginPageState extends State<LoginPage> {
             print(state.user.token);
             UserPreferences().token = state.user.token;
             UserPreferences().userName = state.user.userName;
+            UserPreferences().tokenExpirationDate =
+                state.user.expiration.toString();
+
             Navigator.pushNamed(context, homeRoute);
           }
         },
@@ -172,9 +177,21 @@ class _LoginPageState extends State<LoginPage> {
           style: ElevatedButton.styleFrom(
             primary: darkControlColor,
           ),
-          onPressed: () {
+          onPressed: () async {
             print('Google');
-            AuthGoogleSignInService.signInWithGoogle();
+            final result = await AuthGoogleSignInService.signInWithGoogle();
+
+            if (result is LoginError) {}
+            if (result is LoginResponse) {
+              final LoginResponse user = result; //as LoginResponse;
+
+              UserPreferences().token = user.token;
+              UserPreferences().userName = user.userName;
+              UserPreferences().tokenExpirationDate =
+                  user.expiration.toString();
+
+              await Navigator.pushNamed(context, homeRoute);
+            }
           },
           child: const Icon(
             FontAwesomeIcons.google,

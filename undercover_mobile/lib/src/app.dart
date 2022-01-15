@@ -88,6 +88,25 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
+  String getInitialRoute() {
+    final token = UserPreferences().deviceToken;
+    final tokenExpirationDate = UserPreferences().tokenExpirationDate;
+
+    print(tokenExpirationDate);
+
+    if (token.isEmpty || tokenExpirationDate.isEmpty) {
+      return loginRoute;
+    }
+    if (DateTime.parse(UserPreferences().tokenExpirationDate)
+        .toUtc()
+        .isAfter(DateTime.now().toUtc())) {
+      //token expired
+      return loginRoute;
+    } else {
+      return homeRoute;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -132,6 +151,7 @@ class _MyAppState extends State<MyApp> {
             // Define a function to handle named routes in order to support
             // Flutter web url navigation and deep linking.
             routes: getApplicationRoutes(),
+            initialRoute: getInitialRoute(),
             onGenerateRoute: (RouteSettings routeSettings) {
               return MaterialPageRoute<void>(
                 settings: routeSettings,

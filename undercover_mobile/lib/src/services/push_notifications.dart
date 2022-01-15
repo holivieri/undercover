@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import '../models/user_preferences.dart';
+
 class PushNotificationsService {
   static FirebaseMessaging messaging = FirebaseMessaging.instance;
   static String? token;
@@ -22,6 +24,7 @@ class PushNotificationsService {
     token = await FirebaseMessaging.instance.getToken();
     print('================ Device TOKEN ================');
     print(token);
+    UserPreferences().deviceToken = token ?? 'not-set';
 
     //Handlers
     FirebaseMessaging.onBackgroundMessage(_onBackgroundHandler);

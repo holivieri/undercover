@@ -18,5 +18,7 @@ namespace Undercover.API.Entities
 
         public virtual List<Artist> Artists { get; set; }
 
+        public virtual List<User> Users { get; set; }
+
     }
 }
