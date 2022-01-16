@@ -6,7 +6,13 @@ namespace Undercover.API.Entities
 {
     public partial class User : IdentityUser
     {
-
+        public User()
+        {
+            MyGenres = new List<Genre>();
+            MyArtists = new List<Artist>();
+            MyGenres = new List<Genre>();
+            MyPlaces = new List<Place>();
+        }
         public virtual List<Notification> Notifications { get; set; }
 
         public virtual List<Device> Devices { get; set; }
