@@ -20,18 +20,24 @@ class PushNotificationsService {
   void test() {}
   static Future<void> initializeApp() async {
     //Push Notifications
-    await Firebase.initializeApp();
-    token = await FirebaseMessaging.instance.getToken();
-    print('================ Device TOKEN ================');
-    print(token);
-    UserPreferences().deviceToken = token ?? 'not-set';
+    try {
+      await Firebase.initializeApp();
 
-    //Handlers
-    FirebaseMessaging.onBackgroundMessage(_onBackgroundHandler);
-    FirebaseMessaging.onMessage.listen(_onMessageHandler);
-    FirebaseMessaging.onMessageOpenedApp.listen(_onMessageOpenApp);
+      token = await FirebaseMessaging.instance.getToken();
+      print('================ Device TOKEN ================');
+      print(token);
+      UserPreferences().deviceToken = token ?? 'not-set';
 
-    //Local Notifications
+      //Handlers
+      FirebaseMessaging.onBackgroundMessage(_onBackgroundHandler);
+      FirebaseMessaging.onMessage.listen(_onMessageHandler);
+      FirebaseMessaging.onMessageOpenedApp.listen(_onMessageOpenApp);
+
+      //Local Notifications
+
+    } on Exception catch (err) {
+      print(err);
+    }
   }
 
   static Future _onBackgroundHandler(RemoteMessage message) async {
