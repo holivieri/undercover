@@ -10,9 +10,9 @@ import '../utils/http.dart';
 class AuthGoogleSignInService {
   void test() {}
   static final GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: [
-      'email',
-    ],
+    scopes: ['email'],
+    // hostedDomain: '',
+    // clientId: '',
   );
 
   static Future<dynamic> signInWithGoogle() async {
