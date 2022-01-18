@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../generated/l10n.dart';
@@ -183,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
 
             if (result is LoginError) {}
             if (result is LoginResponse) {
-              final LoginResponse user = result; //as LoginResponse;
+              final LoginResponse user = result;
 
               UserPreferences().token = user.token;
               UserPreferences().userName = user.userName;
@@ -234,8 +235,19 @@ class _LoginPageState extends State<LoginPage> {
           style: ElevatedButton.styleFrom(
             primary: darkControlColor,
           ),
-          onPressed: () {
+          onPressed: () async {
             print('Facebook');
+            final LoginResult result = await FacebookAuth.instance.login();
+
+            if (result.status == LoginStatus.success) {
+              // you are logged
+              final AccessToken accessToken = result.accessToken!;
+              print(accessToken);
+            } else {
+              print(result.status);
+              print(result.message);
+            }
+            /////
           },
           child: const Icon(
             FontAwesomeIcons.facebook,
