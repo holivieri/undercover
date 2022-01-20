@@ -71,5 +71,11 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 	</array>
+	<key>FacebookAppID</key>
+	<string>937170850506670</string>
+	<key>FacebookClientToken</key>
+	<string>9aba92e4f9cc68916a73fd674f5c9984</string>
+	<key>FacebookDisplayName</key>
+	<string>Undercover</string>
 </dict>
 </plist>
