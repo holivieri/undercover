@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:undercover_mobile/src/models/user_preferences.dart';
 
 import '../../generated/l10n.dart';
 import '../themes/theme_provider.dart';
@@ -39,9 +40,10 @@ class _UserPreferencesPageState extends State<UserPreferencesPage> {
           children: [
             Text(S.of(context).darkMode),
             Switch.adaptive(
-              value: themeProvider.isDarkMode,
+              value: UserPreferences().isDarkModeOn,
               onChanged: (value) {
                 themeProvider.toggleTheme(isOn: value);
+                UserPreferences().isDarkModeOn = value;
               },
             ),
           ],

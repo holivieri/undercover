@@ -62,4 +62,10 @@ class UserPreferences {
   set tokenExpirationDate(String value) {
     _userPreferences!.setString('tokenExpirationDate', value);
   }
+
+  bool get isDarkModeOn => _userPreferences!.getBool('isDarkModeOn') ?? false;
+
+  set isDarkModeOn(bool value) {
+    _userPreferences!.setBool('isDarkModeOn', value);
+  }
 }
