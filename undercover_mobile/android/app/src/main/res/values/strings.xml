@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Undercover</string>
+    <string name="facebook_app_id">937170850506670</string>
+    <string name="fb_login_protocol_scheme">fb937170850506670</string>
+    <string name="facebook_client_token">9aba92e4f9cc68916a73fd674f5c9984</string>
+</resources>

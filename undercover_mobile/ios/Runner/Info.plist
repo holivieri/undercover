@@ -25,6 +25,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>fb937170850506670</string>
 				<string>com.googleusercontent.apps.961458927415-198992ldn2ju1o2dbiulhuucscaj0s5r</string>
 			</array>
 		</dict>
@@ -52,5 +53,29 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fbapi20130214</string>
+		<string>fbapi20130410</string>
+		<string>fbapi20130702</string>
+		<string>fbapi20131010</string>
+		<string>fbapi20131219</string>
+		<string>fbapi20140410</string>
+		<string>fbapi20140116</string>
+		<string>fbapi20150313</string>
+		<string>fbapi20150629</string>
+		<string>fbapi20160328</string>
+		<string>fbauth</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
+	<key>FacebookAppID</key>
+	<string>937170850506670</string>
+	<key>FacebookClientToken</key>
+	<string>9aba92e4f9cc68916a73fd674f5c9984</string>
+	<key>FacebookDisplayName</key>
+	<string>Undercover</string>
 </dict>
 </plist>
