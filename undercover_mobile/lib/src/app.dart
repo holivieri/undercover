@@ -145,7 +145,9 @@ class _MyAppState extends State<MyApp> {
 
             // onGenerateTitle: 'appTitle'.tr,
             themeMode: themeProvider.themeMode,
-            theme: MyThemes.lightTheme,
+            theme: UserPreferences().isDarkModeOn
+                ? MyThemes.darkTheme
+                : MyThemes.lightTheme,
             darkTheme: MyThemes.darkTheme,
 
             // Define a function to handle named routes in order to support
