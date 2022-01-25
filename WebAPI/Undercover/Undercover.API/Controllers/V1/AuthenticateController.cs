@@ -238,6 +238,30 @@ namespace Undercover.API.Controllers.V1
             return BuildToken(userModel, user.Id).Result;
         }
 
+        [HttpPost("auth/facebook")]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<AuthenticateResponse>> FacebookLogin(string facebookTokenId)
+        {
+            try
+            {
+                //graph.facebook.com/debug_token?input_token={token-to-inspect}&access_token=937170850506670|8caa7a8193147b668ec2749d7c794be8
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Failed add a user linked to a login.", ex);
+                return BadRequest();
+            }
+
+            var user = await GetOrCreateExternalLoginUser("facebook", payload.Subject, payload.Email, payload.GivenName, payload.FamilyName);
+            UserModel userModel = new UserModel
+            {
+                Email = user.Email,
+            };
+            return BuildToken(userModel, user.Id).Result;
+        }
+
+
         private async Task<User> GetOrCreateExternalLoginUser(string provider, string key, string email, string firstName, string lastName)
         {
             // Login already linked to a user

@@ -10,7 +10,7 @@ import '../models/login_response_model.dart';
 import '../models/user_preferences.dart';
 import '../repositories/user_repository.dart';
 import '../routes/routes.dart';
-import '../services/auth_google_signin_service.dart';
+import '../services/social_signin_service.dart';
 import '../services/user_service.dart';
 import '../utils/app_colors.dart';
 import '../utils/colors.dart';
@@ -25,6 +25,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   late UsersBloc bloc;
+  late String _error;
   final TextEditingController txtUser = TextEditingController();
   final TextEditingController txtPassword = TextEditingController();
 
@@ -35,6 +36,7 @@ class _LoginPageState extends State<LoginPage> {
     final UserRepository _userRepository = UserRepository(_userService);
 
     bloc = UsersBloc(_userRepository);
+    _error = '';
   }
 
   @override
@@ -45,6 +47,17 @@ class _LoginPageState extends State<LoginPage> {
         width: double.infinity,
         color: darkBackground,
         child: getBody(),
+      ),
+    );
+  }
+
+  Widget showError() {
+    return Container(
+      height: 100,
+      color: themeDanger,
+      child: Text(
+        'Error: $_error',
+        style: const TextStyle(color: Colors.white),
       ),
     );
   }
@@ -74,6 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
+                    if (_error.isNotEmpty) showError(),
                     getLogo(),
                     getUserForm(),
                     const SizedBox(height: 20),
@@ -180,9 +194,14 @@ class _LoginPageState extends State<LoginPage> {
           ),
           onPressed: () async {
             print('Google');
-            final result = await AuthGoogleSignInService.signInWithGoogle();
+            final result = await SocialSignInService.signInWithGoogle();
 
-            if (result is LoginError) {}
+            if (result is LoginError) {
+              setState(() {
+                final LoginError errorMessage = result;
+                _error = errorMessage.description;
+              });
+            }
             if (result is LoginResponse) {
               final LoginResponse user = result;
 
@@ -237,17 +256,25 @@ class _LoginPageState extends State<LoginPage> {
           ),
           onPressed: () async {
             print('Facebook');
-            final LoginResult result = await FacebookAuth.instance.login();
+            final result = await SocialSignInService.signInWithFacebook();
 
-            if (result.status == LoginStatus.success) {
-              // you are logged
-              final AccessToken accessToken = result.accessToken!;
-              print(accessToken);
-            } else {
-              print(result.status);
-              print(result.message);
+            if (result is LoginError) {
+              setState(() {
+                final LoginError errorMessage = result;
+                _error = errorMessage.description;
+              });
             }
-            /////
+
+            if (result is LoginResponse) {
+              final LoginResponse user = result;
+
+              UserPreferences().token = user.token;
+              UserPreferences().userName = user.userName;
+              UserPreferences().tokenExpirationDate =
+                  user.expiration.toString();
+
+              await Navigator.pushNamed(context, homeRoute);
+            }
           },
           child: const Icon(
             FontAwesomeIcons.facebook,

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart';
 
@@ -7,13 +8,52 @@ import '../errors/login_error.dart';
 import '../models/login_response_model.dart';
 import '../utils/http.dart';
 
-class AuthGoogleSignInService {
+class SocialSignInService {
   void test() {}
   static final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: ['email'],
     // hostedDomain: '',
     // clientId: '',
   );
+
+  static Future<dynamic> signInWithFacebook() async {
+    try {
+      final LoginResult result = await FacebookAuth.instance.login();
+
+      if (result.status == LoginStatus.success) {
+        // you are logged
+        final AccessToken accessToken = result.accessToken!;
+        print('=============== FACEBOOK ================');
+        print(accessToken.token);
+        print('=========================================');
+
+        final _apiResponse = await Client().post(
+          Uri.parse(
+              '$apiUrl/Authenticate/auth/facebook?facebookTokenId=${accessToken.token}'),
+          headers: returnUndercoverHeaders(),
+        );
+
+        if (_apiResponse.statusCode == 200) {
+          final LoginResponse user = LoginResponse.fromJson(
+            json.decode(
+              _apiResponse.body,
+            ),
+          );
+          return user;
+        }
+        return LoginError(
+          code: _apiResponse.statusCode.toString(),
+          description: _apiResponse.body,
+        );
+      }
+    } on Exception catch (err) {
+      print(err);
+      return LoginError(
+        code: '500',
+        description: err.toString(),
+      );
+    }
+  }
 
   static Future<dynamic> signInWithGoogle() async {
     try {
@@ -46,15 +86,13 @@ class AuthGoogleSignInService {
       );
 
       return user;
-
-      //return account;
     } on Exception catch (error) {
       print(error);
       return null;
     }
   }
 
-  static Future signOut() async {
+  static Future googleSignOut() async {
     await _googleSignIn.signOut();
   }
 }
