@@ -6,10 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -244,21 +248,47 @@ namespace Undercover.API.Controllers.V1
         {
             try
             {
-                //graph.facebook.com/debug_token?input_token={token-to-inspect}&access_token=937170850506670|8caa7a8193147b668ec2749d7c794be8
+                
+                if (string.IsNullOrEmpty(facebookTokenId))
+                {
+                    throw new ValidationException("Invalid Facebook token");
+                }
 
+                string facebookGraphUrl = "https://graph.facebook.com/me?fields=first_name,last_name,email,picture&access_token=" + facebookTokenId; // + " &access_token=937170850506670|8caa7a8193147b668ec2749d7c794be8";
+
+                WebRequest request = WebRequest.Create(facebookGraphUrl);
+                request.Credentials = CredentialCache.DefaultCredentials;
+
+                using (WebResponse response = await request.GetResponseAsync())
+                {
+                    var status = ((HttpWebResponse)response).StatusCode;
+
+                    Stream dataStream = response.GetResponseStream();
+
+                    StreamReader reader = new StreamReader(dataStream);
+                    string responseFromServer = reader.ReadToEnd();
+
+                    var facebookUser = JsonConvert.DeserializeObject<FacebookResponse>(responseFromServer);
+
+                    bool valid = facebookUser != null && !string.IsNullOrWhiteSpace(facebookUser.Email);
+                    if (!valid)
+                    {
+                        throw new ValidationException("Invalid Facebook token");
+                    }
+
+                    var user = await GetOrCreateExternalLoginUser("facebook", facebookUser.Id, facebookUser.Email, facebookUser.FirstName, facebookUser.LastName);
+                    UserModel userModel = new UserModel
+                    {
+                        Email = user.Email,
+                    };
+                    return BuildToken(userModel, user.Id).Result;
+                }
             }
             catch (Exception ex)
             {
                 _logger.LogError("Failed add a user linked to a login.", ex);
                 return BadRequest();
             }
-
-            var user = await GetOrCreateExternalLoginUser("facebook", payload.Subject, payload.Email, payload.GivenName, payload.FamilyName);
-            UserModel userModel = new UserModel
-            {
-                Email = user.Email,
-            };
-            return BuildToken(userModel, user.Id).Result;
         }
 
 
