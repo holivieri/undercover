@@ -22,6 +22,12 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
     on<InitializeUser>((event, emit) {
       emit(UsersInitial());
     });
+    on<LogMeInWithFacebook>((event, emit) async {
+      final String token = await userRepository.getFacebookToken();
+      emit(ValidatingUser());
+      final user = await userRepository.signInWithFacebook(token);
+      emit(UserIsValidated(user));
+    });
   }
 
   final UserRepository userRepository;
