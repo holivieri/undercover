@@ -73,13 +73,28 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.pushNamed(context, homeRoute);
           }
           if (state is ValidatingUser) {
-            print('waiting');
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    height: 200,
+                    width: 400,
+                    child: const AlertDialog(
+                      title: Text('Ingresando...'),
+                      content: CircularProgressIndicator(),
+                    ),
+                  ),
+                );
+              },
+            );
           }
         },
         child: BlocBuilder<UsersBloc, UsersState>(
           builder: (context, state) {
             if (state is ValidatingUser) {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             }
             if (state is UsersInitial) {
               return Padding(
