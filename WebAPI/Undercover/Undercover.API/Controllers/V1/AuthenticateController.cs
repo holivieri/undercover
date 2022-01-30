@@ -218,7 +218,7 @@ namespace Undercover.API.Controllers.V1
 
         [HttpPost("auth/google")]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult<AuthenticateResponse>> GoogleLogin(string googleTokenId)
+        public async Task<ActionResult<AuthenticateResponse>> GoogleLogin(string googleTokenId, string platform, string deviceToken)
         {
             Payload payload = new Payload();
             try
@@ -235,6 +235,15 @@ namespace Undercover.API.Controllers.V1
             }
 
             var user = await GetOrCreateExternalLoginUser("google", payload.Subject, payload.Email, payload.GivenName, payload.FamilyName);
+            Device device = new Device
+            {
+                LastAccess = DateTime.UtcNow,
+                Platform = platform,
+                Token = deviceToken,
+                UserEmail = user.Email,
+                UserId = user.Id,
+            };
+            SaveDeviceInfo(device);
             UserModel userModel = new UserModel
             {
                 Email = user.Email,
@@ -244,11 +253,10 @@ namespace Undercover.API.Controllers.V1
 
         [HttpPost("auth/facebook")]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult<AuthenticateResponse>> FacebookLogin(string facebookTokenId)
+        public async Task<ActionResult<AuthenticateResponse>> FacebookLogin(string facebookTokenId, string platform, string deviceToken)
         {
             try
             {
-                
                 if (string.IsNullOrEmpty(facebookTokenId))
                 {
                     throw new ValidationException("Invalid Facebook token");
@@ -277,9 +285,22 @@ namespace Undercover.API.Controllers.V1
                     }
 
                     var user = await GetOrCreateExternalLoginUser("facebook", facebookUser.Id, facebookUser.Email, facebookUser.FirstName, facebookUser.LastName);
+                    Device device = new Device
+                    {
+                        LastAccess = DateTime.UtcNow,
+                        Platform = platform,
+                        Token = deviceToken,
+                        UserEmail = user.Email,
+                        UserId = user.Id,
+                    };
+                    SaveDeviceInfo(device);
+
                     UserModel userModel = new UserModel
                     {
                         Email = user.Email,
+                        DeviceToken = deviceToken,
+                        Platform = platform,
+                        UserRole = "user",
                     };
                     return BuildToken(userModel, user.Id).Result;
                 }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart';
+import 'package:undercover_mobile/src/models/user_preferences.dart';
 
 import '../errors/login_error.dart';
 import '../models/login_response_model.dart';
@@ -36,8 +37,12 @@ class SocialSignInService {
   }
 
   static Future<dynamic> signInWithFacebook(String token) async {
+    final String platform = UserPreferences().platform;
+    final String deviceToken = UserPreferences().deviceToken;
+
     final _apiResponse = await Client().post(
-      Uri.parse('$apiUrl/Authenticate/auth/facebook?facebookTokenId=$token'),
+      Uri.parse(
+          '$apiUrl/Authenticate/auth/facebook?facebookTokenId=$token&platform=$platform&deviceToken=$deviceToken'),
       headers: returnUndercoverHeaders(),
     );
 
@@ -67,10 +72,13 @@ class SocialSignInService {
   }
 
   static Future<dynamic> signInWithGoogle(String googleToken) async {
+    final String platform = UserPreferences().platform;
+    final String deviceToken = UserPreferences().deviceToken;
+
     try {
       final _apiResponse = await Client().post(
         Uri.parse(
-            '$apiUrl/Authenticate/auth/google?googleTokenId=$googleToken'),
+            '$apiUrl/Authenticate/auth/google?googleTokenId=$googleToken&platform=$platform&deviceToken=$deviceToken'),
         headers: returnUndercoverHeaders(),
       );
 
