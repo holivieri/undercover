@@ -247,6 +247,8 @@ namespace Undercover.API.Controllers.V1
             UserModel userModel = new UserModel
             {
                 Email = user.Email,
+                Platform = platform,
+                DeviceToken = deviceToken,
             };
             return BuildToken(userModel, user.Id).Result;
         }

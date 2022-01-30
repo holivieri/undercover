@@ -64,6 +64,14 @@ Future<void> main() async {
 
   await PushNotificationsService.initializeApp();
 
+  if (Platform.isAndroid) {
+    UserPreferences().platform = 'android';
+  } else if (Platform.isIOS) {
+    UserPreferences().platform = 'ios';
+  } else {
+    UserPreferences().platform = 'web';
+  }
+
   runApp(
     MultiBlocProvider(
       providers: [
