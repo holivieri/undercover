@@ -16,3 +16,7 @@ class ValidateUser extends UsersEvent {
 }
 
 class LogOutUser extends UsersEvent {}
+
+class LogMeInWithFacebook extends UsersEvent {}
+
+class LogMeInWithGoogle extends UsersEvent {}

@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../generated/l10n.dart';
 import '../blocs/users/users_bloc.dart';
-import '../errors/login_error.dart';
-import '../models/login_response_model.dart';
 import '../models/user_preferences.dart';
 import '../repositories/user_repository.dart';
 import '../routes/routes.dart';
-import '../services/social_signin_service.dart';
 import '../services/user_service.dart';
 import '../utils/app_colors.dart';
 import '../utils/colors.dart';
@@ -76,11 +72,29 @@ class _LoginPageState extends State<LoginPage> {
 
             Navigator.pushNamed(context, homeRoute);
           }
+          if (state is ValidatingUser) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    height: 200,
+                    width: 400,
+                    child: const AlertDialog(
+                      title: Text('Ingresando...'),
+                      content: CircularProgressIndicator(),
+                    ),
+                  ),
+                );
+              },
+            );
+          }
         },
         child: BlocBuilder<UsersBloc, UsersState>(
           builder: (context, state) {
             if (state is ValidatingUser) {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             }
             if (state is UsersInitial) {
               return Padding(
@@ -194,24 +208,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           onPressed: () async {
             print('Google');
-            final result = await SocialSignInService.signInWithGoogle();
-
-            if (result is LoginError) {
-              setState(() {
-                final LoginError errorMessage = result;
-                _error = errorMessage.description;
-              });
-            }
-            if (result is LoginResponse) {
-              final LoginResponse user = result;
-
-              UserPreferences().token = user.token;
-              UserPreferences().userName = user.userName;
-              UserPreferences().tokenExpirationDate =
-                  user.expiration.toString();
-
-              await Navigator.pushNamed(context, homeRoute);
-            }
+            bloc.add(LogMeInWithGoogle());
           },
           child: const Icon(
             FontAwesomeIcons.google,
@@ -256,25 +253,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           onPressed: () async {
             print('Facebook');
-            final result = await SocialSignInService.signInWithFacebook();
-
-            if (result is LoginError) {
-              setState(() {
-                final LoginError errorMessage = result;
-                _error = errorMessage.description;
-              });
-            }
-
-            if (result is LoginResponse) {
-              final LoginResponse user = result;
-
-              UserPreferences().token = user.token;
-              UserPreferences().userName = user.userName;
-              UserPreferences().tokenExpirationDate =
-                  user.expiration.toString();
-
-              await Navigator.pushNamed(context, homeRoute);
-            }
+            bloc.add(LogMeInWithFacebook());
           },
           child: const Icon(
             FontAwesomeIcons.facebook,

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart';
+import 'package:undercover_mobile/src/models/user_preferences.dart';
 
 import '../errors/login_error.dart';
 import '../models/login_response_model.dart';
@@ -12,11 +13,9 @@ class SocialSignInService {
   void test() {}
   static final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: ['email'],
-    // hostedDomain: '',
-    // clientId: '',
   );
 
-  static Future<dynamic> signInWithFacebook() async {
+  static Future<String> getFacebookToken() async {
     try {
       final LoginResult result = await FacebookAuth.instance.login();
 
@@ -27,47 +26,59 @@ class SocialSignInService {
         print(accessToken.token);
         print('=========================================');
 
-        final _apiResponse = await Client().post(
-          Uri.parse(
-              '$apiUrl/Authenticate/auth/facebook?facebookTokenId=${accessToken.token}'),
-          headers: returnUndercoverHeaders(),
-        );
-
-        if (_apiResponse.statusCode == 200) {
-          final LoginResponse user = LoginResponse.fromJson(
-            json.decode(
-              _apiResponse.body,
-            ),
-          );
-          return user;
-        }
-        return LoginError(
-          code: _apiResponse.statusCode.toString(),
-          description: _apiResponse.body,
-        );
+        return accessToken.token;
+      } else {
+        return 'error';
       }
     } on Exception catch (err) {
       print(err);
-      return LoginError(
-        code: '500',
-        description: err.toString(),
-      );
+      return err.toString();
     }
   }
 
-  static Future<dynamic> signInWithGoogle() async {
+  static Future<dynamic> signInWithFacebook(String token) async {
+    final String platform = UserPreferences().platform;
+    final String deviceToken = UserPreferences().deviceToken;
+
+    final _apiResponse = await Client().post(
+      Uri.parse(
+          '$apiUrl/Authenticate/auth/facebook?facebookTokenId=$token&platform=$platform&deviceToken=$deviceToken'),
+      headers: returnUndercoverHeaders(),
+    );
+
+    if (_apiResponse.statusCode == 200) {
+      final LoginResponse user = LoginResponse.fromJson(
+        json.decode(
+          _apiResponse.body,
+        ),
+      );
+      return user;
+    }
+    return LoginError(
+      code: _apiResponse.statusCode.toString(),
+      description: _apiResponse.body,
+    );
+  }
+
+  static Future<String> getGoogleToken() async {
+    final account = await _googleSignIn.signIn();
+    print('======== Google Token ========');
+    print(account);
+
+    final googleKey = await account!.authentication;
+
+    print('GOOGLE ID TOKEN: ${googleKey.idToken}');
+    return googleKey.idToken!;
+  }
+
+  static Future<dynamic> signInWithGoogle(String googleToken) async {
+    final String platform = UserPreferences().platform;
+    final String deviceToken = UserPreferences().deviceToken;
+
     try {
-      final account = await _googleSignIn.signIn();
-      print('======== Google Token ========');
-      print(account);
-
-      final googleKey = await account!.authentication;
-
-      print('GOOGLE ID TOKEN: ${googleKey.idToken}');
-
       final _apiResponse = await Client().post(
         Uri.parse(
-            '$apiUrl/Authenticate/auth/google?googleTokenId=${googleKey.idToken}'),
+            '$apiUrl/Authenticate/auth/google?googleTokenId=$googleToken&platform=$platform&deviceToken=$deviceToken'),
         headers: returnUndercoverHeaders(),
       );
 

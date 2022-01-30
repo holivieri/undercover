@@ -18,3 +18,5 @@ class ValidateError extends UsersState {
 
   final String message;
 }
+
+class UserIsLoggedIn extends UsersState {}
