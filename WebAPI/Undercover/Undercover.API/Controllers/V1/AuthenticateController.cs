@@ -331,7 +331,7 @@ namespace Undercover.API.Controllers.V1
                     Email = email,
                     UserName = email,
                     FirstName = firstName,
-                    LastName = lastName
+                    LastName = lastName,
                 };
 
                 await _userManager.CreateAsync(user);
