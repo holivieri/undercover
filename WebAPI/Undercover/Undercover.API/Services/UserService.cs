@@ -65,5 +65,70 @@ namespace Undercover.API.Services
                 .Include(u => u.MyPlaces)
                 .Where(u => u.Id == userId).FirstOrDefault();
         }
+
+        public bool CheckProfile(string userId)
+        {
+            var user = _dbContext.Users.Find(userId);
+            if (user == null)
+            {
+                return false;
+            }
+            if(user.Profile == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool CreateProfile(string userId, Profile profile)
+        {
+            var user = _dbContext.Users.Find(userId);
+            if (user == null)
+            {
+                return false;
+            }
+            //Is Artist * validations *
+            if(profile.Artist != null)
+            {
+                profile.Artist.Id = Guid.NewGuid();
+                profile.Artist.CreatedDate = DateTime.UtcNow;
+
+                if(profile.Artist.Pictures != null)
+                {
+                    foreach (var pic in profile.Artist.Pictures)
+                    {
+                        pic.Id = Guid.NewGuid();
+                        pic.Likes = 0;
+                    }
+                }
+                
+                profile.Artist.Genres.ForEach(g => _dbContext.Entry(g).State = EntityState.Unchanged);
+                _dbContext.Artists.Add(profile.Artist);
+            }
+            if(profile.Place != null)
+            {
+                profile.Place.Id = Guid.NewGuid();
+                if(profile.Place.Pictures != null)
+                {
+                    foreach (var pic in profile.Place.Pictures)
+                    {
+                        pic.Id = Guid.NewGuid();
+                        pic.Likes = 0;
+                    }
+                }
+                
+                _dbContext.Entry(profile.Place.Country).State = EntityState.Unchanged;
+                profile.Place.CreatedDate = DateTime.UtcNow;
+                profile.Place.Dislikes = 0;
+                profile.Place.Likes = 0;
+                _dbContext.Places.Add(profile.Place);
+
+            }
+            
+            user.Profile = profile;
+            _dbContext.SaveChanges();
+            return true;
+
+        }
     }
 }

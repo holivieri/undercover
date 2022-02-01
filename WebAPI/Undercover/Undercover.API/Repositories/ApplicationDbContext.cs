@@ -60,6 +60,14 @@ namespace Undercover.API.Data
                 .HasOne(a => a.Concert)
                 .WithMany(c => c.Attendants)
                 .HasForeignKey(a => a.ConcertId);
+
+            modelBuilder.Entity<User>()
+              .HasOne(u => u.Profile)
+                .WithOne(p => p.User)
+                .HasForeignKey<Profile>(p => p.UserId);
+                
+                
+
             ////////////////////
 
             //modelBuilder.Entity<ArtistGenre>()

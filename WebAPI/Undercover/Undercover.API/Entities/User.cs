@@ -24,5 +24,8 @@ namespace Undercover.API.Entities
         
         [StringLength(50)]
         public string LastName { get; set; }
+
+        public Profile Profile { get; set; }
+
     }
 }
