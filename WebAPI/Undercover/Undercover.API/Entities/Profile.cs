@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Undercover.API.Entities
 {
@@ -18,6 +19,12 @@ namespace Undercover.API.Entities
 
         [Required]
         public bool isPlaceOwner { get; set; }
+
+        [NotMapped]
+        public bool isUser { get { 
+                return !isArtist && !isPlaceOwner;
+            }
+        }
 
     }
 }
