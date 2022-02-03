@@ -12,7 +12,7 @@ class AreYouAnArtist extends StatelessWidget {
       borderRadius: BorderRadius.circular(15),
       child: Container(
         height: 220,
-        width: 150,
+        width: 400,
         decoration: const BoxDecoration(
           color: themeBoxBlue,
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:undercover_mobile/src/pages/wizard_step_one_page.dart';
 
 import '../pages/home_page.dart';
 import '../pages/login_page.dart';
@@ -13,7 +14,7 @@ const String userPreferencesRoute = '/userPreferences';
 
 Map<String, WidgetBuilder> getApplicationRoutes() {
   return <String, WidgetBuilder>{
-    loginRoute: (BuildContext context) => const LoginPage(),
+    loginRoute: (BuildContext context) => const WizardProfile(), //LoginPage(),
     homeRoute: (BuildContext context) => const HomePage(),
     // artistRoute: (BuildContext context) => ArtistDetailsPage(),
     //concertRoute: (BuildContext context) => ConcertDetailsPage(),
