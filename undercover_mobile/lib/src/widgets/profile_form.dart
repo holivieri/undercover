@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'green_button.dart';
 
@@ -36,24 +37,26 @@ class _ProfileFormState extends State<ProfileForm> {
 
     return Column(
       children: [
-        Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(25),
-              child: InkWell(
-                onTap: () {},
-                child: Container(
-                  height: 300,
-                  width: 600,
-                  color: Colors.black,
-                ),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(25),
+          child: InkWell(
+            onTap: () {},
+            child: Container(
+              height: 150,
+              width: 600,
+              color: Colors.black,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: const [
+                  Text('Subir Foto', style: TextStyle(fontSize: 20)),
+                  Icon(
+                    FontAwesomeIcons.photoVideo,
+                    color: Colors.white,
+                  ),
+                ],
               ),
             ),
-            const Icon(
-              Icons.upload_file_rounded,
-              color: Colors.white,
-            ),
-          ],
+          ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -115,31 +118,36 @@ class _ProfileFormState extends State<ProfileForm> {
     final twitterController = TextEditingController();
     final youtubeController = TextEditingController();
     final facebookController = TextEditingController();
+    final managerContactoController = TextEditingController();
+    final managerController = TextEditingController();
 
     return Column(
       children: [
-        Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(25),
-              child: InkWell(
-                onTap: () {},
-                child: Container(
-                  height: 300,
-                  width: 600,
-                  color: Colors.black,
-                ),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(25),
+          child: InkWell(
+            onTap: () {},
+            child: Container(
+              height: 150,
+              width: 600,
+              color: Colors.black,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: const [
+                  Text('Subir Foto', style: TextStyle(fontSize: 20)),
+                  Icon(
+                    FontAwesomeIcons.photoVideo,
+                    color: Colors.white,
+                  ),
+                ],
               ),
             ),
-            const Icon(
-              Icons.upload_file_rounded,
-              color: Colors.white,
-            ),
-          ],
+          ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
+            maxLength: 200,
             controller: artistController,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
@@ -150,10 +158,34 @@ class _ProfileFormState extends State<ProfileForm> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
+            maxLength: 1000,
+            maxLines: 4,
             controller: biografiaController,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Contanos tu historia',
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextField(
+            maxLength: 100,
+            controller: managerController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Nombre del Manager',
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextField(
+            maxLength: 200,
+            controller: managerContactoController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Email/Telefono del Manager',
             ),
           ),
         ),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:undercover_mobile/src/pages/wizard_step_one_page.dart';
 
 import '../pages/home_page.dart';
-import '../pages/login_page.dart';
 import '../pages/user_proferences_page.dart';
+import '../pages/wizard_step_one_page.dart';
 
 const String homeRoute = '/home';
 const String artistRoute = '/artistDetails';

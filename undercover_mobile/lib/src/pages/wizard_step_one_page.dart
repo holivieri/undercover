@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/are_you_a_bar_owner_widget.dart';
 import '../widgets/are_you_an_artist_widget.dart';
+import '../widgets/profile_form.dart';
 
 class WizardProfile extends StatefulWidget {
   const WizardProfile({Key? key}) : super(key: key);
@@ -12,6 +13,10 @@ class WizardProfile extends StatefulWidget {
 
 class _WizardProfileState extends State<WizardProfile> {
   int _currentStep = 0;
+  bool _isArtist = false;
+  bool _isOwner = false;
+
+  static const TextStyle _headerStyle = TextStyle(fontSize: 24);
 
   StepState _stepState(int step) {
     if (_currentStep > step) {
@@ -23,20 +28,25 @@ class _WizardProfileState extends State<WizardProfile> {
 
   List<Step> _steps() => [
         Step(
-          title: const Text('¿Sos músico o artista?'),
+          title: const Text('¿Sos músico o artista?', style: _headerStyle),
           content: const AreYouAnArtist(),
           state: _stepState(0),
           isActive: _currentStep == 0,
         ),
         Step(
-          title: const Text('¿Tienes un bar y queres invitar músicos a tocar?'),
+          title: const Text('¿Tienes un bar y queres invitar músicos a tocar?',
+              style: _headerStyle),
           state: _stepState(1),
           content: const AreYouABarOwner(),
           isActive: _currentStep == 1,
         ),
         Step(
-          title: const Text('Completa tu información'),
-          content: const AreYouABarOwner(),
+          title: const Text('Completa tu información', style: _headerStyle),
+          content: _isArtist
+              ? const ProfileForm(profile: 'artist')
+              : _isOwner
+                  ? const ProfileForm(profile: 'owner')
+                  : const ProfileForm(profile: 'user'),
           state: _stepState(2),
           isActive: _currentStep == 2,
         ),
@@ -53,22 +63,11 @@ class _WizardProfileState extends State<WizardProfile> {
         controlsBuilder: (BuildContext context, ControlsDetails controls) {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 16),
-            child: Row(
-              children: [
-                if (_currentStep != 0)
-                  TextButton(
-                    onPressed: controls.onStepCancel,
-                    child: const Text(
-                      'BACK',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ),
-                ElevatedButton(
-                  onPressed: controls.onStepContinue,
-                  child: const Text('NEXT'),
-                ),
-              ],
-            ),
+            child: _currentStep == 0
+                ? firstStepButtons(controls)
+                : _currentStep == 1
+                    ? secondStepButtons(controls)
+                    : Container(),
           );
         },
         onStepContinue: () {
@@ -92,6 +91,63 @@ class _WizardProfileState extends State<WizardProfile> {
         currentStep: _currentStep,
         //type: StepperType.horizontal,
       ),
+    );
+  }
+
+  Widget firstStepButtons(ControlsDetails controls) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            setState(() {
+              _isArtist = true;
+              _currentStep = 2;
+            });
+            controls.onStepContinue!;
+          },
+          child: const Text(
+            'SI',
+          ),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            setState(() {
+              _isArtist = false;
+              _currentStep = 1;
+            });
+
+            controls.onStepContinue!;
+          },
+          child: const Text('NO'),
+        ),
+      ],
+    );
+  }
+
+  Widget secondStepButtons(ControlsDetails controls) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            setState(() {
+              _isOwner = true;
+              _currentStep = 2;
+            });
+          },
+          child: const Text('SI'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            setState(() {
+              _isOwner = false;
+              _currentStep = 2;
+            });
+          },
+          child: const Text('NO'),
+        ),
+      ],
     );
   }
 }
