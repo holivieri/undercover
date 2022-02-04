@@ -45,6 +45,8 @@ class PlaceBasicProfile {
     required this.coverPicture,
     required this.country,
     this.standing = 0,
+    this.isArtist = false,
+    this.isPlaceOwner = true,
   });
 
   factory PlaceBasicProfile.fromJson(Map<String, dynamic> json) =>
@@ -77,6 +79,8 @@ class PlaceBasicProfile {
   final String province;
   final String coverPicture;
   final Country country;
+  final bool isPlaceOwner;
+  final bool isArtist;
 
   Map<String, dynamic> toJson() => {
         'name': name,

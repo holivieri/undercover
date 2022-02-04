@@ -134,7 +134,7 @@ namespace Undercover.API.Controllers.V1
             catch (Exception ex)
             {
                 _logger.LogError("Error on Create Profile", ex);
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error on Create Profile");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error on Create Profile. " + ex.Message);
             }
         }
 
