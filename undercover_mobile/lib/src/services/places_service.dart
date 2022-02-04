@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import '../models/place_model.dart';
 
+import '../models/place_model.dart';
+import '../models/place_owner_profile_request_model.dart';
 import '../utils/http.dart';
 
 class PlacesService {
@@ -50,5 +51,24 @@ class PlacesService {
       for (final Map<String, dynamic> _record in _decodedResponse)
         Place.fromJson(_record)
     ];
+  }
+
+  Future<bool> createNewPlaceOwnerProfile(
+    PlaceOwnerProfileRequest placeProfile,
+  ) async {
+    final _apiResponse = await Client().post(
+      Uri.parse('$apiUrl/User/CreateProfile'),
+      headers: returnUndercoverHeaders(),
+      body: jsonEncode(placeProfile),
+    );
+
+    if (_apiResponse.statusCode != 200) {
+      assert(
+        _apiResponse.statusCode == 200,
+        'CreateProfile endpoint is NOT working',
+      );
+      return false;
+    }
+    return true;
   }
 }

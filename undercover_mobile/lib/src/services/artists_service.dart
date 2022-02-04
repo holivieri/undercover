@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:undercover_mobile/src/models/artist_profile_request_model.dart';
 
 import '../models/artist_model.dart';
+import '../models/artist_profile_request_model.dart';
 import '../models/twitter_response_model.dart';
 import '../models/youtube_response_model.dart';
 import '../utils/http.dart';

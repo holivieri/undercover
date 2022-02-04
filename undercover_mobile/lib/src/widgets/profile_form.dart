@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../models/artist_profile_request_model.dart';
+import '../models/place_owner_profile_request_model.dart';
 import '../routes/routes.dart';
 import '../services/artists_service.dart';
+import '../services/places_service.dart';
 import '../utils/app_colors.dart';
 
 class ProfileForm extends StatefulWidget {
@@ -24,6 +26,16 @@ class _ProfileFormState extends State<ProfileForm> {
   final managerController = TextEditingController();
   final soundCloudController = TextEditingController();
   final spotifyController = TextEditingController();
+  final addressController = TextEditingController();
+  final addressNumberController = TextEditingController();
+  final barNameController = TextEditingController();
+  final telefonoController = TextEditingController();
+  final seatsController = TextEditingController();
+  final standingController = TextEditingController();
+  final floorController = TextEditingController();
+  final cityController = TextEditingController();
+  final barDescriptionController = TextEditingController();
+  final provinceController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +55,6 @@ class _ProfileFormState extends State<ProfileForm> {
   }
 
   Widget _showOwnerFields() {
-    final twitterController = TextEditingController();
-    final facebookController = TextEditingController();
-    final addressController = TextEditingController();
-    final barNameController = TextEditingController();
-
     return Column(
       children: [
         ClipRRect(
@@ -84,10 +91,30 @@ class _ProfileFormState extends State<ProfileForm> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
-            controller: addressController,
+            controller: barDescriptionController,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
-              hintText: 'Domicilio',
+              hintText: 'Descripcion',
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextField(
+            controller: cityController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Ciudad',
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextField(
+            controller: provinceController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Provincia',
             ),
           ),
         ),
@@ -95,6 +122,56 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: addressController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Domicilio Calle Nombre',
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextField(
+            controller: addressNumberController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Domicilio Calle Numero',
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextField(
+            controller: floorController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Piso',
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextField(
+            controller: seatsController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Capacidad asientos',
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextField(
+            controller: standingController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Capacidad Parados',
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextField(
+            controller: telefonoController,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Telefono',
@@ -164,7 +241,35 @@ class _ProfileFormState extends State<ProfileForm> {
               await Navigator.pushReplacementNamed(context, homeRoute);
             }
           }
-          if (widget.profile == 'owner') {}
+          if (widget.profile == 'owner') {
+            final PlaceBasicProfile place = PlaceBasicProfile(
+              name: barNameController.text,
+              description: barDescriptionController.text,
+              phoneNumber: telefonoController.text,
+              seats: int.parse(seatsController.text),
+              floor: floorController.text,
+              streetName: addressController.text,
+              streetNumber: addressController.text,
+              city: cityController.text,
+              province: provinceController.text,
+              coverPicture:
+                  'https://s3-media0.fl.yelpcdn.com/bphoto/gf8dBRYYV9n6Zn2OdVflhg/l.jpg',
+              country: Country(
+                name: 'Argentina',
+                id: '0e0d7e2e-6624-4315-89b0-cedf9ae190b3',
+              ),
+            );
+
+            final PlaceOwnerProfileRequest placeProfile =
+                PlaceOwnerProfileRequest(place: place);
+
+            final PlacesService service = PlacesService();
+            final bool result =
+                await service.createNewPlaceOwnerProfile(placeProfile);
+            if (result) {
+              await Navigator.pushReplacementNamed(context, homeRoute);
+            }
+          }
         },
         child: const Text(
           'Register',
