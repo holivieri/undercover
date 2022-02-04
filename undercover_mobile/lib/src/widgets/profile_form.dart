@@ -22,6 +22,8 @@ class _ProfileFormState extends State<ProfileForm> {
   final facebookController = TextEditingController();
   final managerContactoController = TextEditingController();
   final managerController = TextEditingController();
+  final soundCloudController = TextEditingController();
+  final spotifyController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +143,15 @@ class _ProfileFormState extends State<ProfileForm> {
               name: artistController.text,
               bio: biografiaController.text,
               genres: <Genre>[],
-              pictureUrl: 'http://www.test',
+              pictureUrl:
+                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE5v13vHH1y3gQZFczqRvbTozeQmEnUZ9n8w&usqp=CAU',
+              managerName: managerController.text,
+              managerContact: managerContactoController.text,
+              facebookAccount: facebookController.text,
+              youTubeAccount: youtubeController.text,
+              soundCloudAccount: soundCloudController.text,
+              twitterAccount: twitterController.text,
+              spotifyAccount: spotifyController.text,
             );
 
             final ArtistProfileRequest artistProfile =
@@ -154,6 +164,7 @@ class _ProfileFormState extends State<ProfileForm> {
               await Navigator.pushReplacementNamed(context, homeRoute);
             }
           }
+          if (widget.profile == 'owner') {}
         },
         child: const Text(
           'Register',
@@ -239,6 +250,26 @@ class _ProfileFormState extends State<ProfileForm> {
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Cuenta de Twitter',
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextField(
+            controller: soundCloudController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Cuenta de SoundCloud',
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextField(
+            controller: spotifyController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Cuenta de Spotify',
             ),
           ),
         ),
