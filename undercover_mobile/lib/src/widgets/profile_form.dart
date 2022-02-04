@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../models/artist_profile_request_model.dart';
 import '../models/place_owner_profile_request_model.dart';
 import '../routes/routes.dart';
 import '../services/artists_service.dart';
 import '../services/places_service.dart';
+import '../services/user_service.dart';
 import '../utils/app_colors.dart';
 
 class ProfileForm extends StatefulWidget {
@@ -37,6 +41,8 @@ class _ProfileFormState extends State<ProfileForm> {
   final barDescriptionController = TextEditingController();
   final provinceController = TextEditingController();
 
+  XFile? _newPictureFile;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -54,27 +60,46 @@ class _ProfileFormState extends State<ProfileForm> {
     return Column();
   }
 
+  Widget getPicture() {
+    if (_newPictureFile == null) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: const [
+          Text('Subir Foto', style: TextStyle(fontSize: 20)),
+          Icon(
+            FontAwesomeIcons.photoVideo,
+            color: Colors.white,
+          ),
+        ],
+      );
+    }
+    return Image.file(
+      File(_newPictureFile!.path),
+      fit: BoxFit.cover,
+    );
+  }
+
   Widget _showOwnerFields() {
     return Column(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(25),
           child: InkWell(
-            onTap: () {},
+            onTap: () async {
+              final picker = ImagePicker();
+              final XFile? image =
+                  await picker.pickImage(source: ImageSource.gallery);
+              if (image != null) {
+                setState(() {
+                  _newPictureFile = image;
+                });
+              }
+            },
             child: Container(
               height: 150,
               width: 600,
               color: Colors.black,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  Text('Subir Foto', style: TextStyle(fontSize: 20)),
-                  Icon(
-                    FontAwesomeIcons.photoVideo,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
+              child: getPicture(),
             ),
           ),
         ),
@@ -216,12 +241,18 @@ class _ProfileFormState extends State<ProfileForm> {
         ),
         onPressed: () async {
           if (widget.profile == 'artist') {
+            final service = ArtistService();
+            String? photoUrl;
+
+            if (_newPictureFile != null) {
+              photoUrl = await UserService().uploadImage(_newPictureFile!.path);
+            }
+
             final ArtistBasicProfile artist = ArtistBasicProfile(
               name: artistController.text,
               bio: biografiaController.text,
               genres: <Genre>[],
-              pictureUrl:
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE5v13vHH1y3gQZFczqRvbTozeQmEnUZ9n8w&usqp=CAU',
+              pictureUrl: photoUrl ?? '',
               managerName: managerController.text,
               managerContact: managerContactoController.text,
               facebookAccount: facebookController.text,
@@ -234,7 +265,6 @@ class _ProfileFormState extends State<ProfileForm> {
             final ArtistProfileRequest artistProfile =
                 ArtistProfileRequest(artist: artist);
 
-            final service = ArtistService();
             final result = await service.createNewArtistProfile(artistProfile);
 
             if (result) {
@@ -242,6 +272,12 @@ class _ProfileFormState extends State<ProfileForm> {
             }
           }
           if (widget.profile == 'owner') {
+            String? photoUrl;
+
+            if (_newPictureFile != null) {
+              photoUrl = await UserService().uploadImage(_newPictureFile!.path);
+            }
+
             final PlaceBasicProfile place = PlaceBasicProfile(
               name: barNameController.text,
               description: barDescriptionController.text,
@@ -252,7 +288,7 @@ class _ProfileFormState extends State<ProfileForm> {
               streetNumber: addressController.text,
               city: cityController.text,
               province: provinceController.text,
-              coverPicture:
+              coverPicture: photoUrl ??
                   'https://s3-media0.fl.yelpcdn.com/bphoto/gf8dBRYYV9n6Zn2OdVflhg/l.jpg',
               country: Country(
                 name: 'Argentina',
@@ -285,21 +321,21 @@ class _ProfileFormState extends State<ProfileForm> {
         ClipRRect(
           borderRadius: BorderRadius.circular(25),
           child: InkWell(
-            onTap: () {},
+            onTap: () async {
+              final picker = ImagePicker();
+              final XFile? image =
+                  await picker.pickImage(source: ImageSource.gallery);
+              if (image != null) {
+                setState(() {
+                  _newPictureFile = image;
+                });
+              }
+            },
             child: Container(
               height: 150,
               width: 600,
               color: Colors.black,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  Text('Subir Foto', style: TextStyle(fontSize: 20)),
-                  Icon(
-                    FontAwesomeIcons.photoVideo,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
+              child: getPicture(),
             ),
           ),
         ),

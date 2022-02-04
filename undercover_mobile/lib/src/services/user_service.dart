@@ -6,6 +6,7 @@ import '../errors/login_error.dart';
 import '../models/login_response_model.dart';
 import '../models/user_preferences.dart';
 import '../utils/http.dart';
+import 'package:cloudinary_public/cloudinary_public.dart';
 
 class UserService {
   String validatePasswordRules(String? password) {
@@ -50,5 +51,23 @@ class UserService {
     );
 
     return user;
+  }
+
+  Future<String?> uploadImage(String photoPath) async {
+    CloudinaryResponse response;
+    try {
+      final cloudinary = CloudinaryPublic('holivieri', 'undercover');
+      response = await cloudinary.uploadFile(
+        CloudinaryFile.fromFile(
+          photoPath,
+          resourceType: CloudinaryResourceType.Image,
+        ),
+      );
+      return response.secureUrl;
+    } on CloudinaryException catch (e) {
+      print(e.message);
+      print(e.request);
+      return '';
+    }
   }
 }
