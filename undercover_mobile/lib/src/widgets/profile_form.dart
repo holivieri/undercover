@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'green_button.dart';
+import '../models/artist_profile_request_model.dart';
+import '../routes/routes.dart';
+import '../services/artists_service.dart';
+import '../utils/app_colors.dart';
 
 class ProfileForm extends StatefulWidget {
   const ProfileForm({required this.profile, Key? key}) : super(key: key);
@@ -12,6 +15,14 @@ class ProfileForm extends StatefulWidget {
 }
 
 class _ProfileFormState extends State<ProfileForm> {
+  final artistController = TextEditingController();
+  final biografiaController = TextEditingController();
+  final twitterController = TextEditingController();
+  final youtubeController = TextEditingController();
+  final facebookController = TextEditingController();
+  final managerContactoController = TextEditingController();
+  final managerController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,7 +31,7 @@ class _ProfileFormState extends State<ProfileForm> {
         if (widget.profile == 'owner') _showOwnerFields(),
         if (widget.profile == 'user') _showUserFields(),
         const SizedBox(height: 25),
-        const GreenButton(label: 'Registrar'),
+        _registerProfileButton(),
       ],
     );
   }
@@ -112,15 +123,47 @@ class _ProfileFormState extends State<ProfileForm> {
     );
   }
 
-  Widget _showArtistFields() {
-    final artistController = TextEditingController();
-    final biografiaController = TextEditingController();
-    final twitterController = TextEditingController();
-    final youtubeController = TextEditingController();
-    final facebookController = TextEditingController();
-    final managerContactoController = TextEditingController();
-    final managerController = TextEditingController();
+  Widget _registerProfileButton() {
+    return Container(
+      height: 50,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: greenButtonColor,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          textStyle: const TextStyle(
+            fontSize: 20,
+            color: Colors.white, //Theme.of(context).primaryColor,
+          ),
+        ),
+        onPressed: () async {
+          if (widget.profile == 'artist') {
+            final ArtistBasicProfile artist = ArtistBasicProfile(
+              name: artistController.text,
+              bio: biografiaController.text,
+              genres: <Genre>[],
+              pictureUrl: 'http://www.test',
+            );
 
+            final ArtistProfileRequest artistProfile =
+                ArtistProfileRequest(artist: artist);
+
+            final service = ArtistService();
+            final result = await service.createNewArtistProfile(artistProfile);
+
+            if (result) {
+              await Navigator.pushReplacementNamed(context, homeRoute);
+            }
+          }
+        },
+        child: const Text(
+          'Register',
+          style: TextStyle(backgroundColor: buttonColor),
+        ),
+      ),
+    );
+  }
+
+  Widget _showArtistFields() {
     return Column(
       children: [
         ClipRRect(
