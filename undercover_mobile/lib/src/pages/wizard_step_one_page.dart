@@ -99,6 +99,12 @@ class _WizardProfileState extends State<WizardProfile> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.green,
+            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 25),
+            textStyle:
+                const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          ),
           onPressed: () {
             setState(() {
               _isArtist = true;
@@ -111,6 +117,12 @@ class _WizardProfileState extends State<WizardProfile> {
           ),
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.red,
+            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 25),
+            textStyle:
+                const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          ),
           onPressed: () {
             setState(() {
               _isArtist = false;
@@ -130,6 +142,12 @@ class _WizardProfileState extends State<WizardProfile> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.green,
+            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 25),
+            textStyle:
+                const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          ),
           onPressed: () {
             setState(() {
               _isOwner = true;
@@ -139,6 +157,12 @@ class _WizardProfileState extends State<WizardProfile> {
           child: const Text('SI'),
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.red,
+            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 25),
+            textStyle:
+                const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          ),
           onPressed: () {
             setState(() {
               _isOwner = false;

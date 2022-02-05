@@ -77,7 +77,9 @@ class UserPreferences {
   }
 
   myProfile get profile {
-    switch (_userPreferences!.getString('profile')) {
+    final String role = _userPreferences!.getString('profile') ?? 'none';
+
+    switch (role) {
       case 'artist':
         return myProfile.artist;
       case 'owner':

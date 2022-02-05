@@ -107,6 +107,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: barNameController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Nombre del Bar',
@@ -117,6 +118,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: barDescriptionController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Descripcion',
@@ -127,6 +129,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: cityController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Ciudad',
@@ -137,6 +140,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: provinceController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Provincia',
@@ -147,6 +151,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: addressController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Domicilio Calle Nombre',
@@ -157,6 +162,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: addressNumberController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Domicilio Calle Numero',
@@ -167,6 +173,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: floorController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Piso',
@@ -177,6 +184,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: seatsController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Capacidad asientos',
@@ -187,6 +195,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: standingController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Capacidad Parados',
@@ -197,6 +206,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: telefonoController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Telefono',
@@ -207,6 +217,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: twitterController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Cuenta de Twitter',
@@ -217,6 +228,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: facebookController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Cuenta de Facebook',
@@ -343,6 +355,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             maxLength: 200,
+            autocorrect: false,
             controller: artistController,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
@@ -355,6 +368,7 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             maxLength: 1000,
             maxLines: 4,
+            autocorrect: false,
             controller: biografiaController,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
@@ -366,6 +380,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             maxLength: 100,
+            autocorrect: false,
             controller: managerController,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
@@ -377,6 +392,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             maxLength: 200,
+            autocorrect: false,
             controller: managerContactoController,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
@@ -388,6 +404,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: twitterController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Cuenta de Twitter',
@@ -398,6 +415,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: soundCloudController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Cuenta de SoundCloud',
@@ -408,6 +426,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: spotifyController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Cuenta de Spotify',
@@ -418,6 +437,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: facebookController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Cuenta de Facebook',
@@ -428,6 +448,7 @@ class _ProfileFormState extends State<ProfileForm> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
             controller: youtubeController,
+            autocorrect: false,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Cuenta de Youtube',
