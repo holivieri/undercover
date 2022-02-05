@@ -1,12 +1,12 @@
 import 'dart:convert';
 
+import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:http/http.dart';
 
 import '../errors/login_error.dart';
 import '../models/login_response_model.dart';
 import '../models/user_preferences.dart';
 import '../utils/http.dart';
-import 'package:cloudinary_public/cloudinary_public.dart';
 
 class UserService {
   String validatePasswordRules(String? password) {

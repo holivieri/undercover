@@ -4,6 +4,7 @@ import 'package:http/http.dart';
 
 import '../models/place_model.dart';
 import '../models/place_owner_profile_request_model.dart';
+import '../models/user_preferences.dart';
 import '../utils/http.dart';
 
 class PlacesService {
@@ -69,6 +70,7 @@ class PlacesService {
       );
       return false;
     }
+    UserPreferences().profile = myProfile.owner;
     return true;
   }
 }

@@ -5,6 +5,7 @@ import 'package:http/http.dart';
 import '../models/artist_model.dart';
 import '../models/artist_profile_request_model.dart';
 import '../models/twitter_response_model.dart';
+import '../models/user_preferences.dart';
 import '../models/youtube_response_model.dart';
 import '../utils/http.dart';
 
@@ -138,6 +139,8 @@ class ArtistService {
       );
       return false;
     }
+    UserPreferences().profile = myProfile.artist;
+
     return true;
   }
 }
