@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'genre_model.dart';
+
 ArtistProfileRequest artistProfileRequestFromJson(String str) =>
     ArtistProfileRequest.fromJson(json.decode(str));
 
@@ -97,7 +99,7 @@ class ArtistBasicProfile {
       };
 }
 
-class Genre {
+/* class Genre {
   Genre({
     required this.id,
     required this.name,
@@ -115,7 +117,7 @@ class Genre {
         'id': id,
         'name': name,
       };
-}
+} */
 
 class Picture {
   Picture({

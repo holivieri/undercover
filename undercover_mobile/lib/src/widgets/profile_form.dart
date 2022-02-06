@@ -3,14 +3,17 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:undercover_mobile/src/services/genres_service.dart';
 
 import '../models/artist_profile_request_model.dart';
+import '../models/genre_model.dart';
 import '../models/place_owner_profile_request_model.dart';
 import '../routes/routes.dart';
 import '../services/artists_service.dart';
 import '../services/places_service.dart';
 import '../services/user_service.dart';
 import '../utils/app_colors.dart';
+import 'genres_checkbox_list.dart';
 
 class ProfileForm extends StatefulWidget {
   const ProfileForm({required this.profile, Key? key}) : super(key: key);
@@ -40,7 +43,6 @@ class _ProfileFormState extends State<ProfileForm> {
   final cityController = TextEditingController();
   final barDescriptionController = TextEditingController();
   final provinceController = TextEditingController();
-
   XFile? _newPictureFile;
 
   @override
@@ -57,7 +59,29 @@ class _ProfileFormState extends State<ProfileForm> {
   }
 
   Widget _showUserFields() {
-    return Column();
+    return Column(
+      children: [
+        Expanded(
+          child: Container(
+            height: 600,
+            width: 450,
+            child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: FutureBuilder(
+                  future: GenresService().getAllGenres(),
+                  builder: (_, AsyncSnapshot snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      return GenresCheckboxList(genres: snapshot.data);
+                    }
+                  },
+                )),
+          ),
+        ),
+      ],
+    );
   }
 
   Widget getPicture() {
