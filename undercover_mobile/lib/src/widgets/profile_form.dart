@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:undercover_mobile/src/services/genres_service.dart';
+import 'package:undercover_mobile/src/utils/font.dart';
 
 import '../models/artist_profile_request_model.dart';
 import '../models/genre_model.dart';
@@ -61,24 +62,19 @@ class _ProfileFormState extends State<ProfileForm> {
   Widget _showUserFields() {
     return Column(
       children: [
-        Expanded(
-          child: Container(
-            height: 600,
-            width: 450,
-            child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: FutureBuilder(
-                  future: GenresService().getAllGenres(),
-                  builder: (_, AsyncSnapshot snapshot) {
-                    if (!snapshot.hasData) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else {
-                      return GenresCheckboxList(genres: snapshot.data);
-                    }
-                  },
-                )),
-          ),
+        const Text(
+          '¿Que tipo de musica escuchas?',
+          style: TextStyle(fontSize: 22),
+        ),
+        FutureBuilder(
+          future: GenresService().getAllGenres(),
+          builder: (_, AsyncSnapshot snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            } else {
+              return GenresCheckboxList(genres: snapshot.data);
+            }
+          },
         ),
       ],
     );
