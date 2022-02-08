@@ -37,7 +37,7 @@ class LanguageSelector extends StatelessWidget {
         ),
       ],
       cancelButton: CupertinoActionSheetAction(
-        onPressed: () => {},
+        onPressed: () => {Navigator.pop(context)},
         child: Text(S.of(context).cancel),
       ),
     );

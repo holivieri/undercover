@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'country_model.dart';
+
 PlaceOwnerProfileRequest placeOwnerProfileRequestFromJson(String str) =>
     PlaceOwnerProfileRequest.fromJson(json.decode(str));
 
@@ -98,7 +100,7 @@ class PlaceBasicProfile {
       };
 }
 
-class Country {
+/* class Country {
   Country({
     required this.id,
     required this.name,
@@ -116,4 +118,4 @@ class Country {
         'id': id,
         'name': name,
       };
-}
+} */

@@ -6,6 +6,7 @@ import 'package:http/http.dart';
 import '../errors/login_error.dart';
 import '../models/login_response_model.dart';
 import '../models/user_preferences.dart';
+import '../models/user_profile_request_model.dart';
 import '../utils/http.dart';
 
 class UserService {
@@ -17,6 +18,26 @@ class UserService {
       return 'La clave debe tener 6 o mas caracteres';
     }
     return 'Ok';
+  }
+
+  Future<bool> createNewUserProfile(
+    UserProfileRequest userProfile,
+  ) async {
+    final _apiResponse = await Client().post(
+      Uri.parse('$apiUrl/User/CreateProfile'),
+      headers: returnUndercoverHeaders(),
+      body: jsonEncode(userProfile),
+    );
+
+    if (_apiResponse.statusCode != 200) {
+      assert(
+        _apiResponse.statusCode == 200,
+        'CreateProfile endpoint is NOT working',
+      );
+      return false;
+    }
+    UserPreferences().profile = myProfile.owner;
+    return true;
   }
 
   Future<dynamic> login(String userName, String password) async {

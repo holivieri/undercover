@@ -3,14 +3,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:undercover_mobile/src/services/genres_service.dart';
-import 'package:undercover_mobile/src/utils/font.dart';
 
+import '../../generated/l10n.dart';
 import '../models/artist_profile_request_model.dart';
+import '../models/country_model.dart';
 import '../models/genre_model.dart';
 import '../models/place_owner_profile_request_model.dart';
+import '../models/user_profile_request_model.dart';
 import '../routes/routes.dart';
 import '../services/artists_service.dart';
+import '../services/genres_service.dart';
 import '../services/places_service.dart';
 import '../services/user_service.dart';
 import '../utils/app_colors.dart';
@@ -45,6 +47,7 @@ class _ProfileFormState extends State<ProfileForm> {
   final barDescriptionController = TextEditingController();
   final provinceController = TextEditingController();
   XFile? _newPictureFile;
+  final _genresListKey = GlobalKey<GenresCheckboxListState>();
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +65,9 @@ class _ProfileFormState extends State<ProfileForm> {
   Widget _showUserFields() {
     return Column(
       children: [
-        const Text(
-          '¿Que tipo de musica escuchas?',
-          style: TextStyle(fontSize: 22),
+        Text(
+          S.of(context).whatKindOfMusic,
+          style: const TextStyle(fontSize: 22),
         ),
         FutureBuilder(
           future: GenresService().getAllGenres(),
@@ -72,7 +75,10 @@ class _ProfileFormState extends State<ProfileForm> {
             if (!snapshot.hasData) {
               return const Center(child: CircularProgressIndicator());
             } else {
-              return GenresCheckboxList(genres: snapshot.data);
+              return GenresCheckboxList(
+                genres: snapshot.data,
+                key: _genresListKey,
+              );
             }
           },
         ),
@@ -334,6 +340,24 @@ class _ProfileFormState extends State<ProfileForm> {
             final PlacesService service = PlacesService();
             final bool result =
                 await service.createNewPlaceOwnerProfile(placeProfile);
+            if (result) {
+              await Navigator.pushReplacementNamed(context, homeRoute);
+            }
+          }
+
+          if (widget.profile == 'user') {
+            final listOfGenresSelected = _genresListKey
+                .currentState!.selectedGenres.entries
+                .map((e) => MyEntity(id: e.key))
+                .toList();
+            print(listOfGenresSelected.length);
+
+            final UserProfileRequest userRequest =
+                UserProfileRequest(user: User(myGenres: listOfGenresSelected));
+            final UserService userService = UserService();
+
+            final bool result =
+                await userService.createNewUserProfile(userRequest);
             if (result) {
               await Navigator.pushReplacementNamed(context, homeRoute);
             }

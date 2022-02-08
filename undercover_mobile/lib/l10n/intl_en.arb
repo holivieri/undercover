@@ -32,5 +32,6 @@
     "test": "Test",
     "title": "Title",
     "tweets": "Tweets",
-    "videos": "Videos"
+    "videos": "Videos",
+    "whatKindOfMusic": "What kind of music do you like?"
 }

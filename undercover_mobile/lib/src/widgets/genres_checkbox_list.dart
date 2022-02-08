@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../generated/l10n.dart';
 import '../models/genre_model.dart';
 
 class GenresCheckboxList extends StatefulWidget {
@@ -9,11 +8,12 @@ class GenresCheckboxList extends StatefulWidget {
   final List<Genre> genres;
 
   @override
-  State<GenresCheckboxList> createState() => _GenresCheckboxListState();
+  State<GenresCheckboxList> createState() => GenresCheckboxListState();
 }
 
-class _GenresCheckboxListState extends State<GenresCheckboxList> {
-  final Map<String, bool> _selected = {};
+class GenresCheckboxListState extends State<GenresCheckboxList> {
+  final Map<String, bool> _selectedGenres = {};
+  Map<String, bool> get selectedGenres => _selectedGenres;
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +37,13 @@ class _GenresCheckboxListState extends State<GenresCheckboxList> {
         onChanged: (bool? value) {
           setState(() {
             if (value!) {
-              _selected[genre.id] = value;
+              _selectedGenres[genre.id] = value;
             } else {
-              _selected.remove(genre.id);
+              _selectedGenres.remove(genre.id);
             }
           });
         },
-        value: _selected.containsKey(genre.id),
+        value: _selectedGenres.containsKey(genre.id),
       ),
     );
   }
