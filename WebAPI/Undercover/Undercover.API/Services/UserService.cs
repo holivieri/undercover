@@ -125,6 +125,15 @@ namespace Undercover.API.Services
 
             }
             
+            if(!profile.isArtist && !profile.isPlaceOwner)
+            {
+                profile.User.MyGenres.ForEach(g => _dbContext.Entry(g).State = EntityState.Unchanged);
+                user.MyGenres = new List<Genre>();
+
+                user.MyGenres.AddRange(profile.User.MyGenres);
+
+            }
+
             user.Profile = profile;
             _dbContext.SaveChanges();
             return true;
