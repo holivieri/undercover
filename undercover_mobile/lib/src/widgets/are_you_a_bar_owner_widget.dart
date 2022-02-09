@@ -15,10 +15,9 @@ class AreYouABarOwner extends StatelessWidget {
         decoration: const BoxDecoration(
           color: themeBoxBlue,
         ),
-        child: Stack(
-          children: [
-            Image.asset('assets/images/bar.jpg'),
-          ],
+        child: Image.asset(
+          'assets/images/bar.jpg',
+          fit: BoxFit.fill,
         ),
       ),
     );

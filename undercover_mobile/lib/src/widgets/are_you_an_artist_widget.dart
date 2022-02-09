@@ -15,11 +15,7 @@ class AreYouAnArtist extends StatelessWidget {
         decoration: const BoxDecoration(
           color: themeBoxBlue,
         ),
-        child: Stack(
-          children: [
-            Image.asset('assets/images/jazz.png'),
-          ],
-        ),
+        child: Image.asset('assets/images/jazz.png'),
       ),
     );
   }
