@@ -1,4 +1,5 @@
 {
+    "areYouAnArtist": "¿Sos músico o artista?",
     "availableLanguages": "Idiomas disponibles",
     "bio": "Bio",
     "cancel": "Cancelar",
@@ -8,8 +9,10 @@
     "errorArtistNotFound": "Error - Artista no encontradp",
     "errorConcertNotFound": "Error - Concierto no encontrado",
     "errorLoadingVideos": "Error - No encontramos videos",
+    "fillInYourInformation": "Completa tu información",
     "followers": "Seguidores",
     "genres": "Estilos",
+    "haveABar": "¿Tienes un bar y queres invitar músicos a tocar?",
     "home": "Inicio",
     "iGo": "Asistire",
     "langEnglish": "Ingles",
@@ -21,6 +24,7 @@
     "myPlaces": "Bares y Fondas",
     "newNotification": "Tenes una nueva notificación",
     "nextConcerts": "Próximos Conciertos",
+    "no": "No",
     "noNotifications": "No hay notificaciones",
     "notifications": "Avisos",
     "or": "ó",
@@ -32,5 +36,7 @@
     "title": "Titulo",
     "tweets": "Tweets",
     "videos": "Videos",
-    "whatKindOfMusic": "¿Que estilo de música te gusta?"
+    "whatKindOfMusic": "¿Que estilo de música te gusta?",
+    "welcome": "Bienvenido",
+    "yes": "Si"
 }

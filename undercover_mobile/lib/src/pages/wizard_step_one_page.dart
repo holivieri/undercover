@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../generated/l10n.dart';
 import '../widgets/are_you_a_bar_owner_widget.dart';
 import '../widgets/are_you_an_artist_widget.dart';
 import '../widgets/profile_form.dart';
@@ -28,20 +29,19 @@ class _WizardProfileState extends State<WizardProfile> {
 
   List<Step> _steps() => [
         Step(
-          title: const Text('¿Sos músico o artista?', style: _headerStyle),
+          title: Text(S.of(context).areYouAnArtist, style: _headerStyle),
           content: const AreYouAnArtist(),
           state: _stepState(0),
           isActive: _currentStep == 0,
         ),
         Step(
-          title: const Text('¿Tienes un bar y queres invitar músicos a tocar?',
-              style: _headerStyle),
+          title: Text(S.of(context).haveABar, style: _headerStyle),
           state: _stepState(1),
           content: const AreYouABarOwner(),
           isActive: _currentStep == 1,
         ),
         Step(
-          title: const Text('Completa tu información', style: _headerStyle),
+          title: Text(S.of(context).fillInYourInformation, style: _headerStyle),
           content: _isArtist
               ? const ProfileForm(profile: 'artist')
               : _isOwner
@@ -56,7 +56,7 @@ class _WizardProfileState extends State<WizardProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bienvenido'),
+        title: Text(S.of(context).welcome),
       ),
       body: Stepper(
         steps: _steps(),
@@ -112,8 +112,8 @@ class _WizardProfileState extends State<WizardProfile> {
             });
             controls.onStepContinue!;
           },
-          child: const Text(
-            'SI',
+          child: Text(
+            S.of(context).yes,
           ),
         ),
         ElevatedButton(
@@ -131,7 +131,7 @@ class _WizardProfileState extends State<WizardProfile> {
 
             controls.onStepContinue!;
           },
-          child: const Text('NO'),
+          child: Text(S.of(context).no),
         ),
       ],
     );
@@ -154,7 +154,7 @@ class _WizardProfileState extends State<WizardProfile> {
               _currentStep = 2;
             });
           },
-          child: const Text('SI'),
+          child: Text(S.of(context).yes),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -169,7 +169,7 @@ class _WizardProfileState extends State<WizardProfile> {
               _currentStep = 2;
             });
           },
-          child: const Text('NO'),
+          child: Text(S.of(context).no),
         ),
       ],
     );

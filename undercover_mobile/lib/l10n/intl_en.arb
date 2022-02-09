@@ -1,4 +1,5 @@
 {
+    "areYouAnArtist": "Are you an artist?",
     "availableLanguages": "Available Languages",
     "bio": "Bio",
     "cancel": "Cancel",
@@ -8,8 +9,10 @@
     "errorArtistNotFound": "Error - Artist not found",
     "errorConcertNotFound": "Error - Concert not found",
     "errorLoadingVideos": "Error - Cannot find any video",
+    "fillInYourInformation": "Fill in your information",
     "followers": "Followers",
     "genres": "Genres",
+    "haveABar": "Do you have a bar and want artists to present there?",
     "home": "Home",
     "iGo": "I'll go",
     "langEnglish": "English",
@@ -21,6 +24,7 @@
     "myPlaces": "My Rocking places",
     "newNotification": "You have a new notification",
     "nextConcerts": "Next Concerts",
+    "no": "No",
     "noNotifications": "There is no notifications",
     "notifications": "Notifications",
     "or": "or",
@@ -33,5 +37,7 @@
     "title": "Title",
     "tweets": "Tweets",
     "videos": "Videos",
-    "whatKindOfMusic": "What kind of music do you like?"
+    "whatKindOfMusic": "What kind of music do you like?",
+    "welcome": "Welcome",
+    "yes": "Yes"
 }
