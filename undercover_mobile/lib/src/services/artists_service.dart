@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 import '../models/artist_model.dart';
+import '../models/artist_profile_request_model.dart';
 import '../models/twitter_response_model.dart';
+import '../models/user_preferences.dart';
 import '../models/youtube_response_model.dart';
 import '../utils/http.dart';
 
@@ -119,5 +121,26 @@ class ArtistService {
       for (final Map<String, dynamic> _record in _decodedResponse)
         Artist.fromJson(_record)
     ];
+  }
+
+  Future<bool> createNewArtistProfile(
+    ArtistProfileRequest artistProfile,
+  ) async {
+    final _apiResponse = await Client().post(
+      Uri.parse('$apiUrl/User/CreateProfile'),
+      headers: returnUndercoverHeaders(),
+      body: jsonEncode(artistProfile),
+    );
+
+    if (_apiResponse.statusCode != 200) {
+      assert(
+        _apiResponse.statusCode == 200,
+        'CreateProfile endpoint is NOT working',
+      );
+      return false;
+    }
+    UserPreferences().profile = myProfile.artist;
+
+    return true;
   }
 }

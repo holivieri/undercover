@@ -10,6 +10,7 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  cloudinary_public: ^0.11.0
   firebase_core: ^1.10.6
   firebase_messaging: ^11.2.4
   flutter:
@@ -25,6 +26,7 @@ dependencies:
   get: ^4.6.1
   google_sign_in: ^5.2.3
   http: ^0.13.4
+  image_picker: ^0.8.4+6
   provider: ^6.0.1
   shared_preferences: ^2.0.9
 

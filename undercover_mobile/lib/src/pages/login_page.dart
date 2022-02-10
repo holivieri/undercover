@@ -70,7 +70,11 @@ class _LoginPageState extends State<LoginPage> {
             UserPreferences().tokenExpirationDate =
                 state.user.expiration.toString();
 
-            Navigator.pushNamed(context, homeRoute);
+            if (UserPreferences().profile == myProfile.none) {
+              Navigator.pushReplacementNamed(context, createProfileRoute);
+            } else {
+              Navigator.pushReplacementNamed(context, homeRoute);
+            }
           }
           if (state is ValidatingUser) {
             showDialog(
