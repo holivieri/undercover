@@ -12,8 +12,8 @@ class GenresCheckboxList extends StatefulWidget {
 }
 
 class GenresCheckboxListState extends State<GenresCheckboxList> {
-  final Map<String, bool> _selectedGenres = {};
-  Map<String, bool> get selectedGenres => _selectedGenres;
+  final Map<String, Genre> _selectedGenres = {};
+  Map<String, Genre> get selectedGenres => _selectedGenres;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,10 @@ class GenresCheckboxListState extends State<GenresCheckboxList> {
         onChanged: (bool? value) {
           setState(() {
             if (value!) {
-              _selectedGenres[genre.id] = value;
+              _selectedGenres[genre.id] = Genre(
+                id: genre.id,
+                name: genre.name,
+              );
             } else {
               _selectedGenres.remove(genre.id);
             }

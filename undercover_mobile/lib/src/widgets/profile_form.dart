@@ -348,7 +348,7 @@ class _ProfileFormState extends State<ProfileForm> {
           if (widget.profile == 'user') {
             final listOfGenresSelected = _genresListKey
                 .currentState!.selectedGenres.entries
-                .map((e) => MyEntity(id: e.key))
+                .map((e) => Genre(id: e.key, name: e.value.name))
                 .toList();
             print(listOfGenresSelected.length);
 

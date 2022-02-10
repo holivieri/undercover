@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:undercover_mobile/src/models/genre_model.dart';
+
 UserProfileRequest userProfileRequestFromJson(String str) =>
     UserProfileRequest.fromJson(json.decode(str));
 
@@ -49,13 +51,12 @@ class User {
                 json['myPlaces'].map((x) => MyEntity.fromJson(x))),
         myGenres: json['myGenres'] == null
             ? null
-            : List<MyEntity>.from(
-                json['myGenres'].map((x) => MyEntity.fromJson(x))),
+            : List<Genre>.from(json['myGenres'].map((x) => Genre.fromJson(x))),
       );
 
   final List<MyEntity>? myArtists;
   final List<MyEntity>? myPlaces;
-  final List<MyEntity>? myGenres;
+  final List<Genre>? myGenres;
 
   Map<String, dynamic> toJson() => {
         'myArtists': myArtists != null

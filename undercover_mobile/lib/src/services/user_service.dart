@@ -36,7 +36,7 @@ class UserService {
       );
       return false;
     }
-    UserPreferences().profile = myProfile.owner;
+    UserPreferences().profile = myProfile.user;
     return true;
   }
 
