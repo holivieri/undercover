@@ -85,9 +85,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: Container(
                     height: 200,
                     width: 400,
-                    child: const AlertDialog(
-                      title: Text('Ingresando...'),
-                      content: CircularProgressIndicator(),
+                    child: AlertDialog(
+                      title: Text(S.of(context).pleaseWait),
+                      content: const CircularProgressIndicator(),
                     ),
                   ),
                 );
@@ -286,6 +286,7 @@ class _LoginPageState extends State<LoginPage> {
                   color: greenButtonColor,
                 ),
               ),
+              style: const TextStyle(color: Colors.white),
               scrollPhysics: const ClampingScrollPhysics(),
               textInputAction: TextInputAction.done,
               controller: txtUser,
@@ -306,6 +307,7 @@ class _LoginPageState extends State<LoginPage> {
                   color: greenButtonColor,
                 ),
               ),
+              style: const TextStyle(color: Colors.white),
               scrollPhysics: const ClampingScrollPhysics(),
               textInputAction: TextInputAction.done,
               obscureText: true,

@@ -20,6 +20,23 @@ class UserService {
     return 'Ok';
   }
 
+  void saveUserProfileToLocal(String profile) {
+    switch (profile) {
+      case 'user':
+        UserPreferences().profile = myProfile.user;
+        break;
+      case 'artist':
+        UserPreferences().profile = myProfile.artist;
+        break;
+      case 'owner':
+        UserPreferences().profile = myProfile.owner;
+        break;
+      default:
+        UserPreferences().profile = myProfile.none;
+        break;
+    }
+  }
+
   Future<bool> createNewUserProfile(
     UserProfileRequest userProfile,
   ) async {
@@ -70,6 +87,8 @@ class UserService {
         _apiResponse.body,
       ),
     );
+
+    UserService().saveUserProfileToLocal(user.userProfile);
 
     return user;
   }

@@ -66,18 +66,21 @@ namespace Undercover.API.Services
                 .Where(u => u.Id == userId).FirstOrDefault();
         }
 
-        public bool CheckProfile(string userId)
+        public string CheckProfile(string userId)
         {
-            var user = _dbContext.Users.Find(userId);
+            var user = _dbContext.Users.Include(p => p.Profile).Where(u => u.Id == userId).SingleOrDefault();
             if (user == null)
             {
-                return false;
+                return "none";
             }
             if(user.Profile == null)
             {
-                return false;
+                return "none";
             }
-            return true;
+            if (user.Profile.isUser) return "user";
+            if (user.Profile.isPlaceOwner) return "owner";
+            if (user.Profile.isArtist) return "artist";
+            return "none";
         }
 
         public bool CreateProfile(string userId, Profile profile)

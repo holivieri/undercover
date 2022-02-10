@@ -8,6 +8,7 @@ import '../errors/login_error.dart';
 import '../models/login_response_model.dart';
 import '../models/user_preferences.dart';
 import '../utils/http.dart';
+import 'user_service.dart';
 
 class SocialSignInService {
   void test() {}
@@ -52,6 +53,7 @@ class SocialSignInService {
           _apiResponse.body,
         ),
       );
+      UserService().saveUserProfileToLocal(user.userProfile);
       return user;
     }
     return LoginError(
@@ -95,7 +97,7 @@ class SocialSignInService {
           _apiResponse.body,
         ),
       );
-
+      UserService().saveUserProfileToLocal(user.userProfile);
       return user;
     } on Exception catch (error) {
       print(error);

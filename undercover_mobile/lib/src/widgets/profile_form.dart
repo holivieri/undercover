@@ -37,7 +37,6 @@ class _ProfileFormState extends State<ProfileForm> {
   final soundCloudController = TextEditingController();
   final spotifyController = TextEditingController();
   final addressController = TextEditingController();
-  final addressNumberController = TextEditingController();
   final barNameController = TextEditingController();
   final telefonoController = TextEditingController();
   final seatsController = TextEditingController();
@@ -90,9 +89,12 @@ class _ProfileFormState extends State<ProfileForm> {
     if (_newPictureFile == null) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: const [
-          Text('Subir Foto', style: TextStyle(fontSize: 20)),
-          Icon(
+        children: [
+          Text(
+            S.of(context).uploadPicture,
+            style: const TextStyle(fontSize: 20),
+          ),
+          const Icon(
             FontAwesomeIcons.photoVideo,
             color: Colors.white,
           ),
@@ -134,9 +136,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: barNameController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Nombre del Bar',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).barName,
             ),
           ),
         ),
@@ -145,9 +147,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: barDescriptionController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Descripcion',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).description,
             ),
           ),
         ),
@@ -156,9 +158,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: cityController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Ciudad',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).city,
             ),
           ),
         ),
@@ -167,9 +169,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: provinceController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Provincia',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).province,
             ),
           ),
         ),
@@ -178,20 +180,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: addressController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Domicilio Calle Nombre',
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: TextField(
-            controller: addressNumberController,
-            autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Domicilio Calle Numero',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).addressStreet,
             ),
           ),
         ),
@@ -200,9 +191,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: floorController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Piso',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).floor,
             ),
           ),
         ),
@@ -211,9 +202,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: seatsController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Capacidad asientos',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).seats,
             ),
           ),
         ),
@@ -222,9 +213,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: standingController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Capacidad Parados',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).standing,
             ),
           ),
         ),
@@ -233,9 +224,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: telefonoController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Telefono',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).phone,
             ),
           ),
         ),
@@ -244,9 +235,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: twitterController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Cuenta de Twitter',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).twitterAccount,
             ),
           ),
         ),
@@ -255,9 +246,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: facebookController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Cuenta de Facebook',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).facebookAccount,
             ),
           ),
         ),
@@ -350,7 +341,6 @@ class _ProfileFormState extends State<ProfileForm> {
                 .currentState!.selectedGenres.entries
                 .map((e) => Genre(id: e.key, name: e.value.name))
                 .toList();
-            print(listOfGenresSelected.length);
 
             final UserProfileRequest userRequest =
                 UserProfileRequest(user: User(myGenres: listOfGenresSelected));
@@ -363,9 +353,9 @@ class _ProfileFormState extends State<ProfileForm> {
             }
           }
         },
-        child: const Text(
-          'Register',
-          style: TextStyle(backgroundColor: buttonColor),
+        child: Text(
+          S.of(context).register,
+          style: const TextStyle(backgroundColor: buttonColor),
         ),
       ),
     );
@@ -401,9 +391,9 @@ class _ProfileFormState extends State<ProfileForm> {
             maxLength: 200,
             autocorrect: false,
             controller: artistController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Nombre del Artista o Banda',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).artistName,
             ),
           ),
         ),
@@ -414,9 +404,9 @@ class _ProfileFormState extends State<ProfileForm> {
             maxLines: 4,
             autocorrect: false,
             controller: biografiaController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Contanos tu historia',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).tellUsAboutYou,
             ),
           ),
         ),
@@ -426,9 +416,9 @@ class _ProfileFormState extends State<ProfileForm> {
             maxLength: 100,
             autocorrect: false,
             controller: managerController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Nombre del Manager',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).managerName,
             ),
           ),
         ),
@@ -438,9 +428,9 @@ class _ProfileFormState extends State<ProfileForm> {
             maxLength: 200,
             autocorrect: false,
             controller: managerContactoController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Email/Telefono del Manager',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).managerContactInformation,
             ),
           ),
         ),
@@ -449,9 +439,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: twitterController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Cuenta de Twitter',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).twitterAccount,
             ),
           ),
         ),
@@ -460,9 +450,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: soundCloudController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Cuenta de SoundCloud',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).soundCloud,
             ),
           ),
         ),
@@ -471,9 +461,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: spotifyController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Cuenta de Spotify',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).spotifyAccount,
             ),
           ),
         ),
@@ -482,9 +472,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: facebookController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Cuenta de Facebook',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).facebookAccount,
             ),
           ),
         ),
@@ -493,11 +483,24 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: youtubeController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Cuenta de Youtube',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).youtubeAccount,
             ),
           ),
+        ),
+        FutureBuilder(
+          future: GenresService().getAllGenres(),
+          builder: (_, AsyncSnapshot snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            } else {
+              return GenresCheckboxList(
+                genres: snapshot.data,
+                key: _genresListKey,
+              );
+            }
+          },
         ),
       ],
     );

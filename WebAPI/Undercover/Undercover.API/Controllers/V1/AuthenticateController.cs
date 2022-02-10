@@ -206,7 +206,7 @@ namespace Undercover.API.Controllers.V1
             {
                 UserId = Guid.Parse(userId),
                 UserName = UserModel.Email,
-                UserRoles = myRoles,
+                UserProfile = _userService.CheckProfile(user.Id),
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 Expiration = expiration,
             };
@@ -249,6 +249,7 @@ namespace Undercover.API.Controllers.V1
                 Email = user.Email,
                 Platform = platform,
                 DeviceToken = deviceToken,
+                UserRole = _userService.CheckProfile(user.Id),
             };
             return BuildToken(userModel, user.Id).Result;
         }
@@ -302,7 +303,7 @@ namespace Undercover.API.Controllers.V1
                         Email = user.Email,
                         DeviceToken = deviceToken,
                         Platform = platform,
-                        UserRole = "user",
+                        UserRole = _userService.CheckProfile(user.Id),
                     };
                     return BuildToken(userModel, user.Id).Result;
                 }
