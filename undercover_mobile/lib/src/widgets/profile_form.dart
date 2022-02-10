@@ -37,7 +37,6 @@ class _ProfileFormState extends State<ProfileForm> {
   final soundCloudController = TextEditingController();
   final spotifyController = TextEditingController();
   final addressController = TextEditingController();
-  final addressNumberController = TextEditingController();
   final barNameController = TextEditingController();
   final telefonoController = TextEditingController();
   final seatsController = TextEditingController();
@@ -90,9 +89,12 @@ class _ProfileFormState extends State<ProfileForm> {
     if (_newPictureFile == null) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: const [
-          Text('Subir Foto', style: TextStyle(fontSize: 20)),
-          Icon(
+        children: [
+          Text(
+            S.of(context).uploadPicture,
+            style: const TextStyle(fontSize: 20),
+          ),
+          const Icon(
             FontAwesomeIcons.photoVideo,
             color: Colors.white,
           ),
@@ -134,9 +136,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: barNameController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Nombre del Bar',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).barName,
             ),
           ),
         ),
@@ -167,9 +169,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: provinceController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Provincia',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).province,
             ),
           ),
         ),
@@ -178,20 +180,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: addressController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Domicilio Calle Nombre',
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: TextField(
-            controller: addressNumberController,
-            autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Domicilio Calle Numero',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).addressStreet,
             ),
           ),
         ),
@@ -200,9 +191,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: floorController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Piso',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).floor,
             ),
           ),
         ),
@@ -211,9 +202,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: seatsController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Capacidad asientos',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).seats,
             ),
           ),
         ),
@@ -222,9 +213,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: standingController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Capacidad Parados',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).standing,
             ),
           ),
         ),
@@ -362,9 +353,9 @@ class _ProfileFormState extends State<ProfileForm> {
             }
           }
         },
-        child: const Text(
-          'Register',
-          style: TextStyle(backgroundColor: buttonColor),
+        child: Text(
+          S.of(context).register,
+          style: const TextStyle(backgroundColor: buttonColor),
         ),
       ),
     );

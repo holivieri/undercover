@@ -85,9 +85,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: Container(
                     height: 200,
                     width: 400,
-                    child: const AlertDialog(
-                      title: Text('Ingresando...'),
-                      content: CircularProgressIndicator(),
+                    child: AlertDialog(
+                      title: Text(S.of(context).pleaseWait),
+                      content: const CircularProgressIndicator(),
                     ),
                   ),
                 );
