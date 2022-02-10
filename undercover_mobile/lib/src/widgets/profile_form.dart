@@ -145,9 +145,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: barDescriptionController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Descripcion',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).description,
             ),
           ),
         ),
@@ -156,9 +156,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: cityController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Ciudad',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).city,
             ),
           ),
         ),
@@ -233,9 +233,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: telefonoController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Telefono',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).phone,
             ),
           ),
         ),
@@ -244,9 +244,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: twitterController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Cuenta de Twitter',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).twitterAccount,
             ),
           ),
         ),
@@ -255,9 +255,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: facebookController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Cuenta de Facebook',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).facebookAccount,
             ),
           ),
         ),
@@ -350,7 +350,6 @@ class _ProfileFormState extends State<ProfileForm> {
                 .currentState!.selectedGenres.entries
                 .map((e) => Genre(id: e.key, name: e.value.name))
                 .toList();
-            print(listOfGenresSelected.length);
 
             final UserProfileRequest userRequest =
                 UserProfileRequest(user: User(myGenres: listOfGenresSelected));
@@ -401,9 +400,9 @@ class _ProfileFormState extends State<ProfileForm> {
             maxLength: 200,
             autocorrect: false,
             controller: artistController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Nombre del Artista o Banda',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).artistName,
             ),
           ),
         ),
@@ -414,9 +413,9 @@ class _ProfileFormState extends State<ProfileForm> {
             maxLines: 4,
             autocorrect: false,
             controller: biografiaController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Contanos tu historia',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).tellUsAboutYou,
             ),
           ),
         ),
@@ -426,9 +425,9 @@ class _ProfileFormState extends State<ProfileForm> {
             maxLength: 100,
             autocorrect: false,
             controller: managerController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Nombre del Manager',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).managerName,
             ),
           ),
         ),
@@ -438,9 +437,9 @@ class _ProfileFormState extends State<ProfileForm> {
             maxLength: 200,
             autocorrect: false,
             controller: managerContactoController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Email/Telefono del Manager',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).managerContactInformation,
             ),
           ),
         ),
@@ -449,9 +448,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: twitterController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Cuenta de Twitter',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).twitterAccount,
             ),
           ),
         ),
@@ -460,9 +459,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: soundCloudController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Cuenta de SoundCloud',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).soundCloud,
             ),
           ),
         ),
@@ -471,9 +470,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: spotifyController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Cuenta de Spotify',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).spotifyAccount,
             ),
           ),
         ),
@@ -482,9 +481,9 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: facebookController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Cuenta de Facebook',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).facebookAccount,
             ),
           ),
         ),
@@ -493,11 +492,24 @@ class _ProfileFormState extends State<ProfileForm> {
           child: TextField(
             controller: youtubeController,
             autocorrect: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Cuenta de Youtube',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: S.of(context).youtubeAccount,
             ),
           ),
+        ),
+        FutureBuilder(
+          future: GenresService().getAllGenres(),
+          builder: (_, AsyncSnapshot snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            } else {
+              return GenresCheckboxList(
+                genres: snapshot.data,
+                key: _genresListKey,
+              );
+            }
+          },
         ),
       ],
     );
