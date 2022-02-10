@@ -11,7 +11,7 @@ namespace Undercover.API.Services
         void CreateNotification(Notification notification, Guid userId);
         void SaveDevice(Device device);
         User GetUser(string userId);
-        bool CheckProfile(string userId);
+        string CheckProfile(string userId);
 
         bool CreateProfile(string userId, Profile profile);
     }

@@ -11,7 +11,7 @@ class LoginResponse {
     required this.userName,
     required this.token,
     required this.expiration,
-    required this.userRoles,
+    required this.userProfile,
   });
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
@@ -19,20 +19,20 @@ class LoginResponse {
         userName: json['userName'],
         token: json['token'],
         expiration: DateTime.parse(json['expiration']),
-        userRoles: json['userRoles'],
+        userProfile: json['userProfile'],
       );
 
   final String userId;
   final String userName;
   final String token;
   final DateTime expiration;
-  final String userRoles;
+  final String userProfile;
 
   Map<String, dynamic> toJson() => {
         'userId': userId,
         'userName': userName,
         'token': token,
         'expiration': expiration.toIso8601String(),
-        'userRoles': userRoles,
+        'userProfile': userProfile,
       };
 }

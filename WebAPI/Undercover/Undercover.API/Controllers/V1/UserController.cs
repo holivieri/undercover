@@ -100,26 +100,6 @@ namespace Undercover.API.Controllers.V1
             
         }
 
-        [HttpGet("CheckProfile")]
-        public ActionResult<bool> CheckProfile()
-        {
-            try
-            {
-                // string userId = "9a9c3f4b-240d-4dde-8d93-c95c52a27f51"; //Server //TODO take this one from Token
-
-                string userId = "9a9c3f4b-240d-4dde-8d93-c95c52a27f51"; //Local //TODO take this one from Token
-
-                return Ok(_userService.CheckProfile(userId));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error on Check Profile", ex);
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error on Check Profile");
-            }
-
-            
-        }
-
         [HttpPost("CreateProfile")]
         public ActionResult<bool> CreateProfile(Profile profile)
         {

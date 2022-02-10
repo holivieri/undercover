@@ -10,9 +10,9 @@ namespace Undercover.API.Models
         public DateTime Expiration { get; set; }
         
         /// <summary>
-        /// Roles. Comma separated
+        /// Profiles
         /// </summary>
-        public string UserRoles { get; set; }
+        public string UserProfile { get; set; }
 
     }
 }

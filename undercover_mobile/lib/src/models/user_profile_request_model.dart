@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:undercover_mobile/src/models/genre_model.dart';
+import 'genre_model.dart';
 
 UserProfileRequest userProfileRequestFromJson(String str) =>
     UserProfileRequest.fromJson(json.decode(str));
