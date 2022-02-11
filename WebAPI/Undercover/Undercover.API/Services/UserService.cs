@@ -16,11 +16,11 @@ namespace Undercover.API.Services
             _dbContext = dbContext;
         }
 
-        public void CreateNotification(Notification notification, Guid userId)
+        public void CreateNotification(Notification notification, string userId)
         {
             notification.Id = Guid.NewGuid();
             notification.CreatedDate = DateTime.UtcNow;
-            notification.User = _dbContext.Users.FirstOrDefault(u => u.Id == userId.ToString());
+            notification.User = _dbContext.Users.FirstOrDefault(u => u.Id == userId);
             _dbContext.Notifications.Add(notification);
             _dbContext.SaveChanges();
 

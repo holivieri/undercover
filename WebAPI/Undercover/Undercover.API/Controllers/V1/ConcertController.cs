@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Undercover.API.Entities;
 using Undercover.API.Services;
@@ -85,9 +86,7 @@ namespace Undercover.API.Controllers.V1
         {
             try
             {
-                string userId = "9a9c3f4b-240d-4dde-8d93-c95c52a27f51"; //Server //TODO take this one from Token
-                
-               // string userId = "9a9c3f4b-240d-4dde-8d93-c95c52a27f51"; //Local //TODO take this one from Token
+                string userId = HttpContext.User.Claims.Where(x => x.Type == "UserId").FirstOrDefault().Value;
                 
                 var result = _concertService.SetAssistance(concertId, userId, attendance);
 
@@ -104,11 +103,18 @@ namespace Undercover.API.Controllers.V1
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<bool> CheckUserAttendance(Guid concertId)
         {
-            string userId = "9a9c3f4b-240d-4dde-8d93-c95c52a27f51"; //Server //TODO take this one from Token
+            try
+            {
+                string userId = HttpContext.User.Claims.Where(x => x.Type == "UserId").FirstOrDefault().Value;
 
-            // string userId = "9a9c3f4b-240d-4dde-8d93-c95c52a27f51"; //Local //TODO take this one from Token
-
-           return Ok(_concertService.CheckUserAttendance(userId, concertId));
+                return Ok(_concertService.CheckUserAttendance(userId, concertId));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error checking assistance", ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error checking assistance");
+            }
+            
         }
 
     }
