@@ -92,7 +92,7 @@ class _ProfileFormState extends State<ProfileForm> {
         children: [
           Text(
             S.of(context).uploadPicture,
-            style: const TextStyle(fontSize: 20),
+            style: const TextStyle(fontSize: 20, color: Colors.redAccent),
           ),
           const Icon(
             FontAwesomeIcons.photoVideo,
