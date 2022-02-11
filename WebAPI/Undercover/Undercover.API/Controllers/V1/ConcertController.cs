@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -25,6 +27,7 @@ namespace Undercover.API.Controllers.V1
 
 
         [HttpGet("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<List<Concert>>> Get(Guid id)
         {
             try
@@ -47,6 +50,7 @@ namespace Undercover.API.Controllers.V1
 
         
         [HttpGet("GetNextConcerts")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<List<Concert>>> GetNextConcerts()
         {
             try
@@ -61,6 +65,7 @@ namespace Undercover.API.Controllers.V1
         }
 
         [HttpGet("GetNextConcertsByCity/{city}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<List<Concert>>> GetNextConcertsByCity(string city)
         {
             try
@@ -75,6 +80,7 @@ namespace Undercover.API.Controllers.V1
         }
 
         [HttpPost("SetAssistance")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult SetAssistance(Guid concertId, bool attendance)
         {
             try
@@ -95,6 +101,7 @@ namespace Undercover.API.Controllers.V1
         }
 
         [HttpGet("CheckUserAttendance")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<bool> CheckUserAttendance(Guid concertId)
         {
             string userId = "9a9c3f4b-240d-4dde-8d93-c95c52a27f51"; //Server //TODO take this one from Token

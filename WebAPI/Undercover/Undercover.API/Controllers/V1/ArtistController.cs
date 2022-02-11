@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -32,6 +34,7 @@ namespace Undercover.API.Controllers.V1
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<List<Artist>>> Get()
         {
             try
@@ -53,6 +56,7 @@ namespace Undercover.API.Controllers.V1
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<List<Artist>>> Get(Guid id)
         {
             try
@@ -75,6 +79,7 @@ namespace Undercover.API.Controllers.V1
 
 
         [HttpGet("GetTweets")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetTweets()
         {
             try
@@ -90,6 +95,7 @@ namespace Undercover.API.Controllers.V1
         }
 
         [HttpGet("GetYoutubeVideos")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetYoutubeVideos()
         {
             try
@@ -105,6 +111,7 @@ namespace Undercover.API.Controllers.V1
         }
 
         [HttpGet("Search")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<List<Artist>> Search(string name)
         {
             try

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -22,6 +24,7 @@ namespace Undercover.API.Controllers.V1
         }
 
         [HttpGet("GetNotifications")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<List<Notification>> GetNotifications()
         {
 
@@ -37,6 +40,7 @@ namespace Undercover.API.Controllers.V1
         }
 
         [HttpPost("DeleteNotification")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<Notification> DeleteNotification(Guid notificationId)
         {
             try
@@ -51,6 +55,7 @@ namespace Undercover.API.Controllers.V1
             }
         }
         [HttpPost("CreateNotification")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<Notification> CreateNotification([FromBody] Notification notification)
         {
             try
@@ -66,6 +71,7 @@ namespace Undercover.API.Controllers.V1
         }
 
         [HttpPost("SendPushNotification")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult SendPushNotification([FromBody] string[] emails)
         {
             try
@@ -80,6 +86,7 @@ namespace Undercover.API.Controllers.V1
             }
         }
         [HttpGet("GetUser")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult GetUser()
         {
             try
@@ -101,6 +108,7 @@ namespace Undercover.API.Controllers.V1
         }
 
         [HttpPost("CreateProfile")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<bool> CreateProfile(Profile profile)
         {
             try

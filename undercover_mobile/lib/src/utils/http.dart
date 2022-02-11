@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import '../models/user_preferences.dart';
+
 const String apiUrl = 'https://undercoverrg.azurewebsites.net/api/V1';
 //'https://undercoverrg.azurewebsites.net/api/V1'; //'https://localhost:44320/api/V1';
 
@@ -12,6 +14,6 @@ Map<String, String> returnUndercoverHeaders({
 }) {
   return {
     HttpHeaders.contentTypeHeader: contentType,
-    //HttpHeaders.authorizationHeader: 'Bearer ${_userPreferences.authToken}',
+    HttpHeaders.authorizationHeader: 'Bearer ${UserPreferences().token}',
   };
 }
