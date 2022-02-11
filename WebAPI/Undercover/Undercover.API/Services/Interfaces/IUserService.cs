@@ -8,7 +8,7 @@ namespace Undercover.API.Services
     {
         List<Notification> GetNotifications(string userId);
         void DeleteNotification(Guid notificationId);
-        void CreateNotification(Notification notification, Guid userId);
+        void CreateNotification(Notification notification, string userId);
         void SaveDevice(Device device);
         User GetUser(string userId);
         string CheckProfile(string userId);
