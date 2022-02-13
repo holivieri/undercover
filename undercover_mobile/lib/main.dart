@@ -9,6 +9,7 @@ import 'src/app.dart';
 import 'src/blocs/artists/my_artists_bloc.dart';
 import 'src/blocs/concerts/concerts_bloc.dart';
 import 'src/blocs/genres/genres_bloc.dart';
+import 'src/blocs/gps/gps_bloc.dart';
 import 'src/blocs/notifications/notifications_bloc.dart';
 import 'src/blocs/places/places_bloc.dart';
 import 'src/blocs/users/users_bloc.dart';
@@ -100,6 +101,7 @@ Future<void> main() async {
               NotificationsBloc(_notificationsRepository)
                 ..add(GettingUserNotifications()),
         ),
+        BlocProvider<GpsBloc>(create: (BuildContext context) => GpsBloc()),
       ],
       child: MultiProvider(
         providers: [
