@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:geolocator/geolocator.dart';
@@ -19,21 +21,33 @@ class GpsBloc extends Bloc<GpsEvent, GpsState> {
     _init();
   }
 
+  StreamSubscription? gpsServiceSubscription;
+
   Future<void> _init() async {
-    await _checkGpsStatus();
+    final bool isEnabled = await _checkGpsStatus();
+    add(
+      GpsAndPermissionEvent(
+          isGpsEnabled: isEnabled,
+          isGpsPermissionsGranted: state.isGpsPermissionGranted),
+    );
   }
 
   Future<bool> _checkGpsStatus() async {
     final bool isEnable = await Geolocator.isLocationServiceEnabled();
 
-    Geolocator.getServiceStatusStream().listen((event) {
+    gpsServiceSubscription =
+        Geolocator.getServiceStatusStream().listen((event) {
       final bool isEnabled;
       if (event.index == 1) {
         isEnabled = true;
       } else {
         isEnabled = false;
       }
-      print('service status: $isEnabled');
+      add(
+        GpsAndPermissionEvent(
+            isGpsEnabled: isEnabled,
+            isGpsPermissionsGranted: state.isGpsPermissionGranted),
+      );
     });
 
     return isEnable;
@@ -41,6 +55,7 @@ class GpsBloc extends Bloc<GpsEvent, GpsState> {
 
   @override
   Future<void> close() {
+    gpsServiceSubscription?.cancel();
     return super.close();
   }
 }
