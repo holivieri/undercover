@@ -21,6 +21,7 @@
     "genres": "Genres",
     "gpsAccessTitle": "We need access to your GPS to show you the artists/pubs in your zone",
     "gpsAccessButtonText": "Request Access",
+    "gpsMustBeEnabled": "You must enable the GPS",
     "haveABar": "Do you have a bar and want artists to present there?",
     "home": "Home",
     "iGo": "I'll go",
