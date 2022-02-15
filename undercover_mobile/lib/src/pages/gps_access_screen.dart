@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../generated/l10n.dart';
 import '../blocs/gps/gps_bloc.dart';
 
 class GpsAccessScreen extends StatelessWidget {
@@ -9,16 +10,15 @@ class GpsAccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: BlocBuilder<GpsBloc, GpsState>(
-        builder: (context, state) {
-          return !state.isGpsEnabled
-              ? const _EnableGpsMessage()
-              : const _AccessButton();
-        },
-      )
-          //  _AccessButton(),
-          //  child: _EnableGpsMessage()
-          ),
+      body: Center(
+        child: BlocBuilder<GpsBloc, GpsState>(
+          builder: (context, state) {
+            return !state.isGpsEnabled
+                ? const _EnableGpsMessage()
+                : const _AccessButton();
+          },
+        ),
+      ),
     );
   }
 }
@@ -33,18 +33,24 @@ class _AccessButton extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text('Es necesario el acceso a GPS'),
+        Text(
+          S.of(context).gpsAccessTitle,
+          style: const TextStyle(fontSize: 18),
+        ),
+        const SizedBox(height: 25),
         MaterialButton(
           color: Colors.black,
           shape: const StadiumBorder(),
-          elevation: 0,
+          elevation: 10,
           splashColor: Colors.transparent,
           onPressed: () async {
             final gpsBloc = BlocProvider.of<GpsBloc>(context);
             await gpsBloc.askGpsAccess();
           },
-          child: const Text('Solicitar Acceso',
-              style: TextStyle(color: Colors.white)),
+          child: Text(
+            S.of(context).gpsAccessButtonText,
+            style: const TextStyle(color: Colors.white, fontSize: 24),
+          ),
         )
       ],
     );

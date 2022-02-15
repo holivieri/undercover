@@ -19,6 +19,8 @@
     "floor": "Piso",
     "followers": "Seguidores",
     "genres": "Estilos",
+    "gpsAccessTitle": "Es necesario el acceso a GPS para buscar los artistas y bares en tu zona",
+    "gpsAccessButtonText": "Solicitar Accesso",
     "haveABar": "¿Tienes un bar y queres invitar músicos a tocar?",
     "home": "Inicio",
     "iGo": "Asistire",

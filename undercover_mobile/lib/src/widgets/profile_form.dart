@@ -297,7 +297,7 @@ class _ProfileFormState extends State<ProfileForm> {
             final result = await service.createNewArtistProfile(artistProfile);
 
             if (result) {
-              await Navigator.pushReplacementNamed(context, homeRoute);
+              await Navigator.pushReplacementNamed(context, gpsAccessRoute);
             }
           }
           if (widget.profile == 'owner') {
@@ -332,7 +332,7 @@ class _ProfileFormState extends State<ProfileForm> {
             final bool result =
                 await service.createNewPlaceOwnerProfile(placeProfile);
             if (result) {
-              await Navigator.pushReplacementNamed(context, homeRoute);
+              await Navigator.pushReplacementNamed(context, gpsAccessRoute);
             }
           }
 
@@ -349,7 +349,7 @@ class _ProfileFormState extends State<ProfileForm> {
             final bool result =
                 await userService.createNewUserProfile(userRequest);
             if (result) {
-              await Navigator.pushReplacementNamed(context, homeRoute);
+              await Navigator.pushReplacementNamed(context, gpsAccessRoute);
             }
           }
         },

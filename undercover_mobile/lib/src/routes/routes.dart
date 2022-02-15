@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../pages/gps_access_screen.dart';
 import '../pages/home_page.dart';
 import '../pages/login_page.dart';
 import '../pages/user_proferences_page.dart';
@@ -12,11 +13,13 @@ const String concertRoute = '/concertDetails';
 const String loginRoute = '/';
 const String userPreferencesRoute = '/userPreferences';
 const String createProfileRoute = '/createProfile';
+const String gpsAccessRoute = '/gpsAccess';
 
 Map<String, WidgetBuilder> getApplicationRoutes() {
   return <String, WidgetBuilder>{
     loginRoute: (BuildContext context) => const LoginPage(),
     homeRoute: (BuildContext context) => const HomePage(),
+    gpsAccessRoute: (BuildContext context) => const GpsAccessScreen(),
     createProfileRoute: (BuildContext context) => const WizardProfile(),
     // artistRoute: (BuildContext context) => ArtistDetailsPage(),
     //concertRoute: (BuildContext context) => ConcertDetailsPage(),

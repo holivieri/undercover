@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
             if (UserPreferences().profile == myProfile.none) {
               Navigator.pushReplacementNamed(context, createProfileRoute);
             } else {
-              Navigator.pushReplacementNamed(context, homeRoute);
+              Navigator.pushReplacementNamed(context, gpsAccessRoute);
             }
           }
           if (state is ValidatingUser) {
