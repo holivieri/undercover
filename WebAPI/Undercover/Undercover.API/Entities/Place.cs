@@ -1,6 +1,8 @@
-﻿using System;
+﻿using NetTopologySuite.Geometries;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Undercover.API.Entities
 {
@@ -62,6 +64,13 @@ namespace Undercover.API.Entities
         [Required]
         public long Dislikes { get; set; }
 
+        public Point LatLng { get; set; }
+        
+        [NotMapped]
+        public double? Latitude { get; set; }
+        
+        [NotMapped]
+        public double? Longitude { get; set; }
 
     }
 }

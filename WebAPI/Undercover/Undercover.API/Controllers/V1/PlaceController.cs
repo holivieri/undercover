@@ -41,6 +41,26 @@ namespace Undercover.API.Controllers.V1
         }
 
 
+        [HttpGet("GetByCity")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult> GetByCity(double Latitude, double Longitude, double distance = 25000)
+        {
+            try
+            {
+                
+                var result = _placeService.GetAllPlaces(new NetTopologySuite.Geometries.Point(x: Longitude, y: Latitude), distance);
+
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error on Get by City", ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error getting places by city");
+            }
+        }
+
+
         [HttpGet("{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<List<Place>>> Get(Guid id)

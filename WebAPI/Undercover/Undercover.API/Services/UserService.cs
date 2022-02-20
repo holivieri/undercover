@@ -124,6 +124,11 @@ namespace Undercover.API.Services
                 profile.Place.CreatedDate = DateTime.UtcNow;
                 profile.Place.Dislikes = 0;
                 profile.Place.Likes = 0;
+                if(profile.Place.Latitude.HasValue && profile.Place.Longitude.HasValue)
+                {
+                    profile.Place.LatLng = new NetTopologySuite.Geometries.Point(profile.Place.Longitude.Value, profile.Place.Latitude.Value);
+                }
+                
                 _dbContext.Places.Add(profile.Place);
 
             }

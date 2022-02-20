@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 	<dict>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>Acceso al GPS para buscar artistas y bares en tu zona</string>
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>Acceso a la biblioteca de fotos</string>
 		<key>NSCameraUsageDescription</key>

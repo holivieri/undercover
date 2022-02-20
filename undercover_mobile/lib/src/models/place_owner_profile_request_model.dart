@@ -34,22 +34,22 @@ class PlaceOwnerProfileRequest {
 }
 
 class PlaceBasicProfile {
-  PlaceBasicProfile({
-    required this.name,
-    required this.description,
-    required this.phoneNumber,
-    required this.seats,
-    required this.floor,
-    required this.streetName,
-    required this.streetNumber,
-    required this.city,
-    required this.province,
-    required this.coverPicture,
-    required this.country,
-    this.standing = 0,
-    this.isArtist = false,
-    this.isPlaceOwner = true,
-  });
+  PlaceBasicProfile(
+      {required this.name,
+      required this.description,
+      required this.phoneNumber,
+      required this.seats,
+      required this.floor,
+      required this.streetName,
+      required this.city,
+      required this.province,
+      required this.coverPicture,
+      required this.country,
+      this.standing = 0,
+      this.isArtist = false,
+      this.isPlaceOwner = true,
+      this.latitude,
+      this.longitude});
 
   factory PlaceBasicProfile.fromJson(Map<String, dynamic> json) =>
       PlaceBasicProfile(
@@ -59,7 +59,6 @@ class PlaceBasicProfile {
         seats: json['seats'],
         floor: json['floor'],
         streetName: json['streetName'],
-        streetNumber: json['streetNumber'],
         city: json['city'],
         province: json['province'],
         coverPicture: json['coverPicture'],
@@ -76,13 +75,14 @@ class PlaceBasicProfile {
   final int standing;
   final String floor;
   final String streetName;
-  final String streetNumber;
   final String city;
   final String province;
   final String coverPicture;
   final Country country;
   final bool isPlaceOwner;
   final bool isArtist;
+  double? latitude;
+  double? longitude;
 
   Map<String, dynamic> toJson() => {
         'name': name,
@@ -92,30 +92,9 @@ class PlaceBasicProfile {
         'standing': standing,
         'floor': floor,
         'streetName': streetName,
-        'streetNumber': streetNumber,
         'city': city,
         'province': province,
         'coverPicture': coverPicture,
         'country': country.toJson(),
       };
 }
-
-/* class Country {
-  Country({
-    required this.id,
-    required this.name,
-  });
-
-  factory Country.fromJson(Map<String, dynamic> json) => Country(
-        id: json['id'],
-        name: json['name'],
-      );
-
-  final String id;
-  final String name;
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-      };
-} */
