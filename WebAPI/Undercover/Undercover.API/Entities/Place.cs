@@ -37,10 +37,6 @@ namespace Undercover.API.Entities
         public string StreetName { get; set; }
         
         [Required]
-        [StringLength(30)]
-        public string StreetNumber { get; set; }
-
-        [Required]
         [StringLength(100)]
         public string City { get; set; }
 
