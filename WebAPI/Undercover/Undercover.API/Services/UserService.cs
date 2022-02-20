@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Undercover.API.Data;
 using Undercover.API.Entities;
@@ -124,9 +125,9 @@ namespace Undercover.API.Services
                 profile.Place.CreatedDate = DateTime.UtcNow;
                 profile.Place.Dislikes = 0;
                 profile.Place.Likes = 0;
-                if(profile.Place.Latitude.HasValue && profile.Place.Longitude.HasValue)
+                if(profile.Latitude.HasValue && profile.Longitude.HasValue)
                 {
-                    profile.Place.LatLng = new NetTopologySuite.Geometries.Point(profile.Place.Longitude.Value, profile.Place.Latitude.Value);
+                    profile.Place.LatLng = new NetTopologySuite.Geometries.Point(Convert.ToDouble(profile.Longitude.Value, CultureInfo.InvariantCulture), Convert.ToDouble(profile.Latitude.Value, CultureInfo.InvariantCulture));
                 }
                 
                 _dbContext.Places.Add(profile.Place);

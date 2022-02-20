@@ -64,7 +64,7 @@ class PlacesService {
 
       if (locations.isNotEmpty) {
         print(
-            'Latitude: ${locations[0].latitude} Longitude: ${locations[0].latitude}');
+            'Latitude: ${locations[0].latitude} Longitude: ${locations[0].longitude}');
         placeProfile.place.latitude = locations[0].latitude;
         placeProfile.place.longitude = locations[0].longitude;
       }
