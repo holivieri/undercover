@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -120,14 +122,16 @@ namespace Undercover.API.Services
                         pic.Likes = 0;
                     }
                 }
-                
+
+                var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+
                 _dbContext.Entry(profile.Place.Country).State = EntityState.Unchanged;
                 profile.Place.CreatedDate = DateTime.UtcNow;
                 profile.Place.Dislikes = 0;
                 profile.Place.Likes = 0;
                 if(profile.Latitude.HasValue && profile.Longitude.HasValue)
                 {
-                    profile.Place.LatLng = new NetTopologySuite.Geometries.Point(Convert.ToDouble(profile.Longitude.Value, CultureInfo.InvariantCulture), Convert.ToDouble(profile.Latitude.Value, CultureInfo.InvariantCulture));
+                    profile.Place.LatLng = geometryFactory.CreatePoint(new Coordinate(profile.Longitude.Value, profile.Latitude.Value));
                 }
                 
                 _dbContext.Places.Add(profile.Place);
