@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NetTopologySuite;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -47,8 +48,9 @@ namespace Undercover.API.Controllers.V1
         {
             try
             {
-                
-                var result = _placeService.GetAllPlaces(new NetTopologySuite.Geometries.Point(x: Longitude, y: Latitude), distance);
+                var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+
+                var result = _placeService.GetAllPlaces(geometryFactory.CreatePoint(new NetTopologySuite.Geometries.Coordinate(Longitude, Latitude)), distance);
 
 
                 return Ok(result);
