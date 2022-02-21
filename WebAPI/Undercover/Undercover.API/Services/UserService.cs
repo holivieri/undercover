@@ -99,6 +99,11 @@ namespace Undercover.API.Services
                 profile.Artist.Id = Guid.NewGuid();
                 profile.Artist.CreatedDate = DateTime.UtcNow;
 
+                if(string.IsNullOrEmpty(profile.Artist.PictureUrl))
+                {
+                    profile.Artist.PictureUrl = "https://res.cloudinary.com/holivieri/image/upload/v1645481971/Undercover/mgbzoknsbf8vijeqf4rc.png";
+                }
+
                 if(profile.Artist.Pictures != null)
                 {
                     foreach (var pic in profile.Artist.Pictures)
@@ -121,6 +126,11 @@ namespace Undercover.API.Services
                         pic.Id = Guid.NewGuid();
                         pic.Likes = 0;
                     }
+                }
+
+                if(string.IsNullOrEmpty(profile.Place.CoverPicture))
+                {
+                    profile.Place.CoverPicture = "https://res.cloudinary.com/holivieri/image/upload/v1645481971/Undercover/mgbzoknsbf8vijeqf4rc.png";
                 }
 
                 var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);

@@ -7,7 +7,6 @@ class Place {
     required this.createdDate,
     required this.totalCapacity,
     required this.streetName,
-    required this.streetNumber,
     required this.city,
     required this.province,
     required this.country,
@@ -30,7 +29,6 @@ class Place {
       standing: json['standing'],
       floor: json['floor'],
       streetName: json['streetName'],
-      streetNumber: json['streetNumber'],
       city: json['city'],
       province: json['province'],
       country: Country.fromJson(json['country']),
@@ -48,7 +46,6 @@ class Place {
   final int? standing;
   final String? floor;
   final String streetName;
-  final String streetNumber;
   final String city;
   final String province;
   final Country country;
@@ -67,7 +64,6 @@ class Place {
         'standing': standing,
         'floor': floor,
         'streetName': streetName,
-        'streetNumber': streetNumber,
         'city': city,
         'province': province,
         'country': country.toJson(),
