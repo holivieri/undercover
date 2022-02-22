@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:undercover_mobile/src/utils/app_colors.dart';
 
 import '../../generated/l10n.dart';
 import '../blocs/artists/my_artists_bloc.dart';
@@ -34,16 +35,37 @@ class _SearchPageState extends State<SearchPage> {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
-          child: TextField(
-            controller: _txtController,
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              hintText: S.of(context).enterArtistName,
-            ),
-            onEditingComplete: () {
-              print(_txtController.text);
-              artistBloc.add(SearchArtists(_txtController.text));
-            },
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _txtController,
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    hintText: S.of(context).enterArtistName,
+                  ),
+                  onEditingComplete: () {
+                    artistBloc.add(
+                      SearchArtists(_txtController.text),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(width: 10),
+              Container(
+                width: 100,
+                height: 50,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: greenButtonColor),
+                  onPressed: () {
+                    artistBloc.add(
+                      SearchArtists(_txtController.text),
+                    );
+                  },
+                  child: Text(S.of(context).search),
+                ),
+              )
+            ],
           ),
         ),
         const SizedBox(height: 20),
@@ -61,7 +83,6 @@ class _SearchPageState extends State<SearchPage> {
         }
         if (state is ArtistsFound) {
           final artists = state.artists;
-          print('Artista encontrado');
           return Expanded(
             child: ArtistSearchResultList(artists: artists),
           );
