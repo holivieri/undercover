@@ -23,7 +23,7 @@ namespace Undercover.API.Services
                 .Include(a => a.Concerts).ThenInclude(x => x.Place).ThenInclude(x => x.Country)
                 .Include(a => a.Posts)
                 .Include(a => a.Albums)
-                .Where(a => a.Id == id).FirstOrDefault();
+                .Where(a => a.Deleted == false && a.Id == id).FirstOrDefault();
         }
 
         public List<Artist> GetAllArtist()
@@ -35,6 +35,7 @@ namespace Undercover.API.Services
                         .ThenInclude(x => x.Country)
                 .Include(a => a.Posts)
                 .Include(a => a.Albums)
+                .Where(a => a.Deleted == false)
                 .OrderBy(a => a.Name)
                 .ToList();
         }
@@ -48,6 +49,7 @@ namespace Undercover.API.Services
                 .Include(a => a.Posts)
                 .Include(a => a.Albums)
                 //.Where(a => a.Genres.Select( x => x.Genre.Name).Contains(genre)));
+                .Where(a => a.Deleted == false)
                 .OrderBy(a => a.Name)
                 .ToList();
         }
@@ -60,7 +62,7 @@ namespace Undercover.API.Services
               .Include(a => a.Concerts).ThenInclude(x => x.Place).ThenInclude(x => x.Country)
               .Include(a => a.Posts)
               .Include(a => a.Albums)
-              .Where(a => a.Name.StartsWith(artistName))
+              .Where(a => a.Deleted == false && a.Name.StartsWith(artistName))
               .OrderBy(a => a.Name)
               .ToList();
         }

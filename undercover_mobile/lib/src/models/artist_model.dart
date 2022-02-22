@@ -22,6 +22,8 @@ class Artist {
     required this.albums,
     required this.posts,
     required this.followers,
+    required this.sponsored,
+    required this.deleted,
     this.pictureUrl,
     this.twitterAccount,
     this.facebookAccount,
@@ -51,6 +53,8 @@ class Artist {
         soundCloudAccount: json['soundCloudAccount'],
         managerName: json['managerName'],
         managerContact: json['managerContact'],
+        sponsored: json['sponsored'],
+        deleted: json['deleted'],
       );
 
   final String id;
@@ -70,6 +74,8 @@ class Artist {
   final String? soundCloudAccount;
   final String? managerName;
   final String? managerContact;
+  final bool sponsored;
+  final bool deleted;
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -89,5 +95,7 @@ class Artist {
         'soundCloudAccount': soundCloudAccount,
         'managerName': managerName,
         'managerContact': managerContact,
+        'sponsored': sponsored,
+        'deleted': deleted,
       };
 }

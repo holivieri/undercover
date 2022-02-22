@@ -68,5 +68,10 @@ namespace Undercover.API.Entities
         [NotMapped]
         public double? Longitude { get; set; }
 
+        [Required]
+        public bool Deleted { get; set; }
+
+        [Required]
+        public bool Sponsored { get; set; }
     }
 }

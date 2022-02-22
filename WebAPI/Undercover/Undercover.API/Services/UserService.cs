@@ -98,6 +98,8 @@ namespace Undercover.API.Services
             {
                 profile.Artist.Id = Guid.NewGuid();
                 profile.Artist.CreatedDate = DateTime.UtcNow;
+                profile.Artist.Deleted = false;
+                profile.Artist.Sponsored = false;
 
                 if(string.IsNullOrEmpty(profile.Artist.PictureUrl))
                 {
@@ -119,6 +121,9 @@ namespace Undercover.API.Services
             if(profile.Place != null)
             {
                 profile.Place.Id = Guid.NewGuid();
+                profile.Place.Deleted = false;
+                profile.Place.Sponsored = false;
+
                 if(profile.Place.Pictures != null)
                 {
                     foreach (var pic in profile.Place.Pictures)

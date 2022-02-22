@@ -12,6 +12,8 @@ class Place {
     required this.country,
     required this.likes,
     required this.dislikes,
+    required this.sponsored,
+    required this.deleted,
     this.seats,
     this.standing,
     this.floor,
@@ -21,22 +23,25 @@ class Place {
   });
 
   factory Place.fromJson(Map<String, dynamic> json) => Place(
-      id: json['id'],
-      name: json['name'],
-      createdDate: DateTime.parse(json['createdDate']),
-      totalCapacity: json['totalCapacity'],
-      seats: json['seats'],
-      standing: json['standing'],
-      floor: json['floor'],
-      streetName: json['streetName'],
-      city: json['city'],
-      province: json['province'],
-      country: Country.fromJson(json['country']),
-      coverPicture: json['coverPicture'],
-      description: json['description'],
-      likes: json['likes'],
-      dislikes: json['dislikes'],
-      phoneNumber: json['phoneNumber']);
+        id: json['id'],
+        name: json['name'],
+        createdDate: DateTime.parse(json['createdDate']),
+        totalCapacity: json['totalCapacity'],
+        seats: json['seats'],
+        standing: json['standing'],
+        floor: json['floor'],
+        streetName: json['streetName'],
+        city: json['city'],
+        province: json['province'],
+        country: Country.fromJson(json['country']),
+        coverPicture: json['coverPicture'],
+        description: json['description'],
+        likes: json['likes'],
+        dislikes: json['dislikes'],
+        phoneNumber: json['phoneNumber'],
+        sponsored: json['sponsored'],
+        deleted: json['deleted'],
+      );
 
   final String id;
   final String name;
@@ -54,6 +59,8 @@ class Place {
   final int likes;
   final int dislikes;
   final String? phoneNumber;
+  final bool sponsored;
+  final bool deleted;
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -72,5 +79,7 @@ class Place {
         'likes': likes,
         'dislikes': dislikes,
         'phoneNumber': phoneNumber,
+        'sponsored': sponsored,
+        'deleted': deleted,
       };
 }

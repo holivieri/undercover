@@ -21,7 +21,7 @@ namespace Undercover.API.Services
         {
             return _dbContext.Places
                 .Include(p => p.Country)
-                .Where(p => p.Id == id)
+                .Where(p => p.Deleted == false && p.Id == id)
                 .SingleOrDefault();
         }
 
@@ -29,6 +29,7 @@ namespace Undercover.API.Services
         {
             return _dbContext.Places
                 .Include(p => p.Country)
+                .Where(p => p.Deleted == false)
                 .OrderBy(c => c.Name)
                 .ToList();
         }
@@ -37,7 +38,7 @@ namespace Undercover.API.Services
         {
             return _dbContext.Places
                 .Include(p => p.Country)
-                .Where(c => c.LatLng.Distance(location) < distance)
+                .Where(p => p.Deleted == false && p.LatLng.Distance(location) < distance)
                 .OrderBy(c => c.Name)
                 .ToList();
         }
