@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Undercover.API.Data;
 using Undercover.API.Entities;
@@ -95,6 +98,13 @@ namespace Undercover.API.Services
             {
                 profile.Artist.Id = Guid.NewGuid();
                 profile.Artist.CreatedDate = DateTime.UtcNow;
+                profile.Artist.Deleted = false;
+                profile.Artist.Sponsored = false;
+
+                if(string.IsNullOrEmpty(profile.Artist.PictureUrl))
+                {
+                    profile.Artist.PictureUrl = "https://res.cloudinary.com/holivieri/image/upload/v1645481971/Undercover/mgbzoknsbf8vijeqf4rc.png";
+                }
 
                 if(profile.Artist.Pictures != null)
                 {
@@ -111,6 +121,9 @@ namespace Undercover.API.Services
             if(profile.Place != null)
             {
                 profile.Place.Id = Guid.NewGuid();
+                profile.Place.Deleted = false;
+                profile.Place.Sponsored = false;
+
                 if(profile.Place.Pictures != null)
                 {
                     foreach (var pic in profile.Place.Pictures)
@@ -119,11 +132,23 @@ namespace Undercover.API.Services
                         pic.Likes = 0;
                     }
                 }
-                
+
+                if(string.IsNullOrEmpty(profile.Place.CoverPicture))
+                {
+                    profile.Place.CoverPicture = "https://res.cloudinary.com/holivieri/image/upload/v1645481971/Undercover/mgbzoknsbf8vijeqf4rc.png";
+                }
+
+                var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+
                 _dbContext.Entry(profile.Place.Country).State = EntityState.Unchanged;
                 profile.Place.CreatedDate = DateTime.UtcNow;
                 profile.Place.Dislikes = 0;
                 profile.Place.Likes = 0;
+                if(profile.Latitude.HasValue && profile.Longitude.HasValue)
+                {
+                    profile.Place.LatLng = geometryFactory.CreatePoint(new Coordinate(profile.Longitude.Value, profile.Latitude.Value));
+                }
+                
                 _dbContext.Places.Add(profile.Place);
 
             }

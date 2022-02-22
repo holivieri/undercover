@@ -50,7 +50,8 @@ namespace Undercover.API
 
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(
-                            Configuration.GetConnectionString("defaultConnectionString")
+                            Configuration.GetConnectionString("defaultConnectionString"),
+                            opt => opt.UseNetTopologySuite()
                     ));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(

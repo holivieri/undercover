@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Undercover.API.Services
         {
             return _dbContext.Places
                 .Include(p => p.Country)
-                .Where(p => p.Id == id)
+                .Where(p => p.Deleted == false && p.Id == id)
                 .SingleOrDefault();
         }
 
@@ -28,15 +29,16 @@ namespace Undercover.API.Services
         {
             return _dbContext.Places
                 .Include(p => p.Country)
+                .Where(p => p.Deleted == false)
                 .OrderBy(c => c.Name)
                 .ToList();
         }
 
-        public List<Place> GetAllPlaces(string city)
+        public List<Place> GetAllPlaces(Point location, double distance)
         {
             return _dbContext.Places
                 .Include(p => p.Country)
-                .Where(c => c.City == city)
+                .Where(p => p.Deleted == false && p.LatLng.Distance(location) < distance)
                 .OrderBy(c => c.Name)
                 .ToList();
         }

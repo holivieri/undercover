@@ -59,5 +59,12 @@ namespace Undercover.API.Entities
         
         [StringLength(300)]
         public string ManagerContact { get; set; }
+
+        [Required]
+        public bool Deleted { get; set; }
+        
+        [Required]
+        public bool Sponsored { get; set; }
+
     }
 }

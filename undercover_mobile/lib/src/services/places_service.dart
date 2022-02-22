@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:geocoding/geocoding.dart';
 import 'package:http/http.dart';
 
 import '../models/place_model.dart';
@@ -57,6 +58,20 @@ class PlacesService {
   Future<bool> createNewPlaceOwnerProfile(
     PlaceOwnerProfileRequest placeProfile,
   ) async {
+    try {
+      final List<Location> locations = await locationFromAddress(
+          '${placeProfile.place.streetName}, ${placeProfile.place.city}, ${placeProfile.place.country.name}');
+
+      if (locations.isNotEmpty) {
+        print(
+            'Latitude: ${locations[0].latitude} Longitude: ${locations[0].longitude}');
+        placeProfile.place.latitude = locations[0].latitude;
+        placeProfile.place.longitude = locations[0].longitude;
+      }
+    } on Exception catch (err) {
+      print('Error $err');
+    }
+
     final _apiResponse = await Client().post(
       Uri.parse('$apiUrl/User/CreateProfile'),
       headers: returnUndercoverHeaders(),

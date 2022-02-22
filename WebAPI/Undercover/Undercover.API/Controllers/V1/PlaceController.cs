@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NetTopologySuite;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -37,6 +38,27 @@ namespace Undercover.API.Controllers.V1
             {
                 _logger.LogError("Error on Get all places", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error getting all places");
+            }
+        }
+
+
+        [HttpGet("GetByCity")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult> GetByCity(double Latitude, double Longitude, double distance = 25000)
+        {
+            try
+            {
+                var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+
+                var result = _placeService.GetAllPlaces(geometryFactory.CreatePoint(new NetTopologySuite.Geometries.Coordinate(Longitude, Latitude)), distance);
+
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error on Get by City", ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error getting places by city");
             }
         }
 

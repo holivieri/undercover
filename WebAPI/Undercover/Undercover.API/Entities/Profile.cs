@@ -26,5 +26,10 @@ namespace Undercover.API.Entities
             }
         }
 
+        [NotMapped]
+        public double? Latitude { get; set; }
+        [NotMapped]
+        public double? Longitude { get; set; }
+
     }
 }

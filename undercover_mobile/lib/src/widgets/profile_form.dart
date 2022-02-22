@@ -314,7 +314,6 @@ class _ProfileFormState extends State<ProfileForm> {
               seats: int.parse(seatsController.text),
               floor: floorController.text,
               streetName: addressController.text,
-              streetNumber: addressController.text,
               city: cityController.text,
               province: provinceController.text,
               coverPicture: photoUrl ??

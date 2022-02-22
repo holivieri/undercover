@@ -38,7 +38,8 @@ class _ArtistSearchResultListState extends State<ArtistSearchResultList> {
             ),
           ),
           title: Text(artist.name),
-          subtitle: Text(artist.genres[0].name),
+          subtitle:
+              Text(artist.genres.isNotEmpty ? artist.genres[0].name : 'Rock'),
           trailing: FittedBox(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
