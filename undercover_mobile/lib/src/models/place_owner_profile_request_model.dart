@@ -34,22 +34,23 @@ class PlaceOwnerProfileRequest {
 }
 
 class PlaceBasicProfile {
-  PlaceBasicProfile(
-      {required this.name,
-      required this.description,
-      required this.phoneNumber,
-      required this.seats,
-      required this.floor,
-      required this.streetName,
-      required this.city,
-      required this.province,
-      required this.coverPicture,
-      required this.country,
-      this.standing = 0,
-      this.isArtist = false,
-      this.isPlaceOwner = true,
-      this.latitude,
-      this.longitude});
+  PlaceBasicProfile({
+    required this.name,
+    required this.description,
+    required this.phoneNumber,
+    required this.seats,
+    required this.floor,
+    required this.streetName,
+    required this.city,
+    required this.province,
+    required this.coverPicture,
+    required this.country,
+    this.standing = 0,
+    this.isArtist = false,
+    this.isPlaceOwner = true,
+    this.latitude,
+    this.longitude,
+  });
 
   factory PlaceBasicProfile.fromJson(Map<String, dynamic> json) =>
       PlaceBasicProfile(
@@ -66,6 +67,8 @@ class PlaceBasicProfile {
           json['country'],
         ),
         standing: json['standing'],
+        latitude: json['latitude'],
+        longitude: json['longitude'],
       );
 
   final String name;
@@ -96,5 +99,7 @@ class PlaceBasicProfile {
         'province': province,
         'coverPicture': coverPicture,
         'country': country.toJson(),
+        'latitude': latitude,
+        'longitude': longitude
       };
 }
