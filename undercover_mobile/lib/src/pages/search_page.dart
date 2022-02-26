@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:undercover_mobile/src/utils/app_colors.dart';
 
 import '../../generated/l10n.dart';
 import '../blocs/artists/my_artists_bloc.dart';
 import '../repositories/artists_repository.dart';
 import '../services/artists_service.dart';
+import '../utils/app_colors.dart';
 import '../widgets/artists_search_result.dart';
 
 class SearchPage extends StatefulWidget {
