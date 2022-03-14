@@ -33,9 +33,9 @@ class ArtistService {
     return artist;
   }
 
-  Future<TweeterResponse?> getTweets() async {
+  Future<TweeterResponse?> getTweets(String twitterUserName) async {
     final _apiResponse = await Client().get(
-      Uri.parse('$apiUrl/Artist/GetTweets'),
+      Uri.parse('$apiUrl/Artist/GetTweets?twitterUserName=$twitterUserName'),
       headers: returnUndercoverHeaders(),
     );
 

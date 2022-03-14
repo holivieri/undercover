@@ -85,11 +85,11 @@ namespace Undercover.API.Controllers.V1
 
         [HttpGet("GetTweets")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> GetTweets()
+        public async Task<IActionResult> GetTweets(string twitterUserName)
         {
             try
             {
-                var result = _twitterService.getTweets(567037176);
+                var result = _twitterService.getTweets(twitterUserName);
                return Ok(await result);
             }
             catch (Exception ex)

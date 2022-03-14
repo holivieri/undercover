@@ -34,8 +34,8 @@ class ArtistRepository {
     }
   }
 
-  Future<TweeterResponse?> getArtistTweets() async {
-    return _artistService.getTweets();
+  Future<TweeterResponse?> getArtistTweets(String twitterUserName) async {
+    return _artistService.getTweets(twitterUserName);
   }
 
   Future<YoutubeResponse?> getYoutbeVideos() async {

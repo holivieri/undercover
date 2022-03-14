@@ -20,11 +20,26 @@ namespace Undercover.API.Services
             _settings = settings;
         }
 
-        public async Task<Tweets> getTweets(long twitterUserId)
+        public async Task<Tweets> getTweets(string userName = "undercover_ok")
         {
-            string url = _settings["Twitter:url"];
-            url += "/" + twitterUserId.ToString() + "/tweets?tweet.fields=public_metrics,created_at";
+            //string url = _settings["Twitter:url"];
+            //url += "/" + twitterUserId.ToString() + "/tweets?tweet.fields=public_metrics,created_at";
 
+            //_logger.LogInformation("URL: " + url);
+
+            //using (var httpClient = new HttpClient())
+            //{
+            //    using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, url))
+            //    {
+            //        requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _settings["Twitter:BearerToken"]);
+            //        var response = await httpClient.SendAsync(requestMessage);
+            //        var jsonString = await response.Content.ReadAsStringAsync();
+            //        return JsonConvert.DeserializeObject<Tweets>(jsonString);
+            //    }
+            //}
+
+            string url = _settings["Twitter:url"];
+            url += "/1.1/statuses/user_timeline.json?screen_name=" + userName;
             _logger.LogInformation("URL: " + url);
 
             using (var httpClient = new HttpClient())
@@ -33,10 +48,11 @@ namespace Undercover.API.Services
                 {
                     requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _settings["Twitter:BearerToken"]);
                     var response = await httpClient.SendAsync(requestMessage);
-                    var jsonString = await response.Content.ReadAsStringAsync();
+                   var jsonString = await response.Content.ReadAsStringAsync();
                     return JsonConvert.DeserializeObject<Tweets>(jsonString);
                 }
             }
+
         }
 
     }

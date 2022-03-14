@@ -24,7 +24,8 @@ class MyArtistsBloc extends Bloc<MyArtistsBlocEvent, MyArtistsBlocState> {
       }
     });
     on<LoadArtistTweets>((event, emit) async {
-      final TweeterResponse? tweets = await artistRepository.getArtistTweets();
+      final TweeterResponse? tweets =
+          await artistRepository.getArtistTweets(event.twitterAccount);
       if (tweets == null) {
         emit(TweetsError('No se pueden cargar los Tweets'));
       } else {

@@ -93,7 +93,7 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
             getKeyPad(artist),
             const SizedBox(height: 30),
             getArtistBio(artist),
-            getArtistTweets(),
+            getArtistTweets(artist),
             getArtistVideos(),
             const SizedBox(height: 20),
           ],
@@ -181,7 +181,7 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
     );
   }
 
-  Widget getArtistTweets() {
+  Widget getArtistTweets(Artist artist) {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Column(
@@ -193,7 +193,7 @@ class _ArtistDetailsPageState extends State<ArtistDetailsPage> {
             textAlign: TextAlign.start,
           ),
           const SizedBox(height: 20),
-          const TweetsList(),
+          TweetsList(twitterAccount: artist.twitterAccount ?? 'undercover_ok'),
         ],
       ),
     );

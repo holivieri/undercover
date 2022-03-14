@@ -5,6 +5,6 @@ namespace Undercover.API.Services
 {
     public interface ITwitterService
     {
-        Task<Tweets> getTweets(long twitterUserId);
+        Task<Tweets> getTweets(string userName);
     }
 }
