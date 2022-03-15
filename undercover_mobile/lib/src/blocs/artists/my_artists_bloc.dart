@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:undercover_mobile/src/models/artist_tweet.dart';
 
 import '../../models/artist_model.dart';
-import '../../models/twitter_response_model.dart';
 import '../../models/youtube_response_model.dart';
 import '../../repositories/artists_repository.dart';
 
@@ -24,13 +24,9 @@ class MyArtistsBloc extends Bloc<MyArtistsBlocEvent, MyArtistsBlocState> {
       }
     });
     on<LoadArtistTweets>((event, emit) async {
-      final TweeterResponse? tweets =
+      final List<ArtistTweet?> tweets =
           await artistRepository.getArtistTweets(event.twitterAccount);
-      if (tweets == null) {
-        emit(TweetsError('No se pueden cargar los Tweets'));
-      } else {
-        emit(TweetsLoaded(tweets));
-      }
+      emit(TweetsLoaded(tweets));
     });
     on<LoadArtistYoutubeVideos>((event, emit) async {
       final YoutubeResponse? videos = await artistRepository.getYoutbeVideos();

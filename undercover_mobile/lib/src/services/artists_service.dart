@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 
 import '../models/artist_model.dart';
 import '../models/artist_profile_request_model.dart';
-import '../models/twitter_response_model.dart';
+import '../models/artist_tweet.dart';
 import '../models/user_preferences.dart';
 import '../models/youtube_response_model.dart';
 import '../utils/http.dart';
@@ -33,7 +33,7 @@ class ArtistService {
     return artist;
   }
 
-  Future<TweeterResponse?> getTweets(String twitterUserName) async {
+  Future<List<ArtistTweet?>> getTweets(String twitterUserName) async {
     final _apiResponse = await Client().get(
       Uri.parse('$apiUrl/Artist/GetTweets?twitterUserName=$twitterUserName'),
       headers: returnUndercoverHeaders(),
@@ -44,14 +44,17 @@ class ArtistService {
         _apiResponse.statusCode == 200,
         'Tweets endpoint is NOT working',
       );
-      return null;
+      return [];
     }
 
     final _decodedResponse = json.decode(
       _apiResponse.body,
     );
 
-    return TweeterResponse.fromJson(_decodedResponse);
+    return [
+      for (final Map<String, dynamic> _record in _decodedResponse)
+        ArtistTweet.fromJson(_record)
+    ];
   }
 
   Future<YoutubeResponse?> getYoutubeVideos() async {

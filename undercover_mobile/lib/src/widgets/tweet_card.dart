@@ -14,7 +14,7 @@ class TweetCard extends StatelessWidget {
   }) : super(key: key);
 
   final String message;
-  final DateTime createdDate;
+  final String createdDate;
   final int likeCount;
   final int retweetCount;
   final int replyCount;

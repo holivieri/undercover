@@ -1,5 +1,5 @@
 import '../models/artist_model.dart';
-import '../models/twitter_response_model.dart';
+import '../models/artist_tweet.dart';
 import '../models/youtube_response_model.dart';
 import '../services/artists_service.dart';
 
@@ -34,7 +34,7 @@ class ArtistRepository {
     }
   }
 
-  Future<TweeterResponse?> getArtistTweets(String twitterUserName) async {
+  Future<List<ArtistTweet?>> getArtistTweets(String twitterUserName) async {
     return _artistService.getTweets(twitterUserName);
   }
 
