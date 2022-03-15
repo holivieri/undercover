@@ -37,6 +37,11 @@ namespace Undercover.API.Services
                     requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _settings["Twitter:BearerToken"]);
                     var response = await httpClient.SendAsync(requestMessage);
                    var jsonString = await response.Content.ReadAsStringAsync();
+                    if (jsonString.Contains("errors"))
+                    {
+                        return new List<ArtistTweet>();
+                    }
+
                     return JsonConvert.DeserializeObject<List<ArtistTweet>>(jsonString);
                 }
             }
