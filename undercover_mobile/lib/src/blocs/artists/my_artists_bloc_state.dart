@@ -26,7 +26,7 @@ class LoadingTweets extends MyArtistsBlocState {}
 class TweetsLoaded extends MyArtistsBlocState {
   TweetsLoaded(this.tweets);
 
-  final TweeterResponse tweets;
+  final List<ArtistTweet?> tweets;
 }
 
 class LoadingYoutubeVideos extends MyArtistsBlocState {}

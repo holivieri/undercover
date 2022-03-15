@@ -9,13 +9,19 @@ import 'list_view.dart';
 import 'tweet_card.dart';
 
 class TweetsList extends StatefulWidget {
-  const TweetsList({Key? key}) : super(key: key);
+  const TweetsList({
+    required this.twitterAccount,
+    Key? key,
+  }) : super(key: key);
+  final String twitterAccount;
 
   @override
   State<TweetsList> createState() => _TweetsListState();
 }
 
 class _TweetsListState extends State<TweetsList> {
+  _TweetsListState();
+
   late final MyArtistsBloc bloc;
 
   @override
@@ -24,7 +30,8 @@ class _TweetsListState extends State<TweetsList> {
     final ArtistService _artistService = ArtistService();
     final ArtistRepository _artistRepository = ArtistRepository(_artistService);
 
-    bloc = MyArtistsBloc(_artistRepository)..add(LoadArtistTweets());
+    bloc = MyArtistsBloc(_artistRepository)
+      ..add(LoadArtistTweets(widget.twitterAccount));
   }
 
   @override
@@ -38,15 +45,13 @@ class _TweetsListState extends State<TweetsList> {
               return const CircularProgressIndicator();
             } else if (status is TweetsLoaded) {
               final tweetsWidgets = List.generate(
-                status.tweets.data.length,
+                status.tweets.length,
                 (index) => TweetCard(
-                  createdDate: status.tweets.data[index].createdAt,
-                  likeCount: status.tweets.data[index].publicMetrics.likeCount,
-                  message: status.tweets.data[index].text,
-                  replyCount:
-                      status.tweets.data[index].publicMetrics.replyCount,
-                  retweetCount:
-                      status.tweets.data[index].publicMetrics.retweetCount,
+                  createdDate: status.tweets[index]!.createdAt,
+                  likeCount: status.tweets[index]!.favoriteCount,
+                  message: status.tweets[index]!.text,
+                  replyCount: 0,
+                  retweetCount: status.tweets[index]!.retweetCount,
                 ),
               );
 

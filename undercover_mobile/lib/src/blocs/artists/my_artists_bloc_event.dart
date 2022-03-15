@@ -12,9 +12,9 @@ class LoadArtist extends MyArtistsBlocEvent {
 }
 
 class LoadArtistTweets extends MyArtistsBlocEvent {
-  /*  LoadArtistTweets(this.twitterAccount);
+  LoadArtistTweets(this.twitterAccount);
 
-  final String twitterAccount; */
+  final String twitterAccount;
 }
 
 class LoadArtistYoutubeVideos extends MyArtistsBlocEvent {}
