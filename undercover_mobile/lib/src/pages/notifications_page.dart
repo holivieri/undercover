@@ -87,6 +87,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
                                     messageDescription:
                                         status.notifications[index].message,
                                   ),
+                                  settings: const RouteSettings(
+                                      name: 'Notification Details'),
                                 ),
                               );
                             },

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../generated/l10n.dart';
+import '../models/user_preferences.dart';
+import '../services/analytics_service.dart';
 import '../themes/theme_provider.dart';
 import 'home_screen.dart';
 import 'notifications_page.dart';
@@ -30,6 +32,17 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    _assignUser();
+  }
+
+  Future<void> _assignUser() async {
+    final String userName = UserPreferences().userName;
+    print('UserName $userName');
+
+    if (userName.isNotEmpty) {
+      final AnalyticService analyticService = AnalyticService();
+      await analyticService.setUserProperties(userName);
+    }
   }
 
   @override

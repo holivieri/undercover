@@ -41,6 +41,7 @@ class ArtistTallCard extends StatelessWidget {
             builder: (context) => ArtistDetailsPage(
               artistId: artistId,
             ),
+            settings: const RouteSettings(name: 'Artist Details'),
           ),
         );
       },

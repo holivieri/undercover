@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:undercover_mobile/src/services/analytics_service.dart';
 
 import '../generated/l10n.dart';
 import 'models/user_preferences.dart';
@@ -122,6 +123,7 @@ class _MyAppState extends State<MyApp> {
             navigatorKey: navigatorKey,
             scaffoldMessengerKey: messengerKey,
             debugShowCheckedModeBanner: false,
+            navigatorObservers: [AnalyticService().getAnalyticsObserver()],
             localizationsDelegates: const [
               S.delegate,
               GlobalMaterialLocalizations.delegate,
