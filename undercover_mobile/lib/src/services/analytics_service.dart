@@ -5,4 +5,8 @@ class AnalyticService {
 
   FirebaseAnalyticsObserver getAnalyticsObserver() =>
       FirebaseAnalyticsObserver(analytics: _analytics);
+
+  Future<void> setUserProperties(String userId) async {
+    await _analytics.setUserId(id: userId);
+  }
 }
