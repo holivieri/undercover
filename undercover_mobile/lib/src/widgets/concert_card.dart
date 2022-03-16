@@ -61,6 +61,7 @@ class ConcertCard extends StatelessWidget {
             builder: (context) => ConcertDetailsPage(
               concertId: concertId,
             ),
+            settings: const RouteSettings(name: 'Concert Details'),
           ),
         );
       },

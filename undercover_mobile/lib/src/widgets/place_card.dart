@@ -61,6 +61,7 @@ class PlaceCard extends StatelessWidget {
             builder: (context) => PlaceDetailsPage(
               placeId: placeId,
             ),
+            settings: const RouteSettings(name: 'Place Details'),
           ),
         );
       },
