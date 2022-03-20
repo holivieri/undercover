@@ -33,7 +33,7 @@ def keystoreProperties = new Properties()
    }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -53,8 +53,8 @@ android {
         applicationId "com.arielsanchez.undercover"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 10
-        versionName "0.0.10"
+        versionCode 12
+        versionName "0.0.12"
     }
 
     signingConfigs {
