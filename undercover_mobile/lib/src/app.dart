@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:undercover_mobile/src/services/analytics_service.dart';
 
 import '../generated/l10n.dart';
 import 'models/user_preferences.dart';
@@ -12,6 +11,7 @@ import 'repositories/artists_repository.dart';
 import 'routes/routes.dart';
 import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
+import 'services/analytics_service.dart';
 import 'services/push_notifications.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
