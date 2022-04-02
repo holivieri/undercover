@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:undercover_mobile/src/models/artist_tweet.dart';
 
 import '../../models/artist_model.dart';
+import '../../models/artist_tweet.dart';
 import '../../models/youtube_response_model.dart';
 import '../../repositories/artists_repository.dart';
 
