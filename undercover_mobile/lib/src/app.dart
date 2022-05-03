@@ -93,15 +93,13 @@ class _MyAppState extends State<MyApp> {
     final token = UserPreferences().deviceToken;
     final tokenExpirationDate = UserPreferences().tokenExpirationDate;
 
-    print(tokenExpirationDate);
-
     if (token.isEmpty || tokenExpirationDate.isEmpty) {
       return loginRoute;
     }
     if (DateTime.parse(UserPreferences().tokenExpirationDate)
         .toUtc()
-        .isAfter(DateTime.now().toUtc())) {
-      //token expired
+        .isBefore(DateTime.now().toUtc())) {
+      //token is expired
       return loginRoute;
     } else {
       return homeRoute;
