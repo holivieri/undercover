@@ -98,6 +98,7 @@ class _MyAppState extends State<MyApp> {
     }
     if (DateTime.parse(UserPreferences().tokenExpirationDate)
         .toUtc()
+        // .subtract(const Duration(days: 30))
         .isBefore(DateTime.now().toUtc())) {
       //token is expired
       return loginRoute;
