@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Undercover.API.Data;
 using Undercover.API.Entities;
 
@@ -52,6 +53,15 @@ namespace Undercover.API.Services
                 .Where(a => a.Deleted == false)
                 .OrderBy(a => a.Name)
                 .ToList();
+        }
+
+        public List<Artist> GetMyArtist(string userId)
+        {
+            var query = from artist in _dbContext.Artists
+                        where artist.Users.Any(a => a.Id == userId)
+                        select artist;
+
+            return query.ToList();
         }
 
         public List<Artist> SearchArtist(string artistName)

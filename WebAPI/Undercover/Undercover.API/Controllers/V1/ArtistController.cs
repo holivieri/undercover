@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Undercover.API.Entities;
 using Undercover.API.Services;
@@ -39,9 +40,6 @@ namespace Undercover.API.Controllers.V1
         {
             try
             {
-               
-
-
                 var result =  _artistService.GetAllArtist();
                 return Ok(result);
             }
@@ -49,6 +47,35 @@ namespace Undercover.API.Controllers.V1
             {
                 _logger.LogError("Error on GetAllArtist", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error getting all artist");
+            }
+        }
+
+        /// <summary>
+        /// Obtiene los artistas que el usuario sigue
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetMyArtists")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult<List<Artist>>> GetMyArtists()
+        {
+            try
+            {
+                string userId = HttpContext.User.Claims.Where(x => x.Type == "UserId").FirstOrDefault().Value;
+
+                var result = _artistService.GetMyArtist(userId);
+
+                if (result == null)
+                {
+                    _logger.LogWarning("There are no artists");
+                    return BadRequest("my_artist_not_found");
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error on Get My Artist", ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error getting my artists");
             }
         }
 
