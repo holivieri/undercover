@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
 
 import '../../generated/l10n.dart';
+import '../utils/font.dart';
 
 class NoArtistsFoundMessage extends StatelessWidget {
   const NoArtistsFoundMessage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        Container(
-          height: 200,
-          width: 200,
-          decoration: const BoxDecoration(
-              color: Colors.red,
-              image: DecorationImage(
-                image: AssetImage('images/no-guitar.jpg'),
-                fit: BoxFit.cover,
-              ),
-              borderRadius: BorderRadius.all(Radius.circular(75)),
-              boxShadow: [BoxShadow(blurRadius: 7)]),
+        Padding(
+          padding: const EdgeInsets.all(15),
+          child: Text(S.of(context).noArtistsFound, style: subtitleStyle),
         ),
-        Text(S.of(context).noArtistsFound)
+        Padding(
+          padding: const EdgeInsets.all(15),
+          child: Text(S.of(context).goSearch, style: subtitleStyle),
+        ),
       ],
     );
   }

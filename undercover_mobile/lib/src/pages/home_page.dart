@@ -37,7 +37,6 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _assignUser() async {
     final String userName = UserPreferences().userName;
-    print('UserName $userName');
 
     if (userName.isNotEmpty) {
       final AnalyticService analyticService = AnalyticService();

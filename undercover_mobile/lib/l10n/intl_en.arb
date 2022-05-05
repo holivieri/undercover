@@ -1,4 +1,5 @@
 {
+    "addArtists": "Add an artist",
     "addressStreet": "Address - Street Name",
     "areYouAnArtist": "Are you an artist?",
     "artistName": "Artist Name",
@@ -19,6 +20,7 @@
     "floor": "Floor",
     "followers": "Followers",
     "genres": "Genres",
+    "goSearch": "Click on Search menu to add Artists",
     "haveABar": "Do you have a bar and want artists to present there?",
     "home": "Home",
     "iGo": "I'll go",

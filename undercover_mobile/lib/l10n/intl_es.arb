@@ -1,4 +1,5 @@
 {
+    "addArtists": "Agrega un artista",
     "addressStreet": "Dirección - Calle",
     "areYouAnArtist": "¿Sos músico o artista?",
     "artistName": "Nombre del artista/banda",
@@ -19,6 +20,7 @@
     "floor": "Piso",
     "followers": "Seguidores",
     "genres": "Estilos",
+    "goSearch": "Click en Buscar para agregar artistas",
     "haveABar": "¿Tienes un bar y queres invitar músicos a tocar?",
     "home": "Inicio",
     "iGo": "Asistire",
