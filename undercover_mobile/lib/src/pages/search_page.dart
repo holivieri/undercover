@@ -39,6 +39,7 @@ class _SearchPageState extends State<SearchPage> {
             children: [
               Expanded(
                 child: TextField(
+                  autocorrect: false,
                   controller: _txtController,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),

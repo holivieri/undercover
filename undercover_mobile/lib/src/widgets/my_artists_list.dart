@@ -6,6 +6,7 @@ import '../../main.dart';
 import '../blocs/artists/my_artists_bloc.dart';
 import 'artist_tall_card.dart';
 import 'list_view.dart';
+import 'no_artists_found_widget.dart';
 import 'section_header.dart';
 
 class MyArtistsList extends StatefulWidget {
@@ -31,6 +32,8 @@ class _MyArtistsListState extends State<MyArtistsList> {
             builder: (context, status) {
           if (status is LoadingArtists) {
             return const CircularProgressIndicator();
+          } else if (status is NoArtistsFoundForThisUser) {
+            return const NoArtistsFoundMessage();
           } else if (status is ArtistsLoaded) {
             final List<Widget> _artistWidgets = List.generate(
               status.artists.length,

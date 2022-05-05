@@ -13,7 +13,11 @@ class MyArtistsBloc extends Bloc<MyArtistsBlocEvent, MyArtistsBlocState> {
   MyArtistsBloc(this.artistRepository) : super(LoadingArtists()) {
     on<LoadMyArtists>((event, emit) async {
       final artists = await artistRepository.getMyArtists();
-      emit(ArtistsLoaded(artists));
+      if (artists.isEmpty) {
+        emit(NoArtistsFoundForThisUser());
+      } else {
+        emit(ArtistsLoaded(artists));
+      }
     });
     on<LoadArtist>((event, emit) async {
       final Artist? artist = await artistRepository.getArtist(event.artistId);

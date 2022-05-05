@@ -80,7 +80,7 @@ class ArtistService {
 
   Future<List<Artist>> getMyArtists() async {
     final _apiResponse = await Client().get(
-      Uri.parse('$apiUrl/Artist'),
+      Uri.parse('$apiUrl/Artist/GetMyArtists'),
       headers: returnUndercoverHeaders(),
     );
 
