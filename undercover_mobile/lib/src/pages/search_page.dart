@@ -6,6 +6,7 @@ import '../blocs/artists/my_artists_bloc.dart';
 import '../repositories/artists_repository.dart';
 import '../services/artists_service.dart';
 import '../utils/app_colors.dart';
+import '../widgets/artist_tall_card.dart';
 import '../widgets/artists_search_result.dart';
 import '../widgets/list_view.dart';
 
@@ -79,6 +80,23 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget recommendedArtists() {
+    final List<Widget> _artistWidgets = List.generate(
+      status.artists.length,
+      (index) => InkWell(
+        onTap: () => Navigator.pushNamed(
+          context,
+          'artist',
+          arguments: status.artists[index].id,
+        ),
+        child: ArtistTallCard(
+          artistId: status.artists[index].id,
+          artistName: status.artists[index].name,
+          followersCount: status.artists[index].followers,
+          backgroundImageUrl: status.artists[index].pictureUrl,
+        ),
+      ),
+    );
+
     return const UndercoverListView(
       listOfWidgets: [], //get list of recommended artists
       numOfWidgetsOnTablet: 4,
