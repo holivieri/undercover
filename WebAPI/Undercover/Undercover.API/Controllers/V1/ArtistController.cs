@@ -80,6 +80,33 @@ namespace Undercover.API.Controllers.V1
         }
 
 
+        [HttpGet("GetRecommendedArtists")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult<List<Artist>>> GetRecommendedArtists()
+        {
+            try
+            {
+                string userId = HttpContext.User.Claims.Where(x => x.Type == "UserId").FirstOrDefault().Value;
+
+                var result = _artistService.GetMyRecommendedArtists(userId);
+
+                if (result == null)
+                {
+                    _logger.LogWarning("There are no recommended artists");
+                    return BadRequest("recommended_artist_not_found");
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error on GetRecommended Artist", ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error getting recommended artists");
+            }
+        }
+
+
+
         /// <summary>
         /// Obtiene un artista segun su Id
         /// </summary>

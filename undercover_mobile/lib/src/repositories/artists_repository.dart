@@ -25,6 +25,10 @@ class ArtistRepository {
     return _cacheList;
   }
 
+  Future<List<Artist?>> getRecommendedArtists() async {
+    return _artistService.getRecommendedArtists();
+  }
+
   Future<Artist?> getArtist(String id) async {
     //check cache
     if (_cacheList.any((element) => element.id == id)) {

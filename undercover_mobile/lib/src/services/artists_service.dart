@@ -33,6 +33,30 @@ class ArtistService {
     return artist;
   }
 
+  Future<List<Artist?>> getRecommendedArtists() async {
+    final _apiResponse = await Client().get(
+      Uri.parse('$apiUrl/Artist/GetRecommendedArtists'),
+      headers: returnUndercoverHeaders(),
+    );
+
+    if (_apiResponse.statusCode != 200) {
+      assert(
+        _apiResponse.statusCode == 200,
+        'Artists endpoint is NOT working',
+      );
+      return [];
+    }
+
+    final List _decodedResponse = json.decode(
+      _apiResponse.body,
+    );
+
+    return [
+      for (final Map<String, dynamic> _record in _decodedResponse)
+        Artist.fromJson(_record)
+    ];
+  }
+
   Future<List<ArtistTweet?>> getTweets(String twitterUserName) async {
     final _apiResponse = await Client().get(
       Uri.parse('$apiUrl/Artist/GetTweets?twitterUserName=$twitterUserName'),

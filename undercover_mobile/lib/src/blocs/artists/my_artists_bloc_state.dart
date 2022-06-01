@@ -21,6 +21,10 @@ class ArtistLoaded extends MyArtistsBlocState {
   final Artist artist;
 }
 
+class LoadingRecommendedArtists extends MyArtistsBlocState {}
+
+class RecommendedArtistsLoaded extends MyArtistsBlocState {}
+
 class NoArtistsFoundForThisUser extends MyArtistsBlocState {}
 
 class LoadingTweets extends MyArtistsBlocState {}

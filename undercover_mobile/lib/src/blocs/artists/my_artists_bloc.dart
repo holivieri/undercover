@@ -46,6 +46,11 @@ class MyArtistsBloc extends Bloc<MyArtistsBlocEvent, MyArtistsBlocState> {
           await artistRepository.searchArtists(event.artistName);
       emit(ArtistsFound(artists));
     });
+    on<LoadRecommendedArtists>((event, emit) async {
+      emit(LoadingRecommendedArtists());
+      final List<Artist?> artists =
+          await artistRepository.getRecommendedArtists();
+    });
   }
   final ArtistRepository artistRepository;
 }

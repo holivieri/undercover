@@ -10,6 +10,8 @@ namespace Undercover.API.Services
 
         List<Artist> GetMyArtist(string userId);
 
+        List<Artist> GetMyRecommendedArtists(string userId);
+
         List<Artist> GetAllArtist(Genre genre);
 
         List<Artist> SearchArtist(string artistName);

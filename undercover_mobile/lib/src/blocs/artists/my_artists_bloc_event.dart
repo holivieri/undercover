@@ -11,6 +11,8 @@ class LoadArtist extends MyArtistsBlocEvent {
   final String artistId;
 }
 
+class LoadRecommendedArtists extends MyArtistsBlocEvent {}
+
 class LoadArtistTweets extends MyArtistsBlocEvent {
   LoadArtistTweets(this.twitterAccount);
 

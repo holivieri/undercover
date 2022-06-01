@@ -64,6 +64,15 @@ namespace Undercover.API.Services
             return query.ToList();
         }
 
+        public List<Artist> GetMyRecommendedArtists(string userId)
+        {
+             var query = from artist in _dbContext.Artists
+                        where artist.Users.Any(a => a.Id != userId)
+                        select artist;
+
+            return query.ToList();
+        }
+
         public List<Artist> SearchArtist(string artistName)
         {
             return _dbContext
