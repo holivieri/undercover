@@ -7,6 +7,7 @@ import '../repositories/artists_repository.dart';
 import '../services/artists_service.dart';
 import '../utils/app_colors.dart';
 import '../widgets/artists_search_result.dart';
+import '../widgets/list_view.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -70,8 +71,23 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
         const SizedBox(height: 20),
+        recommendedArtists(),
+        const SizedBox(height: 20),
         showResult(),
       ],
+    );
+  }
+
+  Widget recommendedArtists() {
+    return const UndercoverListView(
+      listOfWidgets: [], //get list of recommended artists
+      numOfWidgetsOnTablet: 4,
+      numOfWidgetsOnDesktop: 6,
+      numOfWidgetsOnWideScreen: 8,
+      itemHeight: 220,
+      itemWidth: 150,
+      padding: 10,
+      leftPaddingOnPhone: 25,
     );
   }
 
