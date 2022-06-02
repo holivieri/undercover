@@ -50,6 +50,7 @@ class MyArtistsBloc extends Bloc<MyArtistsBlocEvent, MyArtistsBlocState> {
       emit(LoadingRecommendedArtists());
       final List<Artist?> artists =
           await artistRepository.getRecommendedArtists();
+      emit(RecommendedArtistsLoaded(artists));
     });
   }
   final ArtistRepository artistRepository;

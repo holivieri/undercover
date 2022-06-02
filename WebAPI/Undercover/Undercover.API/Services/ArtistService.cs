@@ -67,6 +67,7 @@ namespace Undercover.API.Services
         public List<Artist> GetMyRecommendedArtists(string userId)
         {
              var query = from artist in _dbContext.Artists
+                         .Include(c => c.Users)
                         where artist.Users.Any(a => a.Id != userId)
                         select artist;
 

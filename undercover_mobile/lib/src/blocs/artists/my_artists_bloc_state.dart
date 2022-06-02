@@ -23,7 +23,11 @@ class ArtistLoaded extends MyArtistsBlocState {
 
 class LoadingRecommendedArtists extends MyArtistsBlocState {}
 
-class RecommendedArtistsLoaded extends MyArtistsBlocState {}
+class RecommendedArtistsLoaded extends MyArtistsBlocState {
+  RecommendedArtistsLoaded(this.artists);
+
+  final List<Artist?> artists;
+}
 
 class NoArtistsFoundForThisUser extends MyArtistsBlocState {}
 
