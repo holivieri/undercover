@@ -85,7 +85,7 @@ class PlacesService {
       );
       return false;
     }
-    UserPreferences().profile = myProfile.owner;
+    UserPreferences().profile = MyProfile.owner;
     return true;
   }
 }

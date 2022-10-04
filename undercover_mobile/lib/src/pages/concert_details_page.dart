@@ -159,8 +159,8 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
                           ));
                           _assistance = !_assistance;
                         },
-                        style:
-                            ElevatedButton.styleFrom(primary: greenButtonColor),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: greenButtonColor),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: const [
@@ -179,7 +179,8 @@ class _ConcertDetailsPageState extends State<ConcertDetailsPage> {
                           ));
                           _assistance = !_assistance;
                         },
-                        style: ElevatedButton.styleFrom(primary: themeDanger),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: themeDanger),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: const [

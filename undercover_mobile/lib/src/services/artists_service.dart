@@ -142,7 +142,7 @@ class ArtistService {
       );
       return false;
     }
-    UserPreferences().profile = myProfile.artist;
+    UserPreferences().profile = MyProfile.artist;
 
     return true;
   }

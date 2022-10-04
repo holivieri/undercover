@@ -49,7 +49,7 @@ class _UserPreferencesPageState extends State<UserPreferencesPage> {
           ],
         ),
         ElevatedButton(
-          style: ElevatedButton.styleFrom(primary: greenButtonColor),
+          style: ElevatedButton.styleFrom(backgroundColor: greenButtonColor),
           onPressed: () {
             showCupertinoModalPopup(
               context: context,

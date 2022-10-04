@@ -95,7 +95,7 @@ class _ProfileFormState extends State<ProfileForm> {
             style: const TextStyle(fontSize: 20, color: Colors.redAccent),
           ),
           const Icon(
-            FontAwesomeIcons.photoVideo,
+            FontAwesomeIcons.photoFilm,
             color: Colors.white,
           ),
         ],
@@ -261,7 +261,7 @@ class _ProfileFormState extends State<ProfileForm> {
       height: 50,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: greenButtonColor,
+          backgroundColor: greenButtonColor,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           textStyle: const TextStyle(
             fontSize: 20,

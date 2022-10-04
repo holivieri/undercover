@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
             UserPreferences().tokenExpirationDate =
                 state.user.expiration.toString();
 
-            if (UserPreferences().profile == myProfile.none) {
+            if (UserPreferences().profile == MyProfile.none) {
               Navigator.pushReplacementNamed(context, createProfileRoute);
             } else {
               Navigator.pushReplacementNamed(context, homeRoute);
@@ -165,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
         borderRadius: BorderRadius.circular(10),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: greenButtonColor,
+            backgroundColor: greenButtonColor,
           ),
           onPressed: () {
             bloc.add(
@@ -208,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
         borderRadius: BorderRadius.circular(10),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: darkControlColor,
+            backgroundColor: darkControlColor,
           ),
           onPressed: () async {
             print('Google');
@@ -231,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
         borderRadius: BorderRadius.circular(10),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: darkControlColor,
+            backgroundColor: darkControlColor,
           ),
           onPressed: () {
             print('Apple');
@@ -253,7 +253,7 @@ class _LoginPageState extends State<LoginPage> {
         borderRadius: BorderRadius.circular(10),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: darkControlColor,
+            backgroundColor: darkControlColor,
           ),
           onPressed: () async {
             print('Facebook');

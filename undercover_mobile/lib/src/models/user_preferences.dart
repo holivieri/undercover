@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum myProfile {
+enum MyProfile {
   artist,
   owner,
   user,
@@ -76,30 +76,30 @@ class UserPreferences {
     _userPreferences!.setBool('isDarkModeOn', value);
   }
 
-  myProfile get profile {
+  MyProfile get profile {
     final String role = _userPreferences!.getString('profile') ?? 'none';
 
     switch (role) {
       case 'artist':
-        return myProfile.artist;
+        return MyProfile.artist;
       case 'owner':
-        return myProfile.owner;
+        return MyProfile.owner;
       case 'user':
-        return myProfile.user;
+        return MyProfile.user;
       default:
-        return myProfile.none;
+        return MyProfile.none;
     }
   }
 
-  set profile(myProfile value) {
+  set profile(MyProfile value) {
     switch (value) {
-      case myProfile.artist:
+      case MyProfile.artist:
         _userPreferences!.setString('profile', 'artist');
         break;
-      case myProfile.owner:
+      case MyProfile.owner:
         _userPreferences!.setString('profile', 'owner');
         break;
-      case myProfile.user:
+      case MyProfile.user:
         _userPreferences!.setString('profile', 'user');
         break;
       default:

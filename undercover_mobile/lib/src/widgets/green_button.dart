@@ -13,7 +13,7 @@ class GreenButton extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: greenButtonColor,
+          backgroundColor: greenButtonColor,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           textStyle: const TextStyle(
             fontSize: 20,

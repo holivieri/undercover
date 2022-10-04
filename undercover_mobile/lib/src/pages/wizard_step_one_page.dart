@@ -100,7 +100,7 @@ class _WizardProfileState extends State<WizardProfile> {
       children: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Colors.green,
+            backgroundColor: Colors.green,
             padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 25),
             textStyle:
                 const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
@@ -118,7 +118,7 @@ class _WizardProfileState extends State<WizardProfile> {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Colors.red,
+            backgroundColor: Colors.red,
             padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 25),
             textStyle:
                 const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
@@ -143,7 +143,7 @@ class _WizardProfileState extends State<WizardProfile> {
       children: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Colors.green,
+            backgroundColor: Colors.green,
             padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 25),
             textStyle:
                 const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
@@ -158,7 +158,7 @@ class _WizardProfileState extends State<WizardProfile> {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Colors.red,
+            backgroundColor: Colors.red,
             padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 25),
             textStyle:
                 const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),

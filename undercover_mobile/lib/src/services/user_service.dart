@@ -23,16 +23,16 @@ class UserService {
   void saveUserProfileToLocal(String profile) {
     switch (profile) {
       case 'user':
-        UserPreferences().profile = myProfile.user;
+        UserPreferences().profile = MyProfile.user;
         break;
       case 'artist':
-        UserPreferences().profile = myProfile.artist;
+        UserPreferences().profile = MyProfile.artist;
         break;
       case 'owner':
-        UserPreferences().profile = myProfile.owner;
+        UserPreferences().profile = MyProfile.owner;
         break;
       default:
-        UserPreferences().profile = myProfile.none;
+        UserPreferences().profile = MyProfile.none;
         break;
     }
   }
@@ -53,7 +53,7 @@ class UserService {
       );
       return false;
     }
-    UserPreferences().profile = myProfile.user;
+    UserPreferences().profile = MyProfile.user;
     return true;
   }
 

@@ -17,8 +17,8 @@ class CircleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-      onPrimary: themeBlue,
-      primary: backgroundColor,
+      foregroundColor: themeBlue,
+      backgroundColor: backgroundColor,
       minimumSize: const Size(45, 45),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       shape: const CircleBorder(),
